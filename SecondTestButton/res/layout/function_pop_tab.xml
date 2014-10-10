@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!--
+    LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="284" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="54"
+            android:background="@drawable/pop_point"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="89" />
+    </LinearLayout
+    -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1179" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+           
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/pop_remote"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+               
+
+                <Button
+                    android:id ="@+id/liangan1"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:background="@drawable/popitem_selector"
+                    android:textColor="@color/select"
+                    android:text="粮安监测"
+                   
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/tab_item_sqlit"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/pop_local"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+               
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+               
+
+                <Button
+                    android:id ="@+id/liangan2"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="粮安检测"
+                    android:background="@drawable/popitem_selector"
+                    android:textColor="@color/select"
+                    android:textSize="25dp">
+                    
+                </Button>
+                    
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/tab_item_sqlit"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/pop_network"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+               
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/canganjiance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="仓安检测"
+                    android:background="@drawable/popitem_selector"
+                    android:textColor="@color/select"
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

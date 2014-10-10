@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_name">
+        <item>大麦</item>
+        <item>小麦</item>
+        <item>早稻</item>
+        <item>中稻</item>
+        <item>晚稻</item>
+        <item>粳稻</item>
+        <item>玉米</item>
+        <item>大豆</item>
+        <item>菜籽</item>
+        <item>杂粮</item>
+        <item>饲料</item>
+        <item>花生</item>
+    </string-array>
+</resources>

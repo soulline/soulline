@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/pad_title"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.03"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="150" />
+
+        <Button
+            android:id="@+id/bt_file"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="文件" />
+
+        <Button
+            android:id="@+id/bt_function"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="方法" />
+        
+        <Button
+            android:id="@+id/bt_ceding"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="测定"/>
+
+        <Button
+            android:id="@+id/bt_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="停止" />
+
+        <Button
+            android:id="@+id/bt_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="设定" />
+
+        <Button
+            android:id="@+id/bt_view"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="视图" />
+
+        <Button
+            android:id="@+id/bt_inqure"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="查询" />
+
+        <Button
+             android:id="@+id/bt_help"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="150"
+            android:background="@drawable/title_tap_selecotr"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="帮助" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1000" />
+    </LinearLayout>
+  
+</LinearLayout>
