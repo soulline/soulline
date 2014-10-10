@@ -1,0 +1,203 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Content layout -->
+
+    <LinearLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/game_list_bg"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dd_dimen_100px"
+            android:layout_marginTop="@dimen/dd_dimen_50px"
+            android:layout_marginRight="@dimen/dd_dimen_50px" >
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <com.yyl.widget.RoundImageView
+                    android:id="@+id/portrait_self"
+                    android:layout_width="@dimen/dd_dimen_160px"
+                    android:layout_height="@dimen/dd_dimen_160px"
+                    android:layout_gravity="center"
+                    android:background="@drawable/head_boy" />
+
+                <ImageView
+                    android:id="@+id/portrait_user_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/head_kong" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                android:textSize="@dimen/dd_dimen_20px"
+                android:textStyle="@color/white" />
+            <Button
+                    android:id="@+id/user_info_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/login_enter_selector"
+                    android:layout_marginTop="@dimen/dd_dimen_5px"
+                    android:padding="@dimen/dd_dimen_10px"
+                    android:text="@string/personal_info"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_28px" />
+            
+            <ImageView android:id="@+id/raffle_go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dd_dimen_15px"
+                android:scaleType="fitXY"
+                android:background="@drawable/raffle_enter"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dd_dimen_50px"
+            android:background="@drawable/game_list_frame">
+            <RelativeLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dd_dimen_15px"
+                android:paddingBottom="@dimen/dd_dimen_15px">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_28px"
+                    android:textColor="@color/edit_hint_gray"
+                    android:layout_centerVertical="true"
+                    android:text="@string/room_num"
+                    android:layout_marginLeft="@dimen/dd_dimen_80px"/>
+                <LinearLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/dd_dimen_28px"
+                    android:textColor="@color/edit_hint_gray"
+                    android:text="@string/online_count" />
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dd_dimen_80px"
+                    android:textSize="@dimen/dd_dimen_28px"
+                    android:textColor="@color/edit_hint_gray"
+                    android:text="@string/room_state" />
+                </LinearLayout>
+                <Button android:id="@+id/refresh_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dd_dimen_20px"
+                    android:background="@drawable/refresh_selector"
+                    android:layout_marginRight="@dimen/dd_dimen_10px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/refresh_btn"
+                    android:layout_marginRight="@dimen/dd_dimen_40px"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/dd_dimen_28px"
+                    android:textColor="@color/edit_hint_gray"
+                    android:text="@string/base_coin" />
+                 </RelativeLayout>
+                <ListView android:id="@+id/game_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dd_dimen_500px"
+                    android:scrollbars="none"/>
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/game_list_bottom"
+                    android:orientation="horizontal">
+                    <RelativeLayout android:layout_width="@dimen/dd_dimen_289px"
+                        android:layout_height="@dimen/dd_dimen_41px"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/search_box"
+                        android:layout_marginLeft="@dimen/dd_dimen_30px">
+                        <EditText android:id="@+id/search_content"
+                            android:layout_width="@dimen/dd_dimen_250px"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:singleLine="true"
+                            android:numeric="integer"
+                            android:gravity="center_vertical"
+                            android:paddingTop="@dimen/dd_dimen_5px"
+                            android:paddingBottom="@dimen/dd_dimen_5px"
+                            android:paddingLeft="@dimen/dd_dimen_15px"
+                            android:paddingRight="@dimen/dd_dimen_15px"
+                            android:textSize="@dimen/dd_dimen_24px"
+                            android:layout_centerVertical="true"/>
+                        <Button android:id="@+id/search_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/search_content"
+                            android:background="@drawable/search"/>
+                    </RelativeLayout>
+                    <Button android:id="@+id/enter_room"
+                        android:layout_width="@dimen/dd_dimen_166px"
+                        android:layout_height="@dimen/dd_dimen_41px"
+                        android:layout_marginLeft="@dimen/dd_dimen_40px"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/enter_selector"
+                        android:textSize="@dimen/dd_dimen_26px"
+                        android:textColor="@color/white"
+                        android:text="@string/enter_room"/>
+                    <Button android:id="@+id/quick_start"
+                        android:layout_width="@dimen/dd_dimen_166px"
+                        android:layout_height="@dimen/dd_dimen_41px"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dd_dimen_20px"
+                        android:background="@drawable/quick_enter_selector"
+                        android:textSize="@dimen/dd_dimen_26px"
+                        android:textColor="@color/white"
+                        android:text="@string/quick_start"/>
+                    
+                    <Button android:id="@+id/create_room"
+                        android:layout_width="@dimen/dd_dimen_166px"
+                        android:layout_height="@dimen/dd_dimen_41px"
+                        android:layout_marginLeft="@dimen/dd_dimen_20px"
+                        android:layout_marginRight="@dimen/dd_dimen_30px"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/enter_selector"
+                        android:textSize="@dimen/dd_dimen_26px"
+                        android:textColor="@color/white"
+                        android:text="@string/create_room"/>
+                </LinearLayout>
+           
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>

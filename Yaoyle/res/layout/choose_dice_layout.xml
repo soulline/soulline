@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/choose_bg"
+    android:paddingTop="@dimen/dd_dimen_40px"
+    android:orientation="vertical" >
+
+    <LinearLayout android:id="@+id/last_gess_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dd_dimen_30px"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="上家叫骰"
+            android:textColor="@color/edit_hint_gray"
+            android:textSize="@dimen/dd_dimen_32px" />
+
+        <TextView
+            android:id="@+id/gamer_dice_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dd_dimen_10px"
+            android:text="5"
+            android:textColor="@color/regist_yellow"
+            android:textSize="@dimen/dd_dimen_36px" />
+
+        <ImageView
+            android:id="@+id/gamer_dice_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dd_dimen_10px"
+            android:background="@drawable/bs_4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dd_dimen_80px"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/left_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/left_move_selector" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/self_add_count_layout"
+                    android:layout_width="@dimen/dd_dimen_360px"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dd_dimen_10px"
+                    android:paddingRight="@dimen/dd_dimen_10px" >
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/right_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/right_move_selector" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dd_dimen_10px"
+            android:background="@drawable/dice_article" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/self_choose_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/super_ds_1" />
+
+                <ImageView
+                    android:id="@+id/self_choose_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_15px"
+                    android:background="@drawable/super_ds_2" />
+
+                <ImageView
+                    android:id="@+id/self_choose_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_15px"
+                    android:background="@drawable/super_ds_3" />
+
+                <ImageView
+                    android:id="@+id/self_choose_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_15px"
+                    android:background="@drawable/super_ds_4" />
+
+                <ImageView
+                    android:id="@+id/self_choose_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_15px"
+                    android:background="@drawable/super_ds_5" />
+
+                <ImageView
+                    android:id="@+id/self_choose_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_15px"
+                    android:background="@drawable/super_ds_6" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

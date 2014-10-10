@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout android:id="@+id/raffle_win_frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/raffle_win_frame" >
+        
+        <ImageView android:id="@+id/raffle_pic"
+            android:layout_height="@dimen/dd_dimen_220px"
+            android:layout_width="@dimen/dd_dimen_305px"
+            android:layout_marginTop="@dimen/dd_dimen_230px"
+            android:layout_centerHorizontal="true"
+            android:background="@color/green"
+            android:scaleType="fitXY"/>
+        <TextView android:id="@+id/raffle_win_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/raffle_pic"
+            android:layout_marginTop="@dimen/dd_dimen_10px"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dd_dimen_36px"
+            android:text=""/>
+    </RelativeLayout>
+    
+    <Button android:id="@+id/goto_get_raflle_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/goto_get_raffle_selector"
+        android:layout_below="@+id/raffle_win_frame_layout"
+        android:layout_marginTop="@dimen/dd_dimen_low40px"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dd_dimen_50px"
+        android:text="@string/press_get_prize"/>
+
+</RelativeLayout>
