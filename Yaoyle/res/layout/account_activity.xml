@@ -1,0 +1,196 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Content layout -->
+
+    <RelativeLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_all" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_account_frame"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_150px"
+                android:orientation="horizontal" >
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" >
+
+                    <com.yyl.widget.RoundImageView
+                        android:id="@+id/portrait_frame"
+                        android:layout_width="@dimen/dd_dimen_160px"
+                        android:layout_height="@dimen/dd_dimen_160px"
+                        android:layout_gravity="center"
+                        android:background="@drawable/head_boy" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/head_kong" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dd_dimen_10px"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dd_dimen_10px"
+                            android:text="@string/user_name_title"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_32px"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/account_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_28px"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dd_dimen_10px"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dd_dimen_10px"
+                            android:text="@string/sex_title"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_32px"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/account_sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sex_man"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_28px"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dd_dimen_10px"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dd_dimen_10px"
+                            android:text="@string/coin_title"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_32px"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/account_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_28px"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dd_dimen_170px"
+                    android:layout_marginLeft="@dimen/dd_dimen_20px" >
+
+                    <Button
+                        android:id="@+id/pay_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/icon_pay"
+                        android:padding="@dimen/dd_dimen_10px" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dd_dimen_60px"
+                android:paddingLeft="@dimen/dd_dimen_40px"
+                android:paddingRight="@dimen/dd_dimen_40px" >
+                
+                 <Button
+                    android:id="@+id/modify_password_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/register_button_selector"
+                    android:padding="@dimen/dd_dimen_10px"
+                    android:text="@string/modify_pw"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_32px"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/dd_dimen_30px"/>
+
+                <Button
+                        android:id="@+id/exit_login_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/login_enter_selector"
+                        android:padding="@dimen/dd_dimen_10px"
+                        android:text="@string/quit_login"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dd_dimen_32px"
+                        android:textStyle="bold" />
+                
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>

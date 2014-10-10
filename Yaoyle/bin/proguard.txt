@@ -1,0 +1,55 @@
+# view AndroidManifest.xml #generated:24
+-keep class com.yyl.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class com.yyl.account.AccountActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class com.yyl.account.CreatePeopleActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:48
+-keep class com.yyl.account.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:90
+-keep class com.yyl.account.ModifyPWActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:55
+-keep class com.yyl.account.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:18
+-keep class com.yyl.application.YylApp { <init>(...); }
+
+# view AndroidManifest.xml #generated:36
+-keep class com.yyl.game.GameActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:83
+-keep class com.yyl.game.RoomListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:69
+-keep class com.yyl.pay.PayActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:97
+-keep class com.yyl.raffle.RaffleActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:126
+-keep class com.yyl.service.YylService { <init>(...); }
+
+# view AndroidManifest.xml #generated:105
+-keep class com.yyl.web.WebViewActivity { <init>(...); }
+
+# view res/layout/account_activity.xml #generated:33
+# view res/layout/create_people.xml #generated:32
+# view res/layout/game_activity.xml #generated:125
+# view res/layout/game_activity.xml #generated:255
+# view res/layout/game_activity.xml #generated:338
+# view res/layout/game_activity.xml #generated:42
+# view res/layout/game_activity.xml #generated:544
+# view res/layout/game_list_activity.xml #generated:27
+-keep class com.yyl.widget.RoundImageView { <init>(...); }
+
+# view AndroidManifest.xml #generated:114
+-keep class com.yyl.wxapi.WXEntryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:119
+-keep class com.yyl.wxapi.WXPayEntryActivity { <init>(...); }
+

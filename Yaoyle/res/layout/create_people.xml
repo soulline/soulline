@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Content layout -->
+
+    <RelativeLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_all" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_revise_frame"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_150px"
+                android:orientation="horizontal" >
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <com.yyl.widget.RoundImageView
+                        android:id="@+id/portrait_frame"
+                        android:layout_width="@dimen/dd_dimen_160px"
+                        android:layout_height="@dimen/dd_dimen_160px"
+                        android:layout_gravity="center"
+                        android:background="@drawable/head_boy" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/head_kong" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_10px"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dd_dimen_10px"
+                        android:text="@string/user_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dd_dimen_32px"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/name_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dd_dimen_10px"
+                        android:background="@drawable/dl_edit_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/name_input_hint"
+                        android:maxLength="20"
+                        android:padding="@dimen/dd_dimen_10px"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/edit_hint_gray"
+                        android:textSize="@dimen/dd_dimen_28px" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dd_dimen_10px"
+                        android:layout_marginTop="@dimen/dd_dimen_10px"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/sex_man"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/sexual_yes"
+                            android:drawablePadding="@dimen/dd_dimen_5px"
+                            android:text="@string/sex_man"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_26px" />
+
+                        <TextView
+                            android:id="@+id/sex_woman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dd_dimen_50px"
+                            android:drawableLeft="@drawable/sexual_no"
+                            android:drawablePadding="@dimen/dd_dimen_5px"
+                            android:text="@string/sex_woman"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dd_dimen_26px" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dd_dimen_70px"
+                android:paddingLeft="@dimen/dd_dimen_40px"
+                android:paddingRight="@dimen/dd_dimen_40px" >
+
+                <Button
+                    android:id="@+id/create_enter_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/register_button_selector"
+                    android:padding="@dimen/dd_dimen_10px"
+                    android:text="@string/create_people"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_32px"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>

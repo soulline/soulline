@@ -1,0 +1,156 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Content layout -->
+
+    <RelativeLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_all" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_pay_frame"
+            android:orientation="vertical" >
+
+           <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_140px"
+                android:layout_marginLeft="@dimen/dd_dimen_90px" >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_10px"
+                    android:text="@string/coin_rmb_bili"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_26px" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_10px"
+                    android:text="@string/one_to_hundred"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_26px" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_10px"
+                android:orientation="horizontal" >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_10px"
+                    android:text="@string/pay_amount"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_32px"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/pay_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_20px"
+                    android:background="@drawable/dl_edit_bg"
+                    android:gravity="center_vertical"
+                    android:hint="@string/pay_amount_hint"
+                    android:maxLength="10"
+                    android:numeric="integer"
+                    android:padding="@dimen/dd_dimen_10px"
+                    android:textColor="@color/red"
+                    android:textColorHint="@color/edit_hint_gray"
+                    android:textSize="@dimen/dd_dimen_28px" />
+            </LinearLayout>
+
+            
+
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_20px"
+                android:layout_gravity="center_horizontal">
+                <!-- <TextView android:id="@+id/pay_taobao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/dd_dimen_10px"
+                    android:drawableLeft="@drawable/sexual_yes"
+                    android:drawableRight="@drawable/payment_tb"/> -->
+                
+                <TextView android:id="@+id/pay_wx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/dd_dimen_10px"
+                    android:drawableLeft="@drawable/sexual_yes"
+                    android:drawableRight="@drawable/payment_wx"/>
+            </LinearLayout>
+            
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_5px"
+                android:layout_gravity="center_horizontal">
+                <!-- <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_26px"
+                    android:textColor="@color/white"
+                    android:text="@string/pay_taobao"/> -->
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_26px"
+                    android:textColor="@color/white"
+                    android:text="@string/pay_wx"/>
+            </LinearLayout>
+            
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dd_dimen_30px"
+                android:paddingRight="@dimen/dd_dimen_40px"
+                android:paddingLeft="@dimen/dd_dimen_40px" >
+
+                <Button
+                    android:id="@+id/pay_ok_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/register_button_selector"
+                    android:padding="@dimen/dd_dimen_10px"
+                    android:text="@string/action_sure"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_32px"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>
