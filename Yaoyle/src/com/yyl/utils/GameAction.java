@@ -38,6 +38,6 @@ public class GameAction {
 	
 	public static final int SOCKET_TEST_PULSE = 146;
 	
-	public static final int ROOM_OUT_USE = 920;
+	public static final int ROOM_OUT_USE = 934;
 	
 }
