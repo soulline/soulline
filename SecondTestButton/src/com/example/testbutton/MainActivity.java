@@ -266,6 +266,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 		public void onClick(View v) {
 			cdPopupWindow.dismiss();
+			if (checkMinuteValue > 0.0f || paikongMinuteValue > 0.0f) {
+				showToast("检测还未完毕，无法开始新的检测");
+				return;
+			}
 			switch (v.getId()) {
 			case R.id.liangan1:
 				startCutDown();

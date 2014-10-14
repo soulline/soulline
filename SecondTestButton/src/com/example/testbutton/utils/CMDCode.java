@@ -44,5 +44,7 @@ public class CMDCode {
 	
 	public static final String PREPARE_OK = "5A A5 02 01 07 FF FF";
 	
+	public static final String PREPARE_CANCLE = "5A A5 02 01 08 FF FF";
+	
 	public static final String PASSWAY_DATA = "5A A5 0C";
 }
