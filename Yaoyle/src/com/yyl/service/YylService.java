@@ -336,6 +336,7 @@ public class YylService extends Service {
 					gamer.name = obj.optString("name");
 					gamer.sex = obj.optString("sex");
 					gamer.photoUrl = obj.optString("photoUrl");
+					gamer.status = obj.optString("status");
 					gamers.add(gamer);
 				}
 				if (gamers.size() > 0) {

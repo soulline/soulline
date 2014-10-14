@@ -732,6 +732,11 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 					ImageOperater.getInstance(context).onLoadImage(
 							url, portraitGamer1);
 				}
+				if (gamer.status.equals("1")) {
+					findViewById(R.id.gamer_1_prepare).setVisibility(View.VISIBLE);
+				} else {
+					findViewById(R.id.gamer_1_prepare).setVisibility(View.GONE);
+				}
 				break;
 			case 1:
 				gamer3name.setText(gamer.name);
@@ -744,6 +749,11 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 					String url = gamer.photoUrl + "&" + System.currentTimeMillis();
 					ImageOperater.getInstance(context).onLoadImage(
 							url, portraitGamer3);
+				}
+				if (gamer.status.equals("1")) {
+					findViewById(R.id.gamer_3_prepare).setVisibility(View.VISIBLE);
+				} else {
+					findViewById(R.id.gamer_3_prepare).setVisibility(View.GONE);
 				}
 				break;
 			case 2:
@@ -758,6 +768,11 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 					ImageOperater.getInstance(context).onLoadImage(
 							url, portraitGamer2);
 				}
+				if (gamer.status.equals("1")) {
+					findViewById(R.id.gamer_2_prepare).setVisibility(View.VISIBLE);
+				} else {
+					findViewById(R.id.gamer_2_prepare).setVisibility(View.GONE);
+				}
 				break;
 			case 3:
 				gamer4name.setText(gamer.name);
@@ -770,6 +785,11 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 					String url = gamer.photoUrl + "&" + System.currentTimeMillis();
 					ImageOperater.getInstance(context).onLoadImage(
 							url, portraitGamer4);
+				}
+				if (gamer.status.equals("1")) {
+					findViewById(R.id.gamer_4_prepare).setVisibility(View.VISIBLE);
+				} else {
+					findViewById(R.id.gamer_4_prepare).setVisibility(View.GONE);
 				}
 				break;
 			default:

@@ -9,4 +9,6 @@ public class GamerInfo extends YylEntry {
 	public String sex = "";
 	
 	public String photoUrl = "";
+	
+	public String status = "";
 }
