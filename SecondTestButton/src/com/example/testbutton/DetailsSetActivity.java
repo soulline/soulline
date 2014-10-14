@@ -523,6 +523,7 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 			finish();
 			break;
 		case R.id.cancel:
+			sendMessageS(CMDCode.PREPARE_CANCLE);
 			finish();
 			break;
 
