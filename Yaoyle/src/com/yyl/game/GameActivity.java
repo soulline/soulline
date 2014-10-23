@@ -472,7 +472,7 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 						showSelfDiceNote();
 					}
 				}, 1500);
-			}
+			}	
 		});
 	}
 
@@ -918,16 +918,20 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 				break;
 			}
 		}
-		for (int i = 1; i < (gamerIdMap.size() + 1); i++) {
-			if (gamerId.equals(gamerIdMap.get(i))) {
-				n2 = i;
+		for (int j = 1; j < (gamerIdMap.size() + 1); j++) {
+			if (gamerId.equals(gamerIdMap.get(j))) {
+				n2 = j;
 				break;
 			}
 		}
-		if (n1 != -1 && n2 != -1) {
+		if (n1 != -1) {
 			gamersInfo.remove(n1);
+			
+		}
+		if (n2 != -1) {
 			gamerIdMap.remove(n2);
 		}
+		gamerMap.remove(gamerId);
 	}
 
 	@Override
@@ -1042,6 +1046,7 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 							+ getString(R.string.exit_game));
 					removeExitGamer(gamerId);
 					initGamerView(gamersInfo.size());
+					initGamerDetailView(gamersInfo);
 					if (GAME_STATE != GameState.PREPARE
 							|| GAME_STATE == GameState.DEFAULT) {
 						initGameState();
@@ -1166,6 +1171,7 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 							+ getString(R.string.exit_game));
 					removeExitGamer(gamerId);
 					initGamerView(gamersInfo.size());
+					initGamerDetailView(gamersInfo);
 				}
 			}
 		}
@@ -1248,7 +1254,7 @@ public class GameActivity extends BaseActivity implements OnClickListener,
 			}
 		}
 		return n;
-	}
+	}  
 
 	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
 			BaseFragmentListener listener) {
