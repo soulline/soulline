@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">财叮当</string>
+    
+    <!--发现-->
+    <string name="dingdang_quan">叮当圈</string>
+    <string name="action_listen">关注</string>
+
+</resources>
