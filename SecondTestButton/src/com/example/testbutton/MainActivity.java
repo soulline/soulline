@@ -166,7 +166,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 						wayCount = 0;
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
-						number += 1;
+						number += 1;	
 						wayCount = number;
 						textView1.setText(number + "");
 						float check = ((float) checkMinuteValue) / 10.0f;
@@ -266,10 +266,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 		public void onClick(View v) {
 			cdPopupWindow.dismiss();
-			if (checkMinuteValue > 0.0f || paikongMinuteValue > 0.0f) {
-				showToast("检测还未完毕，无法开始新的检测");
-				return;
-			}
 			switch (v.getId()) {
 			case R.id.liangan1:
 				startCutDown();
@@ -353,6 +349,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			int paikong = data.getIntExtra("paikong_value", 0);
 			checkMinuteValue = check * 10;
 			paikongMinuteValue = paikong * 10;
+			wayCount = 0;
 			app.oldCheckTime = checkMinuteValue;
 			app.oldPaikongTime = paikongMinuteValue;
 			PadFragment fragment = (PadFragment) getSupportFragmentManager().findFragmentById(R.id.padFragment);
