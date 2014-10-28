@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
@@ -54,6 +55,8 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 	private TextView minuteCheck, minutePaikong;
 
 	private TextView inputCanghao, inputShuifen, inputShuliang;
+	
+	private TextView startTime, intervalTime;
 
 	private Button setRKTime;
 
@@ -177,6 +180,9 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 
 		btn_cancel = (Button) findViewById(R.id.cancel);
 		btn_cancel.setOnClickListener(this);
+		startTime = (TextView) findViewById(R.id.start_time);
+		startTime.setOnClickListener(this);
+		intervalTime = (TextView) findViewById(R.id.interval_time);
 		sp_food = (Spinner) findViewById(R.id.liangzhong);
 		sp_food.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -245,11 +251,11 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 
 	}
 
-	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
+	public void displayFragment(boolean isOpen, boolean isTime, String tag, Bundle bundle,
 			BaseFragmentListener listener) {
 		if (isOpen) {
 			((BaseActivity) context).showFragment(tag, -1,
-					createFragment(tag, bundle, listener));
+					createFragment(isTime, tag, bundle, listener));
 		} else {
 			((BaseActivity) context).closeFragment(tag);
 		}
@@ -261,7 +267,7 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 		lbm.sendBroadcast(intent);
 	}
 
-	public DialogFragment createFragment(final String tag, Bundle b,
+	public DialogFragment createFragment(boolean isTime, final String tag, Bundle b,
 			BaseFragmentListener listener) {
 		if (tag.equals("input_dialog")) {
 			InputSureFragment inputF = new InputSureFragment(context, b);
@@ -270,6 +276,11 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 		} else if (tag.equals("date_picker")) {
 			DatePickFragment dateFragment = new DatePickFragment(context, b);
 			dateFragment.addFragmentListener(listener);
+			return dateFragment;
+		} else if (tag.equals("time_picker")) {
+			DatePickFragment dateFragment = new DatePickFragment(context, b);
+			dateFragment.addFragmentListener(listener);
+			dateFragment.setIsTime(isTime);
 			return dateFragment;
 		}
 		return null;
@@ -360,7 +371,7 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 	private void showInputFragment(int type) {
 		Bundle b = new Bundle();
 		b.putInt("type", type);
-		displayFragment(true, "input_dialog", b, new BaseFragmentListener() {
+		displayFragment(true, false, "input_dialog", b, new BaseFragmentListener() {
 
 			@Override
 			public void onCallBack(Object object) {
@@ -439,7 +450,7 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 	private void showDatePick() {
 		Bundle b = new Bundle();
 		b.putLong("choose_time", chooseTime);
-		displayFragment(true, "date_picker", b, new BaseFragmentListener() {
+		displayFragment(true, false, "date_picker", b, new BaseFragmentListener() {
 
 			@Override
 			public void onCallBack(Object object) {
@@ -452,6 +463,22 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 					SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
 					String timeMsg = getHexString(format2.format(date), 6);
 					sendMessageS(timeMsg);
+				}
+
+			}
+		});
+	}
+	
+	private void showTimePicker() {
+		displayFragment(true, true, "time_picker", null, new BaseFragmentListener() {
+
+			@Override
+			public void onCallBack(Object object) {
+				if (object instanceof Date) {
+					Date date = (Date) object;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String dateStr = format.format(date.getTime());
+					startTime.setText(dateStr);
 				}
 
 			}
@@ -529,6 +556,10 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 
 		case R.id.set_rk_time:
 			showDatePick();
+			break;
+			
+		case R.id.start_time:
+			showTimePicker();
 			break;
 
 		default:

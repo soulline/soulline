@@ -2,9 +2,11 @@ package com.example.testbutton;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import com.example.testbutton.mode.RightDataEntry;
 
@@ -38,6 +40,8 @@ public class PadFragment extends Fragment{
 	
 	private TextView paikongTitle, checkTitle;
 	
+	private TextView dateNow;
+	
 	ArrayList<RightDataEntry> rightList = new ArrayList<RightDataEntry>();
 	
 	@Override
@@ -59,6 +63,7 @@ public class PadFragment extends Fragment{
 		checkAleaveMinute = (TextView) view.findViewById(R.id.check_aleave_minute);
 		paikongTitle = (TextView) view.findViewById(R.id.paikong_title);
 		checkTitle = (TextView) view.findViewById(R.id.check_title);
+		dateNow = (TextView) view.findViewById(R.id.date_now);
 	}
 	
 	public void updatePaikongMinute(String value) {
@@ -114,7 +119,8 @@ public class PadFragment extends Fragment{
 	}
 	
 	private void initContent() {
-		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		dateNow.setText(format.format(new Date()));
 	}
 
 	public void initAdapter(ArrayList<RightDataEntry> list) {
