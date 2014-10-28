@@ -2,11 +2,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    android:background="@color/white" >
 
+    <!-- Content layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout android:id="@+id/bottom_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:background="@drawable/bottom_title">
+            
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true">
+            <LinearLayout android:id="@+id/community_title_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dd_dimen_40px"
+                android:paddingRight="@dimen/dd_dimen_40px"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <ImageView android:id="@+id/title_community_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title_community"/>
+            <TextView android:id="@+id/community_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dd_dimen_20px"
+                android:textColor="@color/white"
+                android:text="社区"/>
+            </LinearLayout>
+            
+            <LinearLayout android:id="@+id/alarm_title_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dd_dimen_40px"
+                android:paddingRight="@dimen/dd_dimen_40px"
+                android:layout_toRightOf="@+id/community_title_layout"
+                android:layout_marginLeft="@dimen/dd_dimen_30px"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <ImageView android:id="@+id/title_alarm_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title_alarm"/>
+            <TextView android:id="@+id/alarm_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dd_dimen_20px"
+                android:textColor="@color/white"
+                android:text="提醒"/>
+            </LinearLayout>
+            
+            <LinearLayout android:id="@+id/find_title_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dd_dimen_40px"
+                android:paddingRight="@dimen/dd_dimen_40px"
+                android:layout_toRightOf="@+id/alarm_title_layout"
+                android:layout_marginLeft="@dimen/dd_dimen_30px"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <ImageView android:id="@+id/title_find_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title_find"/>
+            <TextView android:id="@+id/find_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dd_dimen_20px"
+                android:textColor="@color/white"
+                android:text="发现"/>
+            </LinearLayout>
+            
+            <LinearLayout android:id="@+id/mine_title_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dd_dimen_40px"
+                android:paddingRight="@dimen/dd_dimen_40px"
+                android:layout_toRightOf="@+id/find_title_layout"
+                android:layout_marginLeft="@dimen/dd_dimen_30px"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <ImageView android:id="@+id/title_mine_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title_mine"/>
+            <TextView android:id="@+id/mine_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dd_dimen_20px"
+                android:textColor="@color/white"
+                android:text="我的"/>
+            </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <android.support.v4.view.ViewPager
+                android:id="@+id/main_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_title_layout" >
+            </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
 
 </RelativeLayout>

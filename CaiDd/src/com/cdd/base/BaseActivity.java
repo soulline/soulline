@@ -3,6 +3,7 @@ package com.cdd.base;
 
 
 import com.cdd.R;
+import com.cdd.app.CddApp;
 
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -27,11 +29,14 @@ public class BaseActivity extends FragmentActivity {
 	
 	public FragmentManager manager;
 	
+	public CddApp app;
+	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		context = this;
 		manager = getSupportFragmentManager();
+		app = CddApp.getInstance();
 	}
 	
 	public Handler handler = new Handler() {
@@ -43,6 +48,12 @@ public class BaseActivity extends FragmentActivity {
 		
 	};
 	
+	
+	public void setFullScreen() {
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	}
 	
 	public void showToast(final String message) {
 		handler.post(new Runnable() {

@@ -216,5 +216,8 @@
     <dimen name="dd_dimen_low40px">-17.86dp</dimen>
     
     <dimen name="dd_dimen_73px">32.59dp</dimen>
+    <dimen name="dd_dimen_509px">227.23dp</dimen>
+    <dimen name="dd_dimen_138px">61.61dp</dimen>
+    <dimen name="dd_dimen_490px">218.75dp</dimen>
 
 </resources>

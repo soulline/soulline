@@ -16,5 +16,25 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="BaseActivityTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@style/BaseAnimation</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style name="BaseAnimation">
+        <item name="android:activityOpenEnterAnimation">@anim/left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>
+        <item name="android:taskOpenEnterAnimation">@anim/left_in</item>
+        <item name="android:taskOpenExitAnimation">@anim/left_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/right_in</item>
+        <item name="android:taskCloseExitAnimation">@anim/right_out</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/left_in</item>
+        <item name="android:taskToFrontExitAnimation">@anim/left_out</item>
+        <item name="android:taskToBackEnterAnimation">@anim/right_in</item>
+        <item name="android:taskToBackExitAnimation">@anim/right_out</item>
+    </style>
 
 </resources>

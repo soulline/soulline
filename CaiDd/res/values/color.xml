@@ -3,11 +3,13 @@
     <color name="base_title_blue">#1b2a38</color>
     <color name="title_yellow">#FFCE54</color>
     <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <color name="dingdang_black">#2A2A2A</color>
     <color name="red">#FF0000</color>
     <color name="edit_hint_gray">#cccccc</color>
     <color name="regist_green">#336666</color>
     <color name="regist_yellow">#cc9933</color>
     <color name="green">#008000</color>
     <color name="orange">#FF6600</color>
+    <color name="jamb_gray">#D1D1D1</color>
+    <color name="simple_tx_">#7F7F7F</color>
 </resources>

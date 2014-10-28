@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/base_title_blue" >   
+    android:background="@drawable/title_bg" >   
     <TextView
         android:id="@+id/base_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dd_dimen_107px"
+        android:layout_height="wrap_content"
         android:textSize="@dimen/dd_dimen_34px"
-        android:textColor="@color/title_yellow"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:gravity="center" />
 </LinearLayout>
