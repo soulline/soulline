@@ -57,6 +57,10 @@ public class InputSureFragment extends DialogFragment implements OnClickListener
 		case 5:
 			inputTitle.setText("排空时间设定");
 			break;
+			
+		case 6:
+			inputTitle.setText("间隔时间");
+			break;
 
 		default:
 			break;

@@ -112,6 +112,7 @@ public class SerialService extends Service {
 	}
 
 	private void startTimer() {
+		app.isCheckIng = true;
 		count = 0;
 		final int halfPaikong = paikongMinute / 2;
 		final int halfCheck = checkMunite / 2;
@@ -228,6 +229,7 @@ public class SerialService extends Service {
 			stopTimer();
 			startTimer();
 		} else {
+			app.isCheckIng = false;
 			stopTimer();
 			app.oldCheckTime = 0;
 			app.oldPaikongTime = 0;

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import com.example.alarm.JcAlarm;
 import com.example.testbutton.app.SerialApp;
 import com.example.testbutton.base.BaseActivity;
 import com.example.testbutton.fragment.BaseFragmentListener;
@@ -61,6 +62,8 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 	private Button setRKTime;
 
 	private long chooseTime = 0L;
+	
+	private long firstAlarmTime = 0L;
 
 	private HashMap<String, String> foodMap = new HashMap<String, String>();
 
@@ -183,6 +186,7 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 		startTime = (TextView) findViewById(R.id.start_time);
 		startTime.setOnClickListener(this);
 		intervalTime = (TextView) findViewById(R.id.interval_time);
+		intervalTime.setOnClickListener(this);
 		sp_food = (Spinner) findViewById(R.id.liangzhong);
 		sp_food.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -405,6 +409,10 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 		case 5:
 			minutePaikong.setText(inputEntry.value);
 			break;
+			
+		case 6:
+			intervalTime.setText(inputEntry.value);
+			break;
 
 		default:
 			break;
@@ -476,6 +484,7 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 			public void onCallBack(Object object) {
 				if (object instanceof Date) {
 					Date date = (Date) object;
+					firstAlarmTime = date.getTime();
 					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String dateStr = format.format(date.getTime());
 					startTime.setText(dateStr);
@@ -507,7 +516,26 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 		String str = getHexFromInt(code);
 		return str;
 	}
-
+	
+	private boolean checkStartInput() {
+		if (TextUtils.isEmpty(startTime.getText().toString().trim()) && 
+				TextUtils.isEmpty(intervalTime.getText().toString().trim())) {
+			return true;
+		}
+		if (!TextUtils.isEmpty(startTime.getText().toString().trim()) &&
+				!TextUtils.isEmpty(intervalTime.getText().toString().trim())) {
+			String interval = intervalTime.getText().toString().trim();
+			if (!isNumeric(interval)) {
+				showToast("请输入正确的间隔时间");
+				return false;
+			} else {
+				return true;
+			}
+		}
+		showToast("未输入起始时间或间隔时间");
+		return false;
+	}
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -531,23 +559,29 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 			break;
 
 		case R.id.confirm:
-			Intent data = new Intent();
-			int check = 0;
-			int paikong = 0;
-			if (!TextUtils.isEmpty(minuteCheck.getText().toString().trim())) {
-				check = Integer
-						.valueOf(minuteCheck.getText().toString().trim());
+			if (checkStartInput()) {
+				Intent data = new Intent();
+				int check = 0;
+				int paikong = 0;
+				if (!TextUtils.isEmpty(minuteCheck.getText().toString().trim())) {
+					check = Integer
+							.valueOf(minuteCheck.getText().toString().trim());
+				}
+				if (!TextUtils.isEmpty(minutePaikong.getText().toString()
+						.trim())) {
+					paikong = Integer.valueOf(minutePaikong.getText().toString()
+							.trim());
+				}
+				String interval = intervalTime.getText().toString().trim();
+				int interIn = Integer.valueOf(interval);
+				data.putExtra("check_value", check);
+				data.putExtra("paikong_value", paikong);
+				data.putExtra("interval_time", interIn);
+				data.putExtra("first_alarm_time", firstAlarmTime);
+				sendMessageS(CMDCode.PREPARE_OK);
+				setResult(RESULT_OK, data);
+				finish();
 			}
-			if (!TextUtils.isEmpty(minutePaikong.getText().toString()
-					.trim())) {
-				paikong = Integer.valueOf(minutePaikong.getText().toString()
-						.trim());
-			}
-			data.putExtra("check_value", check);
-			data.putExtra("paikong_value", paikong);
-			sendMessageS(CMDCode.PREPARE_OK);
-			setResult(RESULT_OK, data);
-			finish();
 			break;
 		case R.id.cancel:
 			sendMessageS(CMDCode.PREPARE_CANCLE);
@@ -560,6 +594,10 @@ public class DetailsSetActivity extends BaseActivity implements OnClickListener 
 			
 		case R.id.start_time:
 			showTimePicker();
+			break;
+			
+		case R.id.interval_time:
+			showInputFragment(6);
 			break;
 
 		default:

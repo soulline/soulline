@@ -17,4 +17,9 @@ public class SerialBroadCode {
 	public static final String ACTION_CO2_RECEIVED = "serail_co2_received";
 	
 	public static final String ACTION_O2_RECEIVED = "serail_o2_received";
+	
+	public static final String ACTION_ALARM_CHECK = "com.serial.action.ALARM_CHECK";
+	
+	public static final String ACTION_ALARM_CHECK_STARTING = "com.serial.action.ALARM_CHECK_STARTING";
+	
 }

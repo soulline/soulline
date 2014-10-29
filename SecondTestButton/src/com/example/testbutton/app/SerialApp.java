@@ -13,6 +13,10 @@ public class SerialApp extends Application {
 	
 	public int oldPaikongTime = 0;
 	
+	public boolean isCheckIng = false;
+	
+	public boolean isSetAlarm = false;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();

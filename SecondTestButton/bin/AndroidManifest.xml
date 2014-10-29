@@ -38,6 +38,12 @@
         </activity>
         <service android:name="com.example.testbutton.service.SerialService"
             android:priority="1000"></service>
+        
+        <receiver android:name="com.example.alarm.JcAlarmReceiver">
+            <intent-filter >
+                <action android:name="com.serial.action.ALARM_CHECK"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

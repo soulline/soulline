@@ -26,10 +26,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dwin.navy.serialportapi.SerialPortOpt;
+import com.example.alarm.JcAlarm;
 import com.example.testbutton.app.SerialApp;
 import com.example.testbutton.base.BaseActivity;
 import com.example.testbutton.fragment.BaseFragmentListener;
 import com.example.testbutton.fragment.InputSureFragment;
+import com.example.testbutton.mode.AlarmInfo;
 import com.example.testbutton.mode.BaseEntry;
 import com.example.testbutton.mode.CutDownEntry;
 import com.example.testbutton.mode.RightDataEntry;
@@ -61,6 +63,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private int paikongMinuteValue = 0;
 	
 	private int wayCount = 0;
+	
+	private AlarmInfo alarmInfo = new AlarmInfo();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +145,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		filter.addAction(SerialBroadCode.ACTION_CO2_RECEIVED);
 		filter.addAction(SerialBroadCode.ACTION_O2_RECEIVED);
 		filter.addAction(SerialBroadCode.ACTION_SEND_CUT_DOWN);
+		filter.addAction(SerialBroadCode.ACTION_ALARM_CHECK_STARTING);
 		lbm.registerReceiver(dataReceiver, filter);
 	}
 	
@@ -203,6 +208,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 						fragment.updatePaikongMinute(paikong + "");
 					}
 				}
+			} else if (intent.getAction().equals(SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
+				alarmInfo = (AlarmInfo) intent.getSerializableExtra("alarm_info");
+				if (alarmInfo != null) {
+					setCheckinfo(alarmInfo);
+					startCutDown();
+				}
 			}
 			
 		}
@@ -261,6 +272,25 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		lbm.sendBroadcast(intent);
 	}
 	
+	private void setAlarmCheck(final AlarmInfo alarm) {
+		if (alarm.firstTimeN < System.currentTimeMillis()) {
+			alarm.firstTimeN = System.currentTimeMillis() + alarm.minuteN * 60 * 1000;
+			alarmInfo = alarm;
+		}
+		if (app.isSetAlarm) {
+			JcAlarm.cancelSendAlarm();
+			handler.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					JcAlarm.setSendAlarm(alarm);
+				}
+			}, 500);
+		} else {
+			JcAlarm.setSendAlarm(alarm);
+		}
+	}
+	
 	// add by zhanghebin 2014-8-6
 	public OnClickListener cedingitemsOnClick = new OnClickListener() {
 
@@ -276,15 +306,18 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				// parasettingpopupwindow.showAsDropDown(v);
 				break;
 			case R.id.liangan2:
-				startCutDown();
-				showToast("开始测定");
+//				startCutDown();
+				showToast("定时器开始");
 				sendMessageS(CMDCode.CD_LIANGAN_CHECK_2);
+				if (alarmInfo != null && alarmInfo.firstTimeN > 0L && alarmInfo.minuteN > 0) {
+					setAlarmCheck(alarmInfo);
+				}
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
 				break;
 			case R.id.canganjiance:
-				startCutDown();
+//				startCutDown();
 				showToast("开始测定");
 				sendMessageS(CMDCode.CD_CANGAN_CHECK);
 				// parasettingpopupwindow = new
@@ -340,28 +373,37 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		check.putExtra("paikong_minute", paikongMinuteValue + "");
 		lbm.sendBroadcast(check);
 	}
+	
+	private void setCheckinfo(AlarmInfo alarm) {
+		checkMinuteValue = alarm.checkN * 10;
+		paikongMinuteValue = alarm.paikongN * 10;
+		wayCount = 0;
+		app.oldCheckTime = checkMinuteValue;
+		app.oldPaikongTime = paikongMinuteValue;
+		PadFragment fragment = (PadFragment) getSupportFragmentManager().findFragmentById(R.id.padFragment);
+//		fragment.clearRightData();
+		if (checkMinuteValue > 0) {
+			float checkF = ((float) checkMinuteValue) / 10.0f;
+			fragment.updateCheckMinute(checkF + "");
+		}
+		if (paikongMinuteValue > 0) {
+			float paikongF = ((float) paikongMinuteValue) / 10.0f;
+			fragment.updatePaikongMinute(paikongF + "");
+		}
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK  && requestCode == SerialRequestCode.REQUEST_SET_DATA) {
-			int check = data.getIntExtra("check_value", 0);
-			int paikong = data.getIntExtra("paikong_value", 0);
-			checkMinuteValue = check * 10;
-			paikongMinuteValue = paikong * 10;
-			wayCount = 0;
-			app.oldCheckTime = checkMinuteValue;
-			app.oldPaikongTime = paikongMinuteValue;
-			PadFragment fragment = (PadFragment) getSupportFragmentManager().findFragmentById(R.id.padFragment);
-//			fragment.clearRightData();
-			if (checkMinuteValue > 0) {
-				float checkF = ((float) checkMinuteValue) / 10.0f;
-				fragment.updateCheckMinute(checkF + "");
+			if (alarmInfo == null) {
+				alarmInfo = new AlarmInfo();
 			}
-			if (paikongMinuteValue > 0) {
-				float paikongF = ((float) paikongMinuteValue) / 10.0f;
-				fragment.updatePaikongMinute(paikongF + "");
-			}
+			alarmInfo.checkN = data.getIntExtra("check_value", 0);
+			alarmInfo.paikongN = data.getIntExtra("paikong_value", 0);
+			alarmInfo.firstTimeN = data.getLongExtra("first_alarm_time", 0L);
+			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
+			setCheckinfo(alarmInfo);
 		}
 	}
 
