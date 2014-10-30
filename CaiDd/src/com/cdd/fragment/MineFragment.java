@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 
 public class MineFragment extends Fragment implements OnClickListener{
 
-	private Context context;
 	
 	private View view;
 	
+	public MineFragment() {
+		super();
+	}
+	
 	public MineFragment(Context context) {
-		this.context = context;
+		
 	}
 
 	@Override

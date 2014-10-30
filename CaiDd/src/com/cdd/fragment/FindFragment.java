@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 public class FindFragment extends Fragment implements OnClickListener{
 
 
-	private Context context;
 	
 	private View view;
 	
+	public FindFragment() {
+		super();
+	}
+	
 	public FindFragment(Context context) {
-		this.context = context;
+		
 	}
 
 	@Override

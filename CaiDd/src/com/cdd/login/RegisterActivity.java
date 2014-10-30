@@ -9,6 +9,10 @@ import android.widget.EditText;
 
 import com.cdd.R;
 import com.cdd.base.BaseActivity;
+import com.cdd.mode.RegisterEntry;
+import com.cdd.net.RequestListener;
+import com.cdd.operater.RegisterOp;
+import com.cdd.operater.StartOp;
 import com.cdd.util.CddConfig;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener{
@@ -48,7 +52,30 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			showToast("请再次输入密码");
 			return false;
 		}
+		if (!pwInput.getText().toString().trim().equals(ensurepwInput.getText().toString().trim())) {
+			showToast("两次输入密码不一致，请重新输入");
+			return false;
+		}
 		return true;
+	}
+	
+	private void doRegister(RegisterEntry register) {
+		RegisterOp registerOp = new RegisterOp(context);
+		registerOp.setParams(register);
+		registerOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				showToast("注册成功");
+				finish();
+			}
+		});
 	}
 	
 	@Override
@@ -56,7 +83,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.regist_btn:
 			if (checkInput()) {
-				
+				RegisterEntry register = new RegisterEntry();
+				register.loginId = accountInput.getText().toString().trim();
+				register.name = nickNameInput.getText().toString().trim();
+				register.password = pwInput.getText().toString().trim();
+				register.confirmPassword = ensurepwInput.getText().toString().trim();
+				doRegister(register);
 			}
 			break;
 		case R.id.turn_login_layout:

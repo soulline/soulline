@@ -2,6 +2,7 @@ package com.cdd.app;
 
 import java.lang.ref.WeakReference;
 
+import com.cdd.mode.AccountInfo;
 import com.cdd.util.DataUtils;
 import com.cdd.util.CddConfig;
 
@@ -39,6 +40,60 @@ public class CddApp extends Application {
 	
 	public String getUID() {
 		return DataUtils.getPreferences(DataUtils.KEY_UUID, "");
+	}
+	
+	public AccountInfo getAccount() {
+		AccountInfo account = new AccountInfo();
+		account.availableScore = DataUtils.getPreferences("availableScore", "");
+		account.description = DataUtils.getPreferences("description", "");
+		account.deviceFlag = DataUtils.getPreferences("deviceFlag", "");
+		account.isAdmin = DataUtils.getPreferences("isAdmin", "");
+		account.levelId = DataUtils.getPreferences("levelId", "");
+		account.loginId = DataUtils.getPreferences("loginId", "");
+		account.name = DataUtils.getPreferences("name", "");
+		account.scoreCeiling = DataUtils.getPreferences("scoreCeiling", "");
+		account.sex = DataUtils.getPreferences("sex", "");
+		account.signTime = DataUtils.getPreferences("signTime", "");
+		account.status = DataUtils.getPreferences("status", "");
+		return account;
+	}
+	
+	public void setAccount(AccountInfo account) {
+		DataUtils.putPreferences("availableScore", account.availableScore);
+		DataUtils.putPreferences("description", account.description);
+		DataUtils.putPreferences("deviceFlag", account.deviceFlag);
+		DataUtils.putPreferences("isAdmin", account.isAdmin);
+		DataUtils.putPreferences("levelId", account.levelId);
+		DataUtils.putPreferences("loginId", account.loginId);
+		DataUtils.putPreferences("name", account.name);
+		DataUtils.putPreferences("scoreCeiling", account.scoreCeiling);
+		DataUtils.putPreferences("sex", account.sex);
+		DataUtils.putPreferences("signTime", account.signTime);
+		DataUtils.putPreferences("status", account.status);
+		setLoginState(true);
+	}
+	
+	public void clearLogin() {
+		DataUtils.putPreferences("availableScore", "");
+		DataUtils.putPreferences("description", "");
+		DataUtils.putPreferences("deviceFlag", "");
+		DataUtils.putPreferences("isAdmin", "");
+		DataUtils.putPreferences("levelId", "");
+		DataUtils.putPreferences("loginId", "");
+		DataUtils.putPreferences("name", "");
+		DataUtils.putPreferences("scoreCeiling", "");
+		DataUtils.putPreferences("sex", "");
+		DataUtils.putPreferences("signTime", "");
+		DataUtils.putPreferences("status", "");
+		setLoginState(false);
+	}
+	
+	public void setLoginState(boolean isLogin) {
+		DataUtils.putPreferences(DataUtils.KEY_ISLOGIN, isLogin);
+	}
+	
+	public boolean isLogin() {
+		return DataUtils.getPreferences(DataUtils.KEY_ISLOGIN, false);
 	}
 	
 	public synchronized void putClosePath(int key,

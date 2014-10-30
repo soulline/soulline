@@ -11,5 +11,11 @@
     <color name="green">#008000</color>
     <color name="orange">#FF6600</color>
     <color name="jamb_gray">#D1D1D1</color>
+    <color name="jamb_gray_line">#D2D2D2</color>
     <color name="simple_tx_">#7F7F7F</color>
+    <color name="alarm_item_blue">#DDE9F7</color>
+    <color name="announcement_bg">#EBF2FA</color>
+    <color name="bottom_title_txblue">#8FB7E1</color>
+    <color name="sq_blue">#60ADD9</color>
+    <color name="gray_zhezhao">#9F7F7F7F</color>
 </resources>

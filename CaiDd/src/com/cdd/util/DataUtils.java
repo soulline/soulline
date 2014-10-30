@@ -24,6 +24,8 @@ public class DataUtils {
 	
 	public static final String KEY_IS_REBUID = "key_is_rebuild";
 	
+	public static final String KEY_ISLOGIN = "key_islogin";
+	
 	
 	public static SharedPreferences sharedPreferences = CddApp.getInstance()
 			.getSharedPreferences(CddApp.getInstance().getPackageName(), 0);

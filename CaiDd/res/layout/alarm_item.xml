@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="beforeDescendants"
-    android:background="@color/green" >
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/alarm_item_blue" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
                     android:orientation="vertical" >
 
                     <TextView
@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/dd_dimen_36px"
+                        android:textSize="@dimen/dd_dimen_30px"
                         android:textStyle="bold" />
 
                     <TextView android:id="@+id/days_title"
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/dd_dimen_30px"
+                        android:textSize="@dimen/dd_dimen_22px"
                         android:text="Days" />
                 </LinearLayout>
             </RelativeLayout>

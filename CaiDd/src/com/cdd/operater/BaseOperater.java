@@ -60,7 +60,7 @@ abstract public class BaseOperater {
 
 	private String extra_data = "";
 
-	private boolean isEncrypt = true;
+	private boolean isEncrypt = false;
 
 	private boolean isShowErrorNetwork = true;
 
@@ -152,7 +152,7 @@ abstract public class BaseOperater {
 		sb.append("?");
 		StringBuffer bbi = new StringBuffer();
 		// bbi.append("&cid=" + app.base_cid);
-		bbi.append("&uid=" + app.getUID());
+		bbi.append("uid=" + app.getUID());
 		sb.append(bbi.toString());
 		return sb.toString();
 	}
@@ -350,8 +350,8 @@ abstract public class BaseOperater {
 						String d = (String) data;
 
 						
-						String ed = isEncrypt ? CryptAES.getInstance()
-								.onDecrypt(d) : d;
+						/*String ed = isEncrypt ? CryptAES.getInstance()
+								.onDecrypt(d) : d;*/
 						// String ed = aes.onDecrypt(d);
 						if (CddConfig.IS_DEBUG) {
 							// RecordUtil.recordDataLog(queryContent,
@@ -361,9 +361,9 @@ abstract public class BaseOperater {
 							// request.url,
 							// "");
 							Log.d("CDD", d);
-							Log.d("CDD", ed);
+//							Log.d("CDD", ed);
 						}
-						response = new JSONObject(ed);
+						response = new JSONObject(d);
 						if (app.isRebuild)
 							return;
 						if (checkJson()) {

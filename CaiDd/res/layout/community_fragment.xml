@@ -4,5 +4,144 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/community_title_bg">
+        <TextView android:id="@+id/checkout_login_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dd_dimen_22px"
+            android:textColor="@drawable/register_text_selector"
+            android:text="切换用户"
+            android:layout_marginLeft="@dimen/dd_dimen_30px"
+            android:layout_marginTop="@dimen/dd_dimen_50px"
+            android:background="@drawable/checkout_login_selector"
+            android:gravity="center"/>
+        <LinearLayout android:id="@+id/already_login_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+                <TextView android:id="@+id/nickname_tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/dd_dimen_44px"
+                    android:textColor="@color/white"
+                    android:text="胡锦涛"/>
+                <RelativeLayout android:id="@+id/sign_today_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/dd_dimen_30px"
+                    android:paddingRight="@dimen/dd_dimen_30px">
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/signtoday_selector"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_20px"
+                android:textSize="@dimen/dd_dimen_26px"
+                android:textColor="@color/dingdang_black"
+                android:text="勤奋的小叮当别忘了每日签到哦"/>
+        </LinearLayout>
+        <TextView android:id="@+id/unlogin_tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/dd_dimen_44px"
+                    android:textColor="@drawable/register_text_selector"
+                    android:text="未登录用户"/>
+    </RelativeLayout>
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dd_dimen_10px"
+        android:layout_marginRight="@dimen/dd_dimen_10px"
+        android:layout_marginTop="@dimen/dd_dimen_10px"
+        android:orientation="vertical"
+        android:background="@drawable/gray_jamb">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout android:id="@+id/accounting_hot_thread_layout"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="@dimen/dd_dimen_88px">
+                <LinearLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+                    <ImageView android:id="@+id/sq_hot_thread_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/accounting_hot_thread"/>
+                    <TextView android:id="@+id/sq_hot_thread_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/dd_dimen_36px"
+                        android:textColor="@color/sq_blue"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/dd_dimen_20px"
+                        android:text="财会热帖"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/dingdang_sq_layout"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:background="@color/sq_blue"
+                android:layout_height="@dimen/dd_dimen_88px">
+                <LinearLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+                    <ImageView android:id="@+id/dingdang_sq_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/dingdang_sq_check"/>
+                    <TextView android:id="@+id/dingdang_sq_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/dd_dimen_36px"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/dd_dimen_20px"
+                        android:text="叮当社区"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_1px"
+            android:background="@color/jamb_gray_line"/>
+        <ListView android:id="@+id/sq_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:visibility="gone" />
+        <ListView android:id="@+id/accounting_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"/>
+        <ListView android:id="@+id/exam_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/alarm_item_blue"
+            android:listSelector="@color/alarm_item_blue"
+            android:divider="@null"
+            android:visibility="gone"/>
+        
+    </LinearLayout>
 </LinearLayout>

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.cdd.mode.BaseEntry;
+import com.cdd.util.DataUtils;
 
 public class StartOp extends BaseOperater {
 
@@ -15,7 +16,7 @@ public class StartOp extends BaseOperater {
 
 	@Override
 	public void initAction() {
-		action = "";
+		action = "base/start.do";
 	}
 
 	@Override
@@ -32,8 +33,8 @@ public class StartOp extends BaseOperater {
 
 	@Override
 	public void onParser(JSONObject response) {
-		// TODO Auto-generated method stub
-
+		String uid = response.optString("uid");
+		DataUtils.putPreferences(DataUtils.KEY_UUID, uid);
 	}
 
 	@Override

@@ -3600,6 +3600,7 @@ com.yyl.mode.GamerInfo -> com.yyl.d.f:
     java.lang.String name -> b
     java.lang.String sex -> c
     java.lang.String photoUrl -> d
+    java.lang.String status -> e
 com.yyl.mode.GetPrize -> com.yyl.d.g:
     java.lang.String receiveKey -> a
     java.lang.String mobile -> b

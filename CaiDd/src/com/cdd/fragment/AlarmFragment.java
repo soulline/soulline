@@ -12,12 +12,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class AlarmFragment extends Fragment {
-	private Context context;
+public class AlarmFragment extends Fragment implements OnClickListener{
 	
 	private View view;
 	
@@ -25,8 +25,12 @@ public class AlarmFragment extends Fragment {
 	
 	private AlarmAdapter adapter;
 	
+	public AlarmFragment() {
+		super();
+	}
+	
 	public AlarmFragment(Context context) {
-		this.context = context;
+		
 	}
 
 	@Override
@@ -38,6 +42,7 @@ public class AlarmFragment extends Fragment {
 	}
 	
 	private void initView() {
+		view.findViewById(R.id.add_alarm_layout).setOnClickListener(this);
 		alarmList = (ListView) view.findViewById(R.id.alarm_list);
 		ArrayList<AlarmItemEntry> list = new ArrayList<AlarmItemEntry>();
 		AlarmItemEntry item1 = new AlarmItemEntry();
@@ -49,7 +54,7 @@ public class AlarmFragment extends Fragment {
 		item1.aliveDays = "30";
 		list.add(item1);
 		AlarmItemEntry item2 = new AlarmItemEntry();
-		item2.alarmDate = "2014年10月27日";
+		item2.alarmDate = "2014年10月28日";
 		item2.alarmDetail = "今天应该复习经济法了";
 		item2.alarmSecondType = "";
 		item2.alarmTitle = "今日学习计划";
@@ -77,7 +82,7 @@ public class AlarmFragment extends Fragment {
 	
 	public void initAdapater(ArrayList<AlarmItemEntry> list) {
 		if (adapter == null) {
-			adapter = new AlarmAdapter(context);
+			adapter = new AlarmAdapter(getActivity());
 			adapter.addData(list);
 			alarmList.setAdapter(adapter);
 		} else {
@@ -85,5 +90,18 @@ public class AlarmFragment extends Fragment {
 			adapter.addData(list);
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.add_alarm_layout:
+			
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 }

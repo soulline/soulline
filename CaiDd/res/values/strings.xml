@@ -6,5 +6,29 @@
     <!--发现-->
     <string name="dingdang_quan">叮当圈</string>
     <string name="action_listen">关注</string>
-
+    <string name="action_sure">确定</string>
+    <string name="action_cancel">取消</string>
+    
+    <!-- 社区string array -->
+    <string-array name="accounting_array_1">
+        <item>税种解析</item>
+        <item>账务处理</item>
+        <item>出纳专区</item>
+        <item>发票管理</item>
+        <item>财务法规</item>
+        <item>企业内控</item>
+        <item>审计评估</item>
+        <item>软件专区</item>
+        <item>财会考试</item>
+    </string-array>
+    
+    <string-array name="accounting_array_2">
+        <item>会计从业资格证</item>
+        <item>初级会计</item>
+        <item>中级会计</item>
+        <item>高级会计</item>
+        <item>注册会计师</item>
+        <item>注册税务师</item>
+        <item>注册资产评估师</item>
+    </string-array>
 </resources>
