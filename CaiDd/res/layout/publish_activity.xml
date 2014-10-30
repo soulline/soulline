@@ -1,0 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Content layout -->
+
+    <LinearLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/alarm_item_blue"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_850px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dd_dimen_20px"
+            android:layout_marginRight="@dimen/dd_dimen_20px"
+            android:layout_marginTop="@dimen/dd_dimen_50px"
+            android:background="@drawable/gray_jamb" >
+
+            <EditText
+                android:id="@+id/input_edtx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top"
+                android:maxLines="5"
+                android:padding="@dimen/dd_dimen_10px"
+                android:textColor="@color/dingdang_black"
+                android:textSize="@dimen/dd_dimen_34px" />
+
+            <GridView
+                android:id="@+id/pic_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/input_edtx"
+                android:columnWidth="@dimen/dd_dimen_90px"
+                android:fadingEdge="none"
+                android:gravity="center"
+                android:horizontalSpacing="@dimen/dd_dimen_10px"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="@dimen/dd_dimen_10px" >
+            </GridView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dd_dimen_20px"
+            android:layout_marginRight="@dimen/dd_dimen_20px"
+            android:layout_marginTop="@dimen/dd_dimen_30px" >
+
+            <TextView
+                android:id="@+id/insert_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/insert_pic_selector"
+                android:drawablePadding="@dimen/dd_dimen_10px"
+                android:gravity="center_vertical"
+                android:text="插入图片"
+                android:textColor="@drawable/insert_tx_selector"
+                android:textSize="@dimen/dd_dimen_28px" />
+
+            <TextView
+                android:id="@+id/insert_bq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dd_dimen_20px"
+                android:layout_toRightOf="@+id/insert_pic"
+                android:drawableLeft="@drawable/insert_bq_selector"
+                android:drawablePadding="@dimen/dd_dimen_10px"
+                android:gravity="center_vertical"
+                android:text="插入表情"
+                android:textColor="@drawable/insert_tx_selector"
+                android:textSize="@dimen/dd_dimen_28px" />
+
+            <TextView
+                android:id="@+id/niming_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dd_dimen_10px"
+                android:drawableLeft="@drawable/nm_selector"
+                android:drawablePadding="@dimen/dd_dimen_10px"
+                android:padding="@dimen/dd_dimen_15px"
+                android:text="匿名发表"
+                android:textColor="@drawable/insert_tx_selector"
+                android:textSize="@dimen/dd_dimen_28px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dd_dimen_20px"
+            android:layout_marginRight="@dimen/dd_dimen_20px"
+            android:layout_marginTop="@dimen/dd_dimen_40px" >
+
+            <Button
+                android:id="@+id/pulish_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/pulish_btn_selector"
+                android:text="发表"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dd_dimen_34px"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/pulish_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dd_dimen_20px"
+                android:layout_toLeftOf="@+id/pulish_ok"
+                android:background="@drawable/pulish_btn_selector"
+                android:text="取消"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dd_dimen_34px"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>

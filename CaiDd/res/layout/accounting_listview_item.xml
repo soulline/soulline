@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="@dimen/dd_dimen_89px"
+        android:background="@drawable/list_item_selector">
+        <TextView android:id="@+id/accounting_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dd_dimen_34px"
+            android:textColor="@color/sq_blue"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dd_dimen_30px" />
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dd_dimen_10px"
+            android:background="@drawable/angle_right"/>
+        <View android:id="@+id/bottom_dash_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_1px"
+            android:layout_marginLeft="@dimen/dd_dimen_10px"
+            android:layout_marginRight="@dimen/dd_dimen_10px"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/dashes_line_gray"/>
+    </RelativeLayout>
+
+</LinearLayout>
