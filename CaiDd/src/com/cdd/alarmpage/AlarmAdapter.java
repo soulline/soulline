@@ -10,6 +10,7 @@ import com.cdd.mode.AlarmItemEntry;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
@@ -77,6 +78,13 @@ public class AlarmAdapter extends ArrayAdapter<AlarmItemEntry> {
 		} else {
 			convertView.findViewById(R.id.bottom_line).setVisibility(View.VISIBLE);
 		}
+		convertView.findViewById(R.id.alarm_rm_layout).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 		return convertView;
 	}
 	

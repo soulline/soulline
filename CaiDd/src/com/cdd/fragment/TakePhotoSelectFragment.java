@@ -1,6 +1,7 @@
 package com.cdd.fragment;
 
 import com.cdd.R;
+import com.cdd.minepage.MineInfoModifyActivity;
 import com.cdd.sqpage.PulishActivity;
 
 import android.content.Context;
@@ -18,6 +19,8 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 
 	private boolean hasDefault = true;
 	
+	private BaseFragmentListener listener;
+	
 	public TakePhotoSelectFragment() {
 		super();
 	}
@@ -26,6 +29,10 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 		if (b != null) {
 			hasDefault = b.getBoolean("has_default", true);
 		}
+	}
+	
+	public void addFragmentListener(BaseFragmentListener listener) {
+		this.listener = listener;
 	}
 
 	@Override
@@ -44,6 +51,7 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 		if (hasDefault) {
 			view.findViewById(R.id.from_default).setOnClickListener(this);
 		}
+		view.findViewById(R.id.take_select_layout).setOnClickListener(this);
 		view.findViewById(R.id.from_camera).setOnClickListener(this);
 		view.findViewById(R.id.from_gallery).setOnClickListener(this);
 	}
@@ -52,23 +60,44 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.from_default:
-
+			if (listener != null) {
+				
+			}
 			dismissAllowingStateLoss();
 			break;
 		case R.id.from_camera:
 			if (hasDefault) {
-
+				if (getActivity() instanceof PulishActivity) {
+					((PulishActivity) getActivity()).pickImageFromCamera();
+				} else if (getActivity() instanceof MineInfoModifyActivity) {
+					((MineInfoModifyActivity) getActivity()).pickImageFromCamera();
+				};
 			} else {
-				((PulishActivity) getActivity()).pickImageFromCamera();
+				if (getActivity() instanceof PulishActivity) {
+					((PulishActivity) getActivity()).pickImageFromCamera();
+				} else if (getActivity() instanceof MineInfoModifyActivity) {
+					((MineInfoModifyActivity) getActivity()).pickImageFromCamera();
+				};
 			}
 			dismissAllowingStateLoss();
 			break;
 		case R.id.from_gallery:
 			if (hasDefault) {
-
+				if (getActivity() instanceof PulishActivity) {
+					((PulishActivity) getActivity()).pickImageFromGallery();
+				} else if (getActivity() instanceof MineInfoModifyActivity) {
+					((MineInfoModifyActivity) getActivity()).pickImageFromGallery();
+				};
 			} else {
-				((PulishActivity) getActivity()).pickImageFromGallery();
+				if (getActivity() instanceof PulishActivity) {
+					((PulishActivity) getActivity()).pickImageFromGallery();
+				} else if (getActivity() instanceof MineInfoModifyActivity) {
+					((MineInfoModifyActivity) getActivity()).pickImageFromGallery();
+				}
 			}
+			dismissAllowingStateLoss();
+			break;
+		case R.id.take_select_layout:
 			dismissAllowingStateLoss();
 			break;
 

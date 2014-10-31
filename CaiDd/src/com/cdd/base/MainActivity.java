@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		initView();
+//		initView();
 	}
 
 	@Override
@@ -54,15 +54,20 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, intent);
 		if (resultCode == RESULT_OK
 				&& requestCode == CddRequestCode.LOGIN_REQUEST) {
-			initView();
 		} else if (resultCode == RESULT_CANCELED
 				&& requestCode == CddRequestCode.LOGIN_REQUEST) {
-			initView();
 		} else if (resultCode == RESULT_OK
 				&& requestCode == CddRequestCode.MINE_LOGIN_REQUEST) {
 			index = 3;
-			initView();
 		}
+	}
+	
+	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		initView();
 	}
 
 	private void initView() {

@@ -30,8 +30,9 @@ public class SlpashActivity extends BaseActivity {
 			
 			@Override
 			public void onError(Object error) {
-				// TODO Auto-generated method stub
-				
+				Intent intent = new Intent(context, MainActivity.class);
+				startActivity(intent);
+				finish();
 			}
 			
 			@Override

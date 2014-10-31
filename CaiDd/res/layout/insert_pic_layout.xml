@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/take_select_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/take_photo_bg" >

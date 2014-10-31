@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity {
@@ -48,6 +49,15 @@ public class BaseActivity extends FragmentActivity {
 		
 	};
 	
+	public void initTitle(String title) {
+		TextView titleTx = (TextView) findViewById(R.id.base_title);
+		titleTx.setText(title);
+	}
+
+	public void initTitle(int titleReId) {
+		TextView titleTx = (TextView) findViewById(R.id.base_title);
+		titleTx.setText(getString(titleReId));
+	}
 	
 	public void setFullScreen() {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

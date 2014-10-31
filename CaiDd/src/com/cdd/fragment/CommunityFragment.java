@@ -3,14 +3,17 @@ package com.cdd.fragment;
 import java.util.ArrayList;
 
 import com.cdd.R;
+import com.cdd.app.CddApp;
 import com.cdd.base.BaseActivity;
 import com.cdd.base.MainActivity;
 import com.cdd.login.LoginActivity;
 import com.cdd.mode.ForumEntry;
 import com.cdd.mode.ForumItem;
+import com.cdd.mode.MemberInfoEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.ExamItemOperater;
 import com.cdd.operater.ForumItemOperater;
+import com.cdd.operater.GetMemberInfoOp;
 import com.cdd.operater.SignTodayOp;
 import com.cdd.sqpage.AccountingHotAdapter;
 import com.cdd.sqpage.ExamListAdapter;
@@ -63,6 +66,33 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	public CommunityFragment(Context context) {
 		this.context = context;
 	}
+	
+	private void loadMemberInfo() {
+		final GetMemberInfoOp memberOp = new GetMemberInfoOp(getActivity());
+		memberOp.onRequest(new RequestListener() {
+
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onCallBack(Object data) {
+				final MemberInfoEntry memberInfo = memberOp.getMemberInfo();
+				if (getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							nicknameTx.setText(memberInfo.name);
+						}
+					});
+				}
+				
+			}
+		});
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,9 +105,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 	private void initContent() {
 		setCheck(0);
-		if (!TextUtils.isEmpty(((BaseActivity) getActivity()).app.getAccount().name)) {
-			nicknameTx.setText(((BaseActivity) getActivity()).app.getAccount().name);
-		}
+		loadMemberInfo();
 	}
 
 	private void doSignToday() {
@@ -287,13 +315,13 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		accountingListview.setVisibility(View.VISIBLE);
 		sqListview.setVisibility(View.GONE);
 		examListview.setVisibility(View.GONE);
-		if (list.size() == 0) {
+		if (list.size() == 0 && accountingAdapter != null) {
 			accountingAdapter.clear();
 			accountingAdapter.notifyDataSetChanged();
 			return;
 		}
 		if (accountingAdapter == null) {
-			accountingAdapter = new AccountingHotAdapter(getActivity());
+			accountingAdapter = new AccountingHotAdapter(CddApp.getInstance());
 			accountingAdapter.addData(list);
 			accountingListview.setAdapter(accountingAdapter);
 		} else {
@@ -307,13 +335,13 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		accountingListview.setVisibility(View.GONE);
 		sqListview.setVisibility(View.GONE);
 		examListview.setVisibility(View.VISIBLE);
-		if (list.size() == 0) {
+		if (list.size() == 0 && examAdapter != null) {
 			examAdapter.clear();
 			examAdapter.notifyDataSetChanged();
 			return;
 		}
 		if (examAdapter == null) {
-			examAdapter = new ExamListAdapter(getActivity());
+			examAdapter = new ExamListAdapter(CddApp.getInstance());
 			examAdapter.addData(list);
 			examListview.setAdapter(examAdapter);
 		} else {
@@ -328,7 +356,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		sqListview.setVisibility(View.VISIBLE);
 		examListview.setVisibility(View.GONE);
 		if (sqAdapter == null) {
-			sqAdapter = new SqForumAdapter(getActivity());
+			sqAdapter = new SqForumAdapter(CddApp.getInstance());
 			sqAdapter.addData(list);
 			sqListview.setAdapter(sqAdapter);
 		} else {

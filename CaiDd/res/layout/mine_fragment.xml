@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <TextView
@@ -68,7 +69,6 @@
                                 android:id="@+id/nick_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="周永康"
                                 android:textColor="@color/dingdang_black"
                                 android:textSize="@dimen/dd_dimen_34px" />
 
@@ -83,14 +83,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dd_dimen_10px"
-                                android:text="LV1"
                                 android:textColor="@color/dingdang_black"
                                 android:textSize="@dimen/dd_dimen_26px" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/dd_dimen_60px"
+                                android:layout_marginLeft="@dimen/dd_dimen_30px"
                                 android:background="@drawable/level_icon" />
 
                             <TextView
@@ -98,17 +97,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dd_dimen_10px"
-                                android:text="365"
                                 android:textColor="@color/dingdang_black"
                                 android:textSize="@dimen/dd_dimen_26px" />
 
-                            <TextView
-                                android:id="@+id/coin_tx"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="叮当币"
-                                android:textColor="@color/dingdang_black"
-                                android:textSize="@dimen/dd_dimen_26px" />
                         </LinearLayout>
 
                         <TextView
@@ -117,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:lines="2"
-                            android:text="我是一只小青蛙呀小呀小青蛙，每天我都很快乐呀很呀很快乐我是一只小青蛙呀小呀小青蛙，每天我都很快乐呀很呀很快乐"
+                            android:text=""
                             android:textColor="@color/simple_tx_"
                             android:textSize="@dimen/dd_dimen_28px" />
                     </LinearLayout>

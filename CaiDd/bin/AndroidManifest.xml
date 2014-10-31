@@ -21,7 +21,7 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/BaseActivityTheme" >
         <activity
             android:name="com.cdd.base.MainActivity"
             android:launchMode="singleTop"
@@ -63,6 +63,18 @@
         </activity>
         <activity
             android:name="com.cdd.sqpage.PulishActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.minepage.MineInfoModifyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.minepage.ModifyPWActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >

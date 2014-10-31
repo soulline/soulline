@@ -58,7 +58,9 @@ public class SqForumAdapter extends ArrayAdapter<ForumEntry> {
 			
 			@Override
 			public void onClick(View v) {
-				((BaseActivity) context).showToast("赞赞赞赞赞");
+				if (context instanceof BaseActivity) {
+					((BaseActivity) context).showToast("赞赞赞赞赞");
+				}
 			}
 		});
 		return convertView;

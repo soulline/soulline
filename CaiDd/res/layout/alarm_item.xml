@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
     android:background="@color/alarm_item_blue" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dd_dimen_266px" >
+        android:layout_height="@dimen/dd_dimen_266px"
+        android:descendantFocusability="blocksDescendants" >
 
         <RelativeLayout
             android:id="@+id/alarm_bg_layout"
@@ -124,7 +124,7 @@
                 android:textColor="@color/base_title_blue"
                 android:textSize="@dimen/dd_dimen_32px" />
 
-            <LinearLayout
+            <LinearLayout android:id="@+id/alarm_rm_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sex_bg_layout"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/take_photo_bg" >
+    
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="@drawable/sex_select_bg">
+        <TextView android:id="@+id/sex_man"
+            android:layout_width="@dimen/dd_dimen_482px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/list_item_selector"
+            android:textColor="@color/self_info_blue"
+            android:textSize="@dimen/dd_dimen_32px"
+            android:gravity="center"
+            android:text="男"/>
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_1px"
+            android:background="@drawable/dashes_line_gray"/>
+        <TextView android:id="@+id/sex_woman"
+            android:layout_width="@dimen/dd_dimen_482px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/list_item_selector"
+            android:textColor="@color/self_info_blue"
+            android:textSize="@dimen/dd_dimen_32px"
+            android:gravity="center"
+            android:text="女"/>
+    </LinearLayout>
+
+</RelativeLayout>
