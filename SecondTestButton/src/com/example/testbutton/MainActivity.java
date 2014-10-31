@@ -209,13 +209,13 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 					}
 				}
 			} else if (intent.getAction().equals(SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
-				sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
+				sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
 				alarmInfo = (AlarmInfo) intent.getSerializableExtra("alarm_info");
 				handler.postDelayed(new Runnable() {
 					
 					@Override
 					public void run() {
-						sendMessageS(CMDCode.CD_LIANGAN_CHECK_2);
+						sendMessageS(CMDCode.CD_LIANGAN_CHECK_1);
 						if (alarmInfo != null) {
 							setCheckinfo(alarmInfo);
 							startCutDown();
@@ -306,20 +306,21 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			cdPopupWindow.dismiss();
 			switch (v.getId()) {
 			case R.id.liangan1:
-				startCutDown();
-				showToast("开始测定");
-				sendMessageS(CMDCode.CD_LIANGAN_CHECK_1);
+//				startCutDown();
+				showToast("定时器开始");
+//				sendMessageS(CMDCode.CD_LIANGAN_CHECK_1);
+				if (alarmInfo != null && alarmInfo.firstTimeN > 0L && alarmInfo.minuteN > 0) {
+					setAlarmCheck(alarmInfo);
+				}
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
 				break;
 			case R.id.liangan2:
 //				startCutDown();
-				showToast("定时器开始");
-//				sendMessageS(CMDCode.CD_LIANGAN_CHECK_2);
-				if (alarmInfo != null && alarmInfo.firstTimeN > 0L && alarmInfo.minuteN > 0) {
-					setAlarmCheck(alarmInfo);
-				}
+				showToast("开始测定");
+				sendMessageS(CMDCode.CD_LIANGAN_CHECK_2);
+				
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
@@ -345,22 +346,22 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			functionPopupWindow.dismiss();
 			switch (v.getId()) {
 			case R.id.liangan1:
-				sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
-				startCanshuActivity();
+//				sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
+				startCanshuActivity(1);
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
 				break;
 			case R.id.liangan2:
-//				sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
-				startCanshuActivity();
+				sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
+				startCanshuActivity(2);
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
 				break;
 			case R.id.canganjiance:
 				sendMessageS(CMDCode.FF_CANGAN_CHECK);
-				startCanshuActivity();
+				startCanshuActivity(3);
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
@@ -415,7 +416,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 
-	public void startCanshuActivity() {
+	public void startCanshuActivity(int type) {
 		// 实例化SelectPicPopupWindow
 //		detailsPopupWindow = new DetailsPopupWindow(context);
 		/*displayFragment(true, "detail_setting", null, new BaseFragmentListener() {
@@ -430,6 +431,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 		
 		  Intent intent = new Intent(MainActivity.this, DetailsSetActivity.class);
+		  intent.putExtra("set_type", type);
 		  startActivityForResult(intent, SerialRequestCode.REQUEST_SET_DATA);
 		  overridePendingTransition(R.anim.bottom_in,
 				  R.anim.bottom_out);

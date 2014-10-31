@@ -23,67 +23,82 @@
             android:layout_height="0dp"
             android:layout_weight="30"
             android:background="@drawable/b" >
-            
-            <LinearLayout android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp"
-                android:orientation="vertical">
-                <LinearLayout android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView android:id="@+id/paikong_title"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/paikong_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:drawableLeft="@drawable/redpoint"
                         android:drawablePadding="5dp"
-                        android:text="排空剩余时间"/>
-                    <TextView android:id="@+id/paikong_aleave_minute"
+                        android:text="排空剩余时间"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/paikong_aleave_minute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
                         android:layout_marginLeft="10dp"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:text=""/>
+                        android:textSize="15dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
                         android:layout_marginLeft="15dp"
+                        android:text="min."
                         android:textColor="@color/black"
-                        android:text="min."/>
+                        android:textSize="15dp" />
                 </LinearLayout>
-                <LinearLayout android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                    <TextView android:id="@+id/check_title"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/check_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:drawableLeft="@drawable/redpoint"
                         android:drawablePadding="5dp"
-                        android:text="检测剩余时间"/>
-                    <TextView android:id="@+id/check_aleave_minute"
+                        android:text="检测剩余时间"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/check_aleave_minute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
                         android:layout_marginLeft="10dp"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:text=""/>
+                        android:textSize="15dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
                         android:layout_marginLeft="15dp"
+                        android:text="min."
                         android:textColor="@color/black"
-                        android:text="min."/>
+                        android:textSize="15dp" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
@@ -93,8 +108,8 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:background="#F0F0F0"
-            android:orientation="horizontal"
-            android:gravity="center" >
+            android:gravity="center"
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/co2_status_img"
@@ -173,13 +188,15 @@
                 android:layout_height="wrap_content"
                 android:text="      %" >
             </TextView>
-            <TextView android:id="@+id/date_now"
+
+            <TextView
+                android:id="@+id/date_now"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:textSize="14dp"
+                android:text="2014-10-28 20:41"
                 android:textColor="@color/black"
-                android:text="2014-10-28 20:41"/>
+                android:textSize="14dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -208,7 +225,7 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="CO2/ppm         RH /%           T/C"/>
+            android:text="CO2/ppm         RH /%           T/C"/>
         -->
 
         <RelativeLayout
@@ -253,14 +270,24 @@
                 android:text="T/C"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
-            
         </RelativeLayout>
 
-        <ListView
-            android:id="@+id/listid"
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="30" >
+
+            <ListView
+                android:id="@+id/listid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <com.example.testbutton.widget.DigitalNewClock android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <ListView>
         </ListView>
     </LinearLayout>
 
