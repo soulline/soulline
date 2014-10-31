@@ -38,12 +38,24 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.alarm_fragment, null);
 		initView();
+		initContent();
 		return view;
 	}
 	
 	private void initView() {
 		view.findViewById(R.id.add_alarm_layout).setOnClickListener(this);
 		alarmList = (ListView) view.findViewById(R.id.alarm_list);
+		alarmList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+			}
+		});
+	}
+	
+	public void initContent() {
 		ArrayList<AlarmItemEntry> list = new ArrayList<AlarmItemEntry>();
 		AlarmItemEntry item1 = new AlarmItemEntry();
 		item1.alarmDate = "2014年12月30日";
@@ -70,14 +82,6 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 		item3.aliveDays = "30";
 		list.add(item3);
 		initAdapater(list);
-		alarmList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				
-			}
-		});
 	}
 	
 	public void initAdapater(ArrayList<AlarmItemEntry> list) {

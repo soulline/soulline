@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dd_dimen_246px"
+        android:paddingLeft="@dimen/dd_dimen_30px"
+        android:paddingRight="@dimen/dd_dimen_30px" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/portait_iv"
+                android:layout_width="@dimen/dd_dimen_46px"
+                android:layout_height="@dimen/dd_dimen_46px"
+                android:background="@color/jamb_gray"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dd_dimen_10px"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="@dimen/dd_dimen_25px" >
+
+                    <TextView
+                        android:id="@+id/message_nick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="会飞的兔子"
+                        android:textColor="@color/self_info_blue"
+                        android:textSize="@dimen/dd_dimen_26px" />
+
+                    <TextView
+                        android:id="@+id/message_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="2014-10-31"
+                        android:textColor="@color/simple_tx_"
+                        android:textSize="@dimen/dd_dimen_24px" />
+
+                    <LinearLayout
+                        android:id="@+id/reply_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/reply_btn_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dd_dimen_5px"
+                            android:text="回复"
+                            android:textColor="@drawable/reply_tx_selector"
+                            android:textSize="@dimen/dd_dimen_24px" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <TextView android:id="@+id/message_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dd_dimen_10px"
+                    android:maxLines="4"
+                    android:layout_marginTop="@dimen/dd_dimen_10px"
+                    android:background="@drawable/message_bg"
+                    android:textColor="@color/dingdang_black"
+                    android:textSize="@dimen/dd_dimen_26px"
+                    android:text="解决危机哦我敬爱日均"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

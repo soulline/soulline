@@ -38,6 +38,10 @@ public class FindFragment extends Fragment implements OnClickListener{
 		view.findViewById(R.id.hot_news_layout).setOnClickListener(this);
 		view.findViewById(R.id.group_layout).setOnClickListener(this);
 	}
+	
+	public void initContent() {
+		
+	}
 
 	@Override
 	public void onClick(View v) {

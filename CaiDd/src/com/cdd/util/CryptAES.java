@@ -103,8 +103,8 @@ public class CryptAES {
 			String base64_ciphertext = hahahah123.onEncrypt(msg);
 			String mm = hahahah123.onDecrypt(base64_ciphertext);
 			if (CddConfig.IS_DEBUG) {
-				Log.i("YYL", base64_ciphertext);
-				Log.i("YYL", mm);
+				Log.i("CDD", base64_ciphertext);
+				Log.i("CDD", mm);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

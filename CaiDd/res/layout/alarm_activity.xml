@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+    <!-- Content layout -->
+
+    <LinearLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/alarm_item_blue" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/title_bg"
+                    android:gravity="center"
+                    android:text="提醒"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dd_dimen_38px"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/announcement_bg"
+                    android:paddingBottom="@dimen/dd_dimen_20px"
+                    android:paddingTop="@dimen/dd_dimen_20px" >
+
+                    <TextView
+                        android:id="@+id/announcement_content"
+                        android:layout_width="@dimen/dd_dimen_640px"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:text="原定于2015年2月21日的会计资格证初级考试已取消，改为2015年4月13日。"
+                        android:textColor="@color/dingdang_black"
+                        android:textSize="@dimen/dd_dimen_28px" />
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/alarm_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/add_alarm_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dd_dimen_20px"
+                android:paddingTop="@dimen/dd_dimen_20px" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/add_alarm_selector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dd_dimen_30px"
+                        android:text="添加报名/考试时间提醒"
+                        android:textColor="@color/dingdang_black"
+                        android:textSize="@dimen/dd_dimen_32px" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>

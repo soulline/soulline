@@ -103,7 +103,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		return view;
 	}
 
-	private void initContent() {
+	public void initContent() {
 		setCheck(0);
 		loadMemberInfo();
 	}
@@ -185,7 +185,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		showTitleLayout();
 	}
 
-	private void showTitleLayout() {
+	public void showTitleLayout() {
 		if (((BaseActivity) getActivity()).app.isLogin()) {
 			view.findViewById(R.id.already_login_layout).setVisibility(
 					View.VISIBLE);
@@ -387,7 +387,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 							@Override
 							public void onClick(DialogInterface dialog, int arg1) {
-								((BaseActivity) getActivity()).app.clearLogin();
+								CddApp.getInstance().clearLogin();
 								Intent login = new Intent(getActivity(),
 										LoginActivity.class);
 								((MainActivity) getActivity())

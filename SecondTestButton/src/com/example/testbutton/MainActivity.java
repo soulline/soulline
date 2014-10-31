@@ -209,7 +209,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 					}
 				}
 			} else if (intent.getAction().equals(SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
-				sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
 				alarmInfo = (AlarmInfo) intent.getSerializableExtra("alarm_info");
 				handler.postDelayed(new Runnable() {
 					
@@ -346,15 +345,19 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			functionPopupWindow.dismiss();
 			switch (v.getId()) {
 			case R.id.liangan1:
-//				sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
+				sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
 				startCanshuActivity(1);
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
 				break;
 			case R.id.liangan2:
-				sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
-				startCanshuActivity(2);
+				if (app.isCheckIng) {
+					showToast("检测正在进行中，无法开始新检测");
+				} else {
+					sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
+					startCanshuActivity(2);
+				}
 				// parasettingpopupwindow = new
 				// ParaSettingPopupWindow(MainActivity.this, paraitemsOnClick);
 				// parasettingpopupwindow.showAsDropDown(v);
@@ -497,12 +500,14 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				if (!app.isPause) {
 					sendMessageS(CMDCode.STOP_CMD);
 					app.isPause = true;
+					app.isCheckIng = false;
 					showToast("停止检测");
 					bt_stop.setText("继续");
 				} else {
 					sendMessageS(CMDCode.STOP_CMD);
 					app.isPause = false;
 					showToast("继续检测");
+					app.isCheckIng = true;
 					bt_stop.setText("停止");
 				}
 				break;

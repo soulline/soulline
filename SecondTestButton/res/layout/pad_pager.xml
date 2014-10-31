@@ -287,8 +287,6 @@
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
-        <ListView>
-        </ListView>
     </LinearLayout>
 
 </LinearLayout>

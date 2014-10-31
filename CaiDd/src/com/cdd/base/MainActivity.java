@@ -41,11 +41,19 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private TextView communityTx, alarmTx, findTx, mineTx;
 
+	private CommunityFragment communityF;
+
+	private AlarmFragment alarmF;
+
+	private FindFragment findF;
+
+	private MineFragment mineF;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		initView();
+		initView();
 	}
 
 	@Override
@@ -61,13 +69,45 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			index = 3;
 		}
 	}
-	
-	
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		initView();
+		mainViewPager.setCurrentItem(index);
+		setCheckTitle(index);
+		initFragmentContent(index);
+	}
+
+	private void initFragmentContent(int type) {
+		switch (type) {
+		case 0:
+			if (communityF != null) {
+				communityF.initContent();
+				communityF.showTitleLayout();
+			}
+			break;
+
+		case 1:
+			if (alarmF != null) {
+				alarmF.initContent();
+			}
+			break;
+
+		case 2:
+			if (findF != null) {
+				findF.initContent();
+			}
+			break;
+
+		case 3:
+			if (mineF != null) {
+				mineF.initContent();
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	private void initView() {
@@ -92,15 +132,16 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onPageSelected(int position) {
-				if (position == 3
-						&& !app.isLogin()) {
+				if (position == 3 && !app.isLogin()) {
 					Intent login = new Intent(context, LoginActivity.class);
-					startActivityForResult(login, CddRequestCode.MINE_LOGIN_REQUEST);
+					startActivityForResult(login,
+							CddRequestCode.MINE_LOGIN_REQUEST);
 					setCheckTitle(index);
 					mainViewPager.setCurrentItem(index);
 				} else {
 					index = position;
 					setCheckTitle(index);
+					initFragmentContent(index);
 				}
 
 			}
@@ -173,7 +214,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
+
 	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
 			BaseFragmentListener listener) {
 		if (isOpen) {
@@ -186,12 +227,13 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	public DialogFragment createFragment(final String tag, Bundle b,
 			BaseFragmentListener listener) {
 		if (tag.equals("sign_success")) {
-			SignSuccessFragment signFragment = new SignSuccessFragment(context, b);
+			SignSuccessFragment signFragment = new SignSuccessFragment(context,
+					b);
 			return signFragment;
 		}
 		return null;
 	}
-	
+
 	public void closeInFragment(final String tag) {
 		if (this.isFinishing()) {
 			return;
@@ -218,26 +260,26 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		if (prev != null) {
 			ft.remove(prev);
 		}
-//		ft.addToBackStack(null);
+		// ft.addToBackStack(null);
 		ft.replace(layoutId <= 0 ? R.id.base_extra_layout : layoutId, fragment,
 				tag).commitAllowingStateLoss();
 	}
-	
+
 	public void showSignSuccessFragment() {
 		displayFragment(true, "sign_success", null, new BaseFragmentListener() {
-			
+
 			@Override
 			public void onCallBack(Object object) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		handler.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				closeInFragment("sign_success");
-				
+
 			}
 		}, 1500);
 	}
@@ -261,17 +303,17 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		@Override
 		public Fragment getItem(int position) {
 			if (position == 0) {
-				CommunityFragment community = new CommunityFragment(context);
-				return community;
+				communityF = new CommunityFragment(context);
+				return communityF;
 			} else if (position == 1) {
-				AlarmFragment alarm = new AlarmFragment(context);
-				return alarm;
+				alarmF = new AlarmFragment(context);
+				return alarmF;
 			} else if (position == 2) {
-				FindFragment find = new FindFragment(context);
-				return find;
+				findF = new FindFragment(context);
+				return findF;
 			} else {
-				MineFragment mine = new MineFragment(context);
-				return mine;
+				mineF = new MineFragment(context);
+				return mineF;
 			}
 		}
 

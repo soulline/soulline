@@ -1,8 +1,19 @@
 package com.cdd.minepage;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,6 +38,9 @@ import com.cdd.mode.ModifyMemberEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.GetMemberInfoOp;
 import com.cdd.operater.UpdateMemberInfoOp;
+import com.cdd.operater.UploadOperater;
+import com.cdd.util.BitmapUtil;
+import com.cdd.util.CddConfig;
 import com.cdd.util.CddRequestCode;
 import com.cdd.util.ImageOperater;
 
@@ -80,9 +94,162 @@ public class MineInfoModifyActivity extends BaseActivity implements
 		}
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK
+				&& requestCode == CddRequestCode.ACTION_PICK_GALLERY) {
+			Uri originalUri = data.getData();
+			ContentResolver resolver = getContentResolver();
+			Cursor cursor = resolver.query(originalUri, null, null, null, null);
+			if (cursor.moveToFirst()) {
+				String path = cursor.getString(cursor.getColumnIndex("_data"));
+				workForImage(path);
+			}
+		} else if (resultCode == RESULT_OK
+				&& requestCode == CddRequestCode.ACTION_PICK_CAMERA) {
+			workImageForCamera(tempPath);
+		}
+	}
+	
+	private void workImageForCamera(final String path) {
+		showLoading(true);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				BitmapUtil.onCompressForUpload(path, 894, 595);
+				BitmapFactory.Options options = new BitmapFactory.Options();
+				Bitmap bitmap = BitmapUtil.getBitmapByPath(
+						CddConfig.IMAGE_CACHE_FILE + "upload.jpg", options, 894,
+						595);
+				if (bitmap != null) {
+					showLoading(true);
+					uploadImage(CddConfig.IMAGE_CACHE_FILE + "upload.jpg");
+					BitmapDrawable portraitD = new BitmapDrawable(bitmap);
+					if (portraitD != null) {
+						showImage(portraitD);
+					}
+				} else {
+					showLoading(false);
+				}
+
+			}
+		}).start();
+	}
+
+	private void workForImage(final String pathN) {
+		showLoading(true);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				if (pathN != null) {
+					OutputStream out = null;
+					byte[] upImageData = BitmapUtil.onCompress_(pathN,
+							"comment");
+					String dir = CddConfig.IMAGE_CACHE_FILE;
+					File dir_ = new File(dir);
+					if (!dir_.exists() || !dir_.isDirectory()) {
+						dir_.mkdirs();
+					}
+					File myUploadFile = new File(dir, "upload.jpg");
+					try {
+						out = new FileOutputStream(myUploadFile);
+						out.write(upImageData);
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						if (out != null) {
+							try {
+								out.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+					uploadImage(myUploadFile.getAbsolutePath());
+					BitmapFactory.Options options = new BitmapFactory.Options();
+					Bitmap bit = BitmapUtil.getBitmapByPath(
+							CddConfig.IMAGE_CACHE_FILE + "upload.jpg", options,
+							894, 595);
+					BitmapDrawable portraitD = new BitmapDrawable(bit);
+					if (portraitD != null) {
+						showImage(portraitD);
+					}
+				}
+
+			}
+		}).start();
+	}
+	
+	private void showImage(final BitmapDrawable portraitD) {
+		handler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				portraitView.setImageDrawable(portraitD);
+			}
+		});
+	}
+	
+	private void uploadImage(final String path) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				UploadOperater upload = new UploadOperater();
+				upload.uploadFile(path, new UploadOperater.OnUploadListener() {
+
+					@Override
+					public void onSuccess(String result) {
+						JSONObject response = null;
+						try {
+							response = new JSONObject(result);
+							if (!JSONObject.NULL.equals(response)) {
+								int code = response.optInt("status");
+								showLoading(false);
+								if (code != 200) {
+									showToast(response.optString("msg"));
+								} else {
+									showToast("上传成功");
+									JSONObject obj = response
+											.optJSONObject("re");
+									final String url = obj.optString("url");
+									handler.post(new Runnable() {
+
+										@Override
+										public void run() {
+											ImageOperater
+													.getInstance(context)
+													.onLoadImage(url, portraitView);
+										}
+									});
+								}
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+							showLoading(false);
+						} finally {
+							showLoading(false);
+						}
+
+					}
+
+					@Override
+					public void onError(String error) {
+						showLoading(false);
+						showToast(error);
+					}
+				});
+			}
+		}).start();
+
+	}
+	
 	private void initMemberInfo(MemberInfoEntry memberInfo) {
 		if (!TextUtils.isEmpty(memberInfo.photo) && !memberInfo.photo.equals("null")) {
-			String ulr = memberInfo.photo + "&" + System.currentTimeMillis();
+			String ulr = memberInfo.photo;
 			ImageOperater.getInstance(context).onLoadImage(ulr,
 					portraitView);
 		}

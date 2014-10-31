@@ -79,6 +79,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
+        <activity
+            android:name="com.cdd.minepage.SettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.alarmpage.AlarmActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.minepage.MyForumActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
     </application>
 
 </manifest>
