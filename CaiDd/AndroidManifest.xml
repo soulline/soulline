@@ -97,6 +97,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
+        <activity
+            android:name="com.cdd.minepage.MyCollectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
     </application>
 
 </manifest>

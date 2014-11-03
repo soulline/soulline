@@ -72,6 +72,9 @@
         android:background="@drawable/gray_jamb">
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dd_dimen_1px"
+            android:paddingLeft="@dimen/dd_dimen_1px"
+            android:paddingRight="@dimen/dd_dimen_1px"
             android:orientation="horizontal">
             <RelativeLayout android:id="@+id/accounting_hot_thread_layout"
                 android:layout_width="match_parent"

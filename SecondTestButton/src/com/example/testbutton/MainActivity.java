@@ -166,16 +166,15 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 					PadFragment fragment = (PadFragment) getSupportFragmentManager().findFragmentById(R.id.padFragment);
 					if (dataEntry.number.equals("0")) {
 						if (!TextUtils.isEmpty(dataEntry.co2)) {
-							int value = Integer.valueOf(dataEntry.co2);
+							long value = Long.valueOf(dataEntry.co2);
 							fragment.setCo2Value(value);
 						}
 						if (!TextUtils.isEmpty(dataEntry.o2)) {
 							float value = Float.valueOf(dataEntry.o2);
-							value = value / 10.0f;
 							fragment.setO2Value(value);
 						}
 						if (!TextUtils.isEmpty(dataEntry.ph3data)) {
-							int value = Integer.valueOf(dataEntry.ph3data);
+							long value = Long.valueOf(dataEntry.ph3data);
 							fragment.setPH3Value(value);
 						}
 						if (!TextUtils.isEmpty(dataEntry.shidu)) {

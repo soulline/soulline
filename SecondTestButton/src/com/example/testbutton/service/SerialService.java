@@ -32,7 +32,7 @@ public class SerialService extends Service {
 	private int checkMunite = 0;
 
 	private int paikongMinute = 0;
-	
+
 	private Timer timer = null;
 
 	private TimerTask task = null;
@@ -99,7 +99,7 @@ public class SerialService extends Service {
 				dataEntry.o2 = subDataHex(array[2]);
 				dataEntry.wendu = subDataHex(array[3]);
 				dataEntry.shidu = subDataHex(array[4]);
-				
+
 				app.isCheckIng = false;
 				stopTimer();
 				app.oldCheckTime = 0;
@@ -112,7 +112,7 @@ public class SerialService extends Service {
 		}
 		return false;
 	}
-	
+
 	private void parseCO2(String data) {
 		data = data.substring(6);
 		data = data.replaceAll("FF", "");
@@ -138,6 +138,17 @@ public class SerialService extends Service {
 		int code = 0;
 		try {
 			code = Integer.parseInt(source, 16);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return code;
+	}
+
+	private long getValueForHex(String source) {
+		String str = "";
+		long code = 0;
+		try {
+			code = Long.parseLong(source, 16);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -178,10 +189,11 @@ public class SerialService extends Service {
 							} else if (checkMunite == 0) {
 								serialManager.sendMsg(CMDCode.CHECK_TIME_END);
 								handler.postDelayed(new Runnable() {
-									
+
 									@Override
 									public void run() {
-										serialManager.sendMsg(CMDCode.CHECK_TIME_END);
+										serialManager
+												.sendMsg(CMDCode.CHECK_TIME_END);
 									}
 								}, 2000);
 							}

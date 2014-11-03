@@ -4,6 +4,7 @@ import com.cdd.R;
 import com.cdd.alarmpage.AlarmActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.minepage.MineInfoModifyActivity;
+import com.cdd.minepage.MyCollectActivity;
 import com.cdd.minepage.MyForumActivity;
 import com.cdd.minepage.SettingActivity;
 import com.cdd.mode.MemberInfoEntry;
@@ -152,8 +153,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 			getActivity().startActivity(answer);
 			break;
 		case R.id.my_collect_layout:
-			Intent collect = new Intent(getActivity(), MyForumActivity.class);
-			collect.putExtra("content_type", 2);
+			Intent collect = new Intent(getActivity(), MyCollectActivity.class);
 			getActivity().startActivity(collect);
 			break;
 		case R.id.my_letters_layout:

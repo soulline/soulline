@@ -105,7 +105,7 @@ public class PadFragment extends Fragment{
 		}
 	}
 	
-	public void setCo2Value(int value) {
+	public void setCo2Value(long value) {
 		if ((value < 50000 && value > 0) || value == 50000) {
 			co2status.setBackgroundResource(R.drawable.greenpoint);
 		} else if (value > 50000) {
@@ -123,10 +123,10 @@ public class PadFragment extends Fragment{
 		o2Tx.setText(value + "");
 	}
 	
-	public void setPH3Value(int value) {
-		if ((value < 10000 && value > 0) || value == 10000) {
+	public void setPH3Value(long value) {
+		if ((value < 50000 && value > 0) || value == 50000) {
 			ph3status.setBackgroundResource(R.drawable.greenpoint);
-		} else if (value > 10000) {
+		} else if (value > 50000) {
 			ph3status.setBackgroundResource(R.drawable.redpoint);
 		}
 		ph3tx.setText(value + "");
