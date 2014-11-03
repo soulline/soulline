@@ -13,12 +13,14 @@ import org.json.JSONObject;
 
 import com.cdd.app.CddApp;
 import com.cdd.base.BaseActivity;
+import com.cdd.login.LoginActivity;
 import com.cdd.mode.BaseEntry;
 import com.cdd.net.RequestCallBack;
 import com.cdd.net.RequestListener;
 import com.cdd.net.CddException;
 import com.cdd.net.CddHttpManager;
 import com.cdd.net.CddHttpManager.Request;
+import com.cdd.util.CddRequestCode;
 import com.cdd.util.CryptAES;
 import com.cdd.util.CddConfig;
 import com.szzc.volley.utils.CryptAESNew;
@@ -231,20 +233,19 @@ abstract public class BaseOperater {
 				 * @Override public void onCallBack(Object data) {
 				 * onRequest(rlistener); } });
 				 
-			}*//* else if (WqConfig.CODE_ERROR_LOGIN == code) {
-//				app.clearAccountInfo();
+			}*/ if (CddConfig.CODE_ERROR_LOGIN == code) {
+				app.clearLogin();
 				Intent i = new Intent(context, LoginActivity.class);
 				i.putExtra("rebuild", true);
 				app.isRebuild = true;
-				app.operate = this;
 				if (context instanceof Activity) {
 					((Activity) context).startActivityForResult(i,
-							YylRequestCode.ACTION_LOGIN_REQUEST_CODE);
+							CddRequestCode.ACTION_LOGIN_REQUEST_CODE);
 				} else {
 					context.startActivity(i);
 				}
 
-			}*//* else if (WqConfig.CODE_ERROR_REQUEST_QUICKY == code) {
+			}/* else if (WqConfig.CODE_ERROR_REQUEST_QUICKY == code) {
 				if (context instanceof BaseActivity) {
 					((BaseActivity) context).showToast("请求太快");
 				}

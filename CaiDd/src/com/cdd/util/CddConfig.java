@@ -14,6 +14,8 @@ public class CddConfig {
 	
 	public static final int LOGIN_PATH_KEY = 10178;
 	
+	public static final int CODE_ERROR_LOGIN = 910;
+	
 	public static final String APP_DIR = Environment
 			.getExternalStorageDirectory().toString();
 	public static final String PIC_DIR_NAME = "cddpic";

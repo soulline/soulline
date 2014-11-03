@@ -67,6 +67,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		} else if (resultCode == RESULT_OK
 				&& requestCode == CddRequestCode.MINE_LOGIN_REQUEST) {
 			index = 3;
+		} else if (requestCode == CddRequestCode.ACTION_LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
+			
 		}
 	}
 

@@ -7,6 +7,7 @@ import com.cdd.R;
 import com.cdd.base.BaseActivity;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.StartOp;
+import com.cdd.util.CddRequestCode;
 
 public class SlpashActivity extends BaseActivity {
 

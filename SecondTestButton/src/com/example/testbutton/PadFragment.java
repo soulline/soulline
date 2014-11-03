@@ -151,8 +151,6 @@ public class PadFragment extends Fragment{
 	}
 	
 	private void initContent() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		dateNow.setText(format.format(new Date()));
 	}
 
 	public void initAdapter(ArrayList<RightDataEntry> list) {
