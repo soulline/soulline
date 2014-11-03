@@ -164,7 +164,31 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				RightDataEntry dataEntry = (RightDataEntry) intent.getSerializableExtra("right_data");
 				if (dataEntry != null) {
 					PadFragment fragment = (PadFragment) getSupportFragmentManager().findFragmentById(R.id.padFragment);
-					fragment.addData(dataEntry);
+					if (dataEntry.number.equals("0")) {
+						if (!TextUtils.isEmpty(dataEntry.co2)) {
+							int value = Integer.valueOf(dataEntry.co2);
+							fragment.setCo2Value(value);
+						}
+						if (!TextUtils.isEmpty(dataEntry.o2)) {
+							float value = Float.valueOf(dataEntry.o2);
+							value = value / 10.0f;
+							fragment.setO2Value(value);
+						}
+						if (!TextUtils.isEmpty(dataEntry.ph3data)) {
+							int value = Integer.valueOf(dataEntry.ph3data);
+							fragment.setPH3Value(value);
+						}
+						if (!TextUtils.isEmpty(dataEntry.shidu)) {
+							float value = Float.valueOf(dataEntry.shidu);
+							fragment.setRHValue(value);
+						}
+						if (!TextUtils.isEmpty(dataEntry.wendu)) {
+							int value = Integer.valueOf(dataEntry.wendu);
+							fragment.setTValue(value);
+						}
+					} else {
+						fragment.addData(dataEntry);
+					}
 					if (dataEntry.number.equals("15")) {
 						showToast("检测结束");
 						textView1.setText("0");

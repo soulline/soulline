@@ -139,6 +139,7 @@
             </TextView>
 
             <ImageView
+                android:id="@+id/ph3_status_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/redpoint" />
@@ -188,15 +189,62 @@
                 android:layout_height="wrap_content"
                 android:text="      %" >
             </TextView>
-
-            <TextView
-                android:id="@+id/date_now"
+            
+            <ImageView
+                android:id="@+id/rh_status_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="2014-10-28 20:41"
+                android:background="@drawable/redpoint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RH:     " >
+            </TextView>
+
+            <TextView
+                android:id="@+id/rhid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="14dp" >
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="      %" >
+            </TextView>
+            
+            
+            <ImageView
+                android:id="@+id/t_status_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/redpoint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="T:     " >
+            </TextView>
+
+            <TextView
+                android:id="@+id/tid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="14dp" >
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="      C" >
+            </TextView>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -283,6 +331,7 @@
                 android:layout_height="wrap_content" />
             <com.example.testbutton.widget.DigitalNewClock android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/listid"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>

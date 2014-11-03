@@ -63,7 +63,9 @@ public class SerialService extends Service {
 							public void run() {
 								if (message.startsWith(CMDCode.PASSWAY_DATA
 										.replaceAll(" ", ""))) {
-									parsePassway(message);
+									if (!checkZeroData(message)) {
+										parsePassway(message);
+									}
 								} else if (message
 										.startsWith(CMDCode.RECEIVE_CO2
 												.replaceAll(" ", ""))) {
@@ -80,6 +82,37 @@ public class SerialService extends Service {
 				});
 	}
 
+	private boolean checkZeroData(String data) {
+		if (data.length() < 8) {
+			return false;
+		}
+		String number = getAsiicForHex(data.substring(6, 8)) + "";
+		if (number.equals("0")) {
+			data = data.substring(6);
+			RightDataEntry dataEntry = new RightDataEntry();
+			dataEntry.number = getAsiicForHex(data.substring(0, 2)) + "";
+			data = data.substring(2);
+			String[] array = data.split("FF");
+			if (array.length == 5) {
+				dataEntry.co2 = subDataHex(array[0]);
+				dataEntry.ph3data = subDataHex(array[1]);
+				dataEntry.o2 = subDataHex(array[2]);
+				dataEntry.wendu = subDataHex(array[3]);
+				dataEntry.shidu = subDataHex(array[4]);
+				
+				app.isCheckIng = false;
+				stopTimer();
+				app.oldCheckTime = 0;
+				app.oldPaikongTime = 0;
+				Intent intent = new Intent(SerialBroadCode.ACTION_PASSWAY_DATA);
+				intent.putExtra("right_data", dataEntry);
+				lbm.sendBroadcast(intent);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private void parseCO2(String data) {
 		data = data.substring(6);
 		data = data.replaceAll("FF", "");
@@ -93,7 +126,7 @@ public class SerialService extends Service {
 		data = data.substring(6);
 		data = data.replaceAll("FF", "");
 		int o2Int = getAsiicForHex(data);
-		float o2i = ((float) o2Int) / 10L;
+		float o2i = ((float) o2Int) / 10f;
 		String o2Str = o2i + "";
 		Intent intent = new Intent(SerialBroadCode.ACTION_O2_RECEIVED);
 		intent.putExtra("o2_data", o2Str);
@@ -207,6 +240,9 @@ public class SerialService extends Service {
 	}
 
 	private void parsePassway(String data) {
+		if (data.length() < 8) {
+			return;
+		}
 		data = data.substring(6);
 		RightDataEntry dataEntry = new RightDataEntry();
 		dataEntry.number = getAsiicForHex(data.substring(0, 2)) + "";

@@ -30,9 +30,9 @@ public class PadFragment extends Fragment{
 	
 	private View view;
 	
-	private ImageView co2status, o2status;
+	private ImageView co2status, o2status, ph3status, rhstatus, tstatus;
 	
-	private TextView co2Tx, o2Tx;
+	private TextView co2Tx, o2Tx, ph3tx, rhtx, ttx;
 	
 	private RightAdatper adapter;
 	
@@ -57,13 +57,18 @@ public class PadFragment extends Fragment{
 		listview = (ListView) view.findViewById(R.id.listid);
 		co2status = (ImageView) view.findViewById(R.id.co2_status_img);
 		o2status = (ImageView) view.findViewById(R.id.o2_status_img);
+		ph3status = (ImageView) view.findViewById(R.id.ph3_status_img);
+		rhstatus = (ImageView) view.findViewById(R.id.rh_status_img);
+		tstatus = (ImageView) view.findViewById(R.id.t_status_img);
 		co2Tx = (TextView) view.findViewById(R.id.co2id);
 		o2Tx = (TextView) view.findViewById(R.id.o2id);
+		ph3tx = (TextView) view.findViewById(R.id.ph3id);
+		rhtx = (TextView) view.findViewById(R.id.rhid);
+		ttx = (TextView) view.findViewById(R.id.tid);
 		paikongAleaveMinute = (TextView) view.findViewById(R.id.paikong_aleave_minute);
 		checkAleaveMinute = (TextView) view.findViewById(R.id.check_aleave_minute);
 		paikongTitle = (TextView) view.findViewById(R.id.paikong_title);
 		checkTitle = (TextView) view.findViewById(R.id.check_title);
-		dateNow = (TextView) view.findViewById(R.id.date_now);
 	}
 	
 	public void updatePaikongMinute(String value) {
@@ -101,7 +106,7 @@ public class PadFragment extends Fragment{
 	}
 	
 	public void setCo2Value(int value) {
-		if (value < 50000 && value > 0) {
+		if ((value < 50000 && value > 0) || value == 50000) {
 			co2status.setBackgroundResource(R.drawable.greenpoint);
 		} else if (value > 50000) {
 			co2status.setBackgroundResource(R.drawable.redpoint);
@@ -116,6 +121,33 @@ public class PadFragment extends Fragment{
 			o2status.setBackgroundResource(R.drawable.redpoint);
 		}
 		o2Tx.setText(value + "");
+	}
+	
+	public void setPH3Value(int value) {
+		if ((value < 10000 && value > 0) || value == 10000) {
+			ph3status.setBackgroundResource(R.drawable.greenpoint);
+		} else if (value > 10000) {
+			ph3status.setBackgroundResource(R.drawable.redpoint);
+		}
+		ph3tx.setText(value + "");
+	}
+	
+	public void setRHValue(float value) {
+		if (value > 30.0f) {
+			rhstatus.setBackgroundResource(R.drawable.redpoint);
+		} else if ((value < 30.0f && value > 0) || value == 30.0f) {
+			rhstatus.setBackgroundResource(R.drawable.greenpoint);
+		}
+		rhtx.setText(value + "");
+	}
+	
+	public void setTValue(int value) {
+		if ((value < 80 && value > 0) || value == 80) {
+			tstatus.setBackgroundResource(R.drawable.greenpoint);
+		} else if (value > 80) {
+			tstatus.setBackgroundResource(R.drawable.redpoint);
+		}
+		ttx.setText(value + "");
 	}
 	
 	private void initContent() {

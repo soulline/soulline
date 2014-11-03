@@ -9,4 +9,8 @@ public class RightDataEntry extends BaseEntry {
 	public String shidu = "";
 	
 	public String number = "";
+	
+	public String ph3data = "";
+	
+	public String o2 = "";
 }
