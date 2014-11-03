@@ -165,7 +165,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				if (dataEntry != null) {
 					PadFragment fragment = (PadFragment) getSupportFragmentManager().findFragmentById(R.id.padFragment);
 					if (dataEntry.number.equals("0")) {
-						if (!TextUtils.isEmpty(dataEntry.co2)) {
+						if (!TextUtils.isEmpty(dataEntry.co2) && isNumber(dataEntry.co2)) {
 							long value = Long.valueOf(dataEntry.co2);
 							fragment.setCo2Value(value);
 						}
@@ -173,7 +173,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 							float value = Float.valueOf(dataEntry.o2);
 							fragment.setO2Value(value);
 						}
-						if (!TextUtils.isEmpty(dataEntry.ph3data)) {
+						if (!TextUtils.isEmpty(dataEntry.ph3data) && isNumber(dataEntry.ph3data)) {
 							long value = Long.valueOf(dataEntry.ph3data);
 							fragment.setPH3Value(value);
 						}
@@ -182,7 +182,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 							fragment.setRHValue(value);
 						}
 						if (!TextUtils.isEmpty(dataEntry.wendu)) {
-							int value = Integer.valueOf(dataEntry.wendu);
+							float value = Float.valueOf(dataEntry.wendu);
 							fragment.setTValue(value);
 						}
 					} else {
@@ -277,6 +277,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
+	private boolean isNumber(String str) {
+		boolean result=str.matches("[0-9]+");
+		return result;
+	}
+	
 	public OnClickListener fileitemsOnClick = new OnClickListener() {
 
 		public void onClick(View v) {

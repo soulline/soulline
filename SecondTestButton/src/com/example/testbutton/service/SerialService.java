@@ -94,11 +94,11 @@ public class SerialService extends Service {
 			data = data.substring(2);
 			String[] array = data.split("FF");
 			if (array.length == 5) {
-				dataEntry.co2 = subDataHex(array[0]);
-				dataEntry.ph3data = subDataHex(array[1]);
-				dataEntry.o2 = subDataHex(array[2]);
-				dataEntry.wendu = subDataHex(array[3]);
-				dataEntry.shidu = subDataHex(array[4]);
+				dataEntry.co2 = subDataHex(array[0]).trim();
+				dataEntry.ph3data = subDataHex(array[1]).trim();
+				dataEntry.o2 = subDataHex(array[2]).trim();
+				dataEntry.wendu = subDataHex(array[3]).trim();
+				dataEntry.shidu = subDataHex(array[4]).trim();
 
 				app.isCheckIng = false;
 				stopTimer();

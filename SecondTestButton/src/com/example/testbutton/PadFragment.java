@@ -141,10 +141,10 @@ public class PadFragment extends Fragment{
 		rhtx.setText(value + "");
 	}
 	
-	public void setTValue(int value) {
-		if ((value < 80 && value > 0) || value == 80) {
+	public void setTValue(float value) {
+		if ((value < 80.0f && value > 0.0f) || value == 80.0f) {
 			tstatus.setBackgroundResource(R.drawable.greenpoint);
-		} else if (value > 80) {
+		} else if (value > 80.0f) {
 			tstatus.setBackgroundResource(R.drawable.redpoint);
 		}
 		ttx.setText(value + "");
