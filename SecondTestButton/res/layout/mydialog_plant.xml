@@ -16,7 +16,7 @@
            >  
            
             <fragment
-                android:name="com.example.testbutton.PadFragment"
+                android:name="com.asag.serial.PadFragment"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
             
