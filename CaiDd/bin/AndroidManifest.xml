@@ -59,6 +59,7 @@
             android:name="com.cdd.sqpage.SqListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity

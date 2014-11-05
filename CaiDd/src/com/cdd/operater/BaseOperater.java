@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -182,7 +183,12 @@ abstract public class BaseOperater {
 				jo.put(key, params.get(key));
 			}
 			for (String s : extra_params.keySet()) {
-				jo.put(s, extra_params.get(s));
+				Object obj =  extra_params.get(s);
+				if(obj != null && obj instanceof ArrayList){
+					jo.put(s,new JSONArray((ArrayList<String>)obj));
+				}else{
+					jo.put(s,obj);
+				}
 			}
 			data = jo.toString();
 			if (CddConfig.IS_DEBUG) {

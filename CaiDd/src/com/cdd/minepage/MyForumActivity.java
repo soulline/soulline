@@ -64,7 +64,7 @@ public class MyForumActivity extends BaseActivity {
 	}
 	
 	private void initSqList(ArrayList<ForumEntry> list) {
-		if (sqAdapter == null) {
+		/*if (sqAdapter == null) {
 			sqAdapter = new SqForumAdapter(CddApp.getInstance());
 			sqAdapter.addData(list);
 			sqListview.setAdapter(sqAdapter);
@@ -72,7 +72,7 @@ public class MyForumActivity extends BaseActivity {
 			sqAdapter.clear();
 			sqAdapter.addData(list);
 			sqAdapter.notifyDataSetChanged();
-		}
+		}*/
 	}
 	
 	private void initContentTitle(int type) {

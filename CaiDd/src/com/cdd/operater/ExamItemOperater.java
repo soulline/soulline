@@ -45,6 +45,7 @@ public class ExamItemOperater extends BaseOperater {
 		for (int i=0; i < response.length(); i++) {
 			JSONObject obj = response.optJSONObject(i);
 			ForumItem entry = new ForumItem();
+			entry.fatherId = "9";
 			entry.id = obj.optString("id");
 			entry.name = obj.optString("name");
 			itemList.add(entry);

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.cdd.R;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.ForumEntry;
+import com.cdd.mode.SqAnswerItem;
+import com.cdd.mode.SqAskItem;
 import com.cdd.util.ImageOperater;
 
 import android.content.Context;
@@ -16,18 +18,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SqForumAdapter extends ArrayAdapter<ForumEntry> {
+public class SqForumAdapter extends ArrayAdapter<SqAskItem> {
 
 	private Context context;
+	
+	public interface onZanListener{
+		public void onZan(int position);
+	}
+	
+	private onZanListener listener;
 	
 	public SqForumAdapter(Context context) {
 		super(context, 0);
 		this.context = context;
 	}
 	
-	public void addData(ArrayList<ForumEntry> list) {
+	public void addOnZanListener(onZanListener listener) {
+		this.listener = listener;
+	}
+	
+	public void addData(ArrayList<SqAskItem> list) {
 		synchronized (list) {
-			for (ForumEntry entry : list) {
+			for (SqAskItem entry : list) {
 				add(entry);
 			}
 		}
@@ -47,19 +59,32 @@ public class SqForumAdapter extends ArrayAdapter<ForumEntry> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		ForumEntry entry = getItem(position);
-		holder.forumTitle.setText(entry.forumTitle);
-		holder.zanCount.setText("（"+ entry.zanCount + "）");
-		holder.answer1Content.setText(entry.answerContent);
-		if (!TextUtils.isEmpty(entry.answerPic)) {
-			ImageOperater.getInstance(context).onLoadImage(entry.answerPic, holder.answer1Icon);
+		SqAskItem entry = getItem(position);
+		holder.forumTitle.setText(entry.title);
+		holder.zanCount.setText("（"+ entry.likeCount + "）");
+		if (entry.answerList.size() > 0) {
+			convertView.findViewById(R.id.answer_layout).setVisibility(View.VISIBLE);
+			SqAnswerItem answer = entry.answerList.get(0);
+			holder.answer1Content.setText(answer.content);
+			if (!TextUtils.isEmpty(answer.memberPhoto) && 
+					!answer.memberPhoto.equals("null") && answer.anonymous.equals("0")) {
+				ImageOperater.getInstance(context).onLoadImage(answer.memberPhoto, holder.answer1Icon);
+			} else if ((TextUtils.isEmpty(answer.memberPhoto) || 
+					answer.memberPhoto.equals("null")) && answer.anonymous.equals("0")) {
+				holder.answer1Icon.setBackgroundResource(R.drawable.default_woman_portrait);
+			} else if (answer.anonymous.equals("1")) {
+				holder.answer1Icon.setBackgroundResource(R.drawable.default_woman_portrait);
+			}
+		} else {
+			convertView.findViewById(R.id.answer_layout).setVisibility(View.GONE);
 		}
+		final int itemPosition = position;
 		convertView.findViewById(R.id.zan_layout).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				if (context instanceof BaseActivity) {
-					((BaseActivity) context).showToast("赞赞赞赞赞");
+				if (listener != null) {
+					listener.onZan(itemPosition);
 				}
 			}
 		});

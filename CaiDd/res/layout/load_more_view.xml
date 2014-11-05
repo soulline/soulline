@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector"
+    android:orientation="vertical" >
+    
+    <View android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dd_dimen_20px"
+        android:layout_marginRight="@dimen/dd_dimen_20px"
+        android:layout_height="@dimen/dd_dimen_1px"
+        android:background="@drawable/dashes_line_gray"/>
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dd_dimen_10px"
+        android:gravity="center"
+        android:textColor="@color/simple_tx_"
+        android:textSize="@dimen/dd_dimen_26px"
+        android:text="点击加载更多"/>
+
+</LinearLayout>

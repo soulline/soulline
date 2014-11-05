@@ -15,6 +15,7 @@ import com.cdd.operater.ExamItemOperater;
 import com.cdd.operater.ForumItemOperater;
 import com.cdd.operater.GetMemberInfoOp;
 import com.cdd.operater.SignTodayOp;
+import com.cdd.operater.SqHotAskOp;
 import com.cdd.sqpage.AccountingHotAdapter;
 import com.cdd.sqpage.ExamListAdapter;
 import com.cdd.sqpage.SqForumAdapter;
@@ -93,6 +94,25 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			}
 		});
 	}
+	
+	private void requestHotAskList(String pageNum) {
+		SqHotAskOp hotAskOp = new SqHotAskOp(context);
+		hotAskOp.setParmas(pageNum);
+		hotAskOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,7 +124,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	}
 
 	public void initContent() {
-		setCheck(0);
+		setCheck(checkCode);
 		loadMemberInfo();
 	}
 
@@ -131,8 +151,9 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		});
 	}
 	
-	private void gotoDetail() {
+	private void gotoDetail(ForumItem item) {
 		Intent detail = new Intent(getActivity(), SqListActivity.class);
+		detail.putExtra("forum_item", item);
 		startActivity(detail);
 	}
 
@@ -161,7 +182,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 						&& accountingAdapter.getItem(position).id.equals("9")) {
 					getExamList();
 				} else {
-					gotoDetail();
+					ForumItem forum = accountingAdapter.getItem(position);
+					gotoDetail(forum);
 				}
 			}
 		});
@@ -170,7 +192,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				gotoDetail();
+				ForumItem forum = examAdapter.getItem(position);
+				gotoDetail(forum);
 			}
 		});
 		sqListview.setOnItemClickListener(new OnItemClickListener() {
@@ -355,7 +378,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		accountingListview.setVisibility(View.GONE);
 		sqListview.setVisibility(View.VISIBLE);
 		examListview.setVisibility(View.GONE);
-		if (sqAdapter == null) {
+		requestHotAskList("1");
+		/*if (sqAdapter == null) {
 			sqAdapter = new SqForumAdapter(CddApp.getInstance());
 			sqAdapter.addData(list);
 			sqListview.setAdapter(sqAdapter);
@@ -363,7 +387,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			sqAdapter.clear();
 			sqAdapter.addData(list);
 			sqAdapter.notifyDataSetChanged();
-		}
+		}*/
 	}
 
 	private void showTipNoteDialog(final String msg) {

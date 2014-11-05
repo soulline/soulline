@@ -1,11 +1,15 @@
 package com.cdd.operater;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,17 +21,16 @@ import com.cdd.util.CddConfig;
 
 public class UploadForMultiOp {
 
-	
 	public interface OnUploadListener {
 		public void onError(String error);
-		
+
 		public void onSuccess(String result);
 	}
-	
+
 	public CddApp app = CddApp.getInstance();
 
 	public String action = "";
-	
+
 	public UploadForMultiOp() {
 		initAction();
 	}
@@ -40,7 +43,7 @@ public class UploadForMultiOp {
 		sb.append(bbi.toString());
 		return sb.toString();
 	}
-	
+
 	public void initAction() {
 		action = "forum/photoUpload.do";
 	}
@@ -50,71 +53,65 @@ public class UploadForMultiOp {
 		if (CddConfig.IS_DEBUG) {
 			Log.i("CDD", actionUrl);
 		}
-		String end = "\r\n";
-		String twoHyphens = "--";
-		String boundary = "*****";
 		try {
+			String BOUNDARY = "------------------------7dc3482080a10"; // 定义数据分隔线
 			URL url = new URL(actionUrl);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			/* 允许Input、Output，不使用Cache */
-			con.setDoInput(true);
-			con.setDoOutput(true);
-			con.setUseCaches(false);
-			/* 设置传送的method=POST */
-			con.setRequestMethod("POST");
-			/* setRequestProperty */
-			con.setRequestProperty("Connection", "Keep-Alive");
-			con.setRequestProperty("Charset", "UTF-8");
-			con.setRequestProperty("Content-Type",
-					"multipart/form-data;boundary=" + boundary);
-			StringBuilder sb = new StringBuilder();
-			sb.append(twoHyphens + boundary + end);
-			sb.append("Content-Disposition: form-data; ");
-			/* 设置DataOutputStream */
-			DataOutputStream ds = new DataOutputStream(con.getOutputStream());
-			for (int i=0; i < imgPaths.size(); i++) {
-				sb.append("name=\"files\";filename=\"");
-				File fileN = imgPaths.get(i);
-				sb.append(fileN.getName()).append(".jpg");
-				sb.append(";");
-			}
-			sb.append(end).append(end);
-			ds.writeBytes(sb.toString());
-			for (int i=0; i < imgPaths.size(); i++) {
-				/* 取得文件的FileInputStream */
-				FileInputStream fStream = new FileInputStream(imgPaths.get(i));
-				/* 设置每次写入1024bytes */
-				int bufferSize = 1024;
-				byte[] buffer = new byte[bufferSize];
-				int length = -1;
-				/* 从文件读取数据至缓冲区 */
-				while ((length = fStream.read(buffer)) != -1) {
-					/* 将资料写入DataOutputStream中 */
-					ds.write(buffer, 0, length);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			// 发送POST请求必须设置如下两行
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setUseCaches(false);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("connection", "Keep-Alive");
+			conn.setRequestProperty("user-agent",
+					"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)");
+			conn.setRequestProperty("Charsert", "UTF-8");
+			conn.setRequestProperty("Content-Type",
+					"multipart/form-data; boundary=" + BOUNDARY);
+
+			OutputStream out = new DataOutputStream(conn.getOutputStream());
+			byte[] end_data = ("\r\n--" + BOUNDARY + "--\r\n").getBytes();// 定义最后数据分隔线
+			int leng = imgPaths.size();
+			for (int i = 0; i < leng; i++) {
+				File file = imgPaths.get(i);
+				StringBuilder sb = new StringBuilder();
+				sb.append("--");
+				sb.append(BOUNDARY);
+				sb.append("\r\n");
+				sb.append("Content-Disposition: form-data;name=\"files\";filename=\""
+						+ file.getName() + "\"\r\n");
+				sb.append("Content-Type:image/png\r\n\r\n");
+
+				byte[] data = sb.toString().getBytes();
+				out.write(data);
+				DataInputStream in = new DataInputStream(new FileInputStream(
+						file));
+				int bytes = 0;
+				byte[] bufferOut = new byte[1024];
+				while ((bytes = in.read(bufferOut)) != -1) {
+					out.write(bufferOut, 0, bytes);
 				}
-				ds.writeBytes(end);
-				ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
-				/* close streams */
-				fStream.close();
+				out.write("\r\n".getBytes()); // 多个文件时，二个文件之间加入这个
+				in.close();
 			}
-			ds.flush();
+			out.write(end_data);
+			out.flush();
+			out.close();
 			/* 取得Response内容 */
-			InputStream is = con.getInputStream();
+			InputStream is = conn.getInputStream();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			byte[] data = toByteArray(is, baos);
 			String result = new String(data);
-//			String resultNew = CryptAES.getInstance().onDecrypt(result);
-			listener.onSuccess(result);
-			/* 关闭DataOutputStream */
-			ds.close();
 			if (CddConfig.IS_DEBUG) {
 				Log.i("CDD", result);
 			}
+			listener.onSuccess(result);
 		} catch (Exception e) {
 			listener.onError("上传失败");
 		}
 	}
-	
+
 	private byte[] toByteArray(InputStream is, ByteArrayOutputStream baos)
 			throws IOException {
 		if (is == null) {
@@ -127,6 +124,5 @@ public class UploadForMultiOp {
 		}
 		return baos.toByteArray();
 	}
-
 
 }

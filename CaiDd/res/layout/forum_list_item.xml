@@ -6,29 +6,31 @@
     android:orientation="vertical" >
     
     <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="@dimen/dd_dimen_180px"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dd_dimen_96px"
         android:paddingLeft="@dimen/dd_dimen_30px"
         android:paddingRight="@dimen/dd_dimen_30px">
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/dd_dimen_30px"
+            android:layout_marginBottom="@dimen/dd_dimen_30px"
             android:orientation="vertical">
-            <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <RelativeLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
                 <TextView android:id="@+id/forum_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:maxWidth="@dimen/dd_dimen_500px"
-                    android:singleLine="true"
+                    android:maxWidth="@dimen/dd_dimen_524px"
                     android:ellipsize="end"
+                    android:maxLines="3"
                     android:textSize="@dimen/dd_dimen_32px"
                     android:textColor="@color/sq_blue" />
                 <RelativeLayout android:id="@+id/zan_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
+                    android:layout_alignParentRight="true">
                 <ImageView android:id="@+id/zan_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,8 +45,9 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/simple_tx_" />
                 </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
+            </RelativeLayout>
+            <LinearLayout android:id="@+id/answer_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dd_dimen_20px"
                 android:orientation="horizontal">
@@ -59,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dd_dimen_10px"
-                    android:lines="2"
+                    android:maxLines="3"
                     android:ellipsize="end"
                     android:textSize="@dimen/dd_dimen_26px"
                     android:textColor="@color/simple_tx_" />

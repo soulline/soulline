@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:text="      %" >
             </TextView>
-            
+
             <ImageView
                 android:id="@+id/rh_status_img"
                 android:layout_width="wrap_content"
@@ -218,8 +218,7 @@
                 android:layout_height="wrap_content"
                 android:text="      %" >
             </TextView>
-            
-            
+
             <ImageView
                 android:id="@+id/t_status_img"
                 android:layout_width="wrap_content"
@@ -247,7 +246,6 @@
                 android:layout_height="wrap_content"
                 android:text="      C" >
             </TextView>
-
         </LinearLayout>
     </LinearLayout>
 
@@ -276,7 +274,7 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="CO2/ppm         RH /%           T/C"/>
+            android:text="CO2/ppm         RH /%           T/C"/>
         -->
 
         <RelativeLayout
@@ -323,22 +321,17 @@
                 android:textSize="14dp" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <ListView
+            android:id="@+id/listid"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="30" >
+            android:layout_weight="30"
+            android:layout_marginBottom="30dp" />
 
-            <ListView
-                android:id="@+id/listid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp" />
-            <com.example.testbutton.widget.DigitalNewClock android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
-
+        <com.example.testbutton.widget.DigitalNewClock
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3" />
     </LinearLayout>
 
 </LinearLayout>
