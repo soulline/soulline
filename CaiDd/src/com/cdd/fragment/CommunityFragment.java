@@ -10,7 +10,10 @@ import com.cdd.login.LoginActivity;
 import com.cdd.mode.ForumEntry;
 import com.cdd.mode.ForumItem;
 import com.cdd.mode.MemberInfoEntry;
+import com.cdd.mode.SqAskItem;
+import com.cdd.mode.SqAskListRequest;
 import com.cdd.net.RequestListener;
+import com.cdd.operater.AskZanOp;
 import com.cdd.operater.ExamItemOperater;
 import com.cdd.operater.ForumItemOperater;
 import com.cdd.operater.GetMemberInfoOp;
@@ -20,7 +23,12 @@ import com.cdd.sqpage.AccountingHotAdapter;
 import com.cdd.sqpage.ExamListAdapter;
 import com.cdd.sqpage.SqForumAdapter;
 import com.cdd.sqpage.SqListActivity;
+import com.cdd.sqpage.SqForumAdapter.onZanListener;
 import com.cdd.util.CddRequestCode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -48,7 +56,9 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	private ImageView sqHotThreadImg, dingdangSqImg;
 	private TextView sqHotThreadTx, dingdangSqTx;
 
-	private ListView accountingListview, sqListview, examListview;
+	private ListView accountingListview, examListview;
+
+	private PullToRefreshListView sqListview;
 
 	private TextView nicknameTx;
 
@@ -59,15 +69,23 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	private ExamListAdapter examAdapter;
 
 	private SqForumAdapter sqAdapter;
-	
+
+	private View footMoreView;
+
+	private int pageNum = 0;
+
+	private int requestPage = 1;
+
+	private ArrayList<SqAskItem> askList = new ArrayList<SqAskItem>();
+
 	public CommunityFragment() {
 		super();
 	}
-	
+
 	public CommunityFragment(Context context) {
 		this.context = context;
 	}
-	
+
 	private void loadMemberInfo() {
 		final GetMemberInfoOp memberOp = new GetMemberInfoOp(getActivity());
 		memberOp.onRequest(new RequestListener() {
@@ -90,26 +108,153 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 						}
 					});
 				}
-				
+
 			}
 		});
 	}
-	
-	private void requestHotAskList(String pageNum) {
-		SqHotAskOp hotAskOp = new SqHotAskOp(context);
-		hotAskOp.setParmas(pageNum);
-		hotAskOp.onRequest(new RequestListener() {
-			
+
+	private void loadMore() {
+		sqListview.getRefreshableView().removeFooterView(footMoreView);
+		String pageN = "";
+		int page = pageNum + 1;
+		if (pageNum == 0) {
+			pageN = "1";
+		} else {
+			pageN = page + "";
+		}
+		requestHotAskList(pageN, true);
+	}
+
+	private void initHotSqListView(ArrayList<SqAskItem> list) {
+		sqListview.setVisibility(View.VISIBLE);
+		view.findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
+		if (sqAdapter == null) {
+			sqAdapter = new SqForumAdapter(context);
+			sqAdapter.addData(list);
+			sqListview.getRefreshableView().setAdapter(sqAdapter);
+			sqAdapter.addOnZanListener(new onZanListener() {
+
+				@Override
+				public void onZan(int position) {
+					onZanRequest(position);
+				}
+			});
+		} else {
+			sqAdapter.clear();
+			sqAdapter.addData(list);
+			sqAdapter.notifyDataSetChanged();
+		}
+		if ((sqAdapter.getCount() % 20) == 0) {
+			sqListview.getRefreshableView().addFooterView(footMoreView);
+		}
+	}
+
+	private void onZanRequest(final int position) {
+		AskZanOp zanOp = new AskZanOp(context);
+		zanOp.setParmas(sqAdapter.getItem(position).id);
+		zanOp.onRequest(new RequestListener() {
+
 			@Override
 			public void onError(Object error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
-				// TODO Auto-generated method stub
-				
+				((BaseActivity) getActivity()).handler.post(new Runnable() {
+
+					@Override
+					public void run() {
+						int oldzanCount = Integer.valueOf(sqAdapter
+								.getItem(position).likeCount);
+						oldzanCount++;
+						sqAdapter.getItem(position).likeCount = oldzanCount
+								+ "";
+						sqAdapter.notifyDataSetChanged();
+						((BaseActivity) getActivity()).showToast("点赞成功");
+					}
+				});
+			}
+		});
+	}
+
+	private void requestHotAskList(String pageNumber, final boolean isShowNow) {
+		final SqHotAskOp hotAskOp = new SqHotAskOp(getActivity());
+		hotAskOp.setParmas(pageNumber);
+		hotAskOp.onRequest(new RequestListener() {
+
+			@Override
+			public void onError(Object error) {
+				((BaseActivity) getActivity()).handler.post(new Runnable() {
+
+					@Override
+					public void run() {
+						if (sqAdapter == null
+								|| (sqAdapter != null && sqAdapter.getCount() == 0)) {
+							sqListview.setVisibility(View.GONE);
+							view.findViewById(R.id.empty_content_layout)
+									.setVisibility(View.VISIBLE);
+						}
+						sqListview.onRefreshComplete();
+					}
+				});
+			}
+
+			@Override
+			public void onCallBack(Object data) {
+				if (hotAskOp.getHotAskList().size() > 0) {
+					askList.addAll(hotAskOp.getHotAskList());
+					if (isShowNow) {
+						pageNum++;
+						((BaseActivity) getActivity()).handler
+								.post(new Runnable() {
+
+									@Override
+									public void run() {
+										sqListview.onRefreshComplete();
+										initHotSqListView(askList);
+									}
+								});
+					} else if (requestPage < pageNum) {
+						requestPage++;
+						String pageN = requestPage + "";
+						requestHotAskList(pageN, false);
+					} else if (requestPage == pageNum) {
+						((BaseActivity) getActivity()).handler
+								.post(new Runnable() {
+
+									@Override
+									public void run() {
+										sqListview.onRefreshComplete();
+										initHotSqListView(askList);
+									}
+								});
+					}
+				} else {
+					if (sqAdapter == null
+							|| (sqAdapter != null && sqAdapter.getCount() == 0)) {
+						((BaseActivity) getActivity()).handler
+								.post(new Runnable() {
+
+									@Override
+									public void run() {
+										sqListview.setVisibility(View.GONE);
+										view.findViewById(
+												R.id.empty_content_layout)
+												.setVisibility(View.VISIBLE);
+									}
+								});
+					}
+					pageNum = 1;
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							sqListview.onRefreshComplete();
+						}
+					});
+				}
 			}
 		});
 	}
@@ -144,13 +289,14 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 					@Override
 					public void run() {
-						((MainActivity) getActivity()).showSignSuccessFragment();
+						((MainActivity) getActivity())
+								.showSignSuccessFragment();
 					}
 				});
 			}
 		});
 	}
-	
+
 	private void gotoDetail(ForumItem item) {
 		Intent detail = new Intent(getActivity(), SqListActivity.class);
 		detail.putExtra("forum_item", item);
@@ -158,6 +304,15 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	}
 
 	private void initView() {
+		footMoreView = View.inflate(context, R.layout.load_more_view, null);
+		footMoreView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				loadMore();
+			}
+		});
+		view.findViewById(R.id.empty_content_layout).setOnClickListener(this);
 		view.findViewById(R.id.accounting_hot_thread_layout)
 				.setOnClickListener(this);
 		view.findViewById(R.id.dingdang_sq_layout).setOnClickListener(this);
@@ -167,7 +322,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		nicknameTx = (TextView) view.findViewById(R.id.nickname_tx);
 		accountingListview = (ListView) view
 				.findViewById(R.id.accounting_listview);
-		sqListview = (ListView) view.findViewById(R.id.sq_listview);
+		sqListview = (PullToRefreshListView) view
+				.findViewById(R.id.sq_listview);
 		examListview = (ListView) view.findViewById(R.id.exam_listview);
 		sqHotThreadImg = (ImageView) view.findViewById(R.id.sq_hot_thread_img);
 		dingdangSqImg = (ImageView) view.findViewById(R.id.dingdang_sq_img);
@@ -201,8 +357,31 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
 
+			}
+		});
+		sqListview.setMode(Mode.PULL_FROM_START);
+		sqListview.getLoadingLayoutProxy(true, true).setPullLabel("下拉刷新...");
+		sqListview.getLoadingLayoutProxy(true, true).setRefreshingLabel(
+				"正在刷新...");
+		sqListview.getLoadingLayoutProxy(true, true).setReleaseLabel("释放刷新...");
+		sqListview.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				if (refreshView.isHeaderShown()) {
+					sqListview.getRefreshableView().removeFooterView(
+							footMoreView);
+					requestPage = 1;
+					String pangeN = "";
+					if (pageNum == 0) {
+						pangeN = 1 + "";
+					} else {
+						pangeN = requestPage + "";
+					}
+					askList.clear();
+					requestHotAskList(pangeN, false);
+				}
 			}
 		});
 		showTitleLayout();
@@ -278,7 +457,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 					.setBackgroundResource(R.drawable.accounting_hot_thread_check);
 			view.findViewById(R.id.accounting_hot_thread_layout)
 					.setBackgroundColor(
-							getActivity().getResources().getColor(R.color.sq_blue));
+							getActivity().getResources().getColor(
+									R.color.sq_blue));
 			sqHotThreadTx.setTextColor(getActivity().getResources().getColor(
 					R.color.white));
 			dingdangSqImg.setBackgroundResource(R.drawable.dingdang_sq);
@@ -293,7 +473,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 					.setBackgroundResource(R.drawable.accounting_hot_thread);
 			view.findViewById(R.id.accounting_hot_thread_layout)
 					.setBackgroundColor(
-							getActivity().getResources().getColor(R.color.white));
+							getActivity().getResources()
+									.getColor(R.color.white));
 			sqHotThreadTx.setTextColor(getActivity().getResources().getColor(
 					R.color.sq_blue));
 			dingdangSqImg.setBackgroundResource(R.drawable.dingdang_sq_check);
@@ -301,37 +482,12 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 					getActivity().getResources().getColor(R.color.sq_blue));
 			dingdangSqTx.setTextColor(getActivity().getResources().getColor(
 					R.color.white));
-			showSqListView();
+			initSqList();
 			break;
 
 		default:
 			break;
 		}
-	}
-
-	private void showSqListView() {
-		ArrayList<ForumEntry> list = new ArrayList<ForumEntry>();
-		ForumEntry entry1 = new ForumEntry();
-		entry1.forumTitle = "财会考试是几号啊？";
-		entry1.zanCount = "126";
-		entry1.answerContent = "纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁";
-		list.add(entry1);
-		ForumEntry entry2 = new ForumEntry();
-		entry2.forumTitle = "财会考试是几号啊？";
-		entry2.zanCount = "126";
-		entry2.answerContent = "纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁";
-		list.add(entry2);
-		ForumEntry entry3 = new ForumEntry();
-		entry3.forumTitle = "财会考试是几号啊？";
-		entry3.zanCount = "126";
-		entry3.answerContent = "纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁";
-		list.add(entry3);
-		ForumEntry entry4 = new ForumEntry();
-		entry4.forumTitle = "财会考试是几号啊？";
-		entry4.zanCount = "126";
-		entry4.answerContent = "纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁纪委及挖掘我既入境问禁";
-		list.add(entry4);
-		initSqList(list);
 	}
 
 	private void initAccountingList(ArrayList<ForumItem> list) {
@@ -374,20 +530,11 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		}
 	}
 
-	private void initSqList(ArrayList<ForumEntry> list) {
+	private void initSqList() {
 		accountingListview.setVisibility(View.GONE);
 		sqListview.setVisibility(View.VISIBLE);
 		examListview.setVisibility(View.GONE);
-		requestHotAskList("1");
-		/*if (sqAdapter == null) {
-			sqAdapter = new SqForumAdapter(CddApp.getInstance());
-			sqAdapter.addData(list);
-			sqListview.setAdapter(sqAdapter);
-		} else {
-			sqAdapter.clear();
-			sqAdapter.addData(list);
-			sqAdapter.notifyDataSetChanged();
-		}*/
+		requestHotAskList("1", true);
 	}
 
 	private void showTipNoteDialog(final String msg) {
@@ -433,6 +580,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			setCheck(0);
 			break;
 		case R.id.dingdang_sq_layout:
+			askList.clear();
+			pageNum = 0;
 			checkCode = 1;
 			setCheck(1);
 			break;
@@ -449,6 +598,10 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 		case R.id.sign_today_layout:
 			doSignToday();
+			break;
+
+		case R.id.empty_content_layout:
+			requestHotAskList("1", true);
 			break;
 
 		default:

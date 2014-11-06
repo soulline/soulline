@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -129,11 +130,14 @@
         <View android:layout_width="match_parent"
             android:layout_height="@dimen/dd_dimen_1px"
             android:background="@color/jamb_gray_line"/>
-        <ListView android:id="@+id/sq_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:visibility="gone" />
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/sq_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                ptr:ptrHeaderTextColor="@color/sq_blue"
+                ptr:ptrAnimationStyle="flip"
+                android:smoothScrollbar="true"
+                android:divider="@null" />
         <ListView android:id="@+id/accounting_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -145,6 +149,13 @@
             android:listSelector="@color/alarm_item_blue"
             android:divider="@null"
             android:visibility="gone"/>
+        <ImageView android:id="@+id/empty_content_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_50px"
+                android:background="@drawable/empty_message"
+                android:visibility="gone"/>
         
     </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,7 @@
     <color name="base_title_blue">#1b2a38</color>
     <color name="title_yellow">#FFCE54</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="dingdang_black">#2A2A2A</color>
     <color name="red">#FF0000</color>
     <color name="edit_hint_gray">#cccccc</color>

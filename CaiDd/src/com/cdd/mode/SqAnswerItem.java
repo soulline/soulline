@@ -19,4 +19,6 @@ public class SqAnswerItem extends BaseEntry {
 	public String memberPhoto ="";
 	
 	public String subjectId = "";
+	
+	public String sex = "";
 }

@@ -89,7 +89,8 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
+				Intent intent = new Intent(context, SqAskDetailActivity.class);
+				startActivity(intent);
 			}
 		});
 		sqContentList.setMode(Mode.PULL_FROM_START);
@@ -195,7 +196,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			sqAdapter.addData(list);
 			sqAdapter.notifyDataSetChanged();
 		}
-		if (sqAdapter.getCount() == 20) {
+		if ((sqAdapter.getCount() % 20) == 0) {
 			sqContentList.getRefreshableView().addFooterView(footMoreView);
 		}
 	}

@@ -71,7 +71,13 @@ public class SqForumAdapter extends ArrayAdapter<SqAskItem> {
 				ImageOperater.getInstance(context).onLoadImage(answer.memberPhoto, holder.answer1Icon);
 			} else if ((TextUtils.isEmpty(answer.memberPhoto) || 
 					answer.memberPhoto.equals("null")) && answer.anonymous.equals("0")) {
-				holder.answer1Icon.setBackgroundResource(R.drawable.default_woman_portrait);
+				if (answer.sex.equals("1")) {
+					holder.answer1Icon
+							.setBackgroundResource(R.drawable.default_man_portrait);
+				} else if (answer.sex.equals("2")) {
+					holder.answer1Icon
+							.setBackgroundResource(R.drawable.default_woman_portrait);
+				}
 			} else if (answer.anonymous.equals("1")) {
 				holder.answer1Icon.setBackgroundResource(R.drawable.default_woman_portrait);
 			}

@@ -104,6 +104,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
+        <activity
+            android:name="com.cdd.sqpage.SqAskDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        
+        <activity
+            android:name="com.cdd.activity.image.ImageNetPageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
     </application>
 
 </manifest>

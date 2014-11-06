@@ -1,0 +1,238 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <!-- Content layout -->
+
+    <RelativeLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dd_dimen_89px"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dd_dimen_10px"
+                android:layout_marginRight="@dimen/dd_dimen_10px"
+                android:layout_marginTop="@dimen/dd_dimen_10px"
+                android:background="@drawable/gray_jamb"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dd_dimen_20px"
+                android:paddingLeft="@dimen/dd_dimen_20px"
+                android:paddingRight="@dimen/dd_dimen_10px"
+                android:paddingTop="@dimen/dd_dimen_20px" >
+
+                <TextView
+                    android:id="@+id/ask_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="财会考试是几号啊？"
+                    android:textColor="@color/sq_blue"
+                    android:textSize="@dimen/dd_dimen_32px" />
+
+                <LinearLayout android:id="@+id/ask_photo_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dd_dimen_10px"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/photo1"
+                        android:layout_width="@dimen/dd_dimen_170px"
+                        android:layout_height="@dimen/dd_dimen_140px"
+                        android:background="@color/jamb_gray"
+                        android:scaleType="fitXY" />
+
+                    <ImageView
+                        android:id="@+id/photo2"
+                        android:layout_width="@dimen/dd_dimen_170px"
+                        android:layout_height="@dimen/dd_dimen_140px"
+                        android:layout_marginLeft="@dimen/dd_dimen_10px"
+                        android:background="@color/jamb_gray"
+                        android:scaleType="fitXY" />
+
+                    <ImageView
+                        android:id="@+id/photo3"
+                        android:layout_width="@dimen/dd_dimen_170px"
+                        android:layout_height="@dimen/dd_dimen_140px"
+                        android:layout_marginLeft="@dimen/dd_dimen_10px"
+                        android:background="@color/jamb_gray"
+                        android:scaleType="fitXY" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dd_dimen_10px" >
+
+                    <TextView
+                        android:id="@+id/ask_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dd_dimen_5px"
+                        android:text="2014-5-14 13:50"
+                        android:textColor="@color/simple_tx_"
+                        android:textSize="@dimen/dd_dimen_24px" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:id="@+id/zan_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dd_dimen_20px" >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/zan_selector" />
+
+                            <TextView
+                                android:id="@+id/zan_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="（20）"
+                                android:textColor="@color/simple_tx_"
+                                android:textSize="@dimen/dd_dimen_24px" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/shoucang_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dd_dimen_20px" >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/shoucang_selector" />
+
+                            <TextView
+                                android:id="@+id/shoucang_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="（20）"
+                                android:textColor="@color/simple_tx_"
+                                android:textSize="@dimen/dd_dimen_24px" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/zhuanfa_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dd_dimen_20px" >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/zhuanfa_selector" />
+
+                            <TextView
+                                android:id="@+id/zhuanfa_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="（20）"
+                                android:textColor="@color/simple_tx_"
+                                android:textSize="@dimen/dd_dimen_24px" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/sq_answer_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gray_jamb"
+                android:layout_marginLeft="@dimen/dd_dimen_10px"
+                android:layout_marginRight="@dimen/dd_dimen_10px"
+                android:padding="@dimen/dd_dimen_1px"
+                android:divider="@null"
+                android:scrollbars="@null"
+                ptr:ptrAnimationStyle="flip"
+                ptr:ptrHeaderTextColor="@color/sq_blue" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/empty_content_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dd_dimen_50px"
+            android:background="@drawable/empty_message"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/detail_answer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/title_bg" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/sq_answer_selector" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dd_dimen_20px"
+                    android:text="我要回答"
+                    android:textColor="@drawable/register_text_selector"
+                    android:textSize="@dimen/dd_dimen_40px"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>
