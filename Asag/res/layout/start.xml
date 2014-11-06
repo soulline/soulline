@@ -1,35 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
--->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+    android:layout_height="match_parent" >
 
-    <ImageView
-        android:id="@+id/welcome"
+
+    <!-- Content layout -->
+
+    <RelativeLayout
+        android:id="@+id/base_content_"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:scaleType="centerCrop"
-        android:src="@drawable/welcome" />
+        android:background="@drawable/start_bg"
+        android:orientation="vertical" >
         
-        <ProgressBar
-        android:id="@+id/bar_welcome"
-        android:layout_marginTop="482dp"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="540dip"
-        android:layout_marginRight="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="27dp"
-        android:indeterminate="false" 
-        android:progress="0"
-        android:max="400"
-        />
-        
+        <ImageView android:id="@+id/welcome_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/strat_loading_1"/>
+
+    </RelativeLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
 
 </RelativeLayout>

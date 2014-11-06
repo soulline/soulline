@@ -75,7 +75,7 @@ public class BaseActivity extends FragmentActivity {
 				}
 				Builder b = new Builder(context);
 				b.setMessage(msg);
-				b.setPositiveButton("È·¶¨",
+				b.setPositiveButton("ç¡®å®š",
 						new OnClickListener() {
 
 							@Override
@@ -146,6 +146,6 @@ public class BaseActivity extends FragmentActivity {
 	}
 
 	public void showNetworkError() {
-		showToast("ÍøÂç´íÎó");
+		showToast("ç½‘ç»œè¿žæŽ¥å¤±è´¥");
 	}
 }
