@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white" >
@@ -14,18 +15,29 @@
 
     <!-- Content layout -->
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/base_content_"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/base_title_layout"
-        android:orientation="vertical" >
+        android:layout_below="@+id/base_title_layout" >
 
-        <ListView android:id="@+id/sq_listview"
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/sq_listview"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            ptr:ptrAnimationStyle="flip"
+            ptr:ptrHeaderTextColor="@color/sq_blue" />
+
+        <ImageView
+            android:id="@+id/empty_content_layout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:divider="@null" />
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dd_dimen_50px"
+            android:background="@drawable/empty_message"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <!-- Extra Fragment layout -->
 

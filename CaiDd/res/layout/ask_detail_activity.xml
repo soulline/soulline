@@ -36,15 +36,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="财会考试是几号啊？"
+                    android:text=""
                     android:textColor="@color/sq_blue"
                     android:textSize="@dimen/dd_dimen_32px" />
 
-                <LinearLayout android:id="@+id/ask_photo_layout"
+                <LinearLayout
+                    android:id="@+id/ask_photo_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dd_dimen_10px"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
 
                     <ImageView
                         android:id="@+id/photo1"
@@ -81,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dd_dimen_5px"
-                        android:text="2014-5-14 13:50"
+                        android:text=""
                         android:textColor="@color/simple_tx_"
                         android:textSize="@dimen/dd_dimen_24px" />
                 </RelativeLayout>
@@ -112,7 +114,7 @@
                                 android:id="@+id/zan_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="（20）"
+                                android:text=""
                                 android:textColor="@color/simple_tx_"
                                 android:textSize="@dimen/dd_dimen_24px" />
                         </LinearLayout>
@@ -133,7 +135,7 @@
                                 android:id="@+id/shoucang_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="（20）"
+                                android:text=""
                                 android:textColor="@color/simple_tx_"
                                 android:textSize="@dimen/dd_dimen_24px" />
                         </LinearLayout>
@@ -154,7 +156,7 @@
                                 android:id="@+id/zhuanfa_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="（20）"
+                                android:text=""
                                 android:textColor="@color/simple_tx_"
                                 android:textSize="@dimen/dd_dimen_24px" />
                         </LinearLayout>
@@ -166,24 +168,23 @@
                 android:id="@+id/sq_answer_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gray_jamb"
                 android:layout_marginLeft="@dimen/dd_dimen_10px"
                 android:layout_marginRight="@dimen/dd_dimen_10px"
-                android:padding="@dimen/dd_dimen_1px"
+                android:background="@drawable/gray_jamb"
                 android:divider="@null"
-                android:scrollbars="@null"
+                android:padding="@dimen/dd_dimen_1px"
                 ptr:ptrAnimationStyle="flip"
                 ptr:ptrHeaderTextColor="@color/sq_blue" />
-        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/empty_content_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dd_dimen_50px"
-            android:background="@drawable/empty_message"
-            android:visibility="gone" />
+            <ImageView
+                android:id="@+id/empty_content_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_50px"
+                android:background="@drawable/empty_answer"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/detail_answer_layout"

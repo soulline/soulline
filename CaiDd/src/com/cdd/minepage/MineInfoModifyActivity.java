@@ -55,6 +55,8 @@ public class MineInfoModifyActivity extends BaseActivity implements
 	private final String IMAGE_TYPE = "image/*";
 
 	private String tempPath = "";
+	
+	private MemberInfoEntry meberInfo = new MemberInfoEntry();
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -216,6 +218,7 @@ public class MineInfoModifyActivity extends BaseActivity implements
 									JSONObject obj = response
 											.optJSONObject("re");
 									final String url = obj.optString("url");
+									meberInfo.photo = url;
 									handler.post(new Runnable() {
 
 										@Override
@@ -248,6 +251,13 @@ public class MineInfoModifyActivity extends BaseActivity implements
 	}
 	
 	private void initMemberInfo(MemberInfoEntry memberInfo) {
+		if (memberInfo.sex.equals("1")) {
+			portraitView.setImageResource(R.drawable.default_man_portrait);
+		} else if (memberInfo.sex.equals("2")) {
+			portraitView.setImageResource(R.drawable.default_woman_portrait);
+		} else {
+			portraitView.setImageResource(R.drawable.default_woman_portrait);
+		}
 		if (!TextUtils.isEmpty(memberInfo.photo) && !memberInfo.photo.equals("null")) {
 			String ulr = memberInfo.photo;
 			ImageOperater.getInstance(context).onLoadImage(ulr,
@@ -292,6 +302,7 @@ public class MineInfoModifyActivity extends BaseActivity implements
 			@Override
 			public void onCallBack(Object data) {
 				final MemberInfoEntry memberInfo = memberOp.getMemberInfo();
+				meberInfo = memberInfo;
 				handler.post(new Runnable() {
 
 					@Override
@@ -391,6 +402,20 @@ public class MineInfoModifyActivity extends BaseActivity implements
 
 						@Override
 						public void onCallBack(Object object) {
+							if (object instanceof String) {
+								String type = (String) object;
+								if (type.equals("1")) {
+									ModifyMemberEntry member = new ModifyMemberEntry();
+									member.defaultPhoto = "1";
+									meberInfo.photo = "";
+									updateMemberInfo(member);
+									if (meberInfo != null && meberInfo.sex.equals("1")) {
+										portraitView.setImageResource(R.drawable.default_man_portrait);
+									} else if ((meberInfo != null && meberInfo.sex.equals("2"))) {
+										portraitView.setImageResource(R.drawable.default_woman_portrait);
+									}
+								}
+							}
 
 						}
 					});
@@ -413,6 +438,7 @@ public class MineInfoModifyActivity extends BaseActivity implements
 						nickName.setText(nickNamet);
 						ModifyMemberEntry member = new ModifyMemberEntry();
 						member.name = nickNamet;
+						meberInfo.name = nickNamet;
 						updateMemberInfo(member);
 					}
 				}
@@ -430,7 +456,14 @@ public class MineInfoModifyActivity extends BaseActivity implements
 						initSex(sex);
 						ModifyMemberEntry modify = new ModifyMemberEntry();
 						modify.sex = sex;
-						
+						meberInfo.sex = sex;
+						if (TextUtils.isEmpty(meberInfo.photo) || (meberInfo.photo.equals("null"))) {
+							if (meberInfo.sex.equals("1")) {
+								portraitView.setImageResource(R.drawable.default_man_portrait);
+							} else if (meberInfo.sex.equals("2")) {
+								portraitView.setImageResource(R.drawable.default_woman_portrait);
+							}
+						}
 						updateMemberInfo(modify);
 					}
 					
@@ -449,6 +482,8 @@ public class MineInfoModifyActivity extends BaseActivity implements
 						localCity.setText(city.name);
 						ModifyMemberEntry modify1 = new ModifyMemberEntry();
 						modify1.cityId = city.id;
+						meberInfo.cityId = city.id;
+						meberInfo.cityName = city.name;
 						updateMemberInfo(modify1);
 					}
 				}
@@ -468,6 +503,7 @@ public class MineInfoModifyActivity extends BaseActivity implements
 						simpleTx.setText(nickNamet);
 						ModifyMemberEntry member = new ModifyMemberEntry();
 						member.description = nickNamet;
+						meberInfo.description = nickNamet;
 						updateMemberInfo(member);
 					}
 				}

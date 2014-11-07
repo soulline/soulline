@@ -34,6 +34,9 @@ public class UpdateMemberInfoOp extends BaseOperater {
 		if (!TextUtils.isEmpty(member.sex)) {
 			params.put("sex", member.sex);
 		}
+		if (!TextUtils.isEmpty(member.defaultPhoto)) {
+			params.put("defaultPhoto", member.defaultPhoto);
+		}
 	}
 
 	@Override

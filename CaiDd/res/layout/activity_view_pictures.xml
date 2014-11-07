@@ -18,6 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/dd_dimen_28px"
+        android:padding="@dimen/dd_dimen_20px"
+        android:layout_centerVertical="true"
         android:id="@+id/close_btn"
         android:textColor="@drawable/register_text_selector"
         android:layout_marginLeft="@dimen/dd_dimen_20px"
@@ -29,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/dd_dimen_36px"
         android:textColor="@color/white"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true" />
         
     </RelativeLayout>
 

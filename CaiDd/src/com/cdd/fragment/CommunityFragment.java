@@ -21,6 +21,7 @@ import com.cdd.operater.SignTodayOp;
 import com.cdd.operater.SqHotAskOp;
 import com.cdd.sqpage.AccountingHotAdapter;
 import com.cdd.sqpage.ExamListAdapter;
+import com.cdd.sqpage.SqAskDetailActivity;
 import com.cdd.sqpage.SqForumAdapter;
 import com.cdd.sqpage.SqListActivity;
 import com.cdd.sqpage.SqForumAdapter.onZanListener;
@@ -220,7 +221,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 						requestPage++;
 						String pageN = requestPage + "";
 						requestHotAskList(pageN, false);
-					} else if (requestPage == pageNum) {
+					} else if ((requestPage == pageNum) || (pageNum == 0)) {
 						((BaseActivity) getActivity()).handler
 								.post(new Runnable() {
 
@@ -357,7 +358,9 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
+				Intent intent = new Intent(context, SqAskDetailActivity.class);
+				intent.putExtra("ask_id", sqAdapter.getItem(position - 1).id);
+				startActivity(intent);
 			}
 		});
 		sqListview.setMode(Mode.PULL_FROM_START);

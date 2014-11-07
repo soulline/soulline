@@ -81,22 +81,26 @@ public class SqAnswerAdapter extends ArrayAdapter<SqAnswerDetailEntry> {
 		SqAnswerDetailEntry answer = getItem(position);
 		if (answer.anonymous.equals("0")) {
 			holder.answerName.setText(answer.memberName);
-			if (answer.sex.equals("1")) {
+			if (answer.memberSex.equals("1")) {
 				holder.answerIcon
-						.setBackgroundResource(R.drawable.default_man_portrait);
-			} else if (answer.sex.equals("2")) {
+						.setImageResource(R.drawable.default_man_portrait);
+			} else if (answer.memberSex.equals("2")) {
 				holder.answerIcon
-						.setBackgroundResource(R.drawable.default_woman_portrait);
+						.setImageResource(R.drawable.default_woman_portrait);
+			} else {
+				holder.answerIcon.setImageResource(R.drawable.default_woman_portrait);
 			}
 			if (!TextUtils.isEmpty(answer.memberPhoto)) {
 				ImageOperater.getInstance(context).onLoadImage(
 						answer.memberPhoto, holder.answerIcon);
 			}
-			holder.answerLevel.setText(answer.level);
+			if (!TextUtils.isEmpty(answer.memberLevelName) && !answer.memberLevelName.equals("null")) {
+				holder.answerLevel.setText(answer.memberLevelName);
+			}
 		} else if (answer.anonymous.equals("1")) {
 			holder.answerName.setText("匿名");
 			holder.answerIcon
-					.setBackgroundResource(R.drawable.default_woman_portrait);
+					.setImageResource(R.drawable.default_woman_portrait);
 			holder.answerLevel.setText("");
 		}
 		holder.zanCount.setText("（" + answer.likeCount + "）");

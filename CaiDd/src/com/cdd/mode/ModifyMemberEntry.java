@@ -9,4 +9,6 @@ public class ModifyMemberEntry extends BaseEntry {
 	public String cityId = "";
 	
 	public String description = "";
+	
+	public String defaultPhoto = "";
 }

@@ -11,25 +11,22 @@ import android.text.TextUtils;
 import com.cdd.mode.BaseEntry;
 import com.cdd.mode.SqAnswerItem;
 import com.cdd.mode.SqAskItem;
-import com.cdd.mode.SqAskListRequest;
 
-public class SqAskListOp extends BaseOperater {
+public class MyQuestionListOp extends BaseOperater {
 
 	private ArrayList<SqAskItem> askList = new ArrayList<SqAskItem>();
 	
-	public SqAskListOp(Context context) {
+	public MyQuestionListOp(Context context) {
 		super(context);
-	}
-	
-	public void setParams(SqAskListRequest request) {
-		params.put("itemId", request.itemId);
-		params.put("subItemId", request.subItemId);
-		params.put("pageNum", request.pageNum);
 	}
 
 	@Override
 	public void initAction() {
-		action = "forum/subjectList.do";
+		action = "forum/mySubjectList.do";
+	}
+	
+	public void setParams(String pageNum) {
+		params.put("pageNum", pageNum);
 	}
 
 	@Override
@@ -71,37 +68,33 @@ public class SqAskListOp extends BaseOperater {
 						&& !arrayN.toString().equals("null")) {
 					for (int j=0; j < arrayN.length(); j++) {
 						JSONObject objN = arrayN.optJSONObject(j);
-						if (objN != null && !TextUtils.isEmpty(objN.toString())
-								&& !objN.toString().equals("null")) {
-							SqAnswerItem answerItem = new SqAnswerItem();
-							answerItem.anonymous = objN.optString("anonymous");
-							answerItem.content = objN.optString("content");
-							answerItem.createTime = objN.optString("createTime");
-							answerItem.id = objN.optString("id");
-							answerItem.likeCount = objN.optString("likeCount");
-							answerItem.memberId = objN.optString("memberId");
-							answerItem.memberName = objN.optString("memberName");
-							answerItem.memberSex = objN.optString("memberSex");
-							answerItem.memberPhoto = objN.optString("memberPhoto");
-							answerItem.subjectId = objN.optString("subjectId");
-							askItem.answerList.add(answerItem);
-						}
+						SqAnswerItem answerItem = new SqAnswerItem();
+						answerItem.anonymous = objN.optString("anonymous");
+						answerItem.content = objN.optString("content");
+						answerItem.createTime = objN.optString("createTime");
+						answerItem.id = objN.optString("id");
+						answerItem.likeCount = objN.optString("likeCount");
+						answerItem.memberId = objN.optString("memberId");
+						answerItem.memberName = objN.optString("memberName");
+						answerItem.memberSex = objN.optString("memberSex");
+						answerItem.memberPhoto = objN.optString("memberPhoto");
+						answerItem.subjectId = objN.optString("subjectId");
+						askItem.answerList.add(answerItem);
 					}
 				}
 				askList.add(askItem);
 			}
 		}
-
-	}
-	
-	public ArrayList<SqAskItem> getAskList() {
-		return askList;
 	}
 
 	@Override
 	public void onParser(JSONArray response) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public ArrayList<SqAskItem> getAskList() {
+		return askList;
 	}
 
 	@Override

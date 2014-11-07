@@ -27,11 +27,14 @@ import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.cdd.R;
+import com.cdd.activity.image.ImageDrawablePageActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.base.MainActivity;
 import com.cdd.fragment.BaseFragmentListener;
@@ -39,8 +42,10 @@ import com.cdd.fragment.SignSuccessFragment;
 import com.cdd.fragment.TakePhotoSelectFragment;
 import com.cdd.login.LoginActivity;
 import com.cdd.mode.ForumItem;
+import com.cdd.mode.SqAnswerCommitEntry;
 import com.cdd.mode.SqAskCommitEntry;
 import com.cdd.net.RequestListener;
+import com.cdd.operater.SqAnswerCommitOp;
 import com.cdd.operater.SqAskCommitOp;
 import com.cdd.operater.UploadForMultiOp;
 import com.cdd.operater.UploadForMultiOp.OnUploadListener;
@@ -69,7 +74,11 @@ public class PulishActivity extends BaseActivity implements OnClickListener {
 	private EditText inputEdtx;
 	
 	private ForumItem forumItem = new ForumItem();
-
+	
+	private int pulishType = 1;
+	
+	private String askId = "";
+	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -87,11 +96,30 @@ public class PulishActivity extends BaseActivity implements OnClickListener {
 		findViewById(R.id.pulish_cancel).setOnClickListener(this);
 		findViewById(R.id.pulish_ok).setOnClickListener(this);
 		setNimingOrNot(isNimingS);
-		if (getIntent().getSerializableExtra("forum_item") != null
+		pulishType = getIntent().getIntExtra("pulish_type", 1);
+		if ((pulishType == 1) && getIntent().getSerializableExtra("forum_item") != null
 				&& getIntent().getSerializableExtra("forum_item") instanceof ForumItem) {
 			forumItem = (ForumItem) getIntent().getSerializableExtra(
 					"forum_item");
+		} else if (pulishType == 2) {
+			askId = getIntent().getStringExtra("ask_id");
 		}
+		picGrid.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ArrayList<String> photoList = new ArrayList<String>();
+				for (int i = 0; i < picList.size(); i++) {
+					String picUrl = picList.get(i).getAbsolutePath();
+					photoList.add(picUrl);
+				}
+				Intent intent = new Intent(context, ImageDrawablePageActivity.class);
+				intent.putExtra("drawable_list", photoList);
+				intent.putExtra("image_index", position);
+				startActivity(intent);
+			}
+		});
 	}
 
 	private void initGridAdapter(ArrayList<Drawable> list) {
@@ -311,6 +339,62 @@ public class PulishActivity extends BaseActivity implements OnClickListener {
 		intent1.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
 		startActivityForResult(intent1, CddRequestCode.ACTION_PICK_CAMERA);
 	}
+	
+	private void doRequestForAskCommit(ArrayList<String> photoList) {
+		SqAskCommitEntry askEntry = new SqAskCommitEntry();
+		askEntry.title = inputEdtx.getText().toString().trim();
+		if (photoList.size() > 0) {
+			askEntry.photos = photoList;
+		}
+		if (forumItem != null && !TextUtils.isEmpty(forumItem.fatherId)
+				&& !TextUtils.isEmpty(forumItem.id)) {
+			askEntry.itemId = forumItem.fatherId;
+			askEntry.subItemId = forumItem.id;
+		} else if (forumItem != null && TextUtils.isEmpty(forumItem.fatherId)
+				&& !TextUtils.isEmpty(forumItem.id)) {
+			askEntry.itemId = forumItem.id;
+		}
+		if (isNimingS) {
+			askEntry.anonymous = "1";
+		} else {
+			askEntry.anonymous = "0";
+		}
+		sqAskCommit(askEntry);
+	}
+	
+	private void doRequestForAnswerCommit(ArrayList<String> photoList) {
+		SqAnswerCommitEntry answerEntry = new SqAnswerCommitEntry();
+		answerEntry.content = inputEdtx.getText().toString().trim();
+		if (photoList.size() > 0) {
+			answerEntry.photos = photoList;
+		}
+		answerEntry.subjectId = askId;
+		if (isNimingS) {
+			answerEntry.anonymous = "1";
+		} else {
+			answerEntry.anonymous = "0";
+		}
+		sqAnswerCommit(answerEntry);
+	}
+	
+	private void sqAnswerCommit(SqAnswerCommitEntry entry) {
+		SqAnswerCommitOp answerCommitOp = new SqAnswerCommitOp(context);
+		answerCommitOp.setParmas(entry);
+		answerCommitOp.onRequest(new RequestListener() {
+
+			@Override
+			public void onError(Object error) {
+
+			}
+
+			@Override
+			public void onCallBack(Object data) {
+				showToast("发表成功");
+				setResult(RESULT_OK);
+				finish();
+			}
+		});
+	}
 
 	private void uploadFiles(ArrayList<File> list) {
 		showLoading(true);
@@ -325,26 +409,16 @@ public class PulishActivity extends BaseActivity implements OnClickListener {
 					if (status == 200) {
 						JSONObject objN = obj.optJSONObject("re");
 						JSONArray array = objN.optJSONArray("urls");
-						SqAskCommitEntry askEntry = new SqAskCommitEntry();
+						ArrayList<String> photoList = new ArrayList<String>();
 						for (int i = 0; i < array.length(); i++) {
 							String picUrl = (String) array.opt(i);
-							askEntry.photos.add(picUrl);
+							photoList.add(picUrl);
 						}
-						askEntry.title = inputEdtx.getText().toString().trim();
-						if (forumItem != null && !TextUtils.isEmpty(forumItem.fatherId)
-								&& !TextUtils.isEmpty(forumItem.id)) {
-							askEntry.itemId = forumItem.fatherId;
-							askEntry.subItemId = forumItem.id;
-						} else if (forumItem != null && TextUtils.isEmpty(forumItem.fatherId)
-								&& !TextUtils.isEmpty(forumItem.id)) {
-							askEntry.itemId = forumItem.id;
+						if (pulishType == 1) {
+							doRequestForAskCommit(photoList);
+						} else if (pulishType == 2) {
+							doRequestForAnswerCommit(photoList);
 						}
-						if (isNimingS) {
-							askEntry.anonymous = "1";
-						} else {
-							askEntry.anonymous = "0";
-						}
-						sqAskCommit(askEntry);
 
 					} else {
 						showToast(obj.optString("msg"));
@@ -383,6 +457,7 @@ public class PulishActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onCallBack(Object data) {
 				showToast("发表成功");
+				setResult(RESULT_OK);
 				finish();
 			}
 		});
@@ -436,22 +511,12 @@ public class PulishActivity extends BaseActivity implements OnClickListener {
 					}
 				}).start();
 			} else if (checkInput()) {
-				SqAskCommitEntry askEntry = new SqAskCommitEntry();
-				askEntry.title = inputEdtx.getText().toString().trim();
-				if (forumItem != null && !TextUtils.isEmpty(forumItem.fatherId)
-						&& !TextUtils.isEmpty(forumItem.id)) {
-					askEntry.itemId = forumItem.fatherId;
-					askEntry.subItemId = forumItem.id;
-				} else if (forumItem != null && TextUtils.isEmpty(forumItem.fatherId)
-						&& !TextUtils.isEmpty(forumItem.id)) {
-					askEntry.itemId = forumItem.id;
+				ArrayList<String> photos = new ArrayList<String>();
+				if (pulishType == 1) {
+					doRequestForAskCommit(photos);
+				} else if (pulishType == 2) {
+					doRequestForAnswerCommit(photos);
 				}
-				if (isNimingS) {
-					askEntry.anonymous = "1";
-				} else {
-					askEntry.anonymous = "0";
-				}
-				sqAskCommit(askEntry);
 			}
 			break;
 

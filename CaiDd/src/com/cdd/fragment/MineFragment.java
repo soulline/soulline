@@ -61,6 +61,13 @@ public class MineFragment extends Fragment implements OnClickListener {
 	}
 
 	private void initMemberInfo(MemberInfoEntry member) {
+		if (member.sex.equals("1")) {
+			selfPortrait.setImageResource(R.drawable.default_man_portrait);
+		} else if (member.sex.equals("2")) {
+			selfPortrait.setImageResource(R.drawable.default_woman_portrait);
+		} else {
+			selfPortrait.setImageResource(R.drawable.default_woman_portrait);
+		}
 		if (!TextUtils.isEmpty(member.photo) && !member.photo.equals("null")) {
 			String url = member.photo;
 			ImageOperater.getInstance(getActivity()).onLoadImage(url,
@@ -144,12 +151,12 @@ public class MineFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.my_question_layout:
 			Intent question = new Intent(getActivity(), MyForumActivity.class);
-			question.putExtra("content_type", 0);
+			question.putExtra("content_type", 1);
 			getActivity().startActivity(question);
 			break;
 		case R.id.my_answers_layout:
 			Intent answer = new Intent(getActivity(), MyForumActivity.class);
-			answer.putExtra("content_type", 1);
+			answer.putExtra("content_type", 2);
 			getActivity().startActivity(answer);
 			break;
 		case R.id.my_collect_layout:

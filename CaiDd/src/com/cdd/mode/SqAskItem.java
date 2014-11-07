@@ -24,6 +24,8 @@ public class SqAskItem extends BaseEntry {
 	
 	public String memberPhoto = "";
 	
+	public String memberSex = "";
+	
 	public String shareCount = "";
 	
 	public String subItemId = "";

@@ -20,9 +20,9 @@ public class SqAnswerDetailEntry extends BaseEntry {
 	
 	public String memberPhoto = "";
 	
-	public String sex = "";
+	public String memberSex = "";
 	
-	public String level = "";
+	public String memberLevelName = "";
 	
 	public String subjectId = "";
 	

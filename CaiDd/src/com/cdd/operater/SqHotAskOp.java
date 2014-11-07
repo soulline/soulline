@@ -66,7 +66,7 @@ public class SqHotAskOp extends BaseOperater {
 				if (arrayN != null && !TextUtils.isEmpty(arrayN.toString())
 						&& !arrayN.toString().equals("null")) {
 					for (int j=0; j < arrayN.length(); j++) {
-						JSONObject objN = new JSONObject();
+						JSONObject objN = arrayN.optJSONObject(j);
 						SqAnswerItem answerItem = new SqAnswerItem();
 						answerItem.anonymous = objN.optString("anonymous");
 						answerItem.content = objN.optString("content");
@@ -76,6 +76,7 @@ public class SqHotAskOp extends BaseOperater {
 						answerItem.memberId = objN.optString("memberId");
 						answerItem.memberName = objN.optString("memberName");
 						answerItem.memberPhoto = objN.optString("memberPhoto");
+						answerItem.memberSex = objN.optString("memberSex");
 						answerItem.subjectId = objN.optString("subjectId");
 						askItem.answerList.add(answerItem);
 					}

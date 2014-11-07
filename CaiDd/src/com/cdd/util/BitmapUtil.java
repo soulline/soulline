@@ -278,9 +278,9 @@ public class BitmapUtil {
 			}
 			
 			float scaleWidth = ((float) w) / width;
-			float scaleHeight = ((float) h) / height;
+//			float scaleHeight = ((float) h) / height;
 			Matrix matrix = new Matrix();
-			matrix.postScale(scaleWidth, scaleHeight);
+			matrix.postScale(scaleWidth, scaleWidth);
 			bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix,
 					true);
 		}

@@ -66,6 +66,7 @@
             android:name="com.cdd.sqpage.PulishActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
@@ -113,6 +114,13 @@
         
         <activity
             android:name="com.cdd.activity.image.ImageNetPageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        
+        <activity
+            android:name="com.cdd.activity.image.ImageDrawablePageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >

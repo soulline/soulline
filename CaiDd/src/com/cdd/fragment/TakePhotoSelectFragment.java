@@ -61,7 +61,7 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 		switch (v.getId()) {
 		case R.id.from_default:
 			if (listener != null) {
-				
+				listener.onCallBack("1");
 			}
 			dismissAllowingStateLoss();
 			break;

@@ -20,5 +20,5 @@ public class SqAnswerItem extends BaseEntry {
 	
 	public String subjectId = "";
 	
-	public String sex = "";
+	public String memberSex = "";
 }

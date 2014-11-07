@@ -22,6 +22,7 @@ import com.cdd.net.RequestListener;
 import com.cdd.operater.AskZanOp;
 import com.cdd.operater.SqAskListOp;
 import com.cdd.sqpage.SqForumAdapter.onZanListener;
+import com.cdd.util.CddRequestCode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -71,6 +72,31 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 		requestAskList(request, true);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK && requestCode == CddRequestCode.ASK_PULISH_REQUEST) {
+			sqContentList.getRefreshableView().removeFooterView(footMoreView);
+			requestPage = 1;
+			SqAskListRequest request = new SqAskListRequest();
+			if (!TextUtils.isEmpty(forumItem.fatherId)
+					&& !TextUtils.isEmpty(forumItem.id)) {
+				request.itemId = forumItem.fatherId;
+				request.subItemId = forumItem.id;
+			} else if (TextUtils.isEmpty(forumItem.fatherId)
+					&& !TextUtils.isEmpty(forumItem.id)) {
+				request.itemId = forumItem.id;
+			}
+			if (pageNum == 0) {
+				request.pageNum = 1 + "";
+			} else {
+				request.pageNum = requestPage + "";
+			}
+			askList.clear();
+			requestAskList(request, false);
+		}
+	}
+
 	private void initView() {
 		footMoreView = View.inflate(context, R.layout.load_more_view, null);
 		footMoreView.setOnClickListener(new OnClickListener() {
@@ -84,12 +110,13 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 		findViewById(R.id.search_icon).setOnClickListener(this);
 		findViewById(R.id.sq_ask_layout).setOnClickListener(this);
 		sqContentList = (PullToRefreshListView) findViewById(R.id.sq_content_list);
-		sqContentList.setOnItemClickListener(new OnItemClickListener() {
+		sqContentList.getRefreshableView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent intent = new Intent(context, SqAskDetailActivity.class);
+				intent.putExtra("ask_id", sqAdapter.getItem(position - 1).id);
 				startActivity(intent);
 			}
 		});
@@ -249,7 +276,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 						}
 						request.pageNum = requestPage + "";
 						requestAskList(request, false);
-					} else if (requestPage == pageNum) {
+					} else if ((requestPage == pageNum) || (pageNum == 0)) {
 						handler.post(new Runnable() {
 
 							@Override
@@ -294,7 +321,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			Intent askIntent = new Intent(context, PulishActivity.class);
 			askIntent.putExtra("forum_item", forumItem);
 			askIntent.putExtra("pulish_type", 1);
-			startActivity(askIntent);
+			startActivityForResult(askIntent, CddRequestCode.ASK_PULISH_REQUEST);
 			break;
 			
 		case R.id.empty_content_layout:

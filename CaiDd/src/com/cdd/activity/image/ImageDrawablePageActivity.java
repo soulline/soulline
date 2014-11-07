@@ -3,6 +3,10 @@ package com.cdd.activity.image;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,10 +20,11 @@ import android.widget.ImageView;
 import com.cdd.R;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.DrawableEntry;
+import com.cdd.util.BitmapUtil;
 
 public class ImageDrawablePageActivity extends BaseActivity implements OnClickListener{
 
-	private ArrayList<DrawableEntry> darawableList = new ArrayList<DrawableEntry>();
+	private ArrayList<String> darawableList = new ArrayList<String>();
 	
 	private int currentPosition = 0;
 	
@@ -43,13 +48,13 @@ public class ImageDrawablePageActivity extends BaseActivity implements OnClickLi
 
 		private Context ctx;
 		
-		private ArrayList<DrawableEntry> list = new ArrayList<DrawableEntry>();
+		private ArrayList<Drawable> list = new ArrayList<Drawable>();
 		
 		public ZCPagerAdapter(Context ctx) {
 			this.ctx = ctx;
 		}
 		
-		public void setData(ArrayList<DrawableEntry> list) {
+		public void setData(ArrayList<Drawable> list) {
 			this.list = list;
 		}
 		
@@ -77,7 +82,7 @@ public class ImageDrawablePageActivity extends BaseActivity implements OnClickLi
 			final ImageView iv = (ImageView) v.findViewById(R.id.img);
 			iv.setImageResource(R.drawable.default_ad_icon);
 			iv.setOnTouchListener(new ImageTouchListener(iv));
-			iv.setBackgroundDrawable(list.get(position).drawable);
+			iv.setImageDrawable(list.get(position));
 			container.addView(v);
 			return v;
 		}
@@ -91,10 +96,10 @@ public class ImageDrawablePageActivity extends BaseActivity implements OnClickLi
 		initTitle(title);
 	}
 	
-	private void loadImages() {
+	private void loadImages(ArrayList<Drawable> list) {
 		viewPage = (ViewPager) findViewById(R.id.image_pager);
 		pa = new ZCPagerAdapter(context);
-		pa.setData(darawableList);
+		pa.setData(list);
 		viewPage.setAdapter(pa);
 		viewPage.setOnPageChangeListener(new OnPageChangeListener() {
 			
@@ -123,15 +128,39 @@ public class ImageDrawablePageActivity extends BaseActivity implements OnClickLi
 	}
 
 	private void initContent() {
-		darawableList = (ArrayList<DrawableEntry>) getIntent().getSerializableExtra("drawable_list");
-//		imageUrls.add("http://b.hiphotos.baidu.com/image/pic/item/caef76094b36acafff0500fb7ed98d1000e99cd4.jpg");
-//		imageUrls.add("http://g.hiphotos.baidu.com/image/pic/item/0823dd54564e9258cf8437999e82d158ccbf4e10.jpg");
-//		imageUrls.add("http://e.hiphotos.baidu.com/image/pic/item/d4628535e5dde711942cf5eba5efce1b9d166134.jpg");
-//		imageUrls.add("http://h.hiphotos.baidu.com/image/pic/item/4ec2d5628535e5ddf8cdf7c174c6a7efcf1b62ce.jpg");
+		darawableList = (ArrayList<String>) getIntent().getSerializableExtra("drawable_list");
 		if (darawableList != null && darawableList.size() > 0) {
 			String title = 1 + "/" + darawableList.size();
 			initTitle(title);
-			loadImages();
+			showLoading(true);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					loadBitmapList();
+				}
+			}).start();
+		}
+	}
+	
+	private void loadBitmapList() {
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		final ArrayList<Drawable> list = new ArrayList<Drawable>();
+		for (String path : darawableList) {
+			Bitmap bitmap = BitmapUtil.getBitmapByPath(path, options, 894,
+					595);
+			BitmapDrawable portraitD = new BitmapDrawable(bitmap);
+			list.add(portraitD);
+		}
+		showLoading(false);
+		if (list.size() > 0) {
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					loadImages(list);
+				}
+			});
 		}
 	}
 
