@@ -2,6 +2,8 @@ package com.asag.serial.widget;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;  
 import java.util.Date;
+
+import com.asag.serial.R;
   
 import android.content.Context;  
 import android.content.res.Resources;  
@@ -32,7 +34,8 @@ public class DigitalNewClock extends android.widget.DigitalClock{
     }  
       
     private void initClock(Context context){  
-        Resources r = context.getResources();  
+        Resources r = context.getResources();
+        setTextColor(r.getColor(R.color.serial_black));
         if(mCalendar == null){  
             mCalendar = Calendar.getInstance();  
         }  

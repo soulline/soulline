@@ -36,6 +36,12 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name="com.asag.serial.MainPageActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="landscape" >
+        </activity>
         <service android:name="com.asag.serial.service.SerialService"
             android:priority="1000"></service>
         

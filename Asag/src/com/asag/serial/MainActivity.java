@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.main_activity);
 		initService();
 		lbm = LocalBroadcastManager.getInstance(this);
 		InitUI();

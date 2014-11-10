@@ -29,7 +29,7 @@ public class Welcome extends BaseActivity {
 			
 			@Override
 			public void run() {
-				Intent intent = new Intent(context, MainActivity.class);
+				Intent intent = new Intent(context, MainPageActivity.class);
 				startActivity(intent);
 				finish();
 			}
