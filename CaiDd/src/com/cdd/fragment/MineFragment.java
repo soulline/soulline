@@ -1,12 +1,12 @@
 package com.cdd.fragment;
 
 import com.cdd.R;
-import com.cdd.alarmpage.AlarmActivity;
+import com.cdd.activity.alarmpage.AlarmActivity;
+import com.cdd.activity.minepage.MineInfoModifyActivity;
+import com.cdd.activity.minepage.MyCollectActivity;
+import com.cdd.activity.minepage.MyForumActivity;
+import com.cdd.activity.minepage.SettingActivity;
 import com.cdd.base.BaseActivity;
-import com.cdd.minepage.MineInfoModifyActivity;
-import com.cdd.minepage.MyCollectActivity;
-import com.cdd.minepage.MyForumActivity;
-import com.cdd.minepage.SettingActivity;
 import com.cdd.mode.MemberInfoEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.GetMemberInfoOp;

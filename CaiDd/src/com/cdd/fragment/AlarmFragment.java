@@ -3,7 +3,7 @@ package com.cdd.fragment;
 import java.util.ArrayList;
 
 import com.cdd.R;
-import com.cdd.alarmpage.AlarmAdapter;
+import com.cdd.activity.alarmpage.AlarmAdapter;
 import com.cdd.mode.AlarmItemEntry;
 
 import android.content.Context;

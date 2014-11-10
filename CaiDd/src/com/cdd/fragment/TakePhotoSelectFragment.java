@@ -1,8 +1,9 @@
 package com.cdd.fragment;
 
 import com.cdd.R;
-import com.cdd.minepage.MineInfoModifyActivity;
-import com.cdd.sqpage.PulishActivity;
+import com.cdd.activity.findpage.PulishDynamicActivity;
+import com.cdd.activity.minepage.MineInfoModifyActivity;
+import com.cdd.activity.sqpage.PulishActivity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -71,13 +72,17 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 					((PulishActivity) getActivity()).pickImageFromCamera();
 				} else if (getActivity() instanceof MineInfoModifyActivity) {
 					((MineInfoModifyActivity) getActivity()).pickImageFromCamera();
-				};
+				} else if (getActivity() instanceof PulishDynamicActivity) {
+					((PulishDynamicActivity) getActivity()).pickImageFromCamera();
+				}
 			} else {
 				if (getActivity() instanceof PulishActivity) {
 					((PulishActivity) getActivity()).pickImageFromCamera();
 				} else if (getActivity() instanceof MineInfoModifyActivity) {
 					((MineInfoModifyActivity) getActivity()).pickImageFromCamera();
-				};
+				} else if (getActivity() instanceof PulishDynamicActivity) {
+					((PulishDynamicActivity) getActivity()).pickImageFromCamera();
+				}
 			}
 			dismissAllowingStateLoss();
 			break;
@@ -87,12 +92,16 @@ public class TakePhotoSelectFragment extends DialogFragment implements
 					((PulishActivity) getActivity()).pickImageFromGallery();
 				} else if (getActivity() instanceof MineInfoModifyActivity) {
 					((MineInfoModifyActivity) getActivity()).pickImageFromGallery();
-				};
+				} else if (getActivity() instanceof PulishDynamicActivity) {
+					((PulishDynamicActivity) getActivity()).pickImageFromGallery();
+				}
 			} else {
 				if (getActivity() instanceof PulishActivity) {
 					((PulishActivity) getActivity()).pickImageFromGallery();
 				} else if (getActivity() instanceof MineInfoModifyActivity) {
 					((MineInfoModifyActivity) getActivity()).pickImageFromGallery();
+				} else if (getActivity() instanceof PulishDynamicActivity) {
+					((PulishDynamicActivity) getActivity()).pickImageFromGallery();
 				}
 			}
 			dismissAllowingStateLoss();

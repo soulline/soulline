@@ -9,7 +9,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:paddingLeft="@dimen/dd_dimen_20px"
         android:paddingRight="@dimen/dd_dimen_15px"
         android:paddingTop="@dimen/dd_dimen_20px" >
@@ -37,7 +36,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="周永康"
                     android:textColor="@color/sq_blue"
                     android:textSize="@dimen/dd_dimen_32px" />
 
@@ -48,7 +46,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dd_dimen_10px"
                     android:layout_toRightOf="@+id/answer_name"
-                    android:text="LV1"
                     android:textColor="@color/sq_blue"
                     android:textSize="@dimen/dd_dimen_32px" />
 
@@ -70,7 +67,6 @@
                         android:id="@+id/zan_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="（20）"
                         android:textColor="@color/simple_tx_"
                         android:textSize="@dimen/dd_dimen_24px" />
 
@@ -87,7 +83,6 @@
                 android:id="@+id/answer_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="我叫我JOJOJOJO就"
                 android:textColor="@color/simple_tx_"
                 android:textSize="@dimen/dd_dimen_26px" />
 
@@ -134,7 +129,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dd_dimen_5px"
-                    android:text="2014-5-14 13:50"
                     android:textColor="@color/simple_tx_"
                     android:textSize="@dimen/dd_dimen_24px" />
             </RelativeLayout>

@@ -56,57 +56,57 @@
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.sqpage.SqListActivity"
+            android:name="com.cdd.activity.sqpage.SqListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.sqpage.PulishActivity"
+            android:name="com.cdd.activity.sqpage.PulishActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.minepage.MineInfoModifyActivity"
+            android:name="com.cdd.activity.minepage.MineInfoModifyActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.minepage.ModifyPWActivity"
+            android:name="com.cdd.activity.minepage.ModifyPWActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.minepage.SettingActivity"
+            android:name="com.cdd.activity.minepage.SettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.alarmpage.AlarmActivity"
+            android:name="com.cdd.activity.alarmpage.AlarmActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.minepage.MyForumActivity"
+            android:name="com.cdd.activity.minepage.MyForumActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.minepage.MyCollectActivity"
+            android:name="com.cdd.activity.minepage.MyCollectActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
         <activity
-            android:name="com.cdd.sqpage.SqAskDetailActivity"
+            android:name="com.cdd.activity.sqpage.SqAskDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
@@ -121,6 +121,19 @@
         
         <activity
             android:name="com.cdd.activity.image.ImageDrawablePageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        
+        <activity
+            android:name="com.cdd.activity.findpage.DynamicListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.activity.findpage.PulishDynamicActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >

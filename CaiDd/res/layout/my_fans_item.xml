@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/user_info_selector"
+            android:paddingBottom="@dimen/dd_dimen_10px"
+            android:paddingLeft="@dimen/dd_dimen_10px"
+            android:paddingRight="@dimen/dd_dimen_10px"
+            android:paddingTop="@dimen/dd_dimen_10px" >
+
+            <ImageView
+                android:id="@+id/fans_portrait"
+                android:layout_width="@dimen/dd_dimen_138px"
+                android:layout_height="@dimen/dd_dimen_138px"
+                android:background="@color/jamb_gray"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dd_dimen_440px"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dd_dimen_30px"
+                android:layout_toRightOf="@+id/self_portrait"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/nick_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dingdang_black"
+                        android:textSize="@dimen/dd_dimen_34px" />
+
+                    <TextView
+                        android:id="@+id/level_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dd_dimen_10px"
+                        android:textColor="@color/dingdang_black"
+                        android:textSize="@dimen/dd_dimen_26px" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/simple_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/simple_tx_"
+                    android:textSize="@dimen/dd_dimen_28px" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/add_listen_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_1px"
+            android:layout_marginLeft="@dimen/dd_dimen_10px"
+            android:layout_marginRight="@dimen/dd_dimen_10px"
+            android:background="@drawable/dashes_line_gray" />
+    </LinearLayout>
+
+</LinearLayout>

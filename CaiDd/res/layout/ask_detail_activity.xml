@@ -117,6 +117,12 @@
                                 android:text=""
                                 android:textColor="@color/simple_tx_"
                                 android:textSize="@dimen/dd_dimen_24px" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="点赞"
+                                android:textColor="@color/simple_tx_"
+                                android:textSize="@dimen/dd_dimen_24px" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -138,6 +144,12 @@
                                 android:text=""
                                 android:textColor="@color/simple_tx_"
                                 android:textSize="@dimen/dd_dimen_24px" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="收藏"
+                                android:textColor="@color/simple_tx_"
+                                android:textSize="@dimen/dd_dimen_24px" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -157,6 +169,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=""
+                                android:textColor="@color/simple_tx_"
+                                android:textSize="@dimen/dd_dimen_24px" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="分享"
                                 android:textColor="@color/simple_tx_"
                                 android:textSize="@dimen/dd_dimen_24px" />
                         </LinearLayout>

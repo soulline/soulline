@@ -3,8 +3,8 @@ package com.cdd.fragment;
 import java.util.ArrayList;
 
 import com.cdd.R;
+import com.cdd.activity.minepage.CityListAdapter;
 import com.cdd.base.BaseActivity;
-import com.cdd.minepage.CityListAdapter;
 import com.cdd.mode.CityItemEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.GetCityListOp;
