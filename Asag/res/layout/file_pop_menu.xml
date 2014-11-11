@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:background="@drawable/gray_jamb"
+    android:padding="0.5dp" >
+    
+    <TextView android:id="@+id/route_menu"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:background="@drawable/pop_menu_selector"
+        android:textSize="15dp"
+        android:textColor="@color/serial_black"
+        android:text="路径"/>
+    
+    <View android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line"/>
+    <TextView android:id="@+id/connect_or_shut_menu"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:background="@drawable/pop_menu_selector"
+        android:textSize="15dp"
+        android:textColor="@color/serial_black"
+        android:text="连接/断开"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line"/>
+    <TextView android:id="@+id/exit_menu"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@drawable/pop_menu_selector"
+        android:textSize="15dp"
+        android:textColor="@color/serial_black"
+        android:text="退出"/>
+
+</LinearLayout>

@@ -41,30 +41,31 @@ public class InputSureFragment extends DialogFragment implements OnClickListener
 	}
 	
 	private void initTitle(int type) {
-		switch (type) {
-		case 1:
-			inputTitle.setText("²ÖºÅÉè¶¨");
+		switch (type) {case 1:
+			inputTitle.setText("ä»“å·è®¾å®š");
 			break;
 		case 2:
-			inputTitle.setText("Ë®·ÖÉè¶¨");
+			inputTitle.setText("æ°´åˆ†è®¾å®š");
 			break;
 		case 3:
-			inputTitle.setText("ÊıÁ¿Éè¶¨");
+			inputTitle.setText("æ•°é‡è®¾å®š");
 			break;
 		case 4:
-			inputTitle.setText("¼ì²âÊ±¼äÉè¶¨");
+			inputTitle.setText("æ£€æµ‹æ—¶é—´è®¾å®š");
 			break;
 		case 5:
-			inputTitle.setText("ÅÅ¿ÕÊ±¼äÉè¶¨");
+			inputTitle.setText("æ’ç©ºæ—¶é—´è®¾å®š");
 			break;
 			
 		case 6:
-			inputTitle.setText("¼ä¸ôÊ±¼ä");
+			inputTitle.setText("é—´éš”æ—¶é—´");
 			break;
 
-		default:
+		case 7:
+			inputTitle.setText("å‚ç…§ç‚¹");
 			break;
-		}
+		default:
+			break;}
 	}
 	
 	@Override
@@ -85,7 +86,7 @@ public class InputSureFragment extends DialogFragment implements OnClickListener
 	
 	private boolean checkInput() {
 		if (TextUtils.isEmpty(inputContent.getText().toString().trim())) {
-			Toast.makeText(context, "ÇëÊäÈë²ÎÊıÖµÔÙÈ·¶¨", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "è¯·è¾“å…¥å‚æ•°å€¼å†ç¡®å®š", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		return true;

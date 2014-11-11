@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="80dp"
+    android:orientation="vertical"
+    android:background="@drawable/gray_jamb"
+    android:padding="0.5dp" >
+    
+    <TextView android:id="@+id/point_distribute_menu"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:background="@drawable/pop_menu_selector"
+        android:textSize="15dp"
+        android:textColor="@color/serial_black"
+        android:text="点分布显示"/>
+    
+    <View android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line"/>
+    <TextView android:id="@+id/point_trend_menu"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:background="@drawable/pop_menu_selector"
+        android:textSize="15dp"
+        android:textColor="@color/serial_black"
+        android:text="点趋势线显示"/>
+
+</LinearLayout>

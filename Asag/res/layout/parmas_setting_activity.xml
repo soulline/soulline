@@ -1,0 +1,346 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000" >
+
+    <!-- Content layout -->
+
+    <LinearLayout
+        android:id="@+id/base_content_"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/params_set_bg"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="参数设定"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="一、信息输入"
+            android:textColor="@color/serial_black"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="仓号："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/cang_num_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入仓号"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="粮种："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView android:id="@+id/liangzhong_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="3dp"
+                android:textColor="@color/serial_black"
+                android:textSize="13dp"
+                android:background="@drawable/spinner_menu_bg" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="数量："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/count_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入数量"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="吨"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="水分："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/water_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入水分值"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="%"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="入库时间："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/rk_date_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入入库时间"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产地："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView android:id="@+id/chandi_spinner"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="3dp"
+                android:singleLine="true"
+                android:textColor="@color/serial_black"
+                android:textSize="13dp"
+                android:background="@drawable/spinner_menu_bg" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="二、参数设定"
+            android:textColor="@color/serial_black"
+            android:textSize="14dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="参照点（RP）："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/canzhao_point_input"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp"
+                android:text="0" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="起始日期："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/start_date_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:hint="请输入起始日期"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp"  />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="排空时间："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/paikong_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp"
+                android:hint="请输入排空时间" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="min"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="检测时间："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/jiance_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp"
+                android:hint="请输入检测时间" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="min"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="起始时间："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/start_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:hint="请输入起始时间"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp"  />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:text="间隔时间："
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/jiange_time_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp"
+                android:hint="请输入间隔时间" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="min"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <RelativeLayout android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
+            <Button android:id="@+id/btn_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/params_btn_selector"
+                android:textSize="17dp"
+                android:textColor="@color/serial_black"
+                android:text="确定"/>
+            <Button android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/params_btn_selector"
+                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/serial_black"
+                android:text="取消"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>

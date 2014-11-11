@@ -2,56 +2,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/purple"
+    android:background="@color/white_bg"
     android:orientation="vertical" >
 
-    <TextView android:id="@+id/input_title"
+    <TextView
+        android:id="@+id/input_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@color/pop_menu_blue"
         android:gravity="center"
+        android:padding="10dp"
         android:text="时间选择"
-        android:textColor="@color/black"
-        android:textSize="23dp" />
-
-    <DatePicker android:id="@+id/date_pick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    
-    <TimePicker android:id="@+id/time_pick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:textColor="@color/white"
+        android:textSize="17dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal" >
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
 
-        <Button
-            android:id="@+id/content_ok"
+        <DatePicker
+            android:id="@+id/date_pick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TimePicker
+            android:id="@+id/time_pick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="确定"
-            android:textColor="@color/black"
-            android:textSize="14dp" />
-        
-        <Button
-            android:id="@+id/content_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:gravity="center"
-            android:text="取消"
-            android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/content_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/params_btn_selector"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/content_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/params_btn_selector"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/serial_black"
+                android:textSize="14dp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

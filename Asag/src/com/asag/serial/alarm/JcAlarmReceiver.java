@@ -18,16 +18,20 @@ public class JcAlarmReceiver extends BroadcastReceiver {
 		if (intent.getAction().equals(SerialBroadCode.ACTION_ALARM_CHECK)) {
 			Log.d("SERIAL", "received ----- ");
 			if (SerialApp.getInstance().isCheckIng) {
-				Toast.makeText(context, "¼ì²âÕıÔÚ½øĞĞÖĞ£¬¶¨Ê±Æ÷´Ë´Î´¥·¢ÎŞĞ§", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "æ£€æµ‹æ­£åœ¨è¿›è¡Œä¸­ï¼Œå®šæ—¶å™¨æ­¤æ¬¡è§¦å‘æ— æ•ˆ", Toast.LENGTH_SHORT)
+						.show();
 			} else {
-				AlarmInfo alarm = (AlarmInfo) intent.getSerializableExtra("alarm_info");
-				LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
-				Intent data = new Intent(SerialBroadCode.ACTION_ALARM_CHECK_STARTING);
+				AlarmInfo alarm = (AlarmInfo) intent
+						.getSerializableExtra("alarm_info");
+				LocalBroadcastManager lbm = LocalBroadcastManager
+						.getInstance(context);
+				Intent data = new Intent(
+						SerialBroadCode.ACTION_ALARM_CHECK_STARTING);
 				if (alarm != null) {
 					data.putExtra("alarm_info", alarm);
 				}
 				lbm.sendBroadcast(data);
-				Toast.makeText(context, "¶¨Ê±Æ÷¿ªÊ¼¼ì²â", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "å®šæ—¶å™¨å¼€å§‹æ£€æµ‹", Toast.LENGTH_SHORT).show();
 			}
 		}
 	}

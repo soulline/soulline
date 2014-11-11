@@ -42,6 +42,13 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name="com.asag.serial.ParamsSetActivity"
+            android:configChanges="locale|screenSize|keyboardHidden|orientation"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/BaseDialogTheme"
+            android:screenOrientation="landscape" >
+        </activity>
         <service android:name="com.asag.serial.service.SerialService"
             android:priority="1000"></service>
         

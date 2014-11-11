@@ -12,14 +12,15 @@
         android:orientation="vertical" >
 
         <TextView
-                android:id="@+id/top_title_tx"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/title_blue_bg"
-                android:gravity="center"
-                android:text="储粮质量安全监测系统"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
+            android:id="@+id/top_title_tx"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/title_blue_bg"
+            android:gravity="center"
+            android:text="储粮质量安全监测系统"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -265,18 +266,14 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal" >
 
-                            <ImageView
+                            <TextView
                                 android:id="@+id/paikong_time_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="排空剩余时间"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
@@ -287,7 +284,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="5.0"
+                                android:text=""
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -307,18 +304,14 @@
                             android:layout_marginTop="5dp"
                             android:orientation="horizontal" >
 
-                            <ImageView
+                            <TextView
                                 android:id="@+id/check_time_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="检测剩余时间"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
@@ -329,7 +322,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="5.0"
+                                android:text=""
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -366,29 +359,25 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal" >
 
-                            <ImageView
+
+                            <TextView 
                                 android:id="@+id/co2_value_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="CO₂"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/check_check_time"
+                                android:id="@+id/co2_value"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="13567"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -408,29 +397,25 @@
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal" >
 
-                            <ImageView
+
+                            <TextView
                                 android:id="@+id/ph3_value_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="PH₃"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/check_check_time"
+                                android:id="@+id/ph3_value"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="13567"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -450,24 +435,20 @@
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal" >
 
-                            <ImageView
+                            <TextView
                                 android:id="@+id/o2_value_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="O₂"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/check_check_time"
+                                android:id="@+id/o2_value"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -492,29 +473,25 @@
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal" >
 
-                            <ImageView
+
+                            <TextView
                                 android:id="@+id/rh_value_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="RH"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/check_check_time"
+                                android:id="@+id/rh_value"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="13.0"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -534,29 +511,25 @@
                             android:layout_marginLeft="20dp"
                             android:orientation="horizontal" >
 
-                            <ImageView
+
+                            <TextView
                                 android:id="@+id/t_value_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/state_red_point" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
+                                android:drawableLeft="@drawable/state_red_point"
+                                android:drawablePadding="5dp"
                                 android:text="T"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/check_check_time"
+                                android:id="@+id/t_value"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="135"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -632,10 +605,10 @@
                 <com.asag.serial.widget.DigitalNewClock
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
