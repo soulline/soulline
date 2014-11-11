@@ -5,7 +5,7 @@
     android:orientation="vertical" >
     
     <TextView android:id="@+id/spinner_item_tx"
-        android:layout_width="40dp"
+        android:layout_width="50dp"
         android:layout_height="25dp"
         android:textSize="13dp"
         android:textColor="@color/serial_black"

@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -25,7 +26,6 @@ import com.asag.serial.ShituPopMenu.OnShituClickListener;
 import com.asag.serial.alarm.JcAlarm;
 import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
-import com.asag.serial.fragment.BaseFragmentListener;
 import com.asag.serial.mode.AlarmInfo;
 import com.asag.serial.mode.CutDownEntry;
 import com.asag.serial.mode.RightDataEntry;
@@ -64,6 +64,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private TextView co2State, o2State, ph3State, rhState, tState;
 	
 	private TextView stopMenu;
+	
+	private ImageView checkAnimationImg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,30 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initService();
 		initView();
 		registerReceiver();
+		RightDataEntry entry1 = new RightDataEntry();
+		entry1.co2 = "12345";
+		entry1.number = "1";
+		entry1.shidu = "20.0";
+		entry1.wendu = "40";
+		addData(entry1);
+		
+		RightDataEntry entry2 = new RightDataEntry();
+		entry2.co2 = "12345";
+		entry2.number = "2";
+		entry2.shidu = "20.0";
+		entry2.wendu = "40";
+		addData(entry2);
+	}
+	
+	private void showCheckAnim(boolean isShow) {
+		if (isShow) {
+			checkAnimationImg.setImageResource(R.drawable.checking_anim);
+			AnimationDrawable animDrawable = (AnimationDrawable) checkAnimationImg
+					.getDrawable();
+			animDrawable.start();
+		} else {
+			checkAnimationImg.setImageResource(R.drawable.check_anima_1);
+		}
 	}
 
 	private void initView() {
@@ -83,6 +109,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		findViewById(R.id.shitu_menu).setOnClickListener(this);
 		findViewById(R.id.search_menu).setOnClickListener(this);
 		findViewById(R.id.help_menu).setOnClickListener(this);
+		findViewById(R.id.cancel_alarm_menu).setOnClickListener(this);
+		checkAnimationImg = (ImageView) findViewById(R.id.check_animation_img);
 		checkWayValue = (TextView) findViewById(R.id.check_way_value);
 		paikongCheckTime = (TextView) findViewById(R.id.paikong_check_time);
 		checkCheckTime = (TextView) findViewById(R.id.check_check_time);
@@ -316,6 +344,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						showToast("检测结束");
 						checkWayValue.setText("0");
 						wayCount = 0;
+						showCheckAnim(false);
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
 						number += 1;
@@ -325,6 +354,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						float paikong = ((float) paikongMinuteValue) / 10.0f;
 						updateCheckMinute(check + "");
 						updatePaikongMinute(paikong + "");
+						showCheckAnim(false);
 					}
 				}
 			} else if (intent.getAction().equals(
@@ -350,8 +380,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				CutDownEntry entry = (CutDownEntry) intent
 						.getSerializableExtra("cut_down");
 				if (entry != null) {
-					PadFragment fragment = (PadFragment) getSupportFragmentManager()
-							.findFragmentById(R.id.padFragment);
 					if (entry.type == 1) {
 						checkMinuteValue = entry.time;
 						float check = ((float) checkMinuteValue) / 10.0f;
@@ -390,6 +418,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		check.putExtra("check_minute", checkMinuteValue + "");
 		check.putExtra("paikong_minute", paikongMinuteValue + "");
 		lbm.sendBroadcast(check);
+		showCheckAnim(true);
 	}
 	
 	private void setCheckinfo(AlarmInfo alarm) {
@@ -577,18 +606,20 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.stop_menu:
-			if (!app.isPause) {
+			if (!app.isPause && app.isCheckIng) {
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = true;
 				app.isCheckIng = false;
 				showToast("停止检测");
 				stopMenu.setText("继续");
-			} else {
+				showCheckAnim(false);
+			} else if (app.isPause && !app.isCheckIng){
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = false;
 				showToast("继续检测");
 				app.isCheckIng = true;
 				stopMenu.setText("停止");
+				showCheckAnim(true);
 			}
 			break;
 
@@ -606,6 +637,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 		case R.id.help_menu:
 
+			break;
+			
+		case R.id.cancel_alarm_menu:
+			JcAlarm.cancelSendAlarm();
+			showToast("已取消定时器");
 			break;
 
 		default:

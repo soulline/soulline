@@ -177,6 +177,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/title_diver" />
+            <TextView
+                android:id="@+id/cancel_alarm_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/title_menu_selector"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="取消定时"
+                android:textColor="@color/serial_black"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/title_diver" />
         </LinearLayout>
 
         <LinearLayout
@@ -565,7 +582,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="15dp" />
 
-                <LinearLayout
+                <LinearLayout android:id="@+id/result_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title_result"
@@ -590,16 +607,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="45dp"
                         android:text="T/℃"
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
                 </LinearLayout>
 
+                <View android:id="@+id/title_diver_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/result_title"
+                    android:background="@color/gray_line"/>
                 <ListView
                     android:id="@+id/listid"
+                    android:layout_below="@+id/title_diver_line"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:divider="@color/gray_line"
+                    android:dividerHeight="0.5dp"
                     android:layout_marginBottom="30dp" />
 
                 <com.asag.serial.widget.DigitalNewClock

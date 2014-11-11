@@ -29,7 +29,7 @@ public class SettingPopMenu extends PopupWindow implements OnClickListener{
 		this.listener = listener;
 		this.setContentView(view);
 		// 设置SelectPicPopupWindow弹出窗体的宽
-		this.setWidth(200);
+		this.setWidth(100);
 		// 设置SelectPicPopupWindow弹出窗体的高
 		this.setHeight(LayoutParams.WRAP_CONTENT);
 		// 设置SelectPicPopupWindow弹出窗体可点击

@@ -40,8 +40,8 @@ public class ChandiPopMenu extends PopupWindow {
 		view = inflater.inflate(R.layout.spinner_pop_menu, null);
 		this.listener = listener;
 		this.setContentView(view);
-		this.setWidth(120);
-		this.setHeight(600);
+		this.setWidth(60);
+		this.setHeight(200);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
         this.update();  
@@ -72,7 +72,7 @@ public class ChandiPopMenu extends PopupWindow {
 	
 	public void showPopupWindow(View parent) {  
         if (!this.isShowing()) {  
-            this.showAsDropDown(parent, parent.getLayoutParams().width / 4, 0);  
+            this.showAsDropDown(parent, parent.getLayoutParams().width / 8, 0);  
         } else {  
             this.dismiss();  
         }  
