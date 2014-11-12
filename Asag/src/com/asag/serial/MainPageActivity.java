@@ -140,6 +140,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		filter.addAction(SerialBroadCode.ACTION_O2_RECEIVED);
 		filter.addAction(SerialBroadCode.ACTION_SEND_CUT_DOWN);
 		filter.addAction(SerialBroadCode.ACTION_ALARM_CHECK_STARTING);
+		filter.addAction(SerialBroadCode.ACTION_START_CHECKING);
+		filter.addAction(SerialBroadCode.ACTION_STOP_CHECKING);
 		lbm.registerReceiver(dataReceiver, filter);
 	}
 
@@ -344,7 +346,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						showToast("检测结束");
 						checkWayValue.setText("0");
 						wayCount = 0;
-						showCheckAnim(false);
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
 						number += 1;
@@ -354,7 +355,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						float paikong = ((float) paikongMinuteValue) / 10.0f;
 						updateCheckMinute(check + "");
 						updatePaikongMinute(paikong + "");
-						showCheckAnim(false);
 					}
 				}
 			} else if (intent.getAction().equals(
@@ -405,6 +405,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						}
 					}
 				}, 500);
+			} else if (intent.getAction().equals(SerialBroadCode.ACTION_START_CHECKING)) {
+				showCheckAnim(true);
+			} else if (intent.getAction().equals(SerialBroadCode.ACTION_STOP_CHECKING)) {
+				showCheckAnim(false);
 			}
 
 		}
@@ -418,7 +422,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		check.putExtra("check_minute", checkMinuteValue + "");
 		check.putExtra("paikong_minute", paikongMinuteValue + "");
 		lbm.sendBroadcast(check);
-		showCheckAnim(true);
 	}
 	
 	private void setCheckinfo(AlarmInfo alarm) {

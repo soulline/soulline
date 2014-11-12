@@ -157,6 +157,7 @@ public class SerialService extends Service {
 
 	private void startTimer() {
 		app.isCheckIng = true;
+		lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_START_CHECKING));
 		count = 0;
 		final int halfPaikong = paikongMinute / 2;
 		final int halfCheck = checkMunite / 2;
@@ -225,7 +226,7 @@ public class SerialService extends Service {
 	}
 
 	private void stopTimer() {
-
+		lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_STOP_CHECKING));
 		if (timer != null) {
 			timer.cancel();
 			timer = null;

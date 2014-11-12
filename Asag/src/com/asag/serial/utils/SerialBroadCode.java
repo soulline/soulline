@@ -22,4 +22,8 @@ public class SerialBroadCode {
 	
 	public static final String ACTION_ALARM_CHECK_STARTING = "com.serial.action.ALARM_CHECK_STARTING";
 	
+	public static final String ACTION_START_CHECKING = "com.serial.action.ACTION_START_CHECKING";
+	
+	public static final String ACTION_STOP_CHECKING = "com.serial.action.ACTION_STOP_CHECKING";
+	
 }
