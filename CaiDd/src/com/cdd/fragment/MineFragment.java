@@ -3,6 +3,7 @@ package com.cdd.fragment;
 import com.cdd.R;
 import com.cdd.activity.alarmpage.AlarmActivity;
 import com.cdd.activity.minepage.FansOrListenActivity;
+import com.cdd.activity.minepage.MessageListActivity;
 import com.cdd.activity.minepage.MineInfoModifyActivity;
 import com.cdd.activity.minepage.MyCollectActivity;
 import com.cdd.activity.minepage.MyForumActivity;
@@ -151,12 +152,12 @@ public class MineFragment extends Fragment implements OnClickListener {
 		case R.id.listen_content_layout:
 			Intent guanzhu = new Intent(getActivity(), FansOrListenActivity.class);
 			guanzhu.putExtra("fans_type", "2");
-			startActivity(guanzhu);
+			getActivity().startActivity(guanzhu);
 			break;
 		case R.id.fans_content_layout:
 			Intent fans = new Intent(getActivity(), FansOrListenActivity.class);
 			fans.putExtra("fans_type", "1");
-			startActivity(fans);
+			getActivity().startActivity(fans);
 			break;
 		case R.id.exam_alarm_layout:
 			Intent exam = new Intent(getActivity(), AlarmActivity.class);
@@ -177,7 +178,8 @@ public class MineFragment extends Fragment implements OnClickListener {
 			getActivity().startActivity(collect);
 			break;
 		case R.id.my_letters_layout:
-
+			Intent letters = new Intent(getActivity(), MessageListActivity.class);
+			getActivity().startActivity(letters);
 			break;
 		case R.id.share_dingdang_layout:
 
