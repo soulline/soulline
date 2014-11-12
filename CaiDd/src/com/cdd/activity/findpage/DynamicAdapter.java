@@ -4,16 +4,26 @@ import java.util.ArrayList;
 
 import com.cdd.R;
 import com.cdd.mode.DynamicEntry;
+import com.cdd.mode.DynamicReplay;
 import com.cdd.mode.PhotosEntry;
 import com.cdd.util.ImageOperater;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
@@ -27,16 +37,22 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	public interface OnWorkListener {
 		public void onWork(int position, int type);
 	}
-	
+
 	public interface OnPackListener {
-		public void onPack(boolean pack);
+		public void onPack(int position, boolean pack);
+	}
+	
+	public interface OnAnswerMemberClickLister {
+		public void onAnswerClick(DynamicReplay replay, int position);
 	}
 
 	private OnImageClickListener imgListener;
 
 	private OnWorkListener workListener;
-	
+
 	private OnPackListener packListener;
+	
+	private OnAnswerMemberClickLister answerClickListener;
 
 	public DynamicAdapter(Context context) {
 		super(context, 0);
@@ -50,9 +66,13 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	public void addOnWorkListener(OnWorkListener workListener) {
 		this.workListener = workListener;
 	}
-	
+
 	public void addOnPackListener(OnPackListener packListener) {
 		this.packListener = packListener;
+	}
+	
+	public void addOnAnswerMemberClickLister(OnAnswerMemberClickLister answerClickListener) {
+		this.answerClickListener = answerClickListener;
 	}
 
 	public void addData(ArrayList<DynamicEntry> list) {
@@ -95,7 +115,56 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		doWithItem(position, convertView, holder);
+		doWithAnswerList(position, convertView, holder, getItem(position));
 		return convertView;
+	}
+
+	private void doWithAnswerList(int position, View convertView,
+			ViewHolder holder, DynamicEntry dynamic) {
+		LinearLayout answerList = (LinearLayout) convertView
+				.findViewById(R.id.answer_list_layout);
+		answerList.removeAllViews();
+		if (dynamic.replyList.size() > 0) {
+			answerList.setVisibility(View.VISIBLE);
+		}
+		for (int i = 0; i < dynamic.replyList.size(); i++) {
+			DynamicReplay replay = dynamic.replyList.get(i);
+			SpannableString spanStr = getSpannableString(replay, i);
+			View childView = View.inflate(context,
+					R.layout.dynamic_answer_item, null);
+			TextView txV = (TextView) childView.findViewById(R.id.answer_tx);
+			txV.setHighlightColor(Color.TRANSPARENT);
+			txV.setText(spanStr);
+			txV.setMovementMethod(LinkMovementMethod.getInstance());
+			answerList.addView(childView);
+		}
+	}
+
+	private SpannableString getSpannableString(final DynamicReplay replay,
+			final int position) {
+		String span = replay.memberName + "：" + replay.message;
+		SpannableString spanStr = new SpannableString(span);
+		spanStr.setSpan(new ClickableSpan() {
+
+			@Override
+			public void updateDrawState(TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setColor(Color.YELLOW);
+				ds.setUnderlineText(false);
+			}
+
+			@Override
+			public void onClick(View widget) {
+				if (answerClickListener != null) {
+					answerClickListener.onAnswerClick(replay, position);
+				}
+			}
+		}, 0, (replay.memberName.length() + 1),
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spanStr.setSpan(new ForegroundColorSpan(context.getResources()
+				.getColor(R.color.self_info_blue)), 0, (replay.memberName
+				.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		return spanStr;
 	}
 
 	private void doWithItem(int position, View convertView, ViewHolder holder) {
@@ -120,31 +189,32 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 		doWithWorkfor(position, convertView, holder, dynamic);
 		final int itemPosition = position;
 		final boolean isPack = dynamic.isPack;
-		convertView.findViewById(R.id.pack_up_layout).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if (packListener != null) {
-					if (isPack) {
-						packListener.onPack(false);
-					} else {
-						packListener.onPack(true);
+		convertView.findViewById(R.id.pack_up_layout).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (packListener != null) {
+							if (isPack) {
+								packListener.onPack(itemPosition, false);
+							} else {
+								packListener.onPack(itemPosition, true);
+							}
+						}
 					}
-				}
-			}
-		});
+				});
 		if (!TextUtils.isEmpty(dynamic.content)
 				&& dynamic.content.length() > 40) {
 			convertView.findViewById(R.id.pack_up_layout).setVisibility(
 					View.VISIBLE);
 			if (dynamic.isPack) {
 				holder.packTv.setText("全文");
-				holder.packIcon.setImageResource(R.drawable.show_all);
+				holder.packIcon.setBackgroundResource(R.drawable.show_all);
 				String contentN = dynamic.content.substring(0, 40);
 				holder.askContent.setText(contentN);
 			} else {
 				holder.packTv.setText("收起");
-				holder.packIcon.setImageResource(R.drawable.pack_up);
+				holder.packIcon.setBackgroundResource(R.drawable.pack_up);
 				holder.askContent.setText(dynamic.content);
 			}
 		} else {
@@ -250,6 +320,15 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 						}
 					}
 				});
+		convertView.findViewById(R.id.reply_layout).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (workListener != null) {
+					workListener.onWork(itemPosition, 3);
+				}
+			}
+		});
 	}
 
 	public class ViewHolder {

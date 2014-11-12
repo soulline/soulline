@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/dd_dimen_20px"
+        android:background="@drawable/gray_jamb">
+        <RelativeLayout 
+            android:layout_width="@dimen/dd_dimen_587px"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_jarmb"
+            android:padding="@dimen/dd_dimen_10px">
+            <EditText android:id="@+id/message_input"
+                android:layout_width="@dimen/dd_dimen_500px"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dd_dimen_60px"
+                android:layout_marginLeft="@dimen/dd_dimen_10px"
+                android:background="@null"
+                android:textColor="@color/dingdang_black"
+                android:textSize="@dimen/dd_dimen_28px"
+                android:hint="请输入信息内容"/>
+            <ImageView android:id="@+id/reply_add_bq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/reply_bq_selector"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <Button android:id="@+id/reply_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dd_dimen_20px"
+                android:background="@drawable/send_btn_selector"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dd_dimen_28px"
+                android:text="发送"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

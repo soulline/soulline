@@ -49,6 +49,9 @@ public class GetMemberInfoOp extends BaseOperater {
 		memberInfo.photo = response.optString("photo");
 		memberInfo.scoreCeiling = response.optString("scoreCeiling");
 		memberInfo.sex = response.optString("sex");
+		memberInfo.fansCount = response.optString("fansCount");
+		memberInfo.dynamicInfoCount = response.optString("dynamicInfoCount");
+		memberInfo.idolCount = response.optString("idolCount");
 		memberInfo.status = response.optString("status");
 	}
 

@@ -15,4 +15,6 @@ public class CddRequestCode {
 	public static final int ASK_PULISH_REQUEST = 10122;
 	
 	public static final int ANSWER_PULISH_REQUEST = 10123;
+	
+	public static final int DYNAMIC_PULISH_REQUEST = 10129;
 }

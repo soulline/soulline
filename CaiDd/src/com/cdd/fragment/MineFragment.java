@@ -2,6 +2,7 @@ package com.cdd.fragment;
 
 import com.cdd.R;
 import com.cdd.activity.alarmpage.AlarmActivity;
+import com.cdd.activity.minepage.FansOrListenActivity;
 import com.cdd.activity.minepage.MineInfoModifyActivity;
 import com.cdd.activity.minepage.MyCollectActivity;
 import com.cdd.activity.minepage.MyForumActivity;
@@ -33,6 +34,8 @@ public class MineFragment extends Fragment implements OnClickListener {
 	private ImageView selfPortrait;
 
 	private TextView nickName, levelTx, coinTx, simpleText;
+	
+	private TextView trendsCount, listenCount, fansCount;
 
 	public MineFragment() {
 		super();
@@ -79,6 +82,9 @@ public class MineFragment extends Fragment implements OnClickListener {
 		levelTx.setText(member.levelName);
 		coinTx.setText(member.availableScore);
 		simpleText.setText(member.description);
+		trendsCount.setText(member.dynamicInfoCount);
+		fansCount.setText(member.fansCount);
+		listenCount.setText(member.idolCount);
 	}
 	
 	public void initContent() {
@@ -126,6 +132,9 @@ public class MineFragment extends Fragment implements OnClickListener {
 		view.findViewById(R.id.my_letters_layout).setOnClickListener(this);
 		view.findViewById(R.id.share_dingdang_layout).setOnClickListener(this);
 		view.findViewById(R.id.setting_layout).setOnClickListener(this);
+		trendsCount = (TextView) view.findViewById(R.id.trends_count);
+		listenCount = (TextView) view.findViewById(R.id.listen_count);
+		fansCount = (TextView) view.findViewById(R.id.fans_count);
 	}
 
 	@Override
@@ -140,10 +149,14 @@ public class MineFragment extends Fragment implements OnClickListener {
 
 			break;
 		case R.id.listen_content_layout:
-
+			Intent guanzhu = new Intent(getActivity(), FansOrListenActivity.class);
+			guanzhu.putExtra("fans_type", "2");
+			startActivity(guanzhu);
 			break;
 		case R.id.fans_content_layout:
-
+			Intent fans = new Intent(getActivity(), FansOrListenActivity.class);
+			fans.putExtra("fans_type", "1");
+			startActivity(fans);
 			break;
 		case R.id.exam_alarm_layout:
 			Intent exam = new Intent(getActivity(), AlarmActivity.class);
