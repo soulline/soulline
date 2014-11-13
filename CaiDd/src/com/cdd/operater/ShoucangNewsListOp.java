@@ -6,30 +6,29 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.cdd.mode.BaseEntry;
 import com.cdd.mode.DynamicEntry;
 import com.cdd.mode.DynamicReplay;
 import com.cdd.mode.PhotosEntry;
 
-public class DingdangDynamicListOp extends BaseOperater {
+public class ShoucangNewsListOp extends BaseOperater {
 
 	private ArrayList<DynamicEntry> dynamicList = new ArrayList<DynamicEntry>();
 	
-	public DingdangDynamicListOp(Context context) {
+	public ShoucangNewsListOp(Context context) {
 		super(context);
-	}
-
-	@Override
-	public void initAction() {
-		action = "cof/newsList.do";
 	}
 
 	public void setParams(String pageNum) {
 		params.put("pageNum", pageNum);
 	}
 	
+	@Override
+	public void initAction() {
+		action = "cof/favNewsList.do";
+	}
+
 	@Override
 	public void initRequest() {
 		// TODO Auto-generated method stub
@@ -99,7 +98,6 @@ public class DingdangDynamicListOp extends BaseOperater {
 			}
 			dynamicList.add(dynamic);
 		}
-
 	}
 
 	@Override
@@ -107,11 +105,11 @@ public class DingdangDynamicListOp extends BaseOperater {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public ArrayList<DynamicEntry> getDynamicList() {
 		return dynamicList;
 	}
-
+	
 	@Override
 	public BaseEntry getData() {
 		// TODO Auto-generated method stub

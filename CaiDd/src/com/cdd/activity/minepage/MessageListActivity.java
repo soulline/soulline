@@ -3,8 +3,14 @@ package com.cdd.activity.minepage;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -12,6 +18,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.cdd.R;
 import com.cdd.activity.minepage.MessageAdapter.OnReplyListener;
 import com.cdd.base.BaseActivity;
+import com.cdd.fragment.BaseFragmentListener;
+import com.cdd.fragment.BottomReplyFragment;
 import com.cdd.mode.MessageEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.MessageListOp;
@@ -34,6 +42,8 @@ public class MessageListActivity extends BaseActivity implements
 	private MessageAdapter adapter;
 
 	private PullToRefreshListView messageListview;
+	
+	private BottomReplyFragment bottomReplay;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -81,7 +91,7 @@ public class MessageListActivity extends BaseActivity implements
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-
+						
 					}
 				});
 		messageListview.setMode(Mode.PULL_FROM_START);
@@ -114,12 +124,12 @@ public class MessageListActivity extends BaseActivity implements
 		messageList.clear();
 		requestMessgeList(pageNumber, false);
 	}
-	
+
 	private void requestMessgeList(String page, final boolean isShowNow) {
 		final MessageListOp msgListOp = new MessageListOp(context);
 		msgListOp.setParams(page);
 		msgListOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				handler.post(new Runnable() {
@@ -136,7 +146,7 @@ public class MessageListActivity extends BaseActivity implements
 					}
 				});
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 
@@ -192,18 +202,58 @@ public class MessageListActivity extends BaseActivity implements
 		});
 	}
 	
+
+	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
+			BaseFragmentListener listener) {
+		if (isOpen) {
+			showFragment(tag, -1, createFragment(tag, bundle, listener));
+		} else {
+			closeFragment(tag);
+		}
+	}
+
+	public DialogFragment createFragment(final String tag, Bundle b,
+			BaseFragmentListener listener) {
+		if (tag.equals("bottom_reply")) {
+			if (bottomReplay == null) {
+				bottomReplay = new BottomReplyFragment(context,
+						b);
+				bottomReplay.addBaseFragmentListener(listener);
+			}
+			return bottomReplay;
+		}
+		return null;
+	}
+
 	private void initMsgListContent(ArrayList<MessageEntry> list) {
 		messageListview.setVisibility(View.VISIBLE);
 		findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
 		if (adapter == null) {
-				adapter = new MessageAdapter(context);
+			adapter = new MessageAdapter(context);
 			adapter.addData(list);
 			messageListview.getRefreshableView().setAdapter(adapter);
 			adapter.addOnReplyListener(new OnReplyListener() {
-				
+
 				@Override
 				public void onReply(int position) {
 					MessageEntry entry = adapter.getItem(position);
+					closeFragment("bottom_reply");
+					Bundle b = new Bundle();
+					b.putString("cofId", entry.fromMemberId);
+					b.putInt("reply_type", 2);
+					displayFragment(true, "bottom_reply", b,
+							new BaseFragmentListener() {
+
+								@Override
+								public void onCallBack(Object object) {
+									if (object instanceof String) {
+										String result = (String) object;
+										if (result.equals("success")) {
+											doRefreshListView();
+										}
+									}
+								}
+							});
 				}
 			});
 		} else {
@@ -222,7 +272,7 @@ public class MessageListActivity extends BaseActivity implements
 		case R.id.empty_content_layout:
 			requestMessgeList("1", true);
 			break;
-
+			
 		default:
 			break;
 		}

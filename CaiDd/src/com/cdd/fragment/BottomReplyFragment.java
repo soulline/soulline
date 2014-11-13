@@ -4,6 +4,7 @@ import com.cdd.R;
 import com.cdd.base.BaseActivity;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.DynamicReplyOp;
+import com.cdd.operater.MessageReplyOp;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,11 +29,15 @@ public class BottomReplyFragment extends DialogFragment implements
 	private BaseFragmentListener listener;
 	
 	private String cofId;
+	
+	private int replyType = 1;
 
 	public BottomReplyFragment(Context context, Bundle b) {
 		this.context = context;
+		this.setCancelable(false);
 		if (b != null) {
 			cofId = b.getString("cofId");
+			replyType = b.getInt("reply_type");
 		}
 	}
 	
@@ -44,6 +49,7 @@ public class BottomReplyFragment extends DialogFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = View.inflate(getActivity(), R.layout.bottom_reply_fragment, null);
+		view.findViewById(R.id.background_click).setOnClickListener(this);
 		initView();
 		initContent();
 		return view;
@@ -58,10 +64,12 @@ public class BottomReplyFragment extends DialogFragment implements
 	@Override
 	public void onDestroyView() {
 		messageInput.setText("");
-		((InputMethodManager) getActivity().getSystemService(
-				Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
-				getActivity().getCurrentFocus().getWindowToken(),
-				InputMethodManager.HIDE_NOT_ALWAYS);
+		if (getActivity() != null && getActivity().getCurrentFocus() != null) {
+			((InputMethodManager) getActivity().getSystemService(
+					Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+							getActivity().getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
+		}
 		super.onDestroyView();
 	}
 
@@ -69,11 +77,48 @@ public class BottomReplyFragment extends DialogFragment implements
 
 	}
 	
-	private void sendReply() {
+	private void sendDynamicReply() {
 		if (!TextUtils.isEmpty(messageInput.getText().toString().trim())) {
 			String message = messageInput.getText().toString().trim();
 			if (getActivity() instanceof BaseActivity) {
 				DynamicReplyOp replyOp = new DynamicReplyOp(((BaseActivity) getActivity()));
+				if (TextUtils.isEmpty(cofId)) return;
+				replyOp.setParams(cofId, message);
+				replyOp.onRequest(new RequestListener() {
+					
+					@Override
+					public void onError(Object error) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onCallBack(Object data) {
+						if (getActivity() instanceof BaseActivity) {
+							((BaseActivity) getActivity()).showToast("回复成功");
+						}
+						if (listener != null) {
+							listener.onCallBack("success");
+						}
+						dismissAllowingStateLoss();
+					}
+				});
+			}
+		} else {
+			if (getActivity() instanceof BaseActivity) {
+				((BaseActivity) getActivity()).showToast("请输入回复内容");
+			}
+			return;
+		}
+	}
+	
+	
+	private void sendMessageReply() {
+		if (!TextUtils.isEmpty(messageInput.getText().toString().trim())) {
+			String message = messageInput.getText().toString().trim();
+			if (getActivity() instanceof BaseActivity) {
+				MessageReplyOp replyOp = new MessageReplyOp(((BaseActivity) getActivity()));
+				if (TextUtils.isEmpty(cofId)) return;
 				replyOp.setParams(cofId, message);
 				replyOp.onRequest(new RequestListener() {
 					
@@ -111,9 +156,16 @@ public class BottomReplyFragment extends DialogFragment implements
 			break;
 
 		case R.id.reply_send:
-			sendReply();
+			if (replyType == 1) {
+				sendDynamicReply();
+			} else if (replyType == 2) {
+				sendMessageReply();
+			}
 			break;
 
+		case R.id.background_click:
+			dismissAllowingStateLoss();
+			break;
 		default:
 			break;
 		}

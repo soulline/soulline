@@ -38,4 +38,8 @@ public class DynamicEntry extends BaseEntry {
 	
 	public ArrayList<DynamicReplay> replyList = new ArrayList<DynamicReplay>();
 	
+	public ForwardNewsEntry forward = new ForwardNewsEntry();
+	
+	public String isForward = "";
+	
 }

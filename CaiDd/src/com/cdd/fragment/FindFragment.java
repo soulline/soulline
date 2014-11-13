@@ -2,6 +2,7 @@ package com.cdd.fragment;
 
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicListActivity;
+import com.cdd.activity.findpage.HotNewsListActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -53,10 +54,11 @@ public class FindFragment extends Fragment implements OnClickListener{
 			break;
 		case R.id.dingdangquan_layout:
 			Intent dingdangquan = new Intent(getActivity(), DynamicListActivity.class);
-			startActivity(dingdangquan);
+			getActivity().startActivity(dingdangquan);
 			break;
 		case R.id.hot_news_layout:
-			
+			Intent hotNews = new Intent(getActivity(), HotNewsListActivity.class);
+			getActivity().startActivity(hotNews);
 			break;
 		case R.id.group_layout:
 			

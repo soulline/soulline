@@ -68,7 +68,6 @@
             android:layout_marginTop="@dimen/dd_dimen_20px"
             android:background="@drawable/gray_jamb"
             android:divider="@null"
-            android:paddingBottom="@dimen/dd_dimen_100px"
             android:padding="@dimen/dd_dimen_1px"
             ptr:ptrAnimationStyle="flip"
             ptr:ptrHeaderTextColor="@color/sq_blue" />

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_item_selector"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dd_dimen_10px"
                     android:layout_marginTop="@dimen/dd_dimen_10px"
-                    android:background="@drawable/message_bg"
+                    android:background="@drawable/message_bg_corler"
                     android:textColor="@color/dingdang_black"
                     android:textSize="@dimen/dd_dimen_26px" />
             </LinearLayout>

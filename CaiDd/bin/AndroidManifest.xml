@@ -151,6 +151,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
+        <activity
+            android:name="com.cdd.activity.findpage.HotNewsListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.activity.minepage.MyNewsListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.activity.findpage.NewsDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
     </application>
 
 </manifest>

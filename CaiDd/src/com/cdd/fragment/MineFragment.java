@@ -7,6 +7,7 @@ import com.cdd.activity.minepage.MessageListActivity;
 import com.cdd.activity.minepage.MineInfoModifyActivity;
 import com.cdd.activity.minepage.MyCollectActivity;
 import com.cdd.activity.minepage.MyForumActivity;
+import com.cdd.activity.minepage.MyNewsListActivity;
 import com.cdd.activity.minepage.SettingActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.MemberInfoEntry;
@@ -37,6 +38,8 @@ public class MineFragment extends Fragment implements OnClickListener {
 	private TextView nickName, levelTx, coinTx, simpleText;
 	
 	private TextView trendsCount, listenCount, fansCount;
+	
+	private MemberInfoEntry memberEntry = new MemberInfoEntry();
 
 	public MineFragment() {
 		super();
@@ -105,6 +108,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onCallBack(Object data) {
 				final MemberInfoEntry memberInfo = memberOp.getMemberInfo();
+				memberEntry = memberInfo;
 				handler.post(new Runnable() {
 
 					@Override
@@ -147,7 +151,13 @@ public class MineFragment extends Fragment implements OnClickListener {
 			getActivity().startActivity(mineInfo);
 			break;
 		case R.id.trends_content_layout:
-
+			Intent trends = new Intent(getActivity(), MyNewsListActivity.class);
+			if (!TextUtils.isEmpty(memberEntry.id) && !memberEntry.id.equals("null")) {
+				trends.putExtra("memberId", memberEntry.id);
+				getActivity().startActivity(trends);
+			} else if (getActivity() instanceof BaseActivity) {
+				((BaseActivity) getActivity()).showToast("未登录用户");
+			}
 			break;
 		case R.id.listen_content_layout:
 			Intent guanzhu = new Intent(getActivity(), FansOrListenActivity.class);

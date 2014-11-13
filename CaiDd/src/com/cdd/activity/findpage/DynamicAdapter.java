@@ -110,6 +110,8 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 			holder.packIcon = (ImageView) convertView
 					.findViewById(R.id.pack_icon);
 			holder.packTv = (TextView) convertView.findViewById(R.id.pack_tv);
+			holder.forwardPhoto = (ImageView) convertView.findViewById(R.id.forward_photo);
+			holder.forwardTx = (TextView) convertView.findViewById(R.id.forward_tx);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -126,17 +128,19 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 		answerList.removeAllViews();
 		if (dynamic.replyList.size() > 0) {
 			answerList.setVisibility(View.VISIBLE);
-		}
-		for (int i = 0; i < dynamic.replyList.size(); i++) {
-			DynamicReplay replay = dynamic.replyList.get(i);
-			SpannableString spanStr = getSpannableString(replay, i);
-			View childView = View.inflate(context,
-					R.layout.dynamic_answer_item, null);
-			TextView txV = (TextView) childView.findViewById(R.id.answer_tx);
-			txV.setHighlightColor(Color.TRANSPARENT);
-			txV.setText(spanStr);
-			txV.setMovementMethod(LinkMovementMethod.getInstance());
-			answerList.addView(childView);
+			for (int i = 0; i < dynamic.replyList.size(); i++) {
+				DynamicReplay replay = dynamic.replyList.get(i);
+				SpannableString spanStr = getSpannableString(replay, i);
+				View childView = View.inflate(context,
+						R.layout.dynamic_answer_item, null);
+				TextView txV = (TextView) childView.findViewById(R.id.answer_tx);
+				txV.setHighlightColor(Color.TRANSPARENT);
+				txV.setText(spanStr);
+				txV.setMovementMethod(LinkMovementMethod.getInstance());
+				answerList.addView(childView);
+			}
+		} else {
+			answerList.setVisibility(View.GONE);
 		}
 	}
 
@@ -188,92 +192,109 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 		holder.askDate.setText(dynamic.createTime);
 		doWithWorkfor(position, convertView, holder, dynamic);
 		final int itemPosition = position;
-		final boolean isPack = dynamic.isPack;
-		convertView.findViewById(R.id.pack_up_layout).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						if (packListener != null) {
-							if (isPack) {
-								packListener.onPack(itemPosition, false);
-							} else {
-								packListener.onPack(itemPosition, true);
-							}
-						}
-					}
-				});
-		if (!TextUtils.isEmpty(dynamic.content)
-				&& dynamic.content.length() > 40) {
-			convertView.findViewById(R.id.pack_up_layout).setVisibility(
-					View.VISIBLE);
-			if (dynamic.isPack) {
-				holder.packTv.setText("全文");
-				holder.packIcon.setBackgroundResource(R.drawable.show_all);
-				String contentN = dynamic.content.substring(0, 40);
-				holder.askContent.setText(contentN);
+		if (dynamic.isForward.equals("1")) {
+			convertView.findViewById(R.id.share_note).setVisibility(View.VISIBLE);
+			convertView.findViewById(R.id.forward_layout).setVisibility(View.VISIBLE);
+			convertView.findViewById(R.id.ask_content_layout).setVisibility(View.GONE);
+			if (!TextUtils.isEmpty(dynamic.forward.photo)) {
+				holder.forwardPhoto.setVisibility(View.VISIBLE);
+				ImageOperater.getInstance(context).onLoadImage(dynamic.forward.photo, holder.forwardPhoto);
 			} else {
-				holder.packTv.setText("收起");
-				holder.packIcon.setBackgroundResource(R.drawable.pack_up);
-				holder.askContent.setText(dynamic.content);
+				holder.forwardPhoto.setVisibility(View.GONE);
 			}
+			holder.forwardTx.setText(dynamic.forward.content);
 		} else {
-			convertView.findViewById(R.id.pack_up_layout).setVisibility(
-					View.GONE);
-		}
-		if (dynamic.photos.size() > 0) {
-			convertView.findViewById(R.id.answer_photo_layout).setVisibility(
-					View.VISIBLE);
-			holder.photo1.setVisibility(View.GONE);
-			holder.photo2.setVisibility(View.GONE);
-			holder.photo3.setVisibility(View.GONE);
-			for (int i = 0; i < dynamic.photos.size(); i++) {
-				PhotosEntry photo = dynamic.photos.get(i);
-				if (i == 0 && !TextUtils.isEmpty(photo.url)) {
-					holder.photo1.setVisibility(View.VISIBLE);
-					ImageOperater.getInstance(context).onLoadImage(photo.url,
-							holder.photo1);
-					holder.photo1.setOnClickListener(new OnClickListener() {
-
+			convertView.findViewById(R.id.share_note).setVisibility(View.GONE);
+			convertView.findViewById(R.id.forward_layout).setVisibility(View.GONE);
+			convertView.findViewById(R.id.ask_content_layout).setVisibility(View.VISIBLE);
+			final boolean isPack = dynamic.isPack;
+			convertView.findViewById(R.id.pack_up_layout).setOnClickListener(
+					new OnClickListener() {
+						
 						@Override
 						public void onClick(View v) {
-							if (imgListener != null) {
-								imgListener.onImageClick(itemPosition, 0);
+							if (packListener != null) {
+								if (isPack) {
+									packListener.onPack(itemPosition, false);
+								} else {
+									packListener.onPack(itemPosition, true);
+								}
 							}
 						}
 					});
-				} else if (i == 1 && !TextUtils.isEmpty(photo.url)) {
-					holder.photo2.setVisibility(View.VISIBLE);
-					ImageOperater.getInstance(context).onLoadImage(photo.url,
-							holder.photo2);
-					holder.photo2.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							if (imgListener != null) {
-								imgListener.onImageClick(itemPosition, 1);
-							}
-						}
-					});
-				} else if (i == 2 && !TextUtils.isEmpty(photo.url)) {
-					holder.photo3.setVisibility(View.VISIBLE);
-					ImageOperater.getInstance(context).onLoadImage(photo.url,
-							holder.photo3);
-					holder.photo3.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							if (imgListener != null) {
-								imgListener.onImageClick(itemPosition, 2);
-							}
-						}
-					});
-					break;
+			if (!TextUtils.isEmpty(dynamic.content)
+					&& dynamic.content.length() > 40) {
+				convertView.findViewById(R.id.pack_up_layout).setVisibility(
+						View.VISIBLE);
+				if (dynamic.isPack) {
+					holder.packTv.setText("全文");
+					holder.packIcon.setBackgroundResource(R.drawable.show_all);
+					String contentN = dynamic.content.substring(0, 40);
+					holder.askContent.setText(contentN);
+				} else {
+					holder.packTv.setText("收起");
+					holder.packIcon.setBackgroundResource(R.drawable.pack_up);
+					holder.askContent.setText(dynamic.content);
 				}
+			} else {
+				holder.askContent.setText(dynamic.content);
+				convertView.findViewById(R.id.pack_up_layout).setVisibility(
+						View.GONE);
 			}
-		} else {
-			convertView.findViewById(R.id.answer_photo_layout).setVisibility(
-					View.GONE);
+			if (dynamic.photos.size() > 0) {
+				convertView.findViewById(R.id.answer_photo_layout).setVisibility(
+						View.VISIBLE);
+				holder.photo1.setVisibility(View.GONE);
+				holder.photo2.setVisibility(View.GONE);
+				holder.photo3.setVisibility(View.GONE);
+				for (int i = 0; i < dynamic.photos.size(); i++) {
+					PhotosEntry photo = dynamic.photos.get(i);
+					if (i == 0 && !TextUtils.isEmpty(photo.url)) {
+						holder.photo1.setVisibility(View.VISIBLE);
+						ImageOperater.getInstance(context).onLoadImage(photo.url,
+								holder.photo1);
+						holder.photo1.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								if (imgListener != null) {
+									imgListener.onImageClick(itemPosition, 0);
+								}
+							}
+						});
+					} else if (i == 1 && !TextUtils.isEmpty(photo.url)) {
+						holder.photo2.setVisibility(View.VISIBLE);
+						ImageOperater.getInstance(context).onLoadImage(photo.url,
+								holder.photo2);
+						holder.photo2.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								if (imgListener != null) {
+									imgListener.onImageClick(itemPosition, 1);
+								}
+							}
+						});
+					} else if (i == 2 && !TextUtils.isEmpty(photo.url)) {
+						holder.photo3.setVisibility(View.VISIBLE);
+						ImageOperater.getInstance(context).onLoadImage(photo.url,
+								holder.photo3);
+						holder.photo3.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								if (imgListener != null) {
+									imgListener.onImageClick(itemPosition, 2);
+								}
+							}
+						});
+						break;
+					}
+				}
+			} else {
+				convertView.findViewById(R.id.answer_photo_layout).setVisibility(
+						View.GONE);
+			}
 		}
 		if (position == (getCount() - 1)) {
 			convertView.findViewById(R.id.bottom_dash_line).setVisibility(
@@ -332,9 +353,9 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	}
 
 	public class ViewHolder {
-		public ImageView askIcon, photo1, photo2, photo3, packIcon;
+		public ImageView askIcon, photo1, photo2, photo3, packIcon, forwardPhoto;
 
 		public TextView askName, askLevel, zanCount, shoucangCount, shareCount,
-				askContent, askDate, packTv;
+				askContent, askDate, packTv, forwardTx;
 	}
 }

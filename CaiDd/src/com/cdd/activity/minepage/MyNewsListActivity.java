@@ -1,13 +1,10 @@
-package com.cdd.activity.findpage;
+package com.cdd.activity.minepage;
 
 import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -15,36 +12,30 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
+import com.cdd.activity.findpage.DynamicAdapter;
+import com.cdd.activity.findpage.PulishDynamicActivity;
 import com.cdd.activity.findpage.DynamicAdapter.OnAnswerMemberClickLister;
 import com.cdd.activity.findpage.DynamicAdapter.OnImageClickListener;
 import com.cdd.activity.findpage.DynamicAdapter.OnPackListener;
 import com.cdd.activity.findpage.DynamicAdapter.OnWorkListener;
 import com.cdd.activity.image.ImageNetPageActivity;
-import com.cdd.activity.sqpage.SqAskDetailActivity;
-import com.cdd.activity.sqpage.SqForumAdapter;
-import com.cdd.activity.sqpage.SqForumAdapter.onZanListener;
 import com.cdd.base.BaseActivity;
 import com.cdd.fragment.BaseFragmentListener;
 import com.cdd.fragment.BottomReplyFragment;
-import com.cdd.fragment.SignSuccessFragment;
 import com.cdd.mode.DynamicEntry;
 import com.cdd.mode.DynamicReplay;
 import com.cdd.mode.PhotosEntry;
-import com.cdd.mode.SqAskItem;
-import com.cdd.mode.SqAskListRequest;
 import com.cdd.net.RequestListener;
-import com.cdd.operater.DingdangDynamicListOp;
-import com.cdd.operater.NewsShareOp;
-import com.cdd.operater.NewsShoucangOp;
-import com.cdd.operater.NewsZanOp;
+import com.cdd.operater.MemberNewsListOp;
 import com.cdd.util.CddRequestCode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class DynamicListActivity extends BaseActivity implements
-		OnClickListener {
+public class MyNewsListActivity extends BaseActivity implements OnClickListener{
+
+
 
 	private PullToRefreshListView dynamicListView;
 
@@ -57,12 +48,14 @@ public class DynamicListActivity extends BaseActivity implements
 	private View footMoreView;
 
 	private DynamicAdapter adapter;
+	
+	private String memberId = "";
 
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.dynamic_list_activity);
-		initTitle("叮当圈");
+		initTitle("我的动态");
 		initView();
 		initContent();
 	}
@@ -101,9 +94,7 @@ public class DynamicListActivity extends BaseActivity implements
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent detail = new Intent(context, NewsDetailActivity.class);
-						detail.putExtra("cofId", adapter.getItem(position).id);
-						startActivity(detail);
+						
 					}
 				});
 		dynamicListView.setMode(Mode.PULL_FROM_START);
@@ -139,6 +130,7 @@ public class DynamicListActivity extends BaseActivity implements
 	}
 
 	private void initContent() {
+		memberId = getIntent().getStringExtra("memberId");
 		requestDynamicList("1", true);
 	}
 
@@ -185,93 +177,6 @@ public class DynamicListActivity extends BaseActivity implements
 			return bottomReplay;
 		}
 		return null;
-	}
-	
-	private void onNewsZanRequest(String cofId, final int position) {
-		NewsZanOp zanOp = new NewsZanOp(context);
-		zanOp.setParams(cofId);
-		zanOp.onRequest(new RequestListener() {
-			
-			@Override
-			public void onError(Object error) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onCallBack(Object data) {
-				showToast("点赞成功");
-				handler.post(new Runnable() {
-					
-					@Override
-					public void run() {
-						String count = adapter.getItem(position).likeCount;
-						int countN = Integer.valueOf(count);
-						countN++;
-						adapter.getItem(position).likeCount = countN + "";
-						adapter.notifyDataSetChanged();
-					}
-				});
-			}
-		});
-	}
-	
-	private void onNewsShoucangRequest(String cofId, final int position) {
-		NewsShoucangOp shoucangOp = new NewsShoucangOp(context);
-		shoucangOp.setParams(cofId);
-		shoucangOp.onRequest(new RequestListener() {
-			
-			@Override
-			public void onError(Object error) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onCallBack(Object data) {
-				showToast("收藏成功");
-				handler.post(new Runnable() {
-					
-					@Override
-					public void run() {
-						String count = adapter.getItem(position).favoriteCount;
-						int countN = Integer.valueOf(count);
-						countN++;
-						adapter.getItem(position).favoriteCount = countN + "";
-						adapter.notifyDataSetChanged();
-					}
-				});
-			}
-		});
-	}
-	
-	private void onNewsShareRequest(String cofId, final int position) {
-		NewsShareOp shareOp = new NewsShareOp(context);
-		shareOp.setParams(cofId);
-		shareOp.onRequest(new RequestListener() {
-			
-			@Override
-			public void onError(Object error) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onCallBack(Object data) {
-				showToast("分享成功");
-				handler.post(new Runnable() {
-					
-					@Override
-					public void run() {
-						String count = adapter.getItem(position).shareCount;
-						int countN = Integer.valueOf(count);
-						countN++;
-						adapter.getItem(position).shareCount = countN + "";
-						adapter.notifyDataSetChanged();
-					}
-				});
-			}
-		});
 	}
 
 	private void addAdapterListener(DynamicAdapter adapterN) {
@@ -329,12 +234,6 @@ public class DynamicListActivity extends BaseActivity implements
 									}
 								}
 							});
-				} else if (type == 0) {
-					onNewsZanRequest(adapter.getItem(position).id, position);
-				} else if (type == 1) {
-					onNewsShoucangRequest(adapter.getItem(position).id, position);
-				} else if (type == 2) {
-					onNewsShareRequest(adapter.getItem(position).id, position);
 				}
 
 			}
@@ -342,9 +241,9 @@ public class DynamicListActivity extends BaseActivity implements
 	}
 
 	private void requestDynamicList(String pageNumber, final boolean isShowNow) {
-		final DingdangDynamicListOp dingdangOp = new DingdangDynamicListOp(
+		final MemberNewsListOp dingdangOp = new MemberNewsListOp(
 				context);
-		dingdangOp.setParams("1");
+		dingdangOp.setParams(memberId, "1");
 		dingdangOp.onRequest(new RequestListener() {
 
 			@Override
@@ -445,5 +344,7 @@ public class DynamicListActivity extends BaseActivity implements
 		}
 
 	}
+
+
 
 }

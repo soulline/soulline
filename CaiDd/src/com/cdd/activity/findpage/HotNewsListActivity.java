@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -20,20 +17,14 @@ import com.cdd.activity.findpage.DynamicAdapter.OnImageClickListener;
 import com.cdd.activity.findpage.DynamicAdapter.OnPackListener;
 import com.cdd.activity.findpage.DynamicAdapter.OnWorkListener;
 import com.cdd.activity.image.ImageNetPageActivity;
-import com.cdd.activity.sqpage.SqAskDetailActivity;
-import com.cdd.activity.sqpage.SqForumAdapter;
-import com.cdd.activity.sqpage.SqForumAdapter.onZanListener;
 import com.cdd.base.BaseActivity;
 import com.cdd.fragment.BaseFragmentListener;
 import com.cdd.fragment.BottomReplyFragment;
-import com.cdd.fragment.SignSuccessFragment;
 import com.cdd.mode.DynamicEntry;
 import com.cdd.mode.DynamicReplay;
 import com.cdd.mode.PhotosEntry;
-import com.cdd.mode.SqAskItem;
-import com.cdd.mode.SqAskListRequest;
 import com.cdd.net.RequestListener;
-import com.cdd.operater.DingdangDynamicListOp;
+import com.cdd.operater.HotNewsListOp;
 import com.cdd.operater.NewsShareOp;
 import com.cdd.operater.NewsShoucangOp;
 import com.cdd.operater.NewsZanOp;
@@ -43,8 +34,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class DynamicListActivity extends BaseActivity implements
-		OnClickListener {
+public class HotNewsListActivity extends BaseActivity implements OnClickListener{
+
 
 	private PullToRefreshListView dynamicListView;
 
@@ -62,7 +53,7 @@ public class DynamicListActivity extends BaseActivity implements
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.dynamic_list_activity);
-		initTitle("叮当圈");
+		initTitle("热门新鲜事");
 		initView();
 		initContent();
 	}
@@ -122,69 +113,6 @@ public class DynamicListActivity extends BaseActivity implements
 				}
 			}
 		});
-	}
-	
-	private void doRefreshListView() {
-		dynamicListView.getRefreshableView().removeFooterView(
-				footMoreView);
-		requestPage = 1;
-		String pageNumber = "";
-		if (pageNum == 0) {
-			pageNumber = 1 + "";
-		} else {
-			pageNumber = requestPage + "";
-		}
-		dynamicList.clear();
-		requestDynamicList(pageNumber, false);
-	}
-
-	private void initContent() {
-		requestDynamicList("1", true);
-	}
-
-	private void initDynamicList(ArrayList<DynamicEntry> list) {
-		dynamicListView.setVisibility(View.VISIBLE);
-		findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
-		if (adapter == null) {
-			adapter = new DynamicAdapter(context);
-			adapter.addData(list);
-			dynamicListView.getRefreshableView().setAdapter(adapter);
-			addAdapterListener(adapter);
-		} else {
-			adapter.clear();
-			adapter.addData(list);
-			adapter.notifyDataSetChanged();
-		}
-		if ((adapter.getCount() % 20) == 0) {
-			dynamicListView.getRefreshableView().addFooterView(footMoreView);
-		}
-	}
-
-	private void gotoPhotoDetail(ArrayList<PhotosEntry> list, int index) {
-		Intent intent = new Intent(context, ImageNetPageActivity.class);
-		intent.putExtra("image_urls", list);
-		intent.putExtra("image_index", index);
-		startActivity(intent);
-	}
-
-	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
-			BaseFragmentListener listener) {
-		if (isOpen) {
-			showFragment(tag, -1, createFragment(tag, bundle, listener));
-		} else {
-			closeFragment(tag);
-		}
-	}
-
-	public DialogFragment createFragment(final String tag, Bundle b,
-			BaseFragmentListener listener) {
-		if (tag.equals("bottom_reply")) {
-			BottomReplyFragment bottomReplay = new BottomReplyFragment(context,
-					b);
-			bottomReplay.addBaseFragmentListener(listener);
-			return bottomReplay;
-		}
-		return null;
 	}
 	
 	private void onNewsZanRequest(String cofId, final int position) {
@@ -273,6 +201,69 @@ public class DynamicListActivity extends BaseActivity implements
 			}
 		});
 	}
+	
+	private void doRefreshListView() {
+		dynamicListView.getRefreshableView().removeFooterView(
+				footMoreView);
+		requestPage = 1;
+		String pageNumber = "";
+		if (pageNum == 0) {
+			pageNumber = 1 + "";
+		} else {
+			pageNumber = requestPage + "";
+		}
+		dynamicList.clear();
+		requestDynamicList(pageNumber, false);
+	}
+
+	private void initContent() {
+		requestDynamicList("1", true);
+	}
+
+	private void initDynamicList(ArrayList<DynamicEntry> list) {
+		dynamicListView.setVisibility(View.VISIBLE);
+		findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
+		if (adapter == null) {
+			adapter = new DynamicAdapter(context);
+			adapter.addData(list);
+			dynamicListView.getRefreshableView().setAdapter(adapter);
+			addAdapterListener(adapter);
+		} else {
+			adapter.clear();
+			adapter.addData(list);
+			adapter.notifyDataSetChanged();
+		}
+		if ((adapter.getCount() % 20) == 0) {
+			dynamicListView.getRefreshableView().addFooterView(footMoreView);
+		}
+	}
+
+	private void gotoPhotoDetail(ArrayList<PhotosEntry> list, int index) {
+		Intent intent = new Intent(context, ImageNetPageActivity.class);
+		intent.putExtra("image_urls", list);
+		intent.putExtra("image_index", index);
+		startActivity(intent);
+	}
+
+	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
+			BaseFragmentListener listener) {
+		if (isOpen) {
+			showFragment(tag, -1, createFragment(tag, bundle, listener));
+		} else {
+			closeFragment(tag);
+		}
+	}
+
+	public DialogFragment createFragment(final String tag, Bundle b,
+			BaseFragmentListener listener) {
+		if (tag.equals("bottom_reply")) {
+			BottomReplyFragment bottomReplay = new BottomReplyFragment(context,
+					b);
+			bottomReplay.addBaseFragmentListener(listener);
+			return bottomReplay;
+		}
+		return null;
+	}
 
 	private void addAdapterListener(DynamicAdapter adapterN) {
 		adapterN.addOnAnswerMemberClickLister(new OnAnswerMemberClickLister() {
@@ -342,7 +333,7 @@ public class DynamicListActivity extends BaseActivity implements
 	}
 
 	private void requestDynamicList(String pageNumber, final boolean isShowNow) {
-		final DingdangDynamicListOp dingdangOp = new DingdangDynamicListOp(
+		final HotNewsListOp dingdangOp = new HotNewsListOp(
 				context);
 		dingdangOp.setParams("1");
 		dingdangOp.onRequest(new RequestListener() {
@@ -445,5 +436,6 @@ public class DynamicListActivity extends BaseActivity implements
 		}
 
 	}
+
 
 }

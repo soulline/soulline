@@ -124,7 +124,7 @@
                 android:divider="@null"
                 ptr:ptrAnimationStyle="flip"
                 ptr:ptrHeaderTextColor="@color/sq_blue"
-                android:visibility="gone" />
+                 />
 
             <ImageView
                 android:id="@+id/empty_content_layout"
