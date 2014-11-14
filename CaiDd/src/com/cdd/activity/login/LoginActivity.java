@@ -75,14 +75,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				AccountInfo account = loginOp.getAccount();
 				app.setAccount(account);
 				showToast("登录成功");
-				handler.postDelayed(new Runnable() {
-					
-					@Override
-					public void run() {
-						setResult(RESULT_OK);
-						app.popClosePath(true, CddConfig.LOGIN_PATH_KEY);
-					}
-				}, 500);
+				setResult(RESULT_OK);
+				app.popClosePath(true, CddConfig.LOGIN_PATH_KEY);
 			}
 		});
 	}
