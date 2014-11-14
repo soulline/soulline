@@ -85,7 +85,9 @@ public class MineFragment extends Fragment implements OnClickListener {
 		}
 		levelTx.setText(member.levelName);
 		coinTx.setText(member.availableScore);
-		simpleText.setText(member.description);
+		if (!TextUtils.isEmpty(member.description) && !member.description.equals("null")) {
+			simpleText.setText(member.description);
+		}
 		trendsCount.setText(member.dynamicInfoCount);
 		fansCount.setText(member.fansCount);
 		listenCount.setText(member.idolCount);
