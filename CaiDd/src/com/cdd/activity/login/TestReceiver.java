@@ -1,4 +1,4 @@
-package com.cdd.login;
+package com.cdd.activity.login;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

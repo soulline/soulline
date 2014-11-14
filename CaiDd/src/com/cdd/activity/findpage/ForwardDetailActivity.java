@@ -34,7 +34,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class NewsDetailActivity extends BaseActivity implements OnClickListener{
+public class ForwardDetailActivity extends BaseActivity implements OnClickListener{
+
 
 	private ImageView askIcon, photo1, photo2, photo3, forwardPhoto;
 
@@ -237,7 +238,6 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener{
 		askDate = (TextView) findViewById(R.id.ask_date);
 		forwardPhoto = (ImageView) findViewById(R.id.forward_photo);
 		forwardTx = (TextView) findViewById(R.id.forward_tx);
-		findViewById(R.id.forward_layout).setOnClickListener(this);
 		findViewById(R.id.zan_layout).setOnClickListener(this);
 		findViewById(R.id.shoucang_layout).setOnClickListener(this);
 		findViewById(R.id.zhuanfa_layout).setOnClickListener(this);
@@ -482,12 +482,6 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener{
 			gotoPhotoDetail(dynamicEntry.photos, 2);
 			break;
 			
-		case R.id.forward_layout:
-			Intent forward = new Intent(context, ForwardDetailActivity.class);
-			forward.putExtra("cofId", dynamicEntry.forward.id);
-			startActivity(forward);
-			break;
-			
 		case R.id.zan_layout:
 			onNewsZanRequest(cofId);
 			break;
@@ -528,5 +522,6 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener{
 		}
 		
 	}
+
 
 }

@@ -8,12 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/dd_dimen_20px" >
+        android:paddingLeft="@dimen/dd_dimen_20px"
+        android:paddingRight="@dimen/dd_dimen_20px"
+        android:minHeight="@dimen/dd_dimen_70px" >
 
         <TextView
             android:id="@+id/answer_tx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:textColor="@color/simple_tx_"
             android:textSize="@dimen/dd_dimen_24px" />
 

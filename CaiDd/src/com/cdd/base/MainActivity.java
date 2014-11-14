@@ -1,6 +1,7 @@
 package com.cdd.base;
 
 import com.cdd.R;
+import com.cdd.activity.login.LoginActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.fragment.AlarmFragment;
 import com.cdd.fragment.BaseFragmentListener;
@@ -8,7 +9,6 @@ import com.cdd.fragment.CommunityFragment;
 import com.cdd.fragment.FindFragment;
 import com.cdd.fragment.MineFragment;
 import com.cdd.fragment.SignSuccessFragment;
-import com.cdd.login.LoginActivity;
 import com.cdd.mode.LoginEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.LoginOperater;

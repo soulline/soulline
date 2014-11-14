@@ -203,6 +203,15 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 				holder.forwardPhoto.setVisibility(View.GONE);
 			}
 			holder.forwardTx.setText(dynamic.forward.content);
+			convertView.findViewById(R.id.forward_layout).setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if (workListener != null) {
+						workListener.onWork(itemPosition, 4);
+					}
+				}
+			});
 		} else {
 			convertView.findViewById(R.id.share_note).setVisibility(View.GONE);
 			convertView.findViewById(R.id.forward_layout).setVisibility(View.GONE);

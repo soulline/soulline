@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicAdapter;
+import com.cdd.activity.findpage.ForwardDetailActivity;
 import com.cdd.activity.findpage.NewsDetailActivity;
 import com.cdd.activity.findpage.DynamicAdapter.OnAnswerMemberClickLister;
 import com.cdd.activity.findpage.DynamicAdapter.OnImageClickListener;
@@ -507,8 +508,11 @@ public class MyCollectActivity extends BaseActivity implements OnClickListener{
 					onNewsShoucangRequest(dynamicAdapter.getItem(position).id, position);
 				} else if (type == 2) {
 					onNewsShareRequest(dynamicAdapter.getItem(position).id, position);
+				} else if (type == 4) {
+					Intent forward = new Intent(context, ForwardDetailActivity.class);
+					forward.putExtra("cofId", dynamicAdapter.getItem(position).forward.id);
+					startActivity(forward);
 				}
-
 			}
 		});
 	}
@@ -620,7 +624,7 @@ public class MyCollectActivity extends BaseActivity implements OnClickListener{
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						Intent detail = new Intent(context, NewsDetailActivity.class);
-						detail.putExtra("cofId", dynamicAdapter.getItem(position).id);
+						detail.putExtra("cofId", dynamicAdapter.getItem(position - 1).id);
 						startActivity(detail);
 					}
 				});

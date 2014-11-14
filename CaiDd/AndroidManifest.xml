@@ -43,14 +43,14 @@
         </activity>
         
         <activity
-            android:name="com.cdd.login.LoginActivity"
+            android:name="com.cdd.activity.login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
             
         </activity>
         <activity
-            android:name="com.cdd.login.RegisterActivity"
+            android:name="com.cdd.activity.login.RegisterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
@@ -165,6 +165,12 @@
         </activity>
         <activity
             android:name="com.cdd.activity.findpage.NewsDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.activity.findpage.ForwardDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >

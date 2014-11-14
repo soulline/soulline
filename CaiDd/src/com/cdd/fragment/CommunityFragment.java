@@ -3,6 +3,7 @@ package com.cdd.fragment;
 import java.util.ArrayList;
 
 import com.cdd.R;
+import com.cdd.activity.login.LoginActivity;
 import com.cdd.activity.sqpage.AccountingHotAdapter;
 import com.cdd.activity.sqpage.ExamListAdapter;
 import com.cdd.activity.sqpage.SqAskDetailActivity;
@@ -12,7 +13,6 @@ import com.cdd.activity.sqpage.SqForumAdapter.onZanListener;
 import com.cdd.app.CddApp;
 import com.cdd.base.BaseActivity;
 import com.cdd.base.MainActivity;
-import com.cdd.login.LoginActivity;
 import com.cdd.mode.ForumEntry;
 import com.cdd.mode.ForumItem;
 import com.cdd.mode.MemberInfoEntry;

@@ -83,6 +83,7 @@
                     android:id="@+id/forward_tx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dd_dimen_10px"
                     android:textColor="@color/sq_blue"
                     android:maxLines="2"
                     android:ellipsize="end"

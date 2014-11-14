@@ -42,14 +42,9 @@ public class NewsReplyListOp extends BaseOperater {
 
 	@Override
 	public void onParser(JSONObject response) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onParser(JSONArray response) {
-		for (int i=0; i < response.length(); i++) {
-			JSONObject obj = response.optJSONObject(i);
+		JSONArray array = response.optJSONArray("replyList");
+		for (int i=0; i < array.length(); i++) {
+			JSONObject obj = array.optJSONObject(i);
 			DynamicReplay reply = new DynamicReplay();
 			reply.cofId = obj.optString("cofId");
 			reply.createTime = obj.optString("createTime");
@@ -62,6 +57,10 @@ public class NewsReplyListOp extends BaseOperater {
 			reply.message = obj.optString("message");
 			replyList.add(reply);
 		}
+	}
+
+	@Override
+	public void onParser(JSONArray response) {
 
 	}
 	

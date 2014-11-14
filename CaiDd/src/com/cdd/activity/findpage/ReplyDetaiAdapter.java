@@ -62,6 +62,13 @@ public class ReplyDetaiAdapter extends ArrayAdapter<DynamicReplay> {
 		holder.answerTx.setHighlightColor(Color.TRANSPARENT);
 		holder.answerTx.setText(spanStr);
 		holder.answerTx.setMovementMethod(LinkMovementMethod.getInstance());
+		if (position == (getCount() - 1)) {
+			convertView.findViewById(R.id.bottom_dash_line).setVisibility(
+					View.GONE);
+		} else {
+			convertView.findViewById(R.id.bottom_dash_line).setVisibility(
+					View.VISIBLE);
+		}
 		return convertView;
 	}
 	

@@ -35,12 +35,12 @@ import android.widget.TextView;
 
 import com.cdd.R;
 import com.cdd.activity.image.ImageDrawablePageActivity;
+import com.cdd.activity.login.LoginActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.base.MainActivity;
 import com.cdd.fragment.BaseFragmentListener;
 import com.cdd.fragment.SignSuccessFragment;
 import com.cdd.fragment.TakePhotoSelectFragment;
-import com.cdd.login.LoginActivity;
 import com.cdd.mode.ForumItem;
 import com.cdd.mode.SqAnswerCommitEntry;
 import com.cdd.mode.SqAskCommitEntry;

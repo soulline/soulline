@@ -1,4 +1,4 @@
-package com.cdd.login;
+package com.cdd.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;

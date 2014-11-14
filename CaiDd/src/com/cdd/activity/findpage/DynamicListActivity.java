@@ -102,7 +102,7 @@ public class DynamicListActivity extends BaseActivity implements
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						Intent detail = new Intent(context, NewsDetailActivity.class);
-						detail.putExtra("cofId", adapter.getItem(position).id);
+						detail.putExtra("cofId", adapter.getItem(position - 1).id);
 						startActivity(detail);
 					}
 				});
@@ -335,6 +335,10 @@ public class DynamicListActivity extends BaseActivity implements
 					onNewsShoucangRequest(adapter.getItem(position).id, position);
 				} else if (type == 2) {
 					onNewsShareRequest(adapter.getItem(position).id, position);
+				} else if (type == 4) {
+					Intent forward = new Intent(context, ForwardDetailActivity.class);
+					forward.putExtra("cofId", adapter.getItem(position).forward.id);
+					startActivity(forward);
 				}
 
 			}
