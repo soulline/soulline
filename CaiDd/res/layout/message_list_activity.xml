@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dd_dimen_50px"
-            android:background="@drawable/empty_answer"
+            android:background="@drawable/empty_message"
             android:visibility="gone" />
     </LinearLayout>
 

@@ -94,7 +94,7 @@ public class ReplyDetaiAdapter extends ArrayAdapter<DynamicReplay> {
 		}, 0, (replay.memberName.length() + 1),
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources()
-				.getColor(R.color.self_info_blue)), 0, (replay.memberName
+				.getColor(R.color.messageto_tx_selector)), 0, (replay.memberName
 				.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spanStr;
 	}

@@ -90,7 +90,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dd_dimen_30px"
-                                android:background="@drawable/level_icon" />
+                                android:background="@drawable/dd_coin_icon" />
 
                             <TextView
                                 android:id="@+id/coin_tx"

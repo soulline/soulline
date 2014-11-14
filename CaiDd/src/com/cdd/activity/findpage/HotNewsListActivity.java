@@ -270,7 +270,9 @@ public class HotNewsListActivity extends BaseActivity implements OnClickListener
 
 			@Override
 			public void onAnswerClick(DynamicReplay replay, int position) {
-				// TODO Auto-generated method stub
+				Intent userInfo = new Intent(context, UserInfoActivity.class);
+				userInfo.putExtra("memberId", replay.memberId);
+				startActivity(userInfo);
 			}
 		});
 
