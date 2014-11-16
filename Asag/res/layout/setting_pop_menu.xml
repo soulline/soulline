@@ -37,5 +37,17 @@
         android:textSize="15dp"
         android:textColor="@color/serial_black"
         android:text="校正参数设定"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line"/>
+    <TextView android:id="@+id/textSize_menu"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@drawable/pop_menu_selector"
+        android:textSize="15dp"
+        android:textColor="@color/serial_black"
+        android:text="字体大小设定"/>
+    
 
 </LinearLayout>

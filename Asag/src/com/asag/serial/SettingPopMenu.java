@@ -50,6 +50,7 @@ public class SettingPopMenu extends PopupWindow implements OnClickListener{
 		view.findViewById(R.id.date_set_menu).setOnClickListener(this);
 		view.findViewById(R.id.point_set_menu).setOnClickListener(this);
 		view.findViewById(R.id.check_params_menu).setOnClickListener(this);
+		view.findViewById(R.id.textSize_menu).setOnClickListener(this);
 	}
 	
 	public void showPopupWindow(View parent) {  

@@ -74,19 +74,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initService();
 		initView();
 		registerReceiver();
-		RightDataEntry entry1 = new RightDataEntry();
-		entry1.co2 = "12345";
-		entry1.number = "1";
-		entry1.shidu = "20.0";
-		entry1.wendu = "40";
-		addData(entry1);
-		
-		RightDataEntry entry2 = new RightDataEntry();
-		entry2.co2 = "12345";
-		entry2.number = "2";
-		entry2.shidu = "20.0";
-		entry2.wendu = "40";
-		addData(entry2);
 	}
 	
 	private void showCheckAnim(boolean isShow) {

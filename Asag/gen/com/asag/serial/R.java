@@ -360,7 +360,7 @@ public final class R {
         public static final int welcome=0x7f020049;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0089;
+        public static final int action_settings=0x7f0b008a;
         public static final int base_content_=0x7f0b0010;
         public static final int base_extra_layout=0x7f0b0011;
         public static final int base_loading=0x7f0b0012;
@@ -447,9 +447,9 @@ public final class R {
         public static final int ph3_value_state=0x7f0b0040;
         public static final int ph3id=0x7f0b0053;
         public static final int point_check_menu=0x7f0b0022;
-        public static final int point_distribute_menu=0x7f0b0084;
+        public static final int point_distribute_menu=0x7f0b0085;
         public static final int point_set_menu=0x7f0b0082;
-        public static final int point_trend_menu=0x7f0b0085;
+        public static final int point_trend_menu=0x7f0b0086;
         public static final int pop_local=0x7f0b001d;
         public static final int pop_network=0x7f0b001f;
         public static final int pop_remote=0x7f0b001b;
@@ -470,8 +470,8 @@ public final class R {
         public static final int shitu_menu=0x7f0b0033;
         public static final int showmsg=0x7f0b0006;
         public static final int spinner=0x7f0b0066;
-        public static final int spinner_item_tx=0x7f0b0086;
-        public static final int spinner_list=0x7f0b0087;
+        public static final int spinner_item_tx=0x7f0b0087;
+        public static final int spinner_list=0x7f0b0088;
         public static final int start_date_input=0x7f0b0078;
         public static final int start_time=0x7f0b006d;
         public static final int start_time_input=0x7f0b007b;
@@ -480,6 +480,7 @@ public final class R {
         public static final int t_value=0x7f0b0047;
         public static final int t_value_state=0x7f0b0046;
         public static final int testTime=0x7f0b006a;
+        public static final int textSize_menu=0x7f0b0084;
         public static final int textView1=0x7f0b002a;
         public static final int textView2=0x7f0b002b;
         public static final int textView3=0x7f0b002c;
@@ -496,7 +497,7 @@ public final class R {
         public static final int top_title_tx=0x7f0b002d;
         public static final int tuichu=0x7f0b0020;
         public static final int water_input=0x7f0b0074;
-        public static final int welcome_loading=0x7f0b0088;
+        public static final int welcome_loading=0x7f0b0089;
         public static final int wendu_value=0x7f0b007f;
     }
     public static final class layout {
