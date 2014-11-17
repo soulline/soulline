@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import com.cdd.R;
 import com.cdd.activity.alarmpage.AlarmAdapter;
-import com.cdd.mode.AlarmItemEntry;
+import com.cdd.base.BaseActivity;
+import com.cdd.mode.RemindEntry;
+import com.cdd.mode.RemindInfo;
+import com.cdd.net.RequestListener;
+import com.cdd.operater.RemindListOp;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class AlarmFragment extends Fragment implements OnClickListener{
 	
@@ -24,6 +29,10 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 	private ListView alarmList;
 	
 	private AlarmAdapter adapter;
+	
+	private TextView announcementContent;
+	
+	private RemindInfo remindInfo = new RemindInfo();
 	
 	public AlarmFragment() {
 		super();
@@ -44,6 +53,7 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 	
 	private void initView() {
 		view.findViewById(R.id.add_alarm_layout).setOnClickListener(this);
+		announcementContent = (TextView) view.findViewById(R.id.announcement_content);
 		alarmList = (ListView) view.findViewById(R.id.alarm_list);
 		alarmList.setOnItemClickListener(new OnItemClickListener() {
 
@@ -55,36 +65,40 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 		});
 	}
 	
-	public void initContent() {
-		ArrayList<AlarmItemEntry> list = new ArrayList<AlarmItemEntry>();
-		AlarmItemEntry item1 = new AlarmItemEntry();
-		item1.alarmDate = "2014年12月30日";
-		item1.alarmDetail = "今天应该复习经济法了";
-		item1.alarmSecondType = "报名期";
-		item1.alarmTitle = "初级会计证报名";
-		item1.alarmtype = "报名倒计时";
-		item1.aliveDays = "30";
-		list.add(item1);
-		AlarmItemEntry item2 = new AlarmItemEntry();
-		item2.alarmDate = "2014年10月28日";
-		item2.alarmDetail = "今天应该复习经济法了";
-		item2.alarmSecondType = "";
-		item2.alarmTitle = "今日学习计划";
-		item2.alarmtype = "学习计划";
-		item2.aliveDays = "";
-		list.add(item2);
-		AlarmItemEntry item3 = new AlarmItemEntry();
-		item3.alarmDate = "2014年12月30日";
-		item3.alarmDetail = "今天应该复习经济法了";
-		item3.alarmSecondType = "考试期";
-		item3.alarmTitle = "初级会计证考试";
-		item3.alarmtype = "考试倒计时";
-		item3.aliveDays = "30";
-		list.add(item3);
-		initAdapater(list);
+	private void requestRemindInfo() {
+		final RemindListOp remindListOp = new RemindListOp(getActivity());
+		remindListOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				remindInfo = remindListOp.getRemind();
+				if (getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+						
+						@Override
+						public void run() {
+							if (remindInfo.noticeList.size() > 0) {
+								announcementContent.setText(remindInfo.noticeList.get(0).message);
+							}
+							initAdapater(remindInfo.remindList);
+						}
+					});
+				}
+			}
+		});
 	}
 	
-	public void initAdapater(ArrayList<AlarmItemEntry> list) {
+	public void initContent() {
+		requestRemindInfo();
+	}
+	
+	public void initAdapater(ArrayList<RemindEntry> list) {
 		if (adapter == null) {
 			adapter = new AlarmAdapter(getActivity());
 			adapter.addData(list);

@@ -33,7 +33,6 @@
                 android:layout_centerInParent="true"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:text="原定于2015年2月21日的会计资格证初级考试已取消，改为2015年4月13日。"
                 android:textColor="@color/dingdang_black"
                 android:textSize="@dimen/dd_dimen_28px" />
         </RelativeLayout>

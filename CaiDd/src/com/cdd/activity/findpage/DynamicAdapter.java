@@ -10,6 +10,7 @@ import com.cdd.util.ImageOperater;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -130,10 +131,10 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 			answerList.setVisibility(View.VISIBLE);
 			for (int i = 0; i < dynamic.replyList.size(); i++) {
 				DynamicReplay replay = dynamic.replyList.get(i);
-				SpannableString spanStr = getSpannableString(replay, i);
 				View childView = View.inflate(context,
 						R.layout.dynamic_answer_item, null);
 				TextView txV = (TextView) childView.findViewById(R.id.answer_tx);
+				SpannableString spanStr = getSpannableString(replay, i, txV);
 				txV.setHighlightColor(Color.TRANSPARENT);
 				txV.setText(spanStr);
 				txV.setMovementMethod(LinkMovementMethod.getInstance());
@@ -145,9 +146,9 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	}
 
 	private SpannableString getSpannableString(final DynamicReplay replay,
-			final int position) {
+			final int position, final TextView txV) {
 		String span = replay.memberName + "：" + replay.message;
-		SpannableString spanStr = new SpannableString(span);
+		final SpannableString spanStr = new SpannableString(span);
 		spanStr.setSpan(new ClickableSpan() {
 
 			@Override
@@ -159,6 +160,21 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 
 			@Override
 			public void onClick(View widget) {
+				spanStr.setSpan(new ForegroundColorSpan(context.getResources()
+						.getColor(R.color.regist_yellow)), 0, (replay.memberName
+						.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				txV.setText(spanStr);
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						spanStr.setSpan(new ForegroundColorSpan(context.getResources()
+								.getColor(R.color.messageto_tx_selector)), 0, (replay.memberName
+								.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						txV.setText(spanStr);
+					}
+				}, 800);
 				if (answerClickListener != null) {
 					answerClickListener.onAnswerClick(replay, position);
 				}

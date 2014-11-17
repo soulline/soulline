@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
+import com.cdd.activity.findpage.ReplyDetaiAdapter.OnAnswerMemberClickLister;
 import com.cdd.activity.image.ImageNetPageActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.fragment.BaseFragmentListener;
@@ -89,6 +90,15 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener{
 		if (adapter == null) {
 			adapter = new ReplyDetaiAdapter(context);
 			adapter.addData(list);
+			adapter.addOnAnswerMemberClickLister(new OnAnswerMemberClickLister() {
+				
+				@Override
+				public void onAnswerClick(DynamicReplay replay, int position) {
+					Intent userInfo = new Intent(context, UserInfoActivity.class);
+					userInfo.putExtra("memberId", replay.memberId);
+					startActivity(userInfo);
+				}
+			});
 			replyListView.getRefreshableView().setAdapter(adapter);
 		} else {
 			adapter.clear();

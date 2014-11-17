@@ -27,6 +27,10 @@ public class FansListOp extends BaseOperater {
 		params.put("pageNum", pageNum);
 	}
 
+	public void setMemberId(String memberId) {
+		params.put("memberId", memberId);
+	}
+	
 	@Override
 	public void initRequest() {
 		// TODO Auto-generated method stub

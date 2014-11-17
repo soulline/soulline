@@ -131,7 +131,11 @@ public class BottomReplyFragment extends DialogFragment implements
 					@Override
 					public void onCallBack(Object data) {
 						if (getActivity() instanceof BaseActivity) {
-							((BaseActivity) getActivity()).showToast("回复成功");
+							if (replyType == 2) {
+								((BaseActivity) getActivity()).showToast("回复成功");
+							} else if (replyType == 3) {
+								((BaseActivity) getActivity()).showToast("发送成功");
+							}
 						}
 						if (listener != null) {
 							listener.onCallBack("success");
@@ -158,7 +162,7 @@ public class BottomReplyFragment extends DialogFragment implements
 		case R.id.reply_send:
 			if (replyType == 1) {
 				sendDynamicReply();
-			} else if (replyType == 2) {
+			} else if (replyType == 2 || replyType == 3) {
 				sendMessageReply();
 			}
 			break;

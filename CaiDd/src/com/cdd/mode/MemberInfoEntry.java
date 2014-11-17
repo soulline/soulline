@@ -34,6 +34,8 @@ public class MemberInfoEntry extends BaseEntry {
 	
 	public String dynamicInfoCount = "";
 	
+	public String relation = "";
+	
 	public String idolCount = "";
 
 	public String status = "";

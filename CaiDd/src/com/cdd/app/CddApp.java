@@ -53,6 +53,7 @@ public class CddApp extends Application {
 		account.name = DataUtils.getPreferences("name", "");
 		account.scoreCeiling = DataUtils.getPreferences("scoreCeiling", "");
 		account.sex = DataUtils.getPreferences("sex", "");
+		account.id = DataUtils.getPreferences("id", "");
 		account.signTime = DataUtils.getPreferences("signTime", "");
 		account.status = DataUtils.getPreferences("status", "");
 		return account;
@@ -68,6 +69,7 @@ public class CddApp extends Application {
 		DataUtils.putPreferences("name", account.name);
 		DataUtils.putPreferences("scoreCeiling", account.scoreCeiling);
 		DataUtils.putPreferences("sex", account.sex);
+		DataUtils.putPreferences("id", account.id);
 		DataUtils.putPreferences("signTime", account.signTime);
 		DataUtils.putPreferences("status", account.status);
 		setLoginState(true);
@@ -83,6 +85,7 @@ public class CddApp extends Application {
 		DataUtils.putPreferences("name", "");
 		DataUtils.putPreferences("scoreCeiling", "");
 		DataUtils.putPreferences("sex", "");
+		DataUtils.putPreferences("id", "");
 		DataUtils.putPreferences("signTime", "");
 		DataUtils.putPreferences("status", "");
 		setLoginState(false);

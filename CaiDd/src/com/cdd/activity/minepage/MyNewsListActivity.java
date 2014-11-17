@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicAdapter;
 import com.cdd.activity.findpage.PulishDynamicActivity;
+import com.cdd.activity.findpage.UserInfoActivity;
 import com.cdd.activity.findpage.DynamicAdapter.OnAnswerMemberClickLister;
 import com.cdd.activity.findpage.DynamicAdapter.OnImageClickListener;
 import com.cdd.activity.findpage.DynamicAdapter.OnPackListener;
@@ -184,7 +185,9 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 
 			@Override
 			public void onAnswerClick(DynamicReplay replay, int position) {
-				// TODO Auto-generated method stub
+				Intent userInfo = new Intent(context, UserInfoActivity.class);
+				userInfo.putExtra("memberId", replay.memberId);
+				startActivity(userInfo);
 			}
 		});
 

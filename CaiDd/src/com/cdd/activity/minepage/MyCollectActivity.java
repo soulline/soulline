@@ -296,6 +296,7 @@ public class MyCollectActivity extends BaseActivity implements OnClickListener{
 			findViewById(R.id.sc_dongtai_layout).setBackgroundColor(
 					getResources().getColor(R.color.white));
 			scDongtaiTx.setTextColor(getResources().getColor(R.color.sq_blue));
+			dynamicList.clear();
 			sqListview.setVisibility(View.VISIBLE);
 			dongtaiListview.setVisibility(View.GONE);
 			requestAskList("1", true);
@@ -543,7 +544,7 @@ public class MyCollectActivity extends BaseActivity implements OnClickListener{
 	private void requestDynamicList(String pageNumber, final boolean isShowNow) {
 		final DingdangDynamicListOp dingdangOp = new DingdangDynamicListOp(
 				context);
-		dingdangOp.setParams("1");
+		dingdangOp.setParams(pageNumber);
 		dingdangOp.onRequest(new RequestListener() {
 
 			@Override

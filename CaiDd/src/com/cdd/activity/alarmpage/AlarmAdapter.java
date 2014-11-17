@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.cdd.R;
 import com.cdd.mode.AlarmItemEntry;
+import com.cdd.mode.RemindEntry;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -16,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class AlarmAdapter extends ArrayAdapter<AlarmItemEntry> {
+public class AlarmAdapter extends ArrayAdapter<RemindEntry> {
 
 	private Context context;
 	
@@ -25,9 +26,9 @@ public class AlarmAdapter extends ArrayAdapter<AlarmItemEntry> {
 		this.context = context;
 	}
 
-	public void addData(ArrayList<AlarmItemEntry> list) {
+	public void addData(ArrayList<RemindEntry> list) {
 		synchronized (list) {
-			for (AlarmItemEntry entry : list) {
+			for (RemindEntry entry : list) {
 				add(entry);
 			}
 		}
@@ -50,28 +51,49 @@ public class AlarmAdapter extends ArrayAdapter<AlarmItemEntry> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		AlarmItemEntry item = getItem(position);
-		holder.alarmType.setText(item.alarmtype);
-		holder.alarmDate.setText(item.alarmDate);
-		holder.alarmDetail.setText(item.alarmDetail);
-		holder.alarmTitle.setText(item.alarmTitle);
-		holder.alarmDays.setText(item.aliveDays);
-		if (TextUtils.isEmpty(item.alarmSecondType)) {
-			holder.alarmNote.setVisibility(View.GONE);
-		} else {
-			holder.alarmNote.setVisibility(View.VISIBLE);
-			holder.alarmNote.setText(item.alarmSecondType);
+		RemindEntry item = getItem(position);
+		String typeStr = "";
+		String sencondType = "";
+		if (item.type.equals("1")) {
+			typeStr = "考试倒计时";
+			sencondType = "考试期";
+		} else if (item.type.equals("2")) {
+			typeStr = "报名倒计时";
+			sencondType = "报名期";
+		} else if (item.type.equals("3")) {
+			typeStr = "学习计划";
 		}
-		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
-		String today = format.format(new Date());
-		if (today.equals(item.alarmDate)) {
-			holder.alarmBgLayout.setBackgroundResource(R.drawable.alarm_item_today_bg);
-			holder.alarmDays.setVisibility(View.GONE);
-			convertView.findViewById(R.id.days_title).setVisibility(View.GONE);
-		} else {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyy年MM月dd日");
+		holder.alarmType.setText(typeStr);
+		
+		holder.alarmDetail.setText(item.des);
+		holder.alarmTitle.setText(item.title);
+		
+		int days = 0;
+		try {
+			Date date = format1.parse(item.remindTime);
+			holder.alarmDate.setText(format2.format(date));
+			long nowTime = System.currentTimeMillis();
+			days = (int)((nowTime - date.getTime()) / (24L * 3600L * 1000L));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (days > 0) {
 			holder.alarmDays.setVisibility(View.VISIBLE);
 			convertView.findViewById(R.id.days_title).setVisibility(View.VISIBLE);
 			holder.alarmBgLayout.setBackgroundResource(R.drawable.alarm_item_bg);
+			holder.alarmDays.setText(days + "");
+		} else if (days == 0) {
+			holder.alarmBgLayout.setBackgroundResource(R.drawable.alarm_item_today_bg);
+			holder.alarmDays.setVisibility(View.GONE);
+			convertView.findViewById(R.id.days_title).setVisibility(View.GONE);
+		}
+		if (TextUtils.isEmpty(sencondType)) {
+			holder.alarmNote.setVisibility(View.GONE);
+		} else {
+			holder.alarmNote.setVisibility(View.VISIBLE);
+			holder.alarmNote.setText(sencondType);
 		}
 		if (position == (getCount() - 1)) {
 			convertView.findViewById(R.id.bottom_line).setVisibility(View.GONE);

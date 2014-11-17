@@ -51,6 +51,7 @@ public class LoginOperater extends BaseOperater {
 		account.name = response.optString("name");
 		account.scoreCeiling = response.optString("scoreCeiling");
 		account.sex = response.optString("sex");
+		account.id = response.optString("id");
 		account.signTime = response.optString("signTime");
 		account.status = response.optString("status");
 	}

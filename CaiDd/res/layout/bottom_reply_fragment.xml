@@ -20,6 +20,7 @@
                 android:minHeight="@dimen/dd_dimen_60px"
                 android:layout_marginLeft="@dimen/dd_dimen_10px"
                 android:background="@null"
+                android:imeOptions="actionSend"
                 android:textColor="@color/dingdang_black"
                 android:textSize="@dimen/dd_dimen_28px"
                 android:hint="请输入信息内容"/>

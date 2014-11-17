@@ -23,4 +23,6 @@ public class AccountInfo extends BaseEntry {
 	public String sex = "";
 	
 	public String signTime = "";
+	
+	public String id = "";
 }
