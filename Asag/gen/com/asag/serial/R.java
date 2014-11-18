@@ -364,11 +364,13 @@ public final class R {
         public static final int welcome=0x7f02004b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b008a;
+        public static final int action_settings=0x7f0b008f;
+        public static final int b_big_size=0x7f0b008e;
         public static final int base_content_=0x7f0b0010;
         public static final int base_extra_layout=0x7f0b0011;
         public static final int base_loading=0x7f0b0012;
         public static final int base_title_layout=0x7f0b000f;
+        public static final int big_size=0x7f0b008d;
         public static final int bt_ceding=0x7f0b005d;
         public static final int bt_file=0x7f0b005b;
         public static final int bt_function=0x7f0b005c;
@@ -436,6 +438,7 @@ public final class R {
         public static final int lujing=0x7f0b001c;
         public static final int minute_check=0x7f0b006b;
         public static final int minute_paikong=0x7f0b006c;
+        public static final int normal_size=0x7f0b008c;
         public static final int o2_status_img=0x7f0b0054;
         public static final int o2_value=0x7f0b0043;
         public static final int o2_value_state=0x7f0b0042;
@@ -465,6 +468,7 @@ public final class R {
         public static final int rhid=0x7f0b0057;
         public static final int rk_date_input=0x7f0b0075;
         public static final int route_menu=0x7f0b0018;
+        public static final int s_small_size=0x7f0b008a;
         public static final int search_menu=0x7f0b0034;
         public static final int sendButton=0x7f0b000b;
         public static final int sendmsg=0x7f0b0009;
@@ -473,6 +477,7 @@ public final class R {
         public static final int shidu_value=0x7f0b0080;
         public static final int shitu_menu=0x7f0b0033;
         public static final int showmsg=0x7f0b0006;
+        public static final int small_size=0x7f0b008b;
         public static final int spinner=0x7f0b0066;
         public static final int spinner_item_tx=0x7f0b0087;
         public static final int spinner_list=0x7f0b0088;
@@ -528,6 +533,7 @@ public final class R {
         public static final int spinner_item=0x7f030014;
         public static final int spinner_pop_menu=0x7f030015;
         public static final int start=0x7f030016;
+        public static final int textsize_set_menu=0x7f030017;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

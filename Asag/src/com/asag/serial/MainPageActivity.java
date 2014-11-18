@@ -1,5 +1,6 @@
 package com.asag.serial;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +24,7 @@ import com.asag.serial.FilePopupMenu.OnFileClickListener;
 import com.asag.serial.FunctionPopMenu.OnFunctionClickListener;
 import com.asag.serial.SettingPopMenu.OnSettingClickListener;
 import com.asag.serial.ShituPopMenu.OnShituClickListener;
+import com.asag.serial.TextSizeMenu.OnTextSizeClickListener;
 import com.asag.serial.alarm.JcAlarm;
 import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
@@ -31,6 +33,7 @@ import com.asag.serial.mode.CutDownEntry;
 import com.asag.serial.mode.RightDataEntry;
 import com.asag.serial.service.SerialService;
 import com.asag.serial.utils.CMDCode;
+import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
 import com.asag.serial.utils.SerialRequestCode;
 import com.asag.serial.utils.ServiceUtil;
@@ -561,9 +564,52 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 					@Override
 					public void onClick(int resourceId) {
+						switch (resourceId) {
+						case R.id.textSize_menu:
+							showTextSizeMenu();
+							break;
+
+						default:
+							break;
+						}
 
 					}
 				});
+		settingMenu.showPopupWindow(findViewById(R.id.setting_menu));
+	}
+	
+	private void showTextSizeMenu() {
+		TextSizeMenu settingMenu = new TextSizeMenu(context, new OnTextSizeClickListener() {
+			
+			@Override
+			public void onClick(int resourceId) {
+				switch (resourceId) {
+				case R.id.s_small_size:
+					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+					break;
+					
+				case R.id.small_size:
+					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 2);
+					break;
+					
+				case R.id.normal_size:
+					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 3);
+					break;
+					
+				case R.id.big_size:
+					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 4);
+					break;
+					
+				case R.id.b_big_size:
+					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 5);
+					break;
+
+				default:
+					break;
+				}
+				
+			}
+		});
 		settingMenu.showPopupWindow(findViewById(R.id.setting_menu));
 	}
 

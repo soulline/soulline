@@ -14,7 +14,8 @@
         <TextView
             android:id="@+id/top_title_tx"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
             android:background="@drawable/title_blue_bg"
             android:gravity="center"
             android:text="储粮质量安全监测系统"
