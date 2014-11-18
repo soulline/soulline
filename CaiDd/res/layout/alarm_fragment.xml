@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/alarm_item_blue" >
@@ -31,17 +32,28 @@
                 android:layout_width="@dimen/dd_dimen_640px"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:gravity="center"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:textColor="@color/dingdang_black"
                 android:textSize="@dimen/dd_dimen_28px" />
         </RelativeLayout>
         
-        <ListView
-            android:id="@+id/alarm_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null" />
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/alarm_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                ptr:ptrHeaderTextColor="@color/sq_blue"
+                ptr:ptrAnimationStyle="flip"
+                android:smoothScrollbar="true"
+                android:divider="@null" />
+        <ImageView android:id="@+id/empty_content_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dd_dimen_50px"
+                android:background="@drawable/empty_remind"
+                android:visibility="gone"/>
     </LinearLayout>
 
     <RelativeLayout android:id="@+id/add_alarm_layout"

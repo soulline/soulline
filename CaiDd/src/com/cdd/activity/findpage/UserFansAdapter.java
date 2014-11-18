@@ -21,18 +21,15 @@ public class UserFansAdapter extends ArrayAdapter<FansEntry> {
 
 	private Context context;
 
-	private int type = 1;
-	
 	public interface OnListenChange {
 		public void onChange(int position, String relation);
 	}
 	
 	private OnListenChange listener;
 
-	public UserFansAdapter(Context context, int type) {
+	public UserFansAdapter(Context context) {
 		super(context, 0);
 		this.context = context;
-		this.type = type;
 	}
 	
 	public void addOnListenChange(OnListenChange listener) {
@@ -88,14 +85,10 @@ public class UserFansAdapter extends ArrayAdapter<FansEntry> {
 		if (!TextUtils.isEmpty(entry.description) && !entry.description.equals("null")) {
 			holder.simpleText.setText(entry.description);
 		}
-		if (type == 1 && entry.relation.equals("0")) {
+		if (entry.relation.equals("0") || entry.relation.equals("3")) {
 			holder.listenState.setBackgroundResource(R.drawable.add_listen_selector);
-		} else if (type == 1 && entry.relation.equals("1")) {
-			holder.listenState.setBackgroundResource(R.drawable.cancel_listen);
-		} else if (type == 2 && entry.relation.equals("0")) {
+		} else if (entry.relation.equals("1") || entry.relation.equals("2")) {
 			holder.listenState.setBackgroundResource(R.drawable.cancel_listen_selector);
-		} else if (type == 2 && entry.relation.equals("1")) {
-			holder.listenState.setBackgroundResource(R.drawable.add_listen_selector);
 		}
 		final int clickPosition = position;
 		holder.listenState.setOnClickListener(new OnClickListener() {

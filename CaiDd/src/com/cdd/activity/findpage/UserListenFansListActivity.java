@@ -23,25 +23,25 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class UserListenFansListActivity extends BaseActivity implements OnClickListener{
-
+public class UserListenFansListActivity extends BaseActivity implements
+		OnClickListener {
 
 	private PullToRefreshListView fansListview;
-	
+
 	private ArrayList<FansEntry> fansList = new ArrayList<FansEntry>();
-	
+
 	private int pageNum = 0;
 
 	private int requestPage = 1;
-	
+
 	private View footMoreView;
-	
+
 	private UserFansAdapter adapter;
-	
+
 	private String showType = "";
-	
+
 	private String memberId = "";
-	
+
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -52,6 +52,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 
 	private void initContent() {
 		showType = getIntent().getStringExtra("fans_type");
+		memberId = getIntent().getStringExtra("memberId");
 		if (showType.equals("1")) {
 			initTitle("粉丝");
 			requestFansList("1", true);
@@ -59,9 +60,8 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			initTitle("关注");
 			requestListenList("1", true);
 		}
-		memberId = getIntent().getStringExtra("memberId");
 	}
-	
+
 	private void initView() {
 		footMoreView = View.inflate(context, R.layout.load_more_view, null);
 		footMoreView.setOnClickListener(new OnClickListener() {
@@ -75,7 +75,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 		fansListview = (PullToRefreshListView) findViewById(R.id.fans_list);
 		initfansListView();
 	}
-	
+
 	private void loadMore() {
 		fansListview.getRefreshableView().removeFooterView(footMoreView);
 		int page = pageNum + 1;
@@ -91,10 +91,9 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			requestListenList(pageNumber, true);
 		}
 	}
-	
+
 	private void doRefreshListView() {
-		fansListview.getRefreshableView().removeFooterView(
-				footMoreView);
+		fansListview.getRefreshableView().removeFooterView(footMoreView);
 		requestPage = 1;
 		String pageNumber = "";
 		if (pageNum == 0) {
@@ -109,24 +108,24 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			requestListenList(pageNumber, false);
 		}
 	}
-	
+
 	private void attentionRequest(final int position, String idolId) {
 		AttentionOp atOp = new AttentionOp(context);
 		atOp.setParams(idolId);
 		atOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 				showToast("关注成功");
 				if (showType.equals("1")) {
 					handler.post(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							adapter.getItem(position).relation = "1";
@@ -138,24 +137,24 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			}
 		});
 	}
-	
+
 	private void unAttentionRequest(final int position, String idolId) {
 		UnAttentionOp uatOp = new UnAttentionOp(context);
 		uatOp.setParams(idolId);
 		uatOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 				showToast("已取消关注");
 				if (showType.equals("1")) {
 					handler.post(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							adapter.getItem(position).relation = "0";
@@ -165,7 +164,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 					});
 				} else if (showType.equals("2")) {
 					handler.post(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							adapter.remove(adapter.getItem(position));
@@ -177,28 +176,26 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			}
 		});
 	}
-	
+
 	private void initFansListContent(ArrayList<FansEntry> list) {
 		fansListview.setVisibility(View.VISIBLE);
 		findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
 		if (adapter == null) {
-			if (showType.equals("1")) {
-				adapter = new UserFansAdapter(context, 1);
-			} else if (showType.equals("2")) {
-				adapter = new UserFansAdapter(context, 2);
-			}
+			adapter = new UserFansAdapter(context);
 			adapter.addData(list);
 			fansListview.getRefreshableView().setAdapter(adapter);
 			adapter.addOnListenChange(new OnListenChange() {
-				
+
 				@Override
 				public void onChange(int position, String relation) {
 					if (showType.equals("1") && relation.equals("1")) {
-						unAttentionRequest(position, adapter.getItem(position).id);
+						unAttentionRequest(position,
+								adapter.getItem(position).id);
 					} else if (showType.equals("1") && relation.equals("0")) {
 						attentionRequest(position, adapter.getItem(position).id);
 					} else if (showType.equals("2")) {
-						unAttentionRequest(position, adapter.getItem(position).id);
+						unAttentionRequest(position,
+								adapter.getItem(position).id);
 					}
 				}
 			});
@@ -211,13 +208,13 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			fansListview.getRefreshableView().addFooterView(footMoreView);
 		}
 	}
-	
+
 	private void requestListenList(String page, final boolean isShowNow) {
 		final ListenListOp listenOp = new ListenListOp(context);
 		listenOp.setParams(page);
 		listenOp.setMemberId(memberId);
 		listenOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				handler.post(new Runnable() {
@@ -234,7 +231,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 					}
 				});
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 
@@ -289,13 +286,13 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			}
 		});
 	}
-	
+
 	private void requestFansList(String page, final boolean isShowNow) {
 		final FansListOp fansOp = new FansListOp(context);
 		fansOp.setParams(page);
 		fansOp.setMemberId(memberId);
 		fansOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				handler.post(new Runnable() {
@@ -312,7 +309,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 					}
 				});
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 
@@ -367,7 +364,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 			}
 		});
 	}
-	
+
 	private void initfansListView() {
 		fansListview.getRefreshableView().setOnItemClickListener(
 				new OnItemClickListener() {
@@ -375,12 +372,11 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						
+
 					}
 				});
 		fansListview.setMode(Mode.PULL_FROM_START);
-		fansListview.getLoadingLayoutProxy(true, true).setPullLabel(
-				"下拉刷新...");
+		fansListview.getLoadingLayoutProxy(true, true).setPullLabel("下拉刷新...");
 		fansListview.getLoadingLayoutProxy(true, true).setRefreshingLabel(
 				"正在刷新...");
 		fansListview.getLoadingLayoutProxy(true, true).setReleaseLabel(
@@ -406,7 +402,7 @@ public class UserListenFansListActivity extends BaseActivity implements OnClickL
 		default:
 			break;
 		}
-		
+
 	}
 
 }

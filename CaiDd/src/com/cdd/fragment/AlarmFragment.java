@@ -9,6 +9,10 @@ import com.cdd.mode.RemindEntry;
 import com.cdd.mode.RemindInfo;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.RemindListOp;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,7 +30,7 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 	
 	private View view;
 	
-	private ListView alarmList;
+	private PullToRefreshListView alarmList;
 	
 	private AlarmAdapter adapter;
 	
@@ -54,13 +58,34 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 	private void initView() {
 		view.findViewById(R.id.add_alarm_layout).setOnClickListener(this);
 		announcementContent = (TextView) view.findViewById(R.id.announcement_content);
-		alarmList = (ListView) view.findViewById(R.id.alarm_list);
+		alarmList = (PullToRefreshListView) view.findViewById(R.id.alarm_list);
+		initAlarmListView();
+		view.findViewById(R.id.empty_content_layout).setOnClickListener(this);
+	}
+	
+	private void initAlarmListView() {
 		alarmList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
+			}
+		});
+		alarmList.setMode(Mode.PULL_FROM_START);
+		alarmList.getLoadingLayoutProxy(true, true).setPullLabel(
+				"下拉刷新...");
+		alarmList.getLoadingLayoutProxy(true, true).setRefreshingLabel(
+				"正在刷新...");
+		alarmList.getLoadingLayoutProxy(true, true).setReleaseLabel(
+				"释放刷新...");
+		alarmList.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				if (refreshView.isHeaderShown()) {
+					requestRemindInfo();
+				}
 			}
 		});
 	}
@@ -84,9 +109,19 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 						@Override
 						public void run() {
 							if (remindInfo.noticeList.size() > 0) {
+								announcementContent.setVisibility(View.VISIBLE);
 								announcementContent.setText(remindInfo.noticeList.get(0).message);
+							} else {
+								announcementContent.setVisibility(View.GONE);
 							}
-							initAdapater(remindInfo.remindList);
+							if (remindInfo.remindList.size() > 0) {
+								alarmList.setVisibility(View.VISIBLE);
+								view.findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
+								initAdapater(remindInfo.remindList);
+							} else {
+								alarmList.setVisibility(View.GONE);
+								view.findViewById(R.id.empty_content_layout).setVisibility(View.VISIBLE);
+							}
 						}
 					});
 				}
@@ -115,6 +150,10 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.add_alarm_layout:
 			
+			break;
+			
+		case R.id.empty_content_layout:
+			requestRemindInfo();
 			break;
 
 		default:
