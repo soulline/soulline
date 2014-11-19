@@ -14,7 +14,7 @@ public class SerialSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
 
 	private Context context;
 	
-	private float size;
+	private float size = 1.0f;
 	
 	public SerialSpinnerAdapter(Context context) {
 		super(context, 0);
@@ -67,7 +67,7 @@ public class SerialSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.name.setTextSize(holder.name.getTextSize() * size);
+		holder.name.setTextSize(10.2f * size);
 		holder.name.setText(getItem(position).name);
 		return convertView;
 	}

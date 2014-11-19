@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -86,14 +87,22 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initService();
 		initView();
 		registerReceiver();
+		RightDataEntry entry1 = new RightDataEntry();
+		entry1.co2 = "12345";
+		entry1.number = "1";
+		entry1.o2 = "20.0";
+		entry1.ph3data = "3212";
+		entry1.shidu = "20.0";
+		entry1.wendu = "14.0";
+		addData(entry1);
 		initTextSize();
 	}
 	
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
-		if (adapter != null) {
-			adapter.setItemTextSize(size);
-			adapter.notifyDataSetChanged();
+		if (adapter != null && adapter.getCount() > 0) {
+			RightDataEntry entry = adapter.getItem(0);
+			addData(entry);
 		}
 		switch (size) {
 		case 1:
@@ -129,47 +138,47 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void reloadNewTextSize(float size) {
-		topTitleTx.setTextSize(topTitleTx.getTextSize() * size);
-		fileMenu.setTextSize(fileMenu.getTextSize() * size);
-		functionMenu.setTextSize(functionMenu.getTextSize() * size);
-		cedingMenu.setTextSize(cedingMenu.getTextSize() * size);
-		settingMenu.setTextSize(settingMenu.getTextSize() * size);
-		shituMenu.setTextSize(shituMenu.getTextSize() * size);
-		searchMenu.setTextSize(searchMenu.getTextSize() * size);
-		helpMenu.setTextSize(helpMenu.getTextSize() * size);
-		cancelAlarmMenu.setTextSize(cancelAlarmMenu.getTextSize() * size);
-		checkFunctionTx.setTextSize(checkFunctionTx.getTextSize() * size);
+		topTitleTx.setTextSize(15.69f * size);
+		fileMenu.setTextSize(12.55f * size);
+		functionMenu.setTextSize(12.55f* size);
+		cedingMenu.setTextSize(12.55f * size);
+		settingMenu.setTextSize(12.55f * size);
+		shituMenu.setTextSize(12.55f * size);
+		searchMenu.setTextSize(12.55f * size);
+		helpMenu.setTextSize(12.55f * size);
+		cancelAlarmMenu.setTextSize(12.55f * size);
+		checkFunctionTx.setTextSize(12.55f * size);
 //		checkWayValue.setTextSize(checkWayValue.getTextSize() * size);
-		paikongCheckTime.setTextSize(paikongCheckTime.getTextSize() * size);
-		checkCheckTime.setTextSize(checkCheckTime.getTextSize() * size);
-		co2Tx.setTextSize(co2Tx.getTextSize() * size);
-		paikongTimeState.setTextSize(checkWayValue.getTextSize() * size);
-		checkTimeState.setTextSize(paikongCheckTime.getTextSize() * size);
-		checkCheckTime.setTextSize(checkCheckTime.getTextSize() * size);
-		o2Tx.setTextSize(o2Tx.getTextSize() * size);
+		paikongCheckTime.setTextSize(11.0f * size);
+		checkCheckTime.setTextSize(11.0f * size);
+		co2Tx.setTextSize(11.0f * size);
+		paikongTimeState.setTextSize(11.0f * size);
+		checkTimeState.setTextSize(11.0f * size);
+		checkCheckTime.setTextSize(11.0f * size);
+		o2Tx.setTextSize(11.0f * size);
 		
-		ph3tx.setTextSize(ph3tx.getTextSize() * size);
-		rhtx.setTextSize(rhtx.getTextSize() * size);
-		ttx.setTextSize(ttx.getTextSize() * size);
-		co2State.setTextSize(co2State.getTextSize() * size);
-		o2State.setTextSize(o2State.getTextSize() * size);
-		ph3State.setTextSize(ph3State.getTextSize() * size);
-		rhState.setTextSize(rhState.getTextSize() * size);
-		tState.setTextSize(tState.getTextSize() * size);
-		stopMenu.setTextSize(stopMenu.getTextSize() * size);
+		ph3tx.setTextSize(11.0f * size);
+		rhtx.setTextSize(11.0f * size);
+		ttx.setTextSize(11.0f * size);
+		co2State.setTextSize(11.0f * size);
+		o2State.setTextSize(11.0f * size);
+		ph3State.setTextSize(11.0f * size);
+		rhState.setTextSize(11.0f * size);
+		tState.setTextSize(11.0f * size);
+		stopMenu.setTextSize(11.0f * size);
 		
-		titleResult.setTextSize(titleResult.getTextSize() * size);
-		resultCo2.setTextSize(resultCo2.getTextSize() * size);
-		resultRh.setTextSize(resultRh.getTextSize() * size);
-		resultTc.setTextSize(resultTc.getTextSize() * size);
-		digitalClock.setTextSize(digitalClock.getTextSize() * size);
-		co2Danwei.setTextSize(co2Danwei.getTextSize() * size);
-		o2Danwei.setTextSize(o2Danwei.getTextSize() * size);
-		ph3Danwei.setTextSize(ph3Danwei.getTextSize() * size);
-		rhDanwei.setTextSize(rhDanwei.getTextSize() * size);
-		tDanwei.setTextSize(tDanwei.getTextSize() * size);
-		paikongCheckDanwei.setTextSize(paikongCheckDanwei.getTextSize() * size);
-		checkCheckDanwei.setTextSize(checkCheckDanwei.getTextSize() * size);
+		titleResult.setTextSize(11.0f * size);
+		resultCo2.setTextSize(11.0f * size);
+		resultRh.setTextSize(11.0f * size);
+		resultTc.setTextSize(11.0f * size);
+		digitalClock.setTextSize(11.0f * size);
+		co2Danwei.setTextSize(11.0f * size);
+		o2Danwei.setTextSize(11.0f * size);
+		ph3Danwei.setTextSize(11.0f * size);
+		rhDanwei.setTextSize(11.0f * size);
+		tDanwei.setTextSize(11.0f * size);
+		paikongCheckDanwei.setTextSize(11.0f * size);
+		checkCheckDanwei.setTextSize(11.0f * size);
 	}
 
 	private void initView() {
@@ -600,6 +609,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							int newType = -1;
 							if (resourceId == R.id.liangan_jiance_menu) {
 								newType = 1;
+								checkFunctionTx.setText("粮安监测");
 								sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
 								startCanshuActivity(newType);
 							} else if (resourceId == R.id.point_check_menu) {
@@ -607,11 +617,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
+									checkFunctionTx.setText("点检测");
 									sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
 									startCanshuActivity(newType);
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								newType = 3;
+								checkFunctionTx.setText("仓安监测");
 								sendMessageS(CMDCode.FF_CANGAN_CHECK);
 								startCanshuActivity(newType);
 							}
@@ -694,6 +706,16 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void onClick(int resourceId) {
+				final ProgressDialog dialog = new ProgressDialog(context);
+				dialog.setTitle("正在设置字体，请稍后...");
+				dialog.show();
+				handler.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						dialog.dismiss();
+					}
+				}, 1000);
 				switch (resourceId) {
 				case R.id.s_small_size:
 					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 1);

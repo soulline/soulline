@@ -4,7 +4,7 @@
     android:layout_height="wrap_content" >
     
     <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="25dp">
+        android:layout_height="30dp">
         <TextView android:id="@+id/data_no"
             android:layout_width="40dp"
             android:layout_height="wrap_content"

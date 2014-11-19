@@ -471,7 +471,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
-                                android:text="32.1"
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 

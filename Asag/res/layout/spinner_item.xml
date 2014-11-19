@@ -3,14 +3,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-    
-    <TextView android:id="@+id/spinner_item_tx"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
-        android:textSize="13dp"
-        android:textColor="@color/serial_black"
-        android:text="黑龙江"
-        android:gravity="center"
-        android:background="@drawable/title_menu_selector"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="vertical"
+        android:background="@drawable/title_menu_selector" >
+
+        <TextView
+            android:id="@+id/spinner_item_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/serial_black"
+            android:textSize="13dp" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -38,26 +38,6 @@ public class LiangzhongPopMenu extends PopupWindow {
 			adapter.setItemTextSize(size);
 			adapter.notifyDataSetChanged();
 		}
-		switch (size) {
-		case 1:
-			this.setWidth(60 * 1);
-			break;
-		case 2:
-			this.setWidth((60 * 6) / 5);
-			break;
-		case 3:
-			this.setWidth((60 * 7) / 5);
-			break;
-		case 4:
-			this.setWidth((60 * 8) / 5);
-			break;
-		case 5:
-			this.setWidth((60 * 9) / 5);
-			break;
-
-		default:
-			break;
-		}
 	}
 
 	public LiangzhongPopMenu(Context context, OnLiangClickListener listener, ArrayList<SpinnerItem> list) {
@@ -67,6 +47,7 @@ public class LiangzhongPopMenu extends PopupWindow {
 		view = inflater.inflate(R.layout.spinner_pop_menu, null);
 		this.listener = listener;
 		this.setContentView(view);
+		this.setWidth(60);
 		this.setHeight(LayoutParams.WRAP_CONTENT);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
