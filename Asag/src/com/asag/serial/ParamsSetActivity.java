@@ -161,7 +161,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		jianceTimeTitle = (TextView) findViewById(R.id.jiance_time_title);
 		jianceTimeDanwei = (TextView) findViewById(R.id.jiance_time_danwei);
 		startTimeTitle = (TextView) findViewById(R.id.start_time_title);
-		jianceTimeTitle = (TextView) findViewById(R.id.jiance_time_title);
+		jiangeTimeTitle = (TextView) findViewById(R.id.jiange_time_title);
 		jiangeTimeDanwei = (TextView) findViewById(R.id.jiange_time_danwei);
 		btnOk = (Button) findViewById(R.id.btn_ok);
 		btnCancel = (Button) findViewById(R.id.btn_cancel);
