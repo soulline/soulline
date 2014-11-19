@@ -1,6 +1,5 @@
 package com.asag.serial;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,6 +36,7 @@ import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
 import com.asag.serial.utils.SerialRequestCode;
 import com.asag.serial.utils.ServiceUtil;
+import com.asag.serial.widget.DigitalNewClock;
 
 public class MainPageActivity extends BaseActivity implements OnClickListener {
 
@@ -69,6 +69,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private TextView stopMenu;
 	
 	private ImageView checkAnimationImg;
+	
+	private TextView topTitleTx, fileMenu, functionMenu, cedingMenu,
+	settingMenu, shituMenu, searchMenu, helpMenu, cancelAlarmMenu, checkFunctionTx;
+	
+	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei, ph3Danwei, o2Danwei, rhDanwei, tDanwei;
+	
+	private DigitalNewClock digitalClock;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,35 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initService();
 		initView();
 		registerReceiver();
+		initTextSize();
+	}
+	
+	private void initTextSize() {
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		if (adapter != null) {
+			adapter.setItemTextSize(size);
+			adapter.notifyDataSetChanged();
+		}
+		switch (size) {
+		case 1:
+			reloadNewTextSize(1.0f);
+			break;
+		case 2:
+			reloadNewTextSize(1.2f);
+			break;
+		case 3:
+			reloadNewTextSize(1.4f);
+			break;
+		case 4:
+			reloadNewTextSize(1.6f);
+			break;
+		case 5:
+			reloadNewTextSize(1.8f);
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	private void showCheckAnim(boolean isShow) {
@@ -89,8 +125,72 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			checkAnimationImg.setImageResource(R.drawable.check_anima_1);
 		}
 	}
+	
+	private void reloadNewTextSize(float size) {
+		topTitleTx.setTextSize(topTitleTx.getTextSize() * size);
+		fileMenu.setTextSize(fileMenu.getTextSize() * size);
+		functionMenu.setTextSize(functionMenu.getTextSize() * size);
+		cedingMenu.setTextSize(cedingMenu.getTextSize() * size);
+		settingMenu.setTextSize(settingMenu.getTextSize() * size);
+		shituMenu.setTextSize(shituMenu.getTextSize() * size);
+		searchMenu.setTextSize(searchMenu.getTextSize() * size);
+		helpMenu.setTextSize(helpMenu.getTextSize() * size);
+		cancelAlarmMenu.setTextSize(cancelAlarmMenu.getTextSize() * size);
+		checkFunctionTx.setTextSize(checkFunctionTx.getTextSize() * size);
+//		checkWayValue.setTextSize(checkWayValue.getTextSize() * size);
+		paikongCheckTime.setTextSize(paikongCheckTime.getTextSize() * size);
+		checkCheckTime.setTextSize(checkCheckTime.getTextSize() * size);
+		co2Tx.setTextSize(co2Tx.getTextSize() * size);
+		paikongTimeState.setTextSize(checkWayValue.getTextSize() * size);
+		checkTimeState.setTextSize(paikongCheckTime.getTextSize() * size);
+		checkCheckTime.setTextSize(checkCheckTime.getTextSize() * size);
+		o2Tx.setTextSize(o2Tx.getTextSize() * size);
+		
+		ph3tx.setTextSize(ph3tx.getTextSize() * size);
+		rhtx.setTextSize(rhtx.getTextSize() * size);
+		ttx.setTextSize(ttx.getTextSize() * size);
+		co2State.setTextSize(co2State.getTextSize() * size);
+		o2State.setTextSize(o2State.getTextSize() * size);
+		ph3State.setTextSize(ph3State.getTextSize() * size);
+		rhState.setTextSize(rhState.getTextSize() * size);
+		tState.setTextSize(tState.getTextSize() * size);
+		stopMenu.setTextSize(stopMenu.getTextSize() * size);
+		
+		titleResult.setTextSize(titleResult.getTextSize() * size);
+		resultCo2.setTextSize(resultCo2.getTextSize() * size);
+		resultRh.setTextSize(resultRh.getTextSize() * size);
+		resultTc.setTextSize(resultTc.getTextSize() * size);
+		digitalClock.setTextSize(digitalClock.getTextSize() * size);
+		co2Danwei.setTextSize(co2Danwei.getTextSize() * size);
+		ph3Danwei.setTextSize(ph3Danwei.getTextSize() * size);
+		rhDanwei.setTextSize(rhDanwei.getTextSize() * size);
+		tDanwei.setTextSize(tDanwei.getTextSize() * size);
+	}
 
 	private void initView() {
+		topTitleTx = (TextView) findViewById(R.id.top_title_tx);
+		fileMenu = (TextView) findViewById(R.id.file_menu);
+		functionMenu = (TextView) findViewById(R.id.function_menu);
+		cedingMenu = (TextView) findViewById(R.id.ceding_menu);
+		settingMenu = (TextView) findViewById(R.id.setting_menu);
+		shituMenu = (TextView) findViewById(R.id.shitu_menu);
+		searchMenu = (TextView) findViewById(R.id.search_menu);
+		helpMenu = (TextView) findViewById(R.id.help_menu);
+		cancelAlarmMenu = (TextView) findViewById(R.id.cancel_alarm_menu);
+		checkFunctionTx = (TextView) findViewById(R.id.check_function_tx);
+		titleResult = (TextView) findViewById(R.id.title_result);
+		
+		resultCo2 = (TextView) findViewById(R.id.result_co2);
+		resultRh = (TextView) findViewById(R.id.result_rh);
+		resultTc = (TextView) findViewById(R.id.result_tc);
+		digitalClock = (DigitalNewClock) findViewById(R.id.digital_clock);
+		
+		co2Danwei = (TextView) findViewById(R.id.co2_danwei);
+		ph3Danwei = (TextView) findViewById(R.id.ph3_danwei);
+		o2Danwei = (TextView) findViewById(R.id.o2_danwei);
+		rhDanwei = (TextView) findViewById(R.id.rh_danwei);
+		tDanwei = (TextView) findViewById(R.id.t_danwei);
+		
 		findViewById(R.id.file_menu).setOnClickListener(this);
 		findViewById(R.id.function_menu).setOnClickListener(this);
 		findViewById(R.id.ceding_menu).setOnClickListener(this);
@@ -152,16 +252,19 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (index != -1 && rightList != null) {
 			rightList.remove(index);
 		}
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
 		if (adapter == null) {
 			adapter = new RightAdatper(context);
 			rightList.add(data);
 			adapter.add(data);
+			adapter.setItemTextSize(size);
 			listView.setAdapter(adapter);
 		} else {
 			rightList.add(data);
 			adapter.clear();
 			Collections.sort(rightList, comparatorRight);
 			adapter.addData(rightList);
+			adapter.setItemTextSize(size);
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -586,22 +689,27 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				switch (resourceId) {
 				case R.id.s_small_size:
 					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+					reloadNewTextSize(1.0f);
 					break;
 					
 				case R.id.small_size:
 					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 2);
+					reloadNewTextSize(1.2f);
 					break;
 					
 				case R.id.normal_size:
 					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 3);
+					reloadNewTextSize(1.4f);
 					break;
 					
 				case R.id.big_size:
 					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 4);
+					reloadNewTextSize(1.6f);
 					break;
 					
 				case R.id.b_big_size:
 					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 5);
+					reloadNewTextSize(1.8f);
 					break;
 
 				default:

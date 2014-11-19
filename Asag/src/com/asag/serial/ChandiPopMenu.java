@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.asag.serial.LiangzhongPopMenu.OnLiangClickListener;
 import com.asag.serial.mode.SpinnerItem;
+import com.asag.serial.utils.DataUtils;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -32,6 +33,34 @@ public class ChandiPopMenu extends PopupWindow {
 	public interface OnChandiClickListener {
 		public void onClick(SpinnerItem item);
 	}
+	
+	private void initTextSize() {
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		if (adapter != null) {
+			adapter.setItemTextSize(size);
+			adapter.notifyDataSetChanged();
+		}
+		switch (size) {
+		case 1:
+			this.setWidth(60 * 1);
+			break;
+		case 2:
+			this.setWidth((60 * 6) / 5);
+			break;
+		case 3:
+			this.setWidth((60 * 7) / 5);
+			break;
+		case 4:
+			this.setWidth((60 * 8) / 5);
+			break;
+		case 5:
+			this.setWidth((60 * 9) / 5);
+			break;
+
+		default:
+			break;
+		}
+	}
 
 	public ChandiPopMenu(Context context, OnChandiClickListener listener, ArrayList<SpinnerItem> list) {
 		this.context = context;
@@ -40,7 +69,6 @@ public class ChandiPopMenu extends PopupWindow {
 		view = inflater.inflate(R.layout.spinner_pop_menu, null);
 		this.listener = listener;
 		this.setContentView(view);
-		this.setWidth(60);
 		this.setHeight(200);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
@@ -52,6 +80,7 @@ public class ChandiPopMenu extends PopupWindow {
         adapter = new SerialSpinnerAdapter(context);
         adapter.addData(list);
         spinnerList.setAdapter(adapter);
+        initTextSize();
 	}
 	
 	private void initView() {

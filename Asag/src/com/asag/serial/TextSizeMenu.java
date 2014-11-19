@@ -1,6 +1,6 @@
 package com.asag.serial;
 
-import com.asag.serial.SettingPopMenu.OnSettingClickListener;
+import com.asag.serial.utils.DataUtils;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 public class TextSizeMenu extends PopupWindow implements OnClickListener{
 
@@ -18,8 +19,47 @@ public class TextSizeMenu extends PopupWindow implements OnClickListener{
 	
 	private OnTextSizeClickListener listener;
 	
+	private TextView sSmallSize, smallSize, normalSize, bigSize, bBigSize;
+	
 	public interface OnTextSizeClickListener {
 		public void onClick(int resourceId);
+	}
+	
+	private void initTextSize() {
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		switch (size) {
+		case 1:
+			reloadNewTextSize(1.0f);
+			this.setWidth(100 * 1);
+			break;
+		case 2:
+			reloadNewTextSize(1.2f);
+			this.setWidth((100 * 6) / 5);
+			break;
+		case 3:
+			reloadNewTextSize(1.4f);
+			this.setWidth((100 * 7) / 5);
+			break;
+		case 4:
+			reloadNewTextSize(1.6f);
+			this.setWidth((100 * 8) / 5);
+			break;
+		case 5:
+			reloadNewTextSize(1.8f);
+			this.setWidth((100 * 9) / 5);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private void reloadNewTextSize(float size) {
+		sSmallSize.setTextSize(sSmallSize.getTextSize() * size);
+		smallSize.setTextSize(smallSize.getTextSize() * size);
+		normalSize.setTextSize(normalSize.getTextSize() * size);
+		bigSize.setTextSize(bigSize.getTextSize() * size);
+		bBigSize.setTextSize(bBigSize.getTextSize() * size);
 	}
 
 	public TextSizeMenu(Context context, OnTextSizeClickListener listener) {
@@ -29,8 +69,6 @@ public class TextSizeMenu extends PopupWindow implements OnClickListener{
 		view = inflater.inflate(R.layout.textsize_set_menu, null);
 		this.listener = listener;
 		this.setContentView(view);
-		// 设置SelectPicPopupWindow弹出窗体的宽
-		this.setWidth(100);
 		// 设置SelectPicPopupWindow弹出窗体的高
 		this.setHeight(LayoutParams.WRAP_CONTENT);
 		// 设置SelectPicPopupWindow弹出窗体可点击
@@ -45,9 +83,15 @@ public class TextSizeMenu extends PopupWindow implements OnClickListener{
         // 设置SelectPicPopupWindow弹出窗体动画效果  
         this.setAnimationStyle(R.style.AnimationPreview);
         initView();
+        initTextSize();
 	}
 	
 	private void initView() {
+		sSmallSize = (TextView) view.findViewById(R.id.s_small_size);
+		smallSize = (TextView) view.findViewById(R.id.small_size);
+		normalSize = (TextView) view.findViewById(R.id.normal_size);
+		bigSize = (TextView) view.findViewById(R.id.big_size);
+		bBigSize = (TextView) view.findViewById(R.id.b_big_size);
 		view.findViewById(R.id.s_small_size).setOnClickListener(this);
 		view.findViewById(R.id.small_size).setOnClickListener(this);
 		view.findViewById(R.id.normal_size).setOnClickListener(this);

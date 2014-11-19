@@ -14,6 +14,8 @@ public class SerialSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
 
 	private Context context;
 	
+	private float size;
+	
 	public SerialSpinnerAdapter(Context context) {
 		super(context, 0);
 		this.context = context;
@@ -24,6 +26,33 @@ public class SerialSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
 			for (SpinnerItem item : list) {
 				add(item);
 			}
+		}
+	}
+	
+	public void setItemTextSize(int bili) {
+		switch (bili) {
+		case 1:
+			size = 1.0f;
+			break;
+		case 2:
+			size = 1.2f;
+			break;
+
+		case 3:
+			size = 1.4f;
+			break;
+
+		case 4:
+			size = 1.6f;
+			break;
+
+		case 5:
+			size = 1.8f;
+			break;
+
+
+		default:
+			break;
 		}
 	}
 
@@ -38,6 +67,7 @@ public class SerialSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		holder.name.setTextSize(holder.name.getTextSize() * size);
 		holder.name.setText(getItem(position).name);
 		return convertView;
 	}

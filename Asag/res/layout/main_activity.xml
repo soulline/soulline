@@ -399,7 +399,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/co2_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -437,7 +437,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/ph3_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -475,7 +475,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/o2_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -513,7 +513,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/rh_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -551,7 +551,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/t_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -589,7 +589,7 @@
                     android:layout_below="@+id/title_result"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <TextView android:id="@+id/result_co2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="60dp"
@@ -597,7 +597,7 @@
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
 
-                    <TextView
+                    <TextView android:id="@+id/result_rh"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -605,7 +605,7 @@
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
 
-                    <TextView
+                    <TextView android:id="@+id/result_tc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="45dp"
@@ -630,8 +630,10 @@
                     android:layout_marginBottom="30dp" />
 
                 <com.asag.serial.widget.DigitalNewClock
+                    android:id="@+id/digital_clock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="14dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="5dp"

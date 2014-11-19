@@ -14,6 +14,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.asag.serial.ChandiPopMenu.OnChandiClickListener;
@@ -26,6 +27,7 @@ import com.asag.serial.fragment.InputSureFragment;
 import com.asag.serial.mode.InputEntry;
 import com.asag.serial.mode.SpinnerItem;
 import com.asag.serial.utils.CMDCode;
+import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
 
 public class ParamsSetActivity extends BaseActivity implements OnClickListener {
@@ -45,6 +47,13 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 	private TextView cangNumInput, countInput, waterInput, rkDateInput,
 			canzhaoPointInput, startDateInput, paikongTimeInput,
 			jianceTimeInput, startTimeInput, jiangeTimeInput;
+	
+	private TextView paramsSettingTitle, title1Ttx, canghaoTitle, liangzhongTitle, shuliangTitle, shuliangDun,
+	                 shuifenTitle, persentDanwei, rukuTimeTitle, chandiTitle, title2Tx, canzhaodianTitle, startDateTitle,
+	                 paikongTimeTitle, paikongTimeDanwei, jianceTimeTitle, jianceTimeDanwei, startTimeTitle, jiangeTimeTitle,
+	                 jiangeTimeDanwei;
+	
+	private Button btnOk, btnCancel;
 
 	private long chooseTime = 0L;
 
@@ -62,6 +71,68 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		initView();
 		initContent();
 		setTpye = getIntent().getIntExtra("set_type", -1);
+		initTextSize();
+	}
+	
+	private void initTextSize() {
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		switch (size) {
+		case 1:
+			reloadTextSize(1.0f);
+			break;
+		case 2:
+			reloadTextSize(1.2f);
+			break;
+		case 3:
+			reloadTextSize(1.4f);
+			break;
+		case 4:
+			reloadTextSize(1.6f);
+			break;
+		case 5:
+			reloadTextSize(1.8f);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private void reloadTextSize(float size) {
+		liangzhongSpinner.setTextSize(liangzhongSpinner.getTextSize() * size);
+		chandiSpinner.setTextSize(chandiSpinner.getTextSize() * size);
+		cangNumInput.setTextSize(cangNumInput.getTextSize() * size);
+		countInput.setTextSize(countInput.getTextSize() * size);
+		waterInput.setTextSize(waterInput.getTextSize() * size);
+		rkDateInput.setTextSize(rkDateInput.getTextSize() * size);
+		canzhaoPointInput.setTextSize(canzhaoPointInput.getTextSize() * size);
+		startDateInput.setTextSize(startDateInput.getTextSize() * size);
+		paikongTimeInput.setTextSize(paikongTimeInput.getTextSize() * size);
+		jianceTimeInput.setTextSize(jianceTimeInput.getTextSize() * size);
+		startTimeInput.setTextSize(startTimeInput.getTextSize() * size);
+		jiangeTimeInput.setTextSize(jiangeTimeInput.getTextSize() * size);
+		paramsSettingTitle.setTextSize(paramsSettingTitle.getTextSize() * size);
+		title1Ttx.setTextSize(title1Ttx.getTextSize() * size);
+		canghaoTitle.setTextSize(canghaoTitle.getTextSize() * size);
+		liangzhongTitle.setTextSize(liangzhongTitle.getTextSize() * size);
+		shuliangTitle.setTextSize(shuliangTitle.getTextSize() * size);
+		shuliangDun.setTextSize(shuliangDun.getTextSize() * size);
+		shuifenTitle.setTextSize(shuifenTitle.getTextSize() * size);
+		persentDanwei.setTextSize(persentDanwei.getTextSize() * size);
+		rukuTimeTitle.setTextSize(rukuTimeTitle.getTextSize() * size);
+		chandiTitle.setTextSize(chandiTitle.getTextSize() * size);
+		title2Tx.setTextSize(title2Tx.getTextSize() * size);
+		canzhaodianTitle.setTextSize(canzhaodianTitle.getTextSize() * size);
+		startDateTitle.setTextSize(startDateTitle.getTextSize() * size);
+		paikongTimeTitle.setTextSize(paikongTimeTitle.getTextSize() * size);
+		paikongTimeDanwei.setTextSize(paikongTimeDanwei.getTextSize() * size);
+		jianceTimeTitle.setTextSize(jianceTimeTitle.getTextSize() * size);
+		jianceTimeDanwei.setTextSize(jianceTimeDanwei.getTextSize() * size);
+		startTimeTitle.setTextSize(startTimeTitle.getTextSize() * size);
+		jiangeTimeTitle.setTextSize(jiangeTimeTitle.getTextSize() * size);
+		jiangeTimeDanwei.setTextSize(jiangeTimeDanwei.getTextSize() * size);
+		btnOk.setTextSize(btnOk.getTextSize() * size);
+		btnCancel.setTextSize(btnCancel.getTextSize() * size);
 	}
 
 	private void initView() {
@@ -71,6 +142,29 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		chandiSpinner.setOnClickListener(this);
 		findViewById(R.id.btn_cancel).setOnClickListener(this);
 		findViewById(R.id.btn_ok).setOnClickListener(this);
+		
+		paramsSettingTitle = (TextView) findViewById(R.id.params_setting_title);
+		title1Ttx = (TextView) findViewById(R.id.title_1_tx);
+		canghaoTitle = (TextView) findViewById(R.id.canghao_title);
+		liangzhongTitle = (TextView) findViewById(R.id.liangzhong_title);
+		shuliangTitle = (TextView) findViewById(R.id.shuliang_title);
+		shuliangDun = (TextView) findViewById(R.id.shuliang_dun);
+		shuifenTitle = (TextView) findViewById(R.id.shuifen_title);
+		persentDanwei = (TextView) findViewById(R.id.persent_danwei);
+		rukuTimeTitle = (TextView) findViewById(R.id.ruku_time_title);
+		chandiTitle = (TextView) findViewById(R.id.chandi_title);
+		title2Tx = (TextView) findViewById(R.id.title_2_tx);
+		canzhaodianTitle = (TextView) findViewById(R.id.canzhaodian_title);
+		startDateTitle = (TextView) findViewById(R.id.start_date_title);
+		paikongTimeTitle = (TextView) findViewById(R.id.paikong_time_title);
+		paikongTimeDanwei = (TextView) findViewById(R.id.paikong_time_danwei);
+		jianceTimeTitle = (TextView) findViewById(R.id.jiance_time_title);
+		jianceTimeDanwei = (TextView) findViewById(R.id.jiance_time_danwei);
+		startTimeTitle = (TextView) findViewById(R.id.start_time_title);
+		jianceTimeTitle = (TextView) findViewById(R.id.jiance_time_title);
+		jiangeTimeDanwei = (TextView) findViewById(R.id.jiange_time_danwei);
+		btnOk = (Button) findViewById(R.id.btn_ok);
+		btnCancel = (Button) findViewById(R.id.btn_cancel);
 
 		cangNumInput = (TextView) findViewById(R.id.cang_num_input);
 		countInput = (TextView) findViewById(R.id.count_input);

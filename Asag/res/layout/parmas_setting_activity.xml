@@ -22,7 +22,7 @@
             android:minHeight="30dp"
             android:orientation="vertical" >
 
-            <TextView
+            <TextView android:id="@+id/params_setting_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -38,7 +38,7 @@
             android:background="@drawable/params_down_bg"
             android:orientation="vertical" >
 
-            <TextView
+            <TextView android:id="@+id/title_1_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -56,7 +56,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <TextView
+                <TextView android:id="@+id/canghao_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="仓号："
@@ -71,7 +71,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/liangzhong_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -89,7 +89,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="13dp" />
 
-                <TextView
+                <TextView android:id="@+id/shuliang_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -105,7 +105,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/shuliang_dun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -123,7 +123,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <TextView
+                <TextView android:id="@+id/shuifen_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="水分："
@@ -138,7 +138,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/persent_danwei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -146,7 +146,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/ruku_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -172,7 +172,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <TextView
+                <TextView android:id="@+id/chandi_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="产地："
@@ -191,7 +191,7 @@
                     android:textSize="13dp" />
             </LinearLayout>
 
-            <TextView
+            <TextView android:id="@+id/title_2_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -209,7 +209,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <TextView
+                <TextView android:id="@+id/canzhaodian_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="参照点（RP）："
@@ -225,7 +225,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/start_date_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -252,7 +252,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <TextView
+                <TextView android:id="@+id/paikong_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="排空时间："
@@ -268,7 +268,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/paikong_time_danwei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -276,7 +276,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/jiance_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -293,7 +293,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/jiance_time_danwei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -311,7 +311,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
-                <TextView
+                <TextView android:id="@+id/start_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="起始时间："
@@ -327,7 +327,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/jiange_time_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35dp"
@@ -344,7 +344,7 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView
+                <TextView android:id="@+id/jiange_time_danwei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
