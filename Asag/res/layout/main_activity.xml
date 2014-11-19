@@ -306,7 +306,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/paikong_check_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -344,7 +344,7 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView
+                            <TextView android:id="@+id/check_check_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"

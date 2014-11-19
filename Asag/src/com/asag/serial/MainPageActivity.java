@@ -75,6 +75,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei, ph3Danwei, o2Danwei, rhDanwei, tDanwei;
 	
+	private TextView paikongCheckDanwei, checkCheckDanwei;
+	
 	private DigitalNewClock digitalClock;
 
 	@Override
@@ -162,9 +164,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		resultTc.setTextSize(resultTc.getTextSize() * size);
 		digitalClock.setTextSize(digitalClock.getTextSize() * size);
 		co2Danwei.setTextSize(co2Danwei.getTextSize() * size);
+		o2Danwei.setTextSize(o2Danwei.getTextSize() * size);
 		ph3Danwei.setTextSize(ph3Danwei.getTextSize() * size);
 		rhDanwei.setTextSize(rhDanwei.getTextSize() * size);
 		tDanwei.setTextSize(tDanwei.getTextSize() * size);
+		paikongCheckDanwei.setTextSize(paikongCheckDanwei.getTextSize() * size);
+		checkCheckDanwei.setTextSize(checkCheckDanwei.getTextSize() * size);
 	}
 
 	private void initView() {
@@ -190,6 +195,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		o2Danwei = (TextView) findViewById(R.id.o2_danwei);
 		rhDanwei = (TextView) findViewById(R.id.rh_danwei);
 		tDanwei = (TextView) findViewById(R.id.t_danwei);
+		
+		paikongCheckDanwei = (TextView) findViewById(R.id.paikong_check_danwei);
+		checkCheckDanwei = (TextView) findViewById(R.id.check_check_danwei);
 		
 		findViewById(R.id.file_menu).setOnClickListener(this);
 		findViewById(R.id.function_menu).setOnClickListener(this);
