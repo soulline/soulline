@@ -666,7 +666,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int accounting_hot_thread_layout=0x7f050055;
         public static final int accounting_listview=0x7f05005c;
         public static final int accounting_tx=0x7f05000c;
-        public static final int add_alarm_layout=0x7f050025;
+        public static final int add_alarm_layout=0x7f050026;
         public static final int add_news_layout=0x7f050060;
         public static final int alarm_bg_layout=0x7f050027;
         public static final int alarm_date=0x7f05002c;
@@ -746,7 +746,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int dynamic_tv=0x7f0500fa;
         public static final int edit_bg_layout=0x7f0500b9;
         public static final int edit_title=0x7f0500ba;
-        public static final int empty_content_layout=0x7f050026;
+        public static final int empty_content_layout=0x7f050025;
         public static final int ensurepw_input=0x7f0500ad;
         public static final int ensurepw_input_layout=0x7f0500ac;
         public static final int exam_alarm_img=0x7f05009d;

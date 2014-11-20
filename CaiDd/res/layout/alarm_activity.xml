@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
 
     <!-- Content layout -->
 
@@ -44,18 +44,30 @@
                         android:layout_width="@dimen/dd_dimen_640px"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:gravity="center_horizontal"
                         android:ellipsize="end"
                         android:maxLines="3"
-                        android:text="原定于2015年2月21日的会计资格证初级考试已取消，改为2015年4月13日。"
                         android:textColor="@color/dingdang_black"
                         android:textSize="@dimen/dd_dimen_28px" />
                 </RelativeLayout>
 
-                <ListView
+                <com.handmark.pulltorefresh.library.PullToRefreshListView
                     android:id="@+id/alarm_list"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:smoothScrollbar="true"
+                    ptr:ptrAnimationStyle="flip"
+                    ptr:ptrHeaderTextColor="@color/sq_blue" />
+
+                <ImageView
+                    android:id="@+id/empty_content_layout"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:divider="@null" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dd_dimen_50px"
+                    android:background="@drawable/empty_remind"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <RelativeLayout
