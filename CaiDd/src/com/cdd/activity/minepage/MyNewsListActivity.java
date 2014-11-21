@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicAdapter;
+import com.cdd.activity.findpage.NewsDetailActivity;
 import com.cdd.activity.findpage.PulishDynamicActivity;
 import com.cdd.activity.findpage.UserInfoActivity;
 import com.cdd.activity.findpage.DynamicAdapter.OnAnswerMemberClickLister;
@@ -95,7 +96,9 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						
+						Intent detail = new Intent(context, NewsDetailActivity.class);
+						detail.putExtra("cofId", adapter.getItem(position - 1).id);
+						startActivity(detail);
 					}
 				});
 		dynamicListView.setMode(Mode.PULL_FROM_START);
