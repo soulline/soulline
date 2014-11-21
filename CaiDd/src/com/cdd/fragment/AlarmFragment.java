@@ -3,6 +3,7 @@ package com.cdd.fragment;
 import java.util.ArrayList;
 
 import com.cdd.R;
+import com.cdd.activity.alarmpage.AddRemindActivity;
 import com.cdd.activity.alarmpage.AlarmAdapter;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.RemindEntry;
@@ -15,6 +16,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -149,7 +151,8 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.add_alarm_layout:
-			
+			Intent add = new Intent(getActivity(), AddRemindActivity.class);
+			getActivity().startActivity(add);
 			break;
 			
 		case R.id.empty_content_layout:

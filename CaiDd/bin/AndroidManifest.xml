@@ -189,7 +189,11 @@
             android:name="com.cdd.activity.alarmpage.RemindCalendarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
-            
+        </activity>
+        <activity
+            android:name="com.cdd.activity.alarmpage.AddRemindActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
         </activity>
     </application>
 

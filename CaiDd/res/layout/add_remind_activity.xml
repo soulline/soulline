@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/base_title_layout"
-        android:layout_width="match_parent"l
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bg"
         android:paddingLeft="@dimen/dd_dimen_30px"
@@ -99,9 +99,82 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/dingdang_black"
                     android:background="@drawable/remind_spinner_selector"
-                    android:text="城市"/>
+                    android:text="提醒"/>
             </LinearLayout>
         </LinearLayout>
+        <RelativeLayout android:id="@+id/set_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_90px"
+            android:layout_marginTop="@dimen/dd_dimen_30px"
+            android:layout_marginLeft="@dimen/dd_dimen_10px"
+            android:layout_marginRight="@dimen/dd_dimen_10px"
+            android:padding="@dimen/dd_dimen_1px"
+            android:background="@drawable/gray_jamb" >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_36px"
+                    android:paddingLeft="@dimen/dd_dimen_30px"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/dingdang_black"
+                    android:text="开始日期"/>
+            
+            <ImageView android:id="@+id/start_date_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/angle_right"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dd_dimen_10px"/>
+            <TextView android:id="@+id/start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_36px"
+                    android:layout_toLeftOf="@+id/start_date_right"
+                    android:layout_marginRight="@dimen/dd_dimen_60px"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/remind_tx_gray"
+                    android:text="2014-11-21"/>
+        </RelativeLayout>
+        
+        <RelativeLayout android:id="@+id/set_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dd_dimen_90px"
+            android:layout_marginTop="@dimen/dd_dimen_30px"
+            android:layout_marginLeft="@dimen/dd_dimen_10px"
+            android:layout_marginRight="@dimen/dd_dimen_10px"
+            android:padding="@dimen/dd_dimen_1px"
+            android:background="@drawable/gray_jamb" >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_36px"
+                    android:paddingLeft="@dimen/dd_dimen_30px"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/dingdang_black"
+                    android:text="结束日期"/>
+            
+            <ImageView android:id="@+id/end_date_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/angle_right"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dd_dimen_10px"/>
+            <TextView android:id="@+id/end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dd_dimen_36px"
+                    android:layout_toLeftOf="@+id/end_date_right"
+                    android:layout_marginRight="@dimen/dd_dimen_60px"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/remind_tx_gray"
+                    android:text="2014-11-21"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <!-- Extra Fragment layout -->

@@ -23,4 +23,5 @@
     <color name="message_gray_bg">#DDE9F6</color>
     <color name="pink_tx">#FF88A8</color>
     <color name="bottom_check_blue">#4395C7</color>
+    <color name="remind_tx_gray">#A9A9A9</color>
 </resources>
