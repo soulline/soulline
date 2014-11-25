@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
+import com.cdd.activity.alarmpage.AlarmAdapter.OnRemoveListener;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.RemindEntry;
 import com.cdd.mode.RemindInfo;
 import com.cdd.net.RequestListener;
+import com.cdd.operater.ExamRemindRemoveOp;
 import com.cdd.operater.RemindListOp;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -46,8 +48,19 @@ public class AlarmActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onError(Object error) {
-				// TODO Auto-generated method stub
-
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						if (adapter == null
+								|| (adapter != null && adapter.getCount() == 0)) {
+							alarmList.setVisibility(View.GONE);
+							findViewById(R.id.empty_content_layout)
+							.setVisibility(View.VISIBLE);
+						}
+						alarmList.onRefreshComplete();
+					}
+				});
 			}
 
 			@Override
@@ -63,6 +76,7 @@ public class AlarmActivity extends BaseActivity implements OnClickListener {
 							} else {
 								announcementContent.setVisibility(View.GONE);
 							}
+							alarmList.onRefreshComplete();
 							if (remindInfo.remindList.size() > 0) {
 								alarmList.setVisibility(View.VISIBLE);
 								findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
@@ -79,7 +93,39 @@ public class AlarmActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void initContent() {
+		
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		requestRemindInfo();
+	}
+	
+	private void removeExamRemind(final int index) {
+		ExamRemindRemoveOp removeOp = new ExamRemindRemoveOp(context);
+		removeOp.setParams(adapter.getItem(index).id);
+		removeOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				showToast("删除考试成功");
+				runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						remindInfo.remindList.remove(index);
+						initAdapater(remindInfo.remindList);
+					}
+				});
+			}
+		});
 	}
 
 	private void initView() {
@@ -89,6 +135,12 @@ public class AlarmActivity extends BaseActivity implements OnClickListener {
 		alarmList = (PullToRefreshListView) findViewById(R.id.alarm_list);
 		initAlarmListView();
 	}
+	
+	private void gotoExamDetail(RemindEntry remind) {
+		Intent intent = new Intent(context, RemindCalendarActivity.class);
+		intent.putExtra("remind", remind);
+		startActivity(intent);
+	}
 
 	private void initAlarmListView() {
 		alarmList.setOnItemClickListener(new OnItemClickListener() {
@@ -96,7 +148,7 @@ public class AlarmActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+				gotoExamDetail(adapter.getItem(position - 1));
 			}
 		});
 		alarmList.setMode(Mode.PULL_FROM_START);
@@ -122,6 +174,13 @@ public class AlarmActivity extends BaseActivity implements OnClickListener {
 			adapter = new AlarmAdapter(context);
 			adapter.addData(list);
 			alarmList.setAdapter(adapter);
+			adapter.addOnRemoveListener(new OnRemoveListener() {
+				
+				@Override
+				public void onRemove(int position) {
+					removeExamRemind(position);
+				}
+			});
 		} else {
 			adapter.clear();
 			adapter.addData(list);

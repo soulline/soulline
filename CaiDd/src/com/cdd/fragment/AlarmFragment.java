@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import com.cdd.R;
 import com.cdd.activity.alarmpage.AddRemindActivity;
 import com.cdd.activity.alarmpage.AlarmAdapter;
+import com.cdd.activity.alarmpage.RemindCalendarActivity;
+import com.cdd.activity.alarmpage.AlarmAdapter.OnRemoveListener;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.RemindEntry;
 import com.cdd.mode.RemindInfo;
 import com.cdd.net.RequestListener;
+import com.cdd.operater.ExamRemindRemoveOp;
 import com.cdd.operater.RemindListOp;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -71,7 +74,7 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+				gotoExamDetail(adapter.getItem(position - 1));
 			}
 		});
 		alarmList.setMode(Mode.PULL_FROM_START);
@@ -98,8 +101,21 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 			
 			@Override
 			public void onError(Object error) {
-				// TODO Auto-generated method stub
-				
+				if (getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+						
+						@Override
+						public void run() {
+							if (adapter == null
+									|| (adapter != null && adapter.getCount() == 0)) {
+								alarmList.setVisibility(View.GONE);
+								view.findViewById(R.id.empty_content_layout)
+								.setVisibility(View.VISIBLE);
+							}
+							alarmList.onRefreshComplete();
+						}
+					});
+				}
 			}
 			
 			@Override
@@ -116,6 +132,7 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 							} else {
 								announcementContent.setVisibility(View.GONE);
 							}
+							alarmList.onRefreshComplete();
 							if (remindInfo.remindList.size() > 0) {
 								alarmList.setVisibility(View.VISIBLE);
 								view.findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
@@ -135,11 +152,52 @@ public class AlarmFragment extends Fragment implements OnClickListener{
 		requestRemindInfo();
 	}
 	
+	private void removeExamRemind(final int index) {
+		ExamRemindRemoveOp removeOp = new ExamRemindRemoveOp(getActivity());
+		removeOp.setParams(adapter.getItem(index).id);
+		removeOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				if (getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).showToast("删除考试成功");
+				}
+				getActivity().runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						remindInfo.remindList.remove(index);
+						initAdapater(remindInfo.remindList);
+					}
+				});
+			}
+		});
+	}
+	
+	private void gotoExamDetail(RemindEntry remind) {
+		Intent intent = new Intent(getActivity(), RemindCalendarActivity.class);
+		intent.putExtra("remind", remind);
+		getActivity().startActivity(intent);
+	}
+	
 	public void initAdapater(ArrayList<RemindEntry> list) {
 		if (adapter == null) {
 			adapter = new AlarmAdapter(getActivity());
 			adapter.addData(list);
 			alarmList.setAdapter(adapter);
+			adapter.addOnRemoveListener(new OnRemoveListener() {
+				
+				@Override
+				public void onRemove(int position) {
+					removeExamRemind(position);
+				}
+			});
 		} else {
 			adapter.clear();
 			adapter.addData(list);

@@ -9,34 +9,48 @@
     <RelativeLayout
         android:id="@+id/base_title_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/title_bg"
-        android:paddingLeft="@dimen/dd_dimen_30px"
-        android:paddingRight="@dimen/dd_dimen_30px" >
-        
-        <Button android:id="@+id/remind_back_btn"
+        android:layout_height="@dimen/dd_dimen_89px"
+        android:background="@drawable/title_bg" >
+
+        <RelativeLayout
+            android:id="@+id/remind_back_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/remind_back_selector"/>
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dd_dimen_30px"
+            android:paddingRight="@dimen/dd_dimen_50px" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/remind_back_selector" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/base_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dd_dimen_40px"
-            android:textStyle="bold"
-            android:text="添加提醒" />
-
-        <Button android:id="@+id/remind_ok_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="添加提醒"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dd_dimen_40px"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/remind_ok_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/remind_ok_selector"/>
+            android:paddingRight="@dimen/dd_dimen_30px"
+            android:paddingLeft="@dimen/dd_dimen_50px" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/remind_ok_selector" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <!-- Content layout -->
@@ -48,133 +62,55 @@
         android:layout_below="@+id/base_title_layout"
         android:orientation="vertical" >
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/dd_dimen_60px"
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/dd_dimen_10px"
-            android:paddingRight="@dimen/dd_dimen_10px">
-            <LinearLayout android:layout_width="wrap_content"
+            android:paddingRight="@dimen/dd_dimen_10px" >
+
+            <LinearLayout
+                android:id="@+id/exam_class_spinner_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:background="@drawable/gray_jamb"
-                android:padding="@dimen/dd_dimen_1px">
-                <TextView android:id="@+id/exam_class_spinner"
-                    android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dd_dimen_1px" >
+
+                <TextView
+                    android:id="@+id/exam_class_spinner"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
-                    android:paddingLeft="@dimen/dd_dimen_30px"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/dingdang_black"
                     android:background="@drawable/exam_spinner_selector"
-                    android:text="考试类别"/>
-            </LinearLayout>
-            <LinearLayout android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/dd_dimen_10px"
-                android:background="@drawable/gray_jamb"
-                android:padding="@dimen/dd_dimen_1px">
-                <TextView android:id="@+id/city_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
-                    android:paddingLeft="@dimen/dd_dimen_30px"
                     android:gravity="center_vertical"
-                    android:textColor="@color/dingdang_black"
-                    android:background="@drawable/remind_spinner_selector"
-                    android:text="城市"/>
-            </LinearLayout>
-            <LinearLayout android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/dd_dimen_10px"
-                android:background="@drawable/gray_jamb"
-                android:padding="@dimen/dd_dimen_1px">
-                <TextView android:id="@+id/remind_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
                     android:paddingLeft="@dimen/dd_dimen_30px"
-                    android:gravity="center_vertical"
                     android:textColor="@color/dingdang_black"
+                    android:textSize="@dimen/dd_dimen_36px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/city_spinner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dd_dimen_10px"
+                android:layout_weight="2"
+                android:background="@drawable/gray_jamb"
+                android:orientation="vertical"
+                android:padding="@dimen/dd_dimen_1px" >
+
+                <TextView
+                    android:id="@+id/city_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/remind_spinner_selector"
-                    android:text="提醒"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dd_dimen_30px"
+                    android:textColor="@color/dingdang_black"
+                    android:textSize="@dimen/dd_dimen_36px" />
             </LinearLayout>
         </LinearLayout>
-        <RelativeLayout android:id="@+id/set_start_date"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dd_dimen_90px"
-            android:layout_marginTop="@dimen/dd_dimen_30px"
-            android:layout_marginLeft="@dimen/dd_dimen_10px"
-            android:layout_marginRight="@dimen/dd_dimen_10px"
-            android:padding="@dimen/dd_dimen_1px"
-            android:background="@drawable/gray_jamb" >
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
-                    android:paddingLeft="@dimen/dd_dimen_30px"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/dingdang_black"
-                    android:text="开始日期"/>
-            
-            <ImageView android:id="@+id/start_date_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/angle_right"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dd_dimen_10px"/>
-            <TextView android:id="@+id/start_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
-                    android:layout_toLeftOf="@+id/start_date_right"
-                    android:layout_marginRight="@dimen/dd_dimen_60px"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/remind_tx_gray"
-                    android:text="2014-11-21"/>
-        </RelativeLayout>
-        
-        <RelativeLayout android:id="@+id/set_end_date"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dd_dimen_90px"
-            android:layout_marginTop="@dimen/dd_dimen_30px"
-            android:layout_marginLeft="@dimen/dd_dimen_10px"
-            android:layout_marginRight="@dimen/dd_dimen_10px"
-            android:padding="@dimen/dd_dimen_1px"
-            android:background="@drawable/gray_jamb" >
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
-                    android:paddingLeft="@dimen/dd_dimen_30px"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/dingdang_black"
-                    android:text="结束日期"/>
-            
-            <ImageView android:id="@+id/end_date_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/angle_right"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dd_dimen_10px"/>
-            <TextView android:id="@+id/end_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dd_dimen_36px"
-                    android:layout_toLeftOf="@+id/end_date_right"
-                    android:layout_marginRight="@dimen/dd_dimen_60px"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/remind_tx_gray"
-                    android:text="2014-11-21"/>
-        </RelativeLayout>
     </LinearLayout>
 
     <!-- Extra Fragment layout -->

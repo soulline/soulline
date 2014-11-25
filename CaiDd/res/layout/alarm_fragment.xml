@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 ptr:ptrHeaderTextColor="@color/sq_blue"
+                android:layout_marginBottom="@dimen/dd_dimen_89px"
                 ptr:ptrAnimationStyle="flip"
                 android:smoothScrollbar="true"
                 android:divider="@null" />
@@ -58,13 +59,14 @@
 
     <RelativeLayout android:id="@+id/add_alarm_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dd_dimen_89px"
         android:background="@color/white"
         android:layout_alignParentBottom="true"
         android:paddingTop="@dimen/dd_dimen_20px"
         android:paddingBottom="@dimen/dd_dimen_20px" >
         <LinearLayout android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">

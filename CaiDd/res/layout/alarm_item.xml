@@ -113,7 +113,7 @@
             android:layout_width="@dimen/dd_dimen_490px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dd_dimen_230px"
-            android:layout_marginTop="@dimen/dd_dimen_30px"
+            android:layout_marginTop="@dimen/dd_dimen_40px"
             android:orientation="horizontal" >
 
             <TextView
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textColor="@color/base_title_blue"
+                android:textColor="@color/remind_title_blue"
                 android:textSize="@dimen/dd_dimen_32px" />
 
             <LinearLayout android:id="@+id/alarm_rm_layout"

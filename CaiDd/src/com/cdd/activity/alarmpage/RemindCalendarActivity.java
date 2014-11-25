@@ -1,6 +1,5 @@
 package com.cdd.activity.alarmpage;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 
 import com.cdd.R;
 import com.cdd.base.BaseActivity;
+import com.cdd.mode.RemindEntry;
 import com.cdd.widget.KCalendar;
 import com.cdd.widget.KCalendar.OnCalendarClickListener;
 import com.cdd.widget.KCalendar.OnCalendarDateChangedListener;
@@ -26,12 +26,41 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 	
 	private TextView monthOfYear, weekValue, yearValue;
 	
+	private RemindEntry remind = new RemindEntry();
+	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.calendar_detail_activity);
-		initTitle("初级会计资格证");
 		initView();
+		initContent();
+	}
+	
+	private void initContent() {
+		remind = (RemindEntry) getIntent().getSerializableExtra("remind");
+		if (remind != null && !TextUtils.isEmpty(remind.title)) {
+			initTitle(remind.title);
+		}
+		if (remind != null && !TextUtils.isEmpty(remind.remindTime)) {
+			List<String> list = new ArrayList<String>();
+			list.add(remind.remindTime);
+			setCheckDate(list);
+			date = remind.remindTime;
+		} else {
+			Date dateToday = new Date();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			date = format.format(dateToday);
+		}
+		int year = Integer.parseInt(date.substring(0,
+				date.indexOf("-")));
+		int month = Integer.parseInt(date.substring(
+				date.indexOf("-") + 1, date.lastIndexOf("-")));
+		setDateText(year, month);
+		initCalendar();
+	}
+	
+	private void setCheckDate(List<String> list) {
+		remindCalendar.setCalendarDaysBgColor(list, R.drawable.calendar_date_focused);
 	}
 	
 	private void initView() {
@@ -39,7 +68,6 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 		weekValue = (TextView) findViewById(R.id.week_value);
 		yearValue = (TextView) findViewById(R.id.year_value);
 		remindCalendar = (KCalendar) findViewById(R.id.remind_calendar);
-		initCalendar();
 		findViewById(R.id.last_month_btn).setOnClickListener(this);
 		findViewById(R.id.next_month_btn).setOnClickListener(this);
 	}
@@ -57,13 +85,6 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 					R.drawable.calendar_date_focused);				
 		}
 		
-		List<String> list = new ArrayList<String>(); //设置标记列表
-		list.add("2014-11-18");
-		list.add("2014-11-19");
-		list.add("2014-11-20");
-		list.add("2014-11-21");
-		remindCalendar.setCalendarDaysBgColor(list, R.drawable.calendar_date_focused);
-
 		//监听所选中的日期
 		remindCalendar.setOnCalendarClickListener(new OnCalendarClickListener() {
 

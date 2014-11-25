@@ -21,6 +21,12 @@ public class AlarmAdapter extends ArrayAdapter<RemindEntry> {
 
 	private Context context;
 	
+	private OnRemoveListener listener;
+	
+	public interface OnRemoveListener {
+		public void onRemove(int position);
+	}
+	
 	public AlarmAdapter(Context context) {
 		super(context, 0);
 		this.context = context;
@@ -32,6 +38,10 @@ public class AlarmAdapter extends ArrayAdapter<RemindEntry> {
 				add(entry);
 			}
 		}
+	}
+	
+	public void addOnRemoveListener(OnRemoveListener listener) {
+		this.listener = listener;
 	}
 
 	@Override
@@ -67,7 +77,9 @@ public class AlarmAdapter extends ArrayAdapter<RemindEntry> {
 		SimpleDateFormat format2 = new SimpleDateFormat("yyyy年MM月dd日");
 		holder.alarmType.setText(typeStr);
 		
-		holder.alarmDetail.setText(item.des);
+		if (!TextUtils.isEmpty(item.des) && !item.des.equals("null")) {
+			holder.alarmDetail.setText(item.des);
+		}
 		holder.alarmTitle.setText(item.title);
 		
 		int days = 0;
@@ -100,11 +112,14 @@ public class AlarmAdapter extends ArrayAdapter<RemindEntry> {
 		} else {
 			convertView.findViewById(R.id.bottom_line).setVisibility(View.VISIBLE);
 		}
+		final int removePostion = position;
 		convertView.findViewById(R.id.alarm_rm_layout).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				
+				if (listener != null) {
+					listener.onRemove(removePostion);
+				}
 			}
 		});
 		return convertView;

@@ -55,6 +55,7 @@
                     android:id="@+id/alarm_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/dd_dimen_89px"
                     android:divider="@null"
                     android:smoothScrollbar="true"
                     ptr:ptrAnimationStyle="flip"
@@ -73,15 +74,14 @@
             <RelativeLayout
                 android:id="@+id/add_alarm_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dd_dimen_89px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/white"
-                android:paddingBottom="@dimen/dd_dimen_20px"
-                android:paddingTop="@dimen/dd_dimen_20px" >
+                android:background="@color/white" >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
