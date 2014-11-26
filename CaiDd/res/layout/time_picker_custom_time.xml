@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+        <TextView
+            android:id="@+id/time_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dingdang_black"
+            android:minHeight="@dimen/dd_dimen_80px"
+            android:textSize="@dimen/dd_dimen_40px"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+</LinearLayout>

@@ -195,6 +195,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
+        <!-- <activity
+            android:name="com.cdd.activity.alarmpage.AAATestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+            
+        </activity> -->
     </application>
 
 </manifest>
