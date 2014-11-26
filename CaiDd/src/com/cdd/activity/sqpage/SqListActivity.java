@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -19,9 +20,11 @@ import com.cdd.mode.ForumEntry;
 import com.cdd.mode.ForumItem;
 import com.cdd.mode.SqAskItem;
 import com.cdd.mode.SqAskListRequest;
+import com.cdd.mode.SqSearchRequestEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.AskZanOp;
 import com.cdd.operater.SqAskListOp;
+import com.cdd.operater.SqSearchOp;
 import com.cdd.util.CddRequestCode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -42,7 +45,11 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 
 	private ArrayList<SqAskItem> askList = new ArrayList<SqAskItem>();
 	
+	private EditText searchContent;
+	
 	private View footMoreView;
+	
+	private int loadMode = 1; // 1为普通模式   2为搜索模式
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -54,28 +61,50 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 
 	private void loadMore() {
 		sqContentList.getRefreshableView().removeFooterView(footMoreView);
-		SqAskListRequest request = new SqAskListRequest();
 		int page = pageNum + 1;
-		if (!TextUtils.isEmpty(forumItem.fatherId)
-				&& !TextUtils.isEmpty(forumItem.id)) {
-			request.itemId = forumItem.fatherId;
-			request.subItemId = forumItem.id;
-		} else if (TextUtils.isEmpty(forumItem.fatherId)
-				&& !TextUtils.isEmpty(forumItem.id)) {
-			request.itemId = forumItem.id;
+		if (!TextUtils.isEmpty(searchContent.getText().toString()) && loadMode == 2) {
+			SqSearchRequestEntry requestS = new SqSearchRequestEntry();
+			requestS.keyword = searchContent.getText().toString();
+			if (!TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+				requestS.itemId = forumItem.fatherId;
+				requestS.subItemId = forumItem.id;
+			} else if (TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+				requestS.itemId = forumItem.id;
+			}
+			if (pageNum == 0) {
+				requestS.pageNum = "1";
+			} else {
+				requestS.pageNum = page + "";
+			}
+			requestSearchList(requestS, true);
+		} else if ((!TextUtils.isEmpty(searchContent.getText().toString()) && loadMode == 1)
+				|| (TextUtils.isEmpty(searchContent.getText().toString()))) {
+			searchContent.setText("");
+			loadMode = 1;
+			SqAskListRequest request = new SqAskListRequest();
+			if (!TextUtils.isEmpty(forumItem.fatherId)
+					&& !TextUtils.isEmpty(forumItem.id)) {
+				request.itemId = forumItem.fatherId;
+				request.subItemId = forumItem.id;
+			} else if (TextUtils.isEmpty(forumItem.fatherId)
+					&& !TextUtils.isEmpty(forumItem.id)) {
+				request.itemId = forumItem.id;
+			}
+			if (pageNum == 0) {
+				request.pageNum = "1";
+			} else {
+				request.pageNum = page + "";
+			}
+			requestAskList(request, true);
 		}
-		if (pageNum == 0) {
-			request.pageNum = "1";
-		} else {
-			request.pageNum = page + "";
-		}
-		requestAskList(request, true);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK && requestCode == CddRequestCode.ASK_PULISH_REQUEST) {
+			searchContent.setText("");
+			loadMode = 1;
 			sqContentList.getRefreshableView().removeFooterView(footMoreView);
 			requestPage = 1;
 			SqAskListRequest request = new SqAskListRequest();
@@ -98,6 +127,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initView() {
+		searchContent = (EditText) findViewById(R.id.search_content);
 		footMoreView = View.inflate(context, R.layout.load_more_view, null);
 		footMoreView.setOnClickListener(new OnClickListener() {
 			
@@ -133,22 +163,47 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 				if (refreshView.isHeaderShown()) {
 					sqContentList.getRefreshableView().removeFooterView(footMoreView);
 					requestPage = 1;
-					SqAskListRequest request = new SqAskListRequest();
-					if (!TextUtils.isEmpty(forumItem.fatherId)
-							&& !TextUtils.isEmpty(forumItem.id)) {
-						request.itemId = forumItem.fatherId;
-						request.subItemId = forumItem.id;
-					} else if (TextUtils.isEmpty(forumItem.fatherId)
-							&& !TextUtils.isEmpty(forumItem.id)) {
-						request.itemId = forumItem.id;
+					
+					
+					if (!TextUtils.isEmpty(searchContent.getText().toString()) && loadMode == 2) {
+						SqSearchRequestEntry request = new SqSearchRequestEntry();
+						request.keyword = searchContent.getText().toString();
+						if (!TextUtils.isEmpty(forumItem.fatherId)
+								&& !TextUtils.isEmpty(forumItem.id)) {
+							request.itemId = forumItem.fatherId;
+							request.subItemId = forumItem.id;
+						} else if (TextUtils.isEmpty(forumItem.fatherId)
+								&& !TextUtils.isEmpty(forumItem.id)) {
+							request.itemId = forumItem.id;
+						}
+						if (pageNum == 0) {
+							request.pageNum = 1 + "";
+						} else {
+							request.pageNum = requestPage + "";
+						}
+						askList.clear();
+						requestSearchList(request, false);
+					} else if ((!TextUtils.isEmpty(searchContent.getText().toString()) && loadMode == 1)
+							|| (TextUtils.isEmpty(searchContent.getText().toString()))) {
+						loadMode = 1;
+						searchContent.setText("");
+						SqAskListRequest request = new SqAskListRequest();
+						if (!TextUtils.isEmpty(forumItem.fatherId)
+								&& !TextUtils.isEmpty(forumItem.id)) {
+							request.itemId = forumItem.fatherId;
+							request.subItemId = forumItem.id;
+						} else if (TextUtils.isEmpty(forumItem.fatherId)
+								&& !TextUtils.isEmpty(forumItem.id)) {
+							request.itemId = forumItem.id;
+						}
+						if (pageNum == 0) {
+							request.pageNum = 1 + "";
+						} else {
+							request.pageNum = requestPage + "";
+						}
+						askList.clear();
+						requestAskList(request, false);
 					}
-					if (pageNum == 0) {
-						request.pageNum = 1 + "";
-					} else {
-						request.pageNum = requestPage + "";
-					}
-					askList.clear();
-					requestAskList(request, false);
 				}
 			}
 		});
@@ -227,6 +282,91 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			sqContentList.getRefreshableView().addFooterView(footMoreView);
 		}
 	}
+	
+	private void requestSearchList(SqSearchRequestEntry request,
+			final boolean isShowNow) {
+		final SqSearchOp searchOp = new SqSearchOp(context);
+		searchOp.setParams(request);
+		searchOp.onRequest(new RequestListener() {
+
+			@Override
+			public void onError(Object error) {
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						if (sqAdapter == null || (sqAdapter != null)) {
+							pageNum = 1;
+							sqContentList.setVisibility(View.GONE);
+							findViewById(R.id.empty_content_layout).setVisibility(View.VISIBLE);
+						}
+						sqContentList.onRefreshComplete();
+					}
+				});
+			}
+
+			@Override
+			public void onCallBack(Object data) {
+				if (searchOp.getAskList().size() > 0) {
+					loadMode = 2;
+					askList.addAll(searchOp.getAskList());
+					if (isShowNow) {
+						pageNum++;
+						handler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								sqContentList.onRefreshComplete();
+								initSqList(askList);
+							}
+						});
+					} else if (requestPage < pageNum) {
+						requestPage++;
+						SqSearchRequestEntry request = new SqSearchRequestEntry();
+						request.keyword = searchContent.getText().toString();
+						if (!TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+							request.itemId = forumItem.fatherId;
+							request.subItemId = forumItem.id;
+						} else if (TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+							request.itemId = forumItem.id;
+						}
+						request.pageNum = requestPage + "";
+						requestSearchList(request, false);
+					} else if ((requestPage == pageNum) || (pageNum == 0)) {
+						handler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								sqContentList.onRefreshComplete();
+								initSqList(askList);
+							}
+						});
+					}
+				} else {
+					if (sqAdapter == null || (sqAdapter != null)) {
+						sqAdapter.clear();
+						askList.clear();
+						handler.post(new Runnable() {
+							
+							@Override
+							public void run() {
+								sqContentList.setVisibility(View.GONE);
+								findViewById(R.id.empty_content_layout).setVisibility(View.VISIBLE);
+							}
+						});
+					}
+					pageNum = 1;
+					handler.post(new Runnable() {
+						
+						@Override
+						public void run() {
+							sqContentList.onRefreshComplete();
+						}
+					});
+				}
+			}
+		});
+	}
 
 	private void requestAskList(SqAskListRequest request,
 			final boolean isShowNow) {
@@ -240,7 +380,8 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
-						if (sqAdapter == null || (sqAdapter != null && sqAdapter.getCount() == 0)) {
+						if (sqAdapter == null || (sqAdapter != null)) {
+							pageNum = 1;
 							sqContentList.setVisibility(View.GONE);
 							findViewById(R.id.empty_content_layout).setVisibility(View.VISIBLE);
 						}
@@ -287,7 +428,9 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 						});
 					}
 				} else {
-					if (sqAdapter == null || (sqAdapter != null && sqAdapter.getCount() == 0)) {
+					if (sqAdapter == null || (sqAdapter != null)) {
+						sqAdapter.clear();
+						askList.clear();
 						handler.post(new Runnable() {
 							
 							@Override
@@ -314,7 +457,20 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.search_icon:
-
+			if (TextUtils.isEmpty(searchContent.getText().toString())) {
+				showToast("请输入搜索内容后再搜索");
+				return;
+			}
+			SqSearchRequestEntry requestS = new SqSearchRequestEntry();
+			requestS.keyword = searchContent.getText().toString();
+			if (!TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+				requestS.itemId = forumItem.fatherId;
+				requestS.subItemId = forumItem.id;
+			} else if (TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+				requestS.itemId = forumItem.id;
+			}
+			requestS.pageNum = "1";
+			requestSearchList(requestS, true);
 			break;
 
 		case R.id.sq_ask_layout:
@@ -326,6 +482,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			
 		case R.id.empty_content_layout:
 			if (forumItem != null) {
+				searchContent.setText("");
 				SqAskListRequest request = new SqAskListRequest();
 				if (forumItem != null && !TextUtils.isEmpty(forumItem.fatherId)
 						&& !TextUtils.isEmpty(forumItem.id)) {

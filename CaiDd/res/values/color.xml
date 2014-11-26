@@ -26,4 +26,5 @@
     <color name="remind_tx_gray">#A9A9A9</color>
     <color name="remind_title_blue">#4494C7</color>
     <color name="dark_blue">#003399</color>
+    <color name="date_title_black">#31394E</color>
 </resources>

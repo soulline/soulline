@@ -1,11 +1,14 @@
 package com.cdd.activity.alarmpage;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +16,9 @@ import android.widget.TextView;
 
 import com.cdd.R;
 import com.cdd.base.BaseActivity;
+import com.cdd.fragment.BaseFragmentListener;
+import com.cdd.fragment.BottomReplyFragment;
+import com.cdd.fragment.DateSetFragment;
 import com.cdd.mode.RemindEntry;
 import com.cdd.widget.KCalendar;
 import com.cdd.widget.KCalendar.OnCalendarClickListener;
@@ -70,6 +76,7 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 		remindCalendar = (KCalendar) findViewById(R.id.remind_calendar);
 		findViewById(R.id.last_month_btn).setOnClickListener(this);
 		findViewById(R.id.next_month_btn).setOnClickListener(this);
+		findViewById(R.id.date_title_layout).setOnClickListener(this);
 	}
 
 	private void initCalendar() {
@@ -132,6 +139,26 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 			e.printStackTrace();
 		}
 	}
+	
+	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
+			BaseFragmentListener listener) {
+		if (isOpen) {
+			showFragment(tag, -1, createFragment(tag, bundle, listener));
+		} else {
+			closeFragment(tag);
+		}
+	}
+
+	public DialogFragment createFragment(final String tag, Bundle b,
+			BaseFragmentListener listener) {
+		if (tag.equals("date_set")) {
+			DateSetFragment dateSetF = new DateSetFragment(context,
+					b);
+			dateSetF.addBaseFragmentListener(listener);
+			return dateSetF;
+		}
+		return null;
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -142,6 +169,42 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 			
 		case R.id.next_month_btn:
 			remindCalendar.nextMonth();
+			break;
+			
+		case R.id.date_title_layout:
+			long current = 0L;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			if (!TextUtils.isEmpty(date)) {
+				Date today = null;
+				try {
+					today = format.parse(date);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				if (today != null) {
+					current = today.getTime();
+				}
+			}
+			Bundle b = new Bundle();
+			b.putLong("current_time", current);
+			displayFragment(true, "date_set", b, new BaseFragmentListener() {
+				
+				@Override
+				public void onCallBack(Object object) {
+					if (object instanceof Long) {
+						long currentTime = (Long) object;
+						Calendar calendar = Calendar.getInstance();
+						calendar.setTimeInMillis(currentTime);
+						setDateText(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
+						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+						date = format.format(calendar.getTime());
+						remindCalendar.showCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
+						remindCalendar.removeAllBgColor();
+						remindCalendar.setCalendarDayBgColor(date,
+								R.drawable.calendar_date_focused);
+					}
+				}
+			});
 			break;
 
 		default:

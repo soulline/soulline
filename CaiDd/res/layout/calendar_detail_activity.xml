@@ -113,7 +113,7 @@
         android:id="@+id/base_extra_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" >
+        android:layout_alignParentBottom="true" >
     </FrameLayout>
 
     <!-- Loading layout -->
