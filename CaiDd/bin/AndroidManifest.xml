@@ -195,12 +195,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
-        <!-- <activity
-            android:name="com.cdd.activity.alarmpage.AAATestActivity"
+        <activity
+            android:name="com.cdd.activity.findpage.DynamicSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
-            
-        </activity> -->
+        </activity>
     </application>
 
 </manifest>

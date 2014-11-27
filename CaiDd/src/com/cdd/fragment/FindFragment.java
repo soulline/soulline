@@ -2,6 +2,7 @@ package com.cdd.fragment;
 
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicListActivity;
+import com.cdd.activity.findpage.DynamicSearchActivity;
 import com.cdd.activity.findpage.HotNewsListActivity;
 
 import android.content.Context;
@@ -50,7 +51,8 @@ public class FindFragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.search_layout:
-			
+			Intent intent = new Intent(getActivity(), DynamicSearchActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.dingdangquan_layout:
 			Intent dingdangquan = new Intent(getActivity(), DynamicListActivity.class);

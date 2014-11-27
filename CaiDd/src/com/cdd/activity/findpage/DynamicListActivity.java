@@ -350,7 +350,7 @@ public class DynamicListActivity extends BaseActivity implements
 	private void requestDynamicList(String pageNumber, final boolean isShowNow) {
 		final DingdangDynamicListOp dingdangOp = new DingdangDynamicListOp(
 				context);
-		dingdangOp.setParams("1");
+		dingdangOp.setParams(pageNumber);
 		dingdangOp.onRequest(new RequestListener() {
 
 			@Override

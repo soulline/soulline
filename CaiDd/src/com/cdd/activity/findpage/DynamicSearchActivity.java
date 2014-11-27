@@ -1,21 +1,19 @@
-package com.cdd.activity.minepage;
+package com.cdd.activity.findpage;
 
 import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
-import com.cdd.activity.findpage.DynamicAdapter;
-import com.cdd.activity.findpage.NewsDetailActivity;
-import com.cdd.activity.findpage.PulishDynamicActivity;
-import com.cdd.activity.findpage.UserInfoActivity;
 import com.cdd.activity.findpage.DynamicAdapter.OnAnswerMemberClickLister;
 import com.cdd.activity.findpage.DynamicAdapter.OnImageClickListener;
 import com.cdd.activity.findpage.DynamicAdapter.OnPackListener;
@@ -28,14 +26,14 @@ import com.cdd.mode.DynamicEntry;
 import com.cdd.mode.DynamicReplay;
 import com.cdd.mode.PhotosEntry;
 import com.cdd.net.RequestListener;
-import com.cdd.operater.MemberNewsListOp;
+import com.cdd.operater.NewsSearchOp;
 import com.cdd.util.CddRequestCode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class MyNewsListActivity extends BaseActivity implements OnClickListener{
+public class DynamicSearchActivity extends BaseActivity implements OnClickListener{
 
 	private PullToRefreshListView dynamicListView;
 
@@ -49,13 +47,14 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 
 	private DynamicAdapter adapter;
 	
-	private String memberId = "";
-
+	private EditText searchContent;
+	
+	private String keywordStr = "";
+	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		setContentView(R.layout.dynamic_list_activity);
-		initTitle("我的动态");
+		setContentView(R.layout.dynamic_search_activity);
 		initView();
 		initContent();
 	}
@@ -69,7 +68,9 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 		} else {
 			pageNumber = page + "";
 		}
-		requestDynamicList(pageNumber, true);
+		if (!TextUtils.isEmpty(keywordStr)) {
+			requestDynamicList(pageNumber, keywordStr, true);
+		}
 	}
 
 	private void initView() {
@@ -81,8 +82,9 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 				loadMore();
 			}
 		});
+		searchContent = (EditText) findViewById(R.id.search_content);
 		findViewById(R.id.empty_content_layout).setOnClickListener(this);
-		findViewById(R.id.add_news_layout).setOnClickListener(this);
+		findViewById(R.id.search_icon).setOnClickListener(this);
 		dynamicListView = (PullToRefreshListView) findViewById(R.id.dynamic_list);
 		initDynamicListView();
 	}
@@ -110,8 +112,10 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				if (refreshView.isHeaderShown()) {
+				if (refreshView.isHeaderShown() && !TextUtils.isEmpty(keywordStr)) {
 					doRefreshListView();
+				} else if (refreshView.isHeaderShown()) {
+					dynamicListView.onRefreshComplete();
 				}
 			}
 		});
@@ -128,12 +132,13 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 			pageNumber = requestPage + "";
 		}
 		dynamicList.clear();
-		requestDynamicList(pageNumber, false);
+		if (!TextUtils.isEmpty(keywordStr)) {
+			requestDynamicList(pageNumber, keywordStr, false);
+		}
 	}
 
 	private void initContent() {
-		memberId = getIntent().getStringExtra("memberId");
-		requestDynamicList("1", true);
+		
 	}
 
 	private void initDynamicList(ArrayList<DynamicEntry> list) {
@@ -244,10 +249,10 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 		});
 	}
 
-	private void requestDynamicList(String pageNumber, final boolean isShowNow) {
-		final MemberNewsListOp dingdangOp = new MemberNewsListOp(
+	private void requestDynamicList(String pageNumber, String keyword, final boolean isShowNow) {
+		final NewsSearchOp dingdangOp = new NewsSearchOp(
 				context);
-		dingdangOp.setParams(memberId, pageNumber);
+		dingdangOp.setParams(pageNumber, keyword);
 		dingdangOp.onRequest(new RequestListener() {
 
 			@Override
@@ -285,7 +290,9 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 					} else if (requestPage < pageNum) {
 						requestPage++;
 						String pageNumber = requestPage + "";
-						requestDynamicList(pageNumber, false);
+						if (!TextUtils.isEmpty(keywordStr)) {
+							requestDynamicList(pageNumber, keywordStr, false);
+						}
 					} else if ((requestPage == pageNum) || (pageNum == 0)) {
 						handler.post(new Runnable() {
 
@@ -334,20 +341,31 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.add_news_layout:
-			Intent addNews = new Intent(context, PulishDynamicActivity.class);
-			startActivityForResult(addNews, CddRequestCode.DYNAMIC_PULISH_REQUEST);
-			break;
-
 		case R.id.empty_content_layout:
-			requestDynamicList("1", true);
+			if (!TextUtils.isEmpty(keywordStr)) {
+				requestDynamicList("1", keywordStr, true);
+			}
 			break;
 
+		case R.id.search_icon:
+			keywordStr = searchContent.getText().toString().trim();
+			if (!TextUtils.isEmpty(keywordStr)) {
+				pageNum = 0;
+				requestPage = 1;
+				dynamicList.clear();
+				requestDynamicList("1", keywordStr, true);
+			} else {
+				showToast("请输入关键字搜索");
+			}
+			break;
+			
 		default:
 			break;
 		}
 
 	}
+
+
 
 
 
