@@ -295,6 +295,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
+						loadMode = 1;
 						if (sqAdapter == null || (sqAdapter != null)) {
 							pageNum = 1;
 							sqContentList.setVisibility(View.GONE);
@@ -344,6 +345,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 					}
 				} else {
 					if (sqAdapter == null || (sqAdapter != null)) {
+						loadMode = 1;
 						sqAdapter.clear();
 						askList.clear();
 						handler.post(new Runnable() {
@@ -461,6 +463,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 				showToast("请输入搜索内容后再搜索");
 				return;
 			}
+			askList.clear();
 			SqSearchRequestEntry requestS = new SqSearchRequestEntry();
 			requestS.keyword = searchContent.getText().toString();
 			if (!TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
@@ -469,6 +472,8 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			} else if (TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
 				requestS.itemId = forumItem.id;
 			}
+			requestPage = 1;
+			pageNum = 0;
 			requestS.pageNum = "1";
 			requestSearchList(requestS, true);
 			break;
@@ -483,6 +488,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 		case R.id.empty_content_layout:
 			if (forumItem != null) {
 				searchContent.setText("");
+				askList.clear();
 				SqAskListRequest request = new SqAskListRequest();
 				if (forumItem != null && !TextUtils.isEmpty(forumItem.fatherId)
 						&& !TextUtils.isEmpty(forumItem.id)) {
@@ -492,6 +498,8 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 						&& !TextUtils.isEmpty(forumItem.id)) {
 					request.itemId = forumItem.id;
 				}
+				requestPage = 1;
+				pageNum = 0;
 				request.pageNum = "1";
 				requestAskList(request, true);
 			}
