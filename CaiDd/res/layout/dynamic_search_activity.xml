@@ -31,6 +31,7 @@
                     android:padding="@dimen/dd_dimen_10px"
                     android:singleLine="true"
                     android:background="@null"
+                    android:imeOptions="actionSearch"
                     android:hint="请输入关键字搜索"
                     android:textColor="@color/dingdang_black"
                     android:textSize="@dimen/dd_dimen_28px" />

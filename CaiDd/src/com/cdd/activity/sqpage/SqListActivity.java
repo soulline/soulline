@@ -2,16 +2,21 @@ package com.cdd.activity.sqpage;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.cdd.R;
 import com.cdd.activity.sqpage.SqForumAdapter.onZanListener;
@@ -207,6 +212,36 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 		});
+		searchContent.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if(actionId ==EditorInfo.IME_ACTION_SEARCH) {
+					((InputMethodManager) searchContent.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+					.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+					InputMethodManager.HIDE_NOT_ALWAYS);
+					if (TextUtils.isEmpty(searchContent.getText().toString())) {
+						showToast("请输入搜索内容后再搜索");
+						return false;
+					}
+					askList.clear();
+					SqSearchRequestEntry requestS = new SqSearchRequestEntry();
+					requestS.keyword = searchContent.getText().toString();
+					if (!TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+						requestS.itemId = forumItem.fatherId;
+						requestS.subItemId = forumItem.id;
+					} else if (TextUtils.isEmpty(forumItem.fatherId) && !TextUtils.isEmpty(forumItem.id)) {
+						requestS.itemId = forumItem.id;
+					}
+					requestPage = 1;
+					pageNum = 0;
+					requestS.pageNum = "1";
+					requestSearchList(requestS, true);
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	private void initContent() {
@@ -344,7 +379,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 						});
 					}
 				} else {
-					if (sqAdapter == null || (sqAdapter != null)) {
+					if (sqAdapter == null || (sqAdapter != null && sqAdapter.getCount() == 0)) {
 						loadMode = 1;
 						sqAdapter.clear();
 						askList.clear();
@@ -430,7 +465,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 						});
 					}
 				} else {
-					if (sqAdapter == null || (sqAdapter != null)) {
+					if (sqAdapter == null || (sqAdapter != null && sqAdapter.getCount() == 0)) {
 						sqAdapter.clear();
 						askList.clear();
 						handler.post(new Runnable() {
@@ -487,6 +522,7 @@ public class SqListActivity extends BaseActivity implements OnClickListener {
 			
 		case R.id.empty_content_layout:
 			if (forumItem != null) {
+				sqContentList.getRefreshableView().removeFooterView(footMoreView);
 				searchContent.setText("");
 				askList.clear();
 				SqAskListRequest request = new SqAskListRequest();

@@ -2,16 +2,22 @@ package com.cdd.activity.findpage;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicAdapter.OnAnswerMemberClickLister;
@@ -87,6 +93,28 @@ public class DynamicSearchActivity extends BaseActivity implements OnClickListen
 		findViewById(R.id.search_icon).setOnClickListener(this);
 		dynamicListView = (PullToRefreshListView) findViewById(R.id.dynamic_list);
 		initDynamicListView();
+		searchContent.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if(actionId ==EditorInfo.IME_ACTION_SEARCH) {
+					((InputMethodManager) searchContent.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+					.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+					InputMethodManager.HIDE_NOT_ALWAYS);
+					keywordStr = searchContent.getText().toString().trim();
+					if (!TextUtils.isEmpty(keywordStr)) {
+						pageNum = 0;
+						requestPage = 1;
+						dynamicList.clear();
+						requestDynamicList("1", keywordStr, true);
+					} else {
+						showToast("请输入关键字搜索");
+					}
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	private void initDynamicListView() {

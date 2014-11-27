@@ -18,6 +18,7 @@ import com.cdd.mode.ForumItem;
 import com.cdd.mode.MemberInfoEntry;
 import com.cdd.mode.SqAskItem;
 import com.cdd.mode.SqAskListRequest;
+import com.cdd.mode.SubForumItem;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.AskZanOp;
 import com.cdd.operater.ExamItemOperater;
@@ -336,8 +337,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (accountingAdapter != null
-						&& accountingAdapter.getItem(position).id.equals("9")) {
-					getExamList();
+						&& accountingAdapter.getItem(position).subItems.size() > 0) {
+					initSubList(accountingAdapter.getItem(position).subItems);
 				} else {
 					ForumItem forum = accountingAdapter.getItem(position);
 					gotoDetail(forum);
@@ -349,8 +350,12 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				ForumItem forum = examAdapter.getItem(position);
-				gotoDetail(forum);
+				SubForumItem forum = examAdapter.getItem(position);
+				ForumItem item = new ForumItem();
+				item.fatherId = forum.fatherId;
+				item.id = forum.id;
+				item.name = forum.name;
+				gotoDetail(item);
 			}
 		});
 		sqListview.setOnItemClickListener(new OnItemClickListener() {
@@ -403,30 +408,6 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			view.findViewById(R.id.unlogin_tx).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.checkout_login_tx).setVisibility(View.GONE);
 		}
-	}
-
-	private void getExamList() {
-		final ExamItemOperater examOp = new ExamItemOperater(getActivity());
-		examOp.onRequest(new RequestListener() {
-
-			@Override
-			public void onError(Object error) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onCallBack(Object data) {
-				final ArrayList<ForumItem> itemList = examOp.getForumList();
-				((BaseActivity) getActivity()).handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						initExamList(itemList);
-					}
-				});
-			}
-		});
 	}
 
 	private void getForumList() {
@@ -513,7 +494,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		}
 	}
 
-	private void initExamList(ArrayList<ForumItem> list) {
+	private void initSubList(ArrayList<SubForumItem> list) {
 		accountingListview.setVisibility(View.GONE);
 		sqListview.setVisibility(View.GONE);
 		examListview.setVisibility(View.VISIBLE);

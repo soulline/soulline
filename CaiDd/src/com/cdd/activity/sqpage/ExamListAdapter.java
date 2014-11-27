@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.cdd.R;
 import com.cdd.mode.ForumItem;
+import com.cdd.mode.SubForumItem;
 
 import android.content.Context;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ExamListAdapter extends ArrayAdapter<ForumItem> {
+public class ExamListAdapter extends ArrayAdapter<SubForumItem> {
 
 	private Context context;
 	
@@ -20,9 +21,9 @@ public class ExamListAdapter extends ArrayAdapter<ForumItem> {
 		this.context = context;
 	}
 
-	public void addData(ArrayList<ForumItem> list) {
+	public void addData(ArrayList<SubForumItem> list) {
 		synchronized (list) {
-			for (ForumItem item : list) {
+			for (SubForumItem item : list) {
 				add(item);
 			}
 		}
