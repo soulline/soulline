@@ -17,14 +17,14 @@ public class DataUtils {
 
 	public static final String KEY_UUID = "key_uuid";
 	public static final String KEY_TIMESTAMP = "key_timestamp";
-	public static final String KEY_GAME_ID = "key_game_id";
-	public static final String KEY_SOUND_ONOFF = "key_sound_onoff";
 	
 	public static final String KEY_COIN_VALUE = "key_coin_value";
 	
 	public static final String KEY_IS_REBUID = "key_is_rebuild";
 	
 	public static final String KEY_ISLOGIN = "key_islogin";
+	
+	public static final String KEY_SQMENU_LIST = "key_sq_menu_list";
 	
 	
 	public static SharedPreferences sharedPreferences = CddApp.getInstance()

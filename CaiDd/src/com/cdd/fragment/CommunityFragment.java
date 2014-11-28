@@ -2,6 +2,9 @@ package com.cdd.fragment;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import com.cdd.R;
 import com.cdd.activity.login.LoginActivity;
 import com.cdd.activity.sqpage.AccountingHotAdapter;
@@ -27,6 +30,7 @@ import com.cdd.operater.GetMemberInfoOp;
 import com.cdd.operater.SignTodayOp;
 import com.cdd.operater.SqHotAskOp;
 import com.cdd.util.CddRequestCode;
+import com.cdd.util.DataUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -409,6 +413,41 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			view.findViewById(R.id.checkout_login_tx).setVisibility(View.GONE);
 		}
 	}
+	
+	private void loadCache(final ForumItemOperater forumOp) {
+		String json = DataUtils.getPreferences(DataUtils.KEY_SQMENU_LIST, "");
+		if (!TextUtils.isEmpty(json)) {
+			try {
+				JSONArray response = new JSONArray(json);
+				forumOp.onParser(response);
+				final ArrayList<ForumItem> itemList = forumOp.getForumList();
+				if (getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							initAccountingList(itemList);
+						}
+					});
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else if (getActivity() instanceof BaseActivity) {
+			
+			((BaseActivity) getActivity()).handler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					accountingListview.setVisibility(View.GONE);
+					sqListview.setVisibility(View.GONE);
+					examListview.setVisibility(View.GONE);
+					view.findViewById(R.id.empty_content_layout)
+					.setVisibility(View.VISIBLE);
+				}
+			});
+		}
+	}
 
 	private void getForumList() {
 		final ForumItemOperater forumOp = new ForumItemOperater(getActivity());
@@ -416,20 +455,25 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 			@Override
 			public void onError(Object error) {
-				// TODO Auto-generated method stub
-
+				loadCache(forumOp);
 			}
 
 			@Override
 			public void onCallBack(Object data) {
 				final ArrayList<ForumItem> itemList = forumOp.getForumList();
-				((BaseActivity) getActivity()).handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						initAccountingList(itemList);
+				if (itemList.size() > 0) {
+					if (getActivity() instanceof BaseActivity) {
+						((BaseActivity) getActivity()).handler.post(new Runnable() {
+							
+							@Override
+							public void run() {
+								initAccountingList(itemList);
+							}
+						});
 					}
-				});
+				} else {
+					loadCache(forumOp);
+				}
 			}
 		});
 	}

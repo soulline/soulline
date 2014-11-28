@@ -10,6 +10,7 @@ import android.content.Context;
 import com.cdd.mode.BaseEntry;
 import com.cdd.mode.ForumItem;
 import com.cdd.mode.SubForumItem;
+import com.cdd.util.DataUtils;
 
 public class ForumItemOperater extends BaseOperater {
 
@@ -61,6 +62,9 @@ public class ForumItemOperater extends BaseOperater {
 				}
 			}
 			itemList.add(entry);
+		}
+		if (response.length() > 0) {
+			DataUtils.putPreferences(DataUtils.KEY_SQMENU_LIST, response.toString());
 		}
 	}
 
