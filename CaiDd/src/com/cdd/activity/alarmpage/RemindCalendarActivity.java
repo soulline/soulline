@@ -195,9 +195,9 @@ public class RemindCalendarActivity extends BaseActivity implements OnClickListe
 						long currentTime = (Long) object;
 						Calendar calendar = Calendar.getInstance();
 						calendar.setTimeInMillis(currentTime);
-						setDateText(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
 						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 						date = format.format(calendar.getTime());
+						setDateText(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
 						remindCalendar.showCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
 						remindCalendar.removeAllBgColor();
 						remindCalendar.setCalendarDayBgColor(date,
