@@ -200,6 +200,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
+        <activity
+            android:name="com.cdd.share.ShareAcitivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
     </application>
 
 </manifest>

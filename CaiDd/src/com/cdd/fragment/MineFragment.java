@@ -13,6 +13,7 @@ import com.cdd.base.BaseActivity;
 import com.cdd.mode.MemberInfoEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.GetMemberInfoOp;
+import com.cdd.share.ShareAcitivity;
 import com.cdd.util.ImageOperater;
 
 import android.content.Context;
@@ -194,7 +195,8 @@ public class MineFragment extends Fragment implements OnClickListener {
 			getActivity().startActivity(letters);
 			break;
 		case R.id.share_dingdang_layout:
-
+			Intent share = new Intent(getActivity(), ShareAcitivity.class);
+			getActivity().startActivity(share);
 			break;
 		case R.id.setting_layout:
 			Intent setting = new Intent(getActivity(), SettingActivity.class);

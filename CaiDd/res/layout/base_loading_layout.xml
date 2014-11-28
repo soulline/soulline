@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/take_photo_bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -10,17 +11,26 @@
         android:clickable="true" >
 
         <LinearLayout
-            android:layout_width="@dimen/dd_dimen_120px"
-            android:layout_height="@dimen/dd_dimen_120px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/loading_bg"
-            android:gravity="center" >
+            android:background="@drawable/loading_bg" >
 
             <ProgressBar
-                android:layout_width="@dimen/dd_dimen_120px"
-                android:layout_height="@dimen/dd_dimen_120px"
+                android:layout_width="@dimen/dd_dimen_140px"
+                android:layout_height="@dimen/dd_dimen_141px"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dd_dimen_40px"
                 android:indeterminateDrawable="@drawable/base_loading_new"
                 android:indeterminateOnly="true" />
+            
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dd_dimen_20px"
+                android:textSize="@dimen/dd_dimen_32px"
+                android:textColor="@color/dingdang_black"
+                android:text="正在拼命为您加载..."/>
         </LinearLayout>
     </RelativeLayout>
 

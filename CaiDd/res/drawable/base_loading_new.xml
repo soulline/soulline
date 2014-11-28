@@ -38,16 +38,4 @@
     <item
         android:drawable="@drawable/loading_12"
         android:duration="150"/>
-    <item
-        android:drawable="@drawable/loading_13"
-        android:duration="150"/>
-    <item
-        android:drawable="@drawable/loading_14"
-        android:duration="150"/>
-    <item
-        android:drawable="@drawable/loading_15"
-        android:duration="150"/>
-    <item
-        android:drawable="@drawable/loading_16"
-        android:duration="150"/>
 </animation-list>
