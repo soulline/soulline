@@ -69,9 +69,7 @@ public class DateSetFragment extends DialogFragment implements OnClickListener {
 		monthAdapter = new DateAdapter(getActivity());
 		monthAdapter.setDateList(monthList);
 		monthSpinner.setViewAdapter(monthAdapter);
-		if (currentTime > 0L) {
-
-		} else {
+		if (currentTime == 0L) {
 			currentTime = System.currentTimeMillis();
 		}
 		calendar.setTimeInMillis(currentTime);
@@ -162,7 +160,8 @@ public class DateSetFragment extends DialogFragment implements OnClickListener {
 							.toString();
 					int year = Integer.valueOf(yearStr);
 					calendar.set(Calendar.YEAR, year);
-					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd E");
+					SimpleDateFormat format = new SimpleDateFormat(
+							"yyyy-MM-dd E");
 					dateTitle.setText(format.format(calendar.getTime()));
 					int month = monthSpinner.getCurrentItem();
 					if (month == 1) {
@@ -231,7 +230,7 @@ public class DateSetFragment extends DialogFragment implements OnClickListener {
 			}
 			dismissAllowingStateLoss();
 			break;
-			
+
 		case R.id.date_bg_click:
 			dismissAllowingStateLoss();
 			break;
