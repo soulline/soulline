@@ -466,7 +466,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 						((BaseActivity) getActivity()).handler.post(new Runnable() {
 							
 							@Override
-							public void run() {
+						 	public void run() {
 								initAccountingList(itemList);
 							}
 						});
