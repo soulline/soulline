@@ -529,6 +529,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				}
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
+				checkState = 0;
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
 				handler.postDelayed(new Runnable() {
