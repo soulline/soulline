@@ -1,0 +1,207 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#00000000" >
+
+    <!-- Content layout -->
+
+    <LinearLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/params_up_title"
+            android:gravity="center"
+            android:minHeight="30dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/params_setting_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minHeight="30dp"
+                android:text="参数设定"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/params_down_bg"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="0" />
+                
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="1" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="2" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="3" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="4" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="5" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="6" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="7" />
+
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+                
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="8" />
+                
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="9" />
+                
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="10" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="11" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="12" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="13" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="14" />
+
+                <com.asag.serial.widget.SerialCheck
+                    android:id="@+id/check_way_15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    Text="15" />
+
+                
+            </LinearLayout>
+            
+            <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/params_btn_selector"
+            android:text="确定"
+            android:textColor="@color/serial_black"
+            android:textSize="17dp" />
+        </LinearLayout>
+
+        
+    </LinearLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>
