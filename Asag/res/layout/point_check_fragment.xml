@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:background="#00000000" >
 
     <!-- Content layout -->
 
     <LinearLayout
         android:id="@+id/base_content_"
-        android:layout_width="match_parent"
+        android:layout_width="550dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical" >
@@ -51,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     Text="0" />
-                
+
                 <com.asag.serial.widget.SerialCheck
                     android:id="@+id/check_way_1"
                     android:layout_width="wrap_content"
@@ -100,8 +101,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     Text="7" />
-
-                
             </LinearLayout>
 
             <LinearLayout
@@ -110,21 +109,21 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal" >
-                
+
                 <com.asag.serial.widget.SerialCheck
                     android:id="@+id/check_way_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     Text="8" />
-                
+
                 <com.asag.serial.widget.SerialCheck
                     android:id="@+id/check_way_9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     Text="9" />
-                
+
                 <com.asag.serial.widget.SerialCheck
                     android:id="@+id/check_way_10"
                     android:layout_width="wrap_content"
@@ -166,24 +165,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     Text="15" />
-
-                
             </LinearLayout>
-            
-            <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/params_btn_selector"
-            android:text="确定"
-            android:textColor="@color/serial_black"
-            android:textSize="17dp" />
-        </LinearLayout>
 
-        
+            <RelativeLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp" >
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/params_btn_selector"
+                    android:text="确定"
+                    android:textColor="@color/serial_black"
+                    android:textSize="17dp" />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/params_btn_selector"
+                    android:text="取消"
+                    android:textColor="@color/serial_black"
+                    android:textSize="17dp" />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Extra Fragment layout -->

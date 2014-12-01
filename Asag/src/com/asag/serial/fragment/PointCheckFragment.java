@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class PointCheckFragment extends DialogFragment implements OnClickListener{
 
@@ -52,6 +53,8 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 		check13 = (SerialCheck) view.findViewById(R.id.check_way_13);
 		check14 = (SerialCheck) view.findViewById(R.id.check_way_14);
 		check15 = (SerialCheck) view.findViewById(R.id.check_way_15);
+		view.findViewById(R.id.btn_ok).setOnClickListener(this);
+		view.findViewById(R.id.btn_cancel).setOnClickListener(this);
 	}
 	
 	private String getCheckResult() {
@@ -156,6 +159,11 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 			if (listener != null) {
 				listener.onCallBack(getCheckResult());
 			}
+			Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
+			dismissAllowingStateLoss();
+			break;
+			
+		case R.id.btn_cancel:
 			dismissAllowingStateLoss();
 			break;
 
