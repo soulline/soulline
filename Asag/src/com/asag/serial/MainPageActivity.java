@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,6 +29,9 @@ import com.asag.serial.TextSizeMenu.OnTextSizeClickListener;
 import com.asag.serial.alarm.JcAlarm;
 import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
+import com.asag.serial.fragment.BaseFragmentListener;
+import com.asag.serial.fragment.InputSureFragment;
+import com.asag.serial.fragment.PointCheckFragment;
 import com.asag.serial.mode.AlarmInfo;
 import com.asag.serial.mode.CutDownEntry;
 import com.asag.serial.mode.RightDataEntry;
@@ -79,6 +83,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private TextView paikongCheckDanwei, checkCheckDanwei;
 	
 	private DigitalNewClock digitalClock;
+	
+	private ArrayList<String> checkWayList = new ArrayList<String>();
+	
+	private int checkState = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +95,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initService();
 		initView();
 		registerReceiver();
-		RightDataEntry entry1 = new RightDataEntry();
-		entry1.co2 = "12345";
-		entry1.number = "1";
-		entry1.o2 = "20.0";
-		entry1.ph3data = "3212";
-		entry1.shidu = "20.0";
-		entry1.wendu = "14.0";
-		addData(entry1);
 		initTextSize();
 	}
 	
@@ -135,6 +135,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else {
 			checkAnimationImg.setImageResource(R.drawable.check_anima_1);
 		}
+	}
+	
+	public static String hexToBinary(String s){
+		return Long.toBinaryString(Long.parseLong(s, 16));
 	}
 	
 	private void reloadNewTextSize(float size) {
@@ -452,19 +456,42 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					} else {
 						addData(dataEntry);
 					}
-					if (dataEntry.number.equals("15")) {
+					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
 						checkWayValue.setText("0");
 						wayCount = 0;
+						checkWayList.clear();
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
-						number += 1;
-						wayCount = number;
-						checkWayValue.setText(number + "");
-						float check = ((float) checkMinuteValue) / 10.0f;
-						float paikong = ((float) paikongMinuteValue) / 10.0f;
-						updateCheckMinute(check + "");
-						updatePaikongMinute(paikong + "");
+						if (checkState == 1) {
+							int next = getNextWay(number + "");
+							if (next != -1) {
+								checkWayValue.setText(next + "");
+								float check = ((float) checkMinuteValue) / 10.0f;
+								float paikong = ((float) paikongMinuteValue) / 10.0f;
+								updateCheckMinute(check + "");
+								updatePaikongMinute(paikong + "");
+							} else {
+								showToast("检测结束");
+								checkWayValue.setText("0");
+								wayCount = 0;
+								checkWayList.clear();
+							}
+							
+						} else if (checkState == 0) {
+							number += 1;
+							wayCount = number;
+							checkWayValue.setText(number + "");
+							float check = ((float) checkMinuteValue) / 10.0f;
+							float paikong = ((float) paikongMinuteValue) / 10.0f;
+							updateCheckMinute(check + "");
+							updatePaikongMinute(paikong + "");
+						} else if (checkState == 2) {
+							showToast("检测结束");
+							checkWayValue.setText("0");
+							wayCount = 0;
+							checkWayList.clear();
+						}
 					}
 				}
 			} else if (intent.getAction().equals(
@@ -598,6 +625,32 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		startActivityForResult(params, SerialRequestCode.REQUEST_SET_DATA);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}
+	
+	private void fillCheckWayList(String result) {
+		String binaryStr = hexToBinary(result);
+		char[] array = binaryStr.toCharArray();
+		for (int i=0; i < array.length; i++) {
+			String way = i + "";
+			String wayN = array[i] + "";
+			if (wayN.equals("1")) {
+				checkWayList.add(way);
+			}
+		}
+	}
+	
+	private int getNextWay(String nowNumber) {
+		if (nowNumber.equals(checkWayList.get(checkWayList.size()))) {
+			return -1;
+		}
+		int position = -1;
+		for (int i=0; i < checkWayList.size(); i++) {
+			if (nowNumber.equals(checkWayList.get(i))) {
+				position = i;
+				break;
+			}
+		}
+		return position;
+	}
 
 	private void showFunctionMenu(final int type) {
 		FunctionPopMenu functionMenu = new FunctionPopMenu(context,
@@ -630,14 +683,29 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 						} else if (type == 1) {
 							if (resourceId == R.id.liangan_jiance_menu) {
+								checkState = 0;
 								showToast("定时器开启");
 								if (alarmInfo != null && alarmInfo.firstTimeN > 0L && alarmInfo.minuteN > 0) {
 									setAlarmCheck(alarmInfo);
 								}
 							} else if (resourceId == R.id.point_check_menu) {
-								showToast("开始测定");
-								sendMessageS(CMDCode.CD_LIANGAN_CHECK_2);
+								checkState = 1;
+								displayFragment(true, "point_select", null, new BaseFragmentListener() {
+									
+									@Override
+									public void onCallBack(Object object) {
+										if (object != null && object instanceof String) {
+											String result = (String) object;
+											fillCheckWayList(result);
+											result = result.substring(0, 2) + " " + result.substring(2, result.length());
+											String message = CMDCode.CD_LIANGAN_CHECK_2 + result + "FF FF";
+											showToast("开始测定");
+											sendMessageS(message);
+										}
+									}
+								});
 							} else if (resourceId == R.id.cangan_jiance_menu) {
+								checkState = 2;
 								showToast("开始测定");
 								sendMessageS(CMDCode.CD_CANGAN_CHECK);
 							}
@@ -657,6 +725,26 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (view != null) {
 			functionMenu.showPopupWindow(view);
 		}
+	}
+	
+	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
+			BaseFragmentListener listener) {
+		if (isOpen) {
+			((BaseActivity) context).showFragment(tag, -1,
+					createFragment(tag, bundle, listener));
+		} else {
+			((BaseActivity)context).closeFragment(tag);
+		}
+	}
+
+	public DialogFragment createFragment(final String tag, Bundle b,
+			BaseFragmentListener listener) {
+		if (tag.equals("point_select")) {
+			PointCheckFragment pointF = new PointCheckFragment();
+			pointF.addBaseFragmentListener(listener);
+			return pointF;
+		}
+		return null;
 	}
 
 	@Override

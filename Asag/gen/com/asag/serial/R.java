@@ -367,13 +367,13 @@ public final class R {
         public static final int welcome=0x7f02004e;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b00af;
-        public static final int b_big_size=0x7f0b00ae;
+        public static final int action_settings=0x7f0b00bf;
+        public static final int b_big_size=0x7f0b00be;
         public static final int base_content_=0x7f0b0010;
         public static final int base_extra_layout=0x7f0b0011;
         public static final int base_loading=0x7f0b0012;
         public static final int base_title_layout=0x7f0b000f;
-        public static final int big_size=0x7f0b00ad;
+        public static final int big_size=0x7f0b00bd;
         public static final int bt_ceding=0x7f0b0068;
         public static final int bt_file=0x7f0b0066;
         public static final int bt_function=0x7f0b0067;
@@ -398,13 +398,29 @@ public final class R {
         public static final int chandi_title=0x7f0b008a;
         public static final int check_aleave_minute=0x7f0b005a;
         public static final int check_animation_img=0x7f0b0039;
-        public static final int check_btn=0x7f0b00a0;
+        public static final int check_btn=0x7f0b00b0;
         public static final int check_check_danwei=0x7f0b003f;
         public static final int check_check_time=0x7f0b003e;
         public static final int check_function_tx=0x7f0b0037;
-        public static final int check_params_menu=0x7f0b00a3;
+        public static final int check_params_menu=0x7f0b00b3;
         public static final int check_time_state=0x7f0b003d;
         public static final int check_title=0x7f0b0059;
+        public static final int check_way_0=0x7f0b009e;
+        public static final int check_way_1=0x7f0b009f;
+        public static final int check_way_10=0x7f0b00a8;
+        public static final int check_way_11=0x7f0b00a9;
+        public static final int check_way_12=0x7f0b00aa;
+        public static final int check_way_13=0x7f0b00ab;
+        public static final int check_way_14=0x7f0b00ac;
+        public static final int check_way_15=0x7f0b00ad;
+        public static final int check_way_2=0x7f0b00a0;
+        public static final int check_way_3=0x7f0b00a1;
+        public static final int check_way_4=0x7f0b00a2;
+        public static final int check_way_5=0x7f0b00a3;
+        public static final int check_way_6=0x7f0b00a4;
+        public static final int check_way_7=0x7f0b00a5;
+        public static final int check_way_8=0x7f0b00a6;
+        public static final int check_way_9=0x7f0b00a7;
         public static final int check_way_value=0x7f0b0038;
         public static final int choose_baudRate_spinner=0x7f0b0001;
         public static final int choose_databits_spinner=0x7f0b0002;
@@ -424,7 +440,7 @@ public final class R {
         public static final int count_input=0x7f0b0083;
         public static final int data_no=0x7f0b0065;
         public static final int date_pick=0x7f0b0014;
-        public static final int date_set_menu=0x7f0b00a1;
+        public static final int date_set_menu=0x7f0b00b1;
         public static final int digital_clock=0x7f0b0056;
         public static final int exit_menu=0x7f0b001a;
         public static final int file_menu=0x7f0b002e;
@@ -453,7 +469,7 @@ public final class R {
         public static final int lujing=0x7f0b001c;
         public static final int minute_check=0x7f0b0076;
         public static final int minute_paikong=0x7f0b0077;
-        public static final int normal_size=0x7f0b00ac;
+        public static final int normal_size=0x7f0b00bc;
         public static final int o2_danwei=0x7f0b0048;
         public static final int o2_status_img=0x7f0b005f;
         public static final int o2_value=0x7f0b0047;
@@ -476,9 +492,9 @@ public final class R {
         public static final int ph3_value_state=0x7f0b0043;
         public static final int ph3id=0x7f0b005e;
         public static final int point_check_menu=0x7f0b0022;
-        public static final int point_distribute_menu=0x7f0b00a5;
-        public static final int point_set_menu=0x7f0b00a2;
-        public static final int point_trend_menu=0x7f0b00a6;
+        public static final int point_distribute_menu=0x7f0b00b5;
+        public static final int point_set_menu=0x7f0b00b2;
+        public static final int point_trend_menu=0x7f0b00b6;
         public static final int pop_local=0x7f0b001d;
         public static final int pop_network=0x7f0b001f;
         public static final int pop_remote=0x7f0b001b;
@@ -495,22 +511,22 @@ public final class R {
         public static final int rk_date_input=0x7f0b0089;
         public static final int route_menu=0x7f0b0018;
         public static final int ruku_time_title=0x7f0b0088;
-        public static final int s_small_size=0x7f0b00aa;
+        public static final int s_small_size=0x7f0b00ba;
         public static final int search_menu=0x7f0b0034;
         public static final int sendButton=0x7f0b000b;
         public static final int sendmsg=0x7f0b0009;
         public static final int set_rk_time=0x7f0b0074;
         public static final int setting_menu=0x7f0b0032;
-        public static final int shidu_value=0x7f0b009f;
+        public static final int shidu_value=0x7f0b00af;
         public static final int shitu_menu=0x7f0b0033;
         public static final int showmsg=0x7f0b0006;
         public static final int shuifen_title=0x7f0b0085;
         public static final int shuliang_dun=0x7f0b0084;
         public static final int shuliang_title=0x7f0b0082;
-        public static final int small_size=0x7f0b00ab;
+        public static final int small_size=0x7f0b00bb;
         public static final int spinner=0x7f0b0071;
-        public static final int spinner_item_tx=0x7f0b00a7;
-        public static final int spinner_list=0x7f0b00a8;
+        public static final int spinner_item_tx=0x7f0b00b7;
+        public static final int spinner_list=0x7f0b00b8;
         public static final int start_date_input=0x7f0b0090;
         public static final int start_date_title=0x7f0b008f;
         public static final int start_time=0x7f0b0078;
@@ -522,7 +538,7 @@ public final class R {
         public static final int t_value=0x7f0b004d;
         public static final int t_value_state=0x7f0b004c;
         public static final int testTime=0x7f0b0075;
-        public static final int textSize_menu=0x7f0b00a4;
+        public static final int textSize_menu=0x7f0b00b4;
         public static final int textView1=0x7f0b002a;
         public static final int textView2=0x7f0b002b;
         public static final int textView3=0x7f0b002c;
@@ -541,8 +557,8 @@ public final class R {
         public static final int top_title_tx=0x7f0b002d;
         public static final int tuichu=0x7f0b0020;
         public static final int water_input=0x7f0b0086;
-        public static final int welcome_loading=0x7f0b00a9;
-        public static final int wendu_value=0x7f0b009e;
+        public static final int welcome_loading=0x7f0b00b9;
+        public static final int wendu_value=0x7f0b00ae;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -562,7 +578,7 @@ public final class R {
         public static final int pad_remote_top_bar=0x7f03000e;
         public static final int parasetting=0x7f03000f;
         public static final int parmas_setting_activity=0x7f030010;
-        public static final int point_check_popmenu=0x7f030011;
+        public static final int point_check_fragment=0x7f030011;
         public static final int right_data_item=0x7f030012;
         public static final int serial_check_item=0x7f030013;
         public static final int setting_pop_menu=0x7f030014;
