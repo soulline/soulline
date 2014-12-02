@@ -557,6 +557,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (checkCode == 0) {
 			String title = wayCount + "";
 			checkWayValue.setText(title);
+		} else if ((checkCode == 1 || checkCode == 2) && checkWayList.size() > 0) {
+			checkWayValue.setText(checkWayList.get(0));
 		}
 		Intent check = new Intent(SerialBroadCode.ACTION_CHECK_MINUTE);
 		check.putExtra("check_minute", checkMinuteValue + "");
@@ -642,7 +644,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private int getNextWay(String nowNumber) {
-		if (nowNumber.equals(checkWayList.get(checkWayList.size()))) {
+		if (nowNumber.equals(checkWayList.get(checkWayList.size() - 1))) {
 			return -1;
 		}
 		int position = -1;
