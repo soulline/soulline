@@ -693,6 +693,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								}
 							} else if (resourceId == R.id.point_check_menu) {
 								checkState = 1;
+								sendMessageS(CMDCode.CD_POINT_CHECK);
 								displayFragment(true, "point_select", null, new BaseFragmentListener() {
 									
 									@Override
@@ -710,7 +711,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								});
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								checkState = 2;
-								showToast("开始测定");
+				
+								 showToast("开始测定");
 								sendMessageS(CMDCode.CD_CANGAN_CHECK);
 								startCutDown(2);
 							}

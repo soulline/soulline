@@ -59,72 +59,7 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 	
 	private String getCheckResult() {
 		StringBuilder sb = new StringBuilder();
-		if (check0.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check1.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check2.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check3.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check4.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check5.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check6.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check7.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check8.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check9.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check10.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check11.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check12.isCheck()) {
-			sb.append("1");
-		} else {
-			sb.append("0");
-		}
-		if (check13.isCheck()) {
+		if (check15.isCheck()) {
 			sb.append("1");
 		} else {
 			sb.append("0");
@@ -134,7 +69,72 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 		} else {
 			sb.append("0");
 		}
-		if (check15.isCheck()) {
+		if (check13.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check12.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check11.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check10.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check9.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check8.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check7.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check6.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check5.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check4.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check3.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check2.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check1.isCheck()) {
+			sb.append("1");
+		} else {
+			sb.append("0");
+		}
+		if (check0.isCheck()) {
 			sb.append("1");
 		} else {
 			sb.append("0");
