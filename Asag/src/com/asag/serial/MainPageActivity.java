@@ -539,7 +539,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						sendMessageS(CMDCode.CD_LIANGAN_CHECK_1);
 						if (alarmInfo != null) {
 							setCheckinfo(alarmInfo);
-							startCutDown();
+							startCutDown(0);
 						}
 					}
 				}, 500);
@@ -552,10 +552,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 	};
 	
-	public void startCutDown() {
+	public void startCutDown(int checkCode) {
 		app.isPause = false;
-		String title = wayCount + "";
-		checkWayValue.setText(title);
+		if (checkCode == 0) {
+			String title = wayCount + "";
+			checkWayValue.setText(title);
+		}
 		Intent check = new Intent(SerialBroadCode.ACTION_CHECK_MINUTE);
 		check.putExtra("check_minute", checkMinuteValue + "");
 		check.putExtra("paikong_minute", paikongMinuteValue + "");
@@ -702,6 +704,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 											String message = CMDCode.CD_LIANGAN_CHECK_2 + result + "FF FF";
 											showToast("开始测定");
 											sendMessageS(message);
+											startCutDown(1);
 										}
 									}
 								});
@@ -709,6 +712,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								checkState = 2;
 								showToast("开始测定");
 								sendMessageS(CMDCode.CD_CANGAN_CHECK);
+								startCutDown(2);
 							}
 						} else if (type == 2) {
 							
