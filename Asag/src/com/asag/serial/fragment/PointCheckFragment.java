@@ -161,16 +161,10 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 			if (listener != null) {
 				listener.onCallBack(getCheckResult());
 			}
-			if (getActivity() instanceof MainPageActivity) {
-				((MainPageActivity) getActivity()).sendMessageS(CMDCode.PREPARE_OK);
-			}
 			dismissAllowingStateLoss();
 			break;
 			
 		case R.id.btn_cancel:
-			if (getActivity() instanceof MainPageActivity) {
-				((MainPageActivity) getActivity()).sendMessageS(CMDCode.PREPARE_CANCLE);
-			}
 			dismissAllowingStateLoss();
 			break;
 

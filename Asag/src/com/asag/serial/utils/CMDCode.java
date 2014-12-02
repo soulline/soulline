@@ -6,9 +6,9 @@ public class CMDCode {
 
 	public static final String CD_LIANGAN_CHECK_1 = "5A A5 03 01 FF FF";
 
-	public static final String CD_LIANGAN_CHECK_2 = "5A A5 03 02";
+	public static final String CD_LIANGAN_CHECK_2 = "5A A5 03 02 01";
 	
-	public static final String CD_POINT_CHECK = "5A A5 03 02 01 FF FF";
+	public static final String CD_POINT_CHECK = "5A A5 03 02 FF FF";
 
 	public static final String CD_CANGAN_CHECK = "5A A5 03 03 FF FF ";
  
