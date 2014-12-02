@@ -635,11 +635,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		checkWayList.clear();
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sbNew = new StringBuilder();
-		for (int i=0; i < (16 - result.length()); i++) {
+		String binaryStr = hexToBinary(result);
+		for (int i=0; i < (16 - binaryStr.length()); i++) {
 			sbNew.append("0");
 		}
-		result = result + sbNew.toString();
-		String binaryStr = hexToBinary(result);
+		binaryStr = binaryStr + sbNew.toString();
 		char[] array = binaryStr.toCharArray();
 		for (int i=0; i < array.length; i++) {
 			String way = i + "";
