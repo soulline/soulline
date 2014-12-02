@@ -594,6 +594,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.btn_cancel:
+			sendMessageS(CMDCode.PREPARE_CANCLE);
 			finish();
 			break;
 

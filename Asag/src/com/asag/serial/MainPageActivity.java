@@ -614,7 +614,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	
-	private void sendMessageS(String message) {
+	public void sendMessageS(String message) {
 		Intent intent = new Intent(SerialBroadCode.ACTION_SEND_MESSAGE);
 		intent.putExtra("send_message", message);
 		lbm.sendBroadcast(intent);
