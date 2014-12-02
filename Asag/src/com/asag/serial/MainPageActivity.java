@@ -632,6 +632,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void fillCheckWayList(String result) {
+		checkWayList.clear();
+		StringBuilder sb = new StringBuilder();
+		StringBuilder sbNew = new StringBuilder();
+		for (int i=0; i < (16 - result.length()); i++) {
+			sbNew.append("0");
+		}
+		result = result + sbNew.toString();
 		String binaryStr = hexToBinary(result);
 		char[] array = binaryStr.toCharArray();
 		for (int i=0; i < array.length; i++) {
@@ -639,11 +646,17 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			String wayN = array[i] + "";
 			if (wayN.equals("1")) {
 				checkWayList.add(way);
+				sb.append(way).append(",");
 			}
 		}
+		showToast("已选择 :" + sb.toString());
 	}
 	
 	private int getNextWay(String nowNumber) {
+		if (checkWayList.size() == 0) {
+			showToast("未选择检测通道号");
+			return -1;
+		}
 		if (nowNumber.equals(checkWayList.get(checkWayList.size() - 1))) {
 			return -1;
 		}

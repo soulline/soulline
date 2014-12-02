@@ -142,6 +142,7 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 			sb.append("0");
 		}
 		String hexStr = binaryToHex(sb.toString()).toUpperCase();
+		sb = null;
 		sb = new StringBuilder();
 		for (int i=0; i < (4 - hexStr.length()); i++) {
 			sb.append("0");
