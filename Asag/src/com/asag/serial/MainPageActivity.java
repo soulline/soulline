@@ -639,10 +639,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		for (int i=0; i < (16 - binaryStr.length()); i++) {
 			sbNew.append("0");
 		}
-		binaryStr = binaryStr + sbNew.toString();
+		binaryStr = sbNew.toString() + binaryStr;
 		char[] array = binaryStr.toCharArray();
-		for (int i=0; i < array.length; i++) {
-			String way = i + "";
+		for (int i = (array.length - 1); i > -1; i--) {
+			int wayI = array.length - 1 - i;
+			String way = wayI + "";
 			String wayN = array[i] + "";
 			if (wayN.equals("1")) {
 				checkWayList.add(way);
