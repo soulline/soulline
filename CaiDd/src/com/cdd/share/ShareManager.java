@@ -6,6 +6,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,10 +26,12 @@ import com.cdd.R;
 import com.cdd.app.CddApp;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.ShareEntry;
+import com.cdd.mode.TencentShareEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.GetShareInfoOp;
 import com.cdd.util.AccessTokenKeeper;
 import com.cdd.util.CddConfig;
+import com.cdd.util.DataUtils;
 import com.cdd.util.PackageUtil;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
@@ -46,12 +52,17 @@ import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.exception.WeiboShareException;
 import com.sina.weibo.sdk.utils.Utility;
+import com.tencent.connect.share.QQShare;
+import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
 public class ShareManager implements IWeiboHandler.Response{
 	private Oauth2AccessToken mAccessToken;
@@ -62,6 +73,12 @@ public class ShareManager implements IWeiboHandler.Response{
 	public static final String SINA_SCOPE = "email,direct_messages_read,direct_messages_write,"
 			+ "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
 			+ "follow_app_official_microblog," + "invitation_write";
+	
+	public static final String QQ_QZONE_ID = "1103564486";
+	
+	public Tencent mTencent;
+	private static final String SCOPE = "get_user_info,get_simple_userinfo,get_user_profile,get_app_friends,"
+            + "add_share,add_topic,list_album,upload_pic,add_album,set_user_face,get_vip_info,get_vip_rich_info,get_intimate_friends_weibo,match_nick_tips_weibo";
 
 	/** 注意：SsoHandler 仅当 SDK 支持 SSO 时有效 */
 	private SsoHandler mSsoHandler;
@@ -89,6 +106,7 @@ public class ShareManager implements IWeiboHandler.Response{
 		wXApi = WXAPIFactory.createWXAPI(context, WX_APP_ID, false);
 //		initSinaShare();
 		initShareEntry();
+		mTencent = Tencent.createInstance(QQ_QZONE_ID, CddApp.getInstance());
 	}
 
 	
@@ -109,7 +127,126 @@ public class ShareManager implements IWeiboHandler.Response{
 			}
 		});
 	}
+	
+	public boolean readyQQ() {
+        boolean ready = mTencent.isSessionValid()
+                && mTencent.getOpenId() != null;
+        return ready;
+    }
 
+	public void initTencentShare() {
+		TencentShareEntry entry = new TencentShareEntry();
+		entry.access_token = DataUtils.getPreferences("tx_access_token", "");
+		entry.expires_in = DataUtils.getPreferences("tx_expires_in", "");
+		entry.openid = DataUtils.getPreferences("tx_openid", "");
+		if (!TextUtils.isEmpty(entry.openid)) {
+			mTencent.setOpenId(entry.openid);
+		}
+		if (!TextUtils.isEmpty(entry.access_token) && !TextUtils.isEmpty(entry.expires_in)) {
+			mTencent.setAccessToken(entry.access_token, entry.expires_in);
+		}
+	}
+	
+	public TencentShareEntry parseTencentShare(String response) {
+		TencentShareEntry entry = new TencentShareEntry();
+		try {
+			JSONObject obj = new JSONObject(response);
+			entry.access_token = obj.optString("access_token");
+			if (!TextUtils.isEmpty(obj.optString("expires_in"))) {
+				long expires_in = System.currentTimeMillis() + Long.parseLong(obj.optString("expires_in")) * 1000;
+				entry.expires_in = expires_in + "";
+			}
+			entry.openid = obj.optString("openid");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return entry;
+	}
+	
+	public void doLoginQQ(final int type) {
+		IUiListener listener = new BaseUiListener() {
+			
+			@Override
+			protected void doComplete(Object values) {
+				TencentShareEntry entry = parseTencentShare(values.toString());
+				DataUtils.putPreferences("tx_access_token", entry.access_token);
+				DataUtils.putPreferences("tx_expires_in", entry.expires_in);
+				DataUtils.putPreferences("tx_openid", entry.openid);
+				if (type == 0) {
+					sharedQQzone();
+				} else if (type == 1) {
+					shareToQQ();
+				}
+			}
+
+		};
+		mTencent.login(context, SCOPE, listener);
+	}
+	
+	public void shareToQQ() { 
+	    final Bundle params = new Bundle();
+	    params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+	    params.putString(QQShare.SHARE_TO_QQ_TITLE, shareEntry.msg);
+	    params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  shareEntry.msg);
+	    params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, shareEntry.url);
+	    params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, shareEntry.picUrl);
+	    params.putString(QQShare.SHARE_TO_QQ_APP_NAME, context.getString(R.string.app_name));
+	    mTencent.shareToQQ(context, params, new BaseUiListener());
+	}
+	
+	public void sharedQQzone() {
+		if (readyQQ()) {
+			final Bundle params = new Bundle();
+			params.putLong(QzoneShare.SHARE_TO_QZONE_KEY_TYPE,
+					QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);// 分享的标题。
+			params.putString(QzoneShare.SHARE_TO_QQ_TITLE,
+					shareEntry.msg);// 用户分享时的评论内容，可由用户输入。
+			params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY,
+					shareEntry.msg);// 分享内容
+			params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,
+					shareEntry.url);
+			ArrayList<String> imageUrls = new ArrayList<String>();
+			imageUrls.add(shareEntry.picUrl);
+			params.putString(QQShare.SHARE_TO_QQ_APP_NAME, context.getString(R.string.app_name));
+			params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL,
+					imageUrls);
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					mTencent.shareToQzone(context, params,
+							new IUiListener() {
+
+								@Override
+								public void onCancel() {
+									// TODO Auto-generated method stub
+
+								}
+
+								@Override
+								public void onComplete(Object arg0) {
+									// TODO Auto-generated method stub
+
+								}
+
+								@Override
+								public void onError(UiError arg0) {
+									if (arg0 == null) {
+										return;
+									}
+									if (context instanceof BaseActivity) {
+										((BaseActivity) context).showToast(context.getString(R.string.share_faided_try_later));
+									}
+								}
+
+							});
+				}
+			}).start();
+
+		}
+	}
+	
 	public void initSinaShare() {
 		if (mWeiboShareAPI == null) {
 			mWeiboShareAPI = WeiboShareSDK
@@ -125,6 +262,7 @@ public class ShareManager implements IWeiboHandler.Response{
 
 	public void onNewIntent(Intent intent,
 			IWXAPIEventHandler iwxh) {
+		context.setIntent(intent);
 		if (mWeiboShareAPI != null) {
 			mWeiboShareAPI.handleWeiboResponse(intent, this);
 		}
@@ -222,6 +360,7 @@ public class ShareManager implements IWeiboHandler.Response{
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		mTencent.onActivityResult(requestCode, resultCode, data);
 		if (mSsoHandler != null) {
 			mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}

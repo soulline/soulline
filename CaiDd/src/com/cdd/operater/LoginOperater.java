@@ -26,6 +26,7 @@ public class LoginOperater extends BaseOperater {
 	public void setParams(LoginEntry login) {
 		params.put("loginId", login.loginId);
 		params.put("password", login.password);
+		params.put("deviceFlag", login.deviceFlag);
 	}
 
 	@Override

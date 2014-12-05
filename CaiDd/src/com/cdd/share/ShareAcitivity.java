@@ -98,11 +98,21 @@ public class ShareAcitivity extends BaseActivity implements OnItemClickListener,
 			break;
 			
 		case 3:
-			
+			shareManager.initTencentShare();
+			if (shareManager.readyQQ()) {
+				shareManager.sharedQQzone();
+			} else {
+				shareManager.doLoginQQ(0);
+			}
 			break;
 			
 		case 4:
-			
+			shareManager.initTencentShare();
+			if (shareManager.readyQQ()) {
+				shareManager.shareToQQ();
+			} else {
+				shareManager.doLoginQQ(1);
+			}
 			break;
 			
 		default:

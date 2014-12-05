@@ -9,12 +9,15 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import com.cdd.R;
+import com.cdd.activity.login.QQLoginManger.OnQQLoginListener;
 import com.cdd.app.BaseActivityCloseListener;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.AccountInfo;
 import com.cdd.mode.LoginEntry;
+import com.cdd.mode.QQLoginEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.LoginOperater;
+import com.cdd.operater.QQLoginOp;
 import com.cdd.util.CddConfig;
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
@@ -22,6 +25,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private EditText accountInput, pwInput;
 	
 	private boolean isRebuild = false;
+	
+	private QQLoginManger qqLoginManager = null;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -36,6 +41,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
+		qqLoginManager = new QQLoginManger(this);
+		qqLoginManager.initQQ();
 	}
 
 	private void initView() {
@@ -82,10 +89,67 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (qqLoginManager != null) {
+			qqLoginManager.loginOutQQ();
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (qqLoginManager != null) {
+			qqLoginManager.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+	
+	private void doQQLogin(QQLoginEntry entry) {
+		app.isRebuild = false;
+		final QQLoginOp loginOp = new QQLoginOp(context);
+		loginOp.setParams(entry);
+		loginOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				qqLoginManager.loginOutQQ();
+				AccountInfo account = loginOp.getAccount();
+				app.setAccount(account);
+				showToast("登录成功");
+				setResult(RESULT_OK);
+				app.popClosePath(true, CddConfig.LOGIN_PATH_KEY);
+			}
+		});
+	}
+
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.login_qq:
-
+			showLoading(true);
+			qqLoginManager.initTencentShare();
+			qqLoginManager.addOnQQLoginListener(new OnQQLoginListener() {
+				
+				@Override
+				public void onSuccess() {
+					showLoading(false);
+					QQLoginEntry entry = qqLoginManager.getQQEntry();
+					doQQLogin(entry);
+				}
+				
+				@Override
+				public void onError() {
+					showLoading(false);
+					showToast("登录失败");
+				}
+			});
+			qqLoginManager.doLoginQQ();
 			break;
 		case R.id.login_btn:
 			if (checkInput()) {

@@ -1848,7 +1848,6 @@ com.sina.weibo.sdk.api.BaseMediaObject -> com.sina.weibo.sdk.api.BaseMediaObject
     java.lang.String title -> d
     java.lang.String description -> e
     byte[] thumbData -> f
-    void setThumbImage(android.graphics.Bitmap) -> a
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
     boolean checkArgs() -> a
@@ -1867,6 +1866,7 @@ com.sina.weibo.sdk.api.ImageObject -> com.sina.weibo.sdk.api.ImageObject:
     byte[] imageData -> g
     java.lang.String imagePath -> h
     android.os.Parcelable$Creator CREATOR -> CREATOR
+    void setImageObject(android.graphics.Bitmap) -> a
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
     boolean checkArgs() -> a

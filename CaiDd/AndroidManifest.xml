@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    
+
     <application
         android:name="com.cdd.app.CddApp"
         android:allowBackup="true"
@@ -27,9 +27,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
-            
         </activity>
-        
         <activity
             android:name="com.cdd.base.SlpashActivity"
             android:launchMode="singleTop"
@@ -41,13 +39,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.cdd.activity.login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
-            
         </activity>
         <activity
             android:name="com.cdd.activity.login.RegisterActivity"
@@ -59,15 +55,15 @@
             android:name="com.cdd.activity.sqpage.SqListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/BaseActivityTheme" >
+            android:theme="@style/BaseActivityTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.cdd.activity.sqpage.PulishActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/BaseActivityTheme" >
+            android:theme="@style/BaseActivityTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.cdd.activity.minepage.MineInfoModifyActivity"
@@ -111,21 +107,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
-        
         <activity
             android:name="com.cdd.activity.image.ImageNetPageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
-        
         <activity
             android:name="com.cdd.activity.image.ImageDrawablePageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
-        
         <activity
             android:name="com.cdd.activity.findpage.DynamicListActivity"
             android:launchMode="singleTop"
@@ -138,7 +131,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
-        
         <activity
             android:name="com.cdd.activity.minepage.FansOrListenActivity"
             android:launchMode="singleTop"
@@ -211,11 +203,30 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 微信分享  -->
+        <!-- 微信分享 -->
         <activity
             android:name="com.cdd.wxapi.WXEntryActivity"
             android:exported="true"
             android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- QQ分享 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1103564486" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 

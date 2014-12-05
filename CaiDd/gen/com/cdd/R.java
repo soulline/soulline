@@ -1145,6 +1145,7 @@ containing a value of this type.
         public static final int pull_to_refresh_refreshing_label=0x7f070002;
         public static final int pull_to_refresh_release_label=0x7f070001;
         public static final int share_cancel=0x7f07000f;
+        public static final int share_faided_try_later=0x7f070012;
         public static final int share_refuse=0x7f070010;
         public static final int share_return=0x7f070011;
         public static final int share_success=0x7f07000e;

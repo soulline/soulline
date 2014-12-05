@@ -1440,6 +1440,7 @@ com.sina.weibo.sdk.api.BaseMediaObject:
     public static final int MEDIA_TYPE_WEBPAGE
     public static final int MEDIA_TYPE_VOICE
     public static final int MEDIA_TYPE_CMD
+    92:109:public final void setThumbImage(android.graphics.Bitmap)
     public abstract int getObjType()
     protected abstract com.sina.weibo.sdk.api.BaseMediaObject toExtraMediaObject(java.lang.String)
 com.sina.weibo.sdk.api.CmdObject:
@@ -1448,7 +1449,6 @@ com.sina.weibo.sdk.api.CmdObject:
     75:75:protected com.sina.weibo.sdk.api.BaseMediaObject toExtraMediaObject(java.lang.String)
 com.sina.weibo.sdk.api.ImageObject:
     private static final int DATA_SIZE
-    64:81:public final void setImageObject(android.graphics.Bitmap)
     126:126:public int getObjType()
     131:131:protected com.sina.weibo.sdk.api.BaseMediaObject toExtraMediaObject(java.lang.String)
 com.sina.weibo.sdk.api.MusicObject:
@@ -2026,7 +2026,7 @@ com.yyl.share.ShareManager:
     public static final java.lang.String SINA_SCOPE
     public static final java.lang.String SINA_APP_KEY
     public static final java.lang.String WX_APP_ID
-    283:283:private android.graphics.Bitmap getIconBitmap()
+    286:286:private android.graphics.Bitmap getIconBitmap()
 com.yyl.utils.AccessTokenKeeper:
     private static final java.lang.String PREFERENCES_NAME
     private static final java.lang.String KEY_UID
