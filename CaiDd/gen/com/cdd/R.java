@@ -1129,9 +1129,12 @@ containing a value of this type.
         public static final int action_listen=0x7f070008;
         public static final int action_sure=0x7f070009;
         public static final int app_name=0x7f070006;
+        public static final int auth_success=0x7f07000d;
         /** 发现
          */
         public static final int dingdang_quan=0x7f070007;
+        public static final int not_install_sina=0x7f07000c;
+        public static final int not_install_wx=0x7f07000b;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
@@ -1141,6 +1144,10 @@ containing a value of this type.
         public static final int pull_to_refresh_pull_label=0x7f070000;
         public static final int pull_to_refresh_refreshing_label=0x7f070002;
         public static final int pull_to_refresh_release_label=0x7f070001;
+        public static final int share_cancel=0x7f07000f;
+        public static final int share_refuse=0x7f070010;
+        public static final int share_return=0x7f070011;
+        public static final int share_success=0x7f07000e;
     }
     public static final class style {
         public static final int AnimationPreview=0x7f0a0003;

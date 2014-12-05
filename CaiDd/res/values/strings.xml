@@ -8,6 +8,13 @@
     <string name="action_listen">关注</string>
     <string name="action_sure">确定</string>
     <string name="action_cancel">取消</string>
+    <string name="not_install_wx">您的手机未安装微信客户端</string>
+    <string name="not_install_sina">您的手机未安装微博客户端</string>
+    <string name="auth_success">授权成功</string>
+    <string name="share_success">分享成功</string>
+    <string name="share_cancel">分享取消</string>
+    <string name="share_refuse">分享被拒绝</string>
+    <string name="share_return">发送返回</string>
     
     <!-- 社区string array -->
     <string-array name="accounting_array_1">

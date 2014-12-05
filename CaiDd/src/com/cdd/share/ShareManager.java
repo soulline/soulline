@@ -1,4 +1,4 @@
-package com.yyl.share;
+package com.cdd.share;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -18,6 +18,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.cdd.R;
+import com.cdd.app.CddApp;
+import com.cdd.base.BaseActivity;
+import com.cdd.mode.ShareEntry;
+import com.cdd.net.RequestListener;
+import com.cdd.operater.GetShareInfoOp;
+import com.cdd.util.AccessTokenKeeper;
+import com.cdd.util.CddConfig;
+import com.cdd.util.PackageUtil;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WebpageObject;
@@ -43,14 +52,6 @@ import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.yyl.BaseActivity;
-import com.yyl.R;
-import com.yyl.application.YylApp;
-import com.yyl.mode.ShareEntry;
-import com.yyl.net.RequestListener;
-import com.yyl.operater.ShareOperater;
-import com.yyl.utils.AccessTokenKeeper;
-import com.yyl.utils.PackageUtil;
 
 public class ShareManager implements IWeiboHandler.Response{
 	private Oauth2AccessToken mAccessToken;
@@ -68,13 +69,13 @@ public class ShareManager implements IWeiboHandler.Response{
 	/** 微博分享的接口实例 */
 	private IWeiboShareAPI mWeiboShareAPI;
 
-	public static final String SINA_APP_KEY = "1876975061";
+	public static final String SINA_APP_KEY = "1326821158";
 
 	private Activity context;
 
 	private IWXAPI wXApi;
 
-	public static final String WX_APP_ID = "wx0efabc4ae60261b1";
+	public static final String WX_APP_ID = "wxa3ed942958805e2c";
 	
 	private ShareEntry shareEntry = new ShareEntry();
 
@@ -92,8 +93,8 @@ public class ShareManager implements IWeiboHandler.Response{
 
 	
 	private void initShareEntry() {
-		final ShareOperater shareOp = new ShareOperater(YylApp.getInstance());
-		shareOp.setParams("100000");
+		final GetShareInfoOp shareOp = new GetShareInfoOp(CddApp.getInstance());
+		shareOp.setParams(CddConfig.CID_CODE + "");
 		shareOp.onRequest(new RequestListener() {
 			
 			@Override
@@ -230,34 +231,21 @@ public class ShareManager implements IWeiboHandler.Response{
 		mWeiboShareAPI.registerApp();
 		if (mWeiboShareAPI.checkEnvironment(true)) {
 			try {
-//				TextObject textObj = new TextObject();
-//				textObj.text = "我正在玩夜店骰王，大家来一起玩吧";
-//				textObj.actionUrl = "http";
-//				textObj.thumbData = bmpToByteArray(getIconBitmap(), true);
+				TextObject textObj = new TextObject();
+				textObj.text = shareEntry.msg + shareEntry.url;
+				ImageObject imageObject = new ImageObject();
+				imageObject.setImageObject(getIconBitmap());
+				WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
 				// textObj.thumbData =
 				// bmpToByteArray(getBitmap(shareEntry.logo), true);
-				WebpageObject webObject = new WebpageObject();
-				webObject.identify = Utility.generateGUID();
-				webObject.title = shareEntry.msg;
-				webObject.description = shareEntry.msg;
-				Bitmap bitmp = getBitmap(shareEntry.picUrl);
-				ImageObject imageObject = new ImageObject();
-				imageObject.setImageObject(bitmp);
-				if (bitmp == null) return;
-				webObject.actionUrl = shareEntry.url;
-				webObject.defaultText = shareEntry.msg;
-				WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
-//				weiboMessage.textObject = textObj;
-				weiboMessage.mediaObject = webObject;
+				weiboMessage.textObject = textObj;
 				weiboMessage.imageObject = imageObject;
-				
 				SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
 				// 用transaction唯一标识一个请求
 				request.transaction = String
 						.valueOf(System.currentTimeMillis());
 				request.multiMessage = weiboMessage;
-
-				// 3. 发送请求消息到微博，唤起微博分享界面
+				
 				mWeiboShareAPI.sendRequest(request);
 			} catch (WeiboShareException e) {
 				e.printStackTrace();

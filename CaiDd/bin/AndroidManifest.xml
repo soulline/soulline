@@ -202,9 +202,21 @@
         </activity>
         <activity
             android:name="com.cdd.share.ShareAcitivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+        <!-- 微信分享  -->
+        <activity
+            android:name="com.cdd.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>
