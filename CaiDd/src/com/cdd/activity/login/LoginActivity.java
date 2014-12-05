@@ -149,7 +149,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					showToast("登录失败");
 				}
 			});
-			qqLoginManager.doLoginQQ();
+			if (qqLoginManager.readyQQ()) {
+				qqLoginManager.getUserInfo();
+			} else {
+				qqLoginManager.doLoginQQ();
+			}
 			break;
 		case R.id.login_btn:
 			if (checkInput()) {
