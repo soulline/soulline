@@ -2,6 +2,7 @@ package com.cdd.share;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -129,13 +130,13 @@ public class ShareAcitivity extends BaseActivity implements OnItemClickListener,
 	@Override
 	public void onReq(BaseReq arg0) {
 		// TODO Auto-generated method stub
-		
+		Log.d("zhao", "onReq");
 	}
 
 	@Override
 	public void onResp(BaseResp arg0) {
 		// TODO Auto-generated method stub
-		
+		Log.d("zhao", "onResp");
 	}
 
 }

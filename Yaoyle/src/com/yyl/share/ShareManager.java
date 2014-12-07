@@ -154,7 +154,7 @@ public class ShareManager implements IWeiboHandler.Response{
 		webpage.webpageUrl = shareEntry.url;
 		WXMediaMessage msg = new WXMediaMessage(webpage);
 		msg.title = shareEntry.msg;
-		msg.description = shareEntry.msg;
+		msg.description = shareEntry.msg + shareEntry.url;
 		Bitmap thumb = getBitmap(shareEntry.picUrl);
 		if (thumb == null) return;
 		msg.thumbData = bmpToByteArray(thumb, true);

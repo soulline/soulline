@@ -14,7 +14,7 @@ import android.os.Bundle;
 public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 	
 	private IWXAPI api;
-	private static final String WX_APP_ID = "wxa3ed942958805e2c";
+	private static final String WX_APP_ID = "wx82b3718805053aa5";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

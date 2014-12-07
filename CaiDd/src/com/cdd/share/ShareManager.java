@@ -92,7 +92,7 @@ public class ShareManager implements IWeiboHandler.Response{
 
 	private IWXAPI wXApi;
 
-	public static final String WX_APP_ID = "wxa3ed942958805e2c";
+	public static final String WX_APP_ID = "wx82b3718805053aa5";
 	
 	private ShareEntry shareEntry = new ShareEntry();
 
@@ -293,7 +293,7 @@ public class ShareManager implements IWeiboHandler.Response{
 		webpage.webpageUrl = shareEntry.url;
 		WXMediaMessage msg = new WXMediaMessage(webpage);
 		msg.title = shareEntry.msg;
-		msg.description = shareEntry.msg;
+		msg.description = shareEntry.msg + shareEntry.url;
 		Bitmap thumb = getBitmap(shareEntry.picUrl);
 		if (thumb == null) return;
 		msg.thumbData = bmpToByteArray(thumb, true);
