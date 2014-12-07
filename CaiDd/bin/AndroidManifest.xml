@@ -44,7 +44,7 @@
         android:theme="@style/BaseActivityTheme" >
         <activity
             android:name="com.cdd.base.MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
@@ -61,7 +61,7 @@
         </activity>
         <activity
             android:name="com.cdd.activity.login.LoginActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>
