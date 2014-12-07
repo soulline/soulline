@@ -7,6 +7,7 @@ import android.content.Context;
 
 import com.cdd.mode.BaseEntry;
 import com.cdd.mode.VersionEntry;
+import com.cdd.util.CddConfig;
 
 public class CheckVersionOp extends BaseOperater {
 
@@ -19,7 +20,10 @@ public class CheckVersionOp extends BaseOperater {
 	@Override
 	public void initAction() {
 		action = "base/checkVersion.do";
-
+	}
+	
+	public void setParams(String cid) {
+		params.put("cid", cid);
 	}
 
 	@Override
@@ -46,6 +50,10 @@ public class CheckVersionOp extends BaseOperater {
 	public void onParser(JSONArray response) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public VersionEntry getVersionInfo() {
+		return version;
 	}
 
 	@Override

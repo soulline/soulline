@@ -1133,6 +1133,7 @@ containing a value of this type.
         /** 发现
          */
         public static final int dingdang_quan=0x7f070007;
+        public static final int new_version_note=0x7f070013;
         public static final int not_install_sina=0x7f07000c;
         public static final int not_install_wx=0x7f07000b;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
