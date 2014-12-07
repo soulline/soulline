@@ -13,6 +13,8 @@ public class SerialApp extends Application {
 	
 	public int oldPaikongTime = 0;
 	
+	public String lastWay = "15";
+	
 	public boolean isCheckIng = false;
 	
 	public boolean isSetAlarm = false;

@@ -32,9 +32,11 @@ import com.asag.serial.base.BaseActivity;
 import com.asag.serial.fragment.BaseFragmentListener;
 import com.asag.serial.fragment.InputSureFragment;
 import com.asag.serial.fragment.PointCheckFragment;
+import com.asag.serial.fragment.PointSetFragment;
 import com.asag.serial.mode.AlarmInfo;
 import com.asag.serial.mode.CutDownEntry;
 import com.asag.serial.mode.RightDataEntry;
+import com.asag.serial.mode.TimeSetEntry;
 import com.asag.serial.service.SerialService;
 import com.asag.serial.utils.CMDCode;
 import com.asag.serial.utils.DataUtils;
@@ -47,45 +49,47 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	private LocalBroadcastManager lbm = LocalBroadcastManager
 			.getInstance(SerialApp.getInstance());
-	
+
 	private TextView checkWayValue;
-	
+
 	private int checkMinuteValue = 0;
 	private int paikongMinuteValue = 0;
-	
+
 	private int wayCount = 0;
-	
+
 	private AlarmInfo alarmInfo = new AlarmInfo();
-	
+
 	private TextView paikongCheckTime, checkCheckTime;
-	
+
 	private TextView paikongTimeState, checkTimeState;
-	
+
 	private RightAdatper adapter;
-	
+
 	private ArrayList<RightDataEntry> rightList = new ArrayList<RightDataEntry>();
-	
+
 	private ListView listView;
-	
+
 	private TextView co2Tx, o2Tx, ph3tx, rhtx, ttx;
-	
+
 	private TextView co2State, o2State, ph3State, rhState, tState;
-	
+
 	private TextView stopMenu;
-	
+
 	private ImageView checkAnimationImg;
-	
+
 	private TextView topTitleTx, fileMenu, functionMenu, cedingMenu,
-	settingMenu, shituMenu, searchMenu, helpMenu, cancelAlarmMenu, checkFunctionTx;
-	
-	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei, ph3Danwei, o2Danwei, rhDanwei, tDanwei;
-	
+			settingMenu, shituMenu, searchMenu, helpMenu, cancelAlarmMenu,
+			checkFunctionTx;
+
+	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei,
+			ph3Danwei, o2Danwei, rhDanwei, tDanwei;
+
 	private TextView paikongCheckDanwei, checkCheckDanwei;
-	
+
 	private DigitalNewClock digitalClock;
-	
+
 	private ArrayList<String> checkWayList = new ArrayList<String>();
-	
+
 	private int checkState = 0;
 
 	@Override
@@ -97,7 +101,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		registerReceiver();
 		initTextSize();
 	}
-	
+
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
 		if (adapter != null && adapter.getCount() > 0) {
@@ -125,7 +129,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
+
 	private void showCheckAnim(boolean isShow) {
 		if (isShow) {
 			checkAnimationImg.setImageResource(R.drawable.checking_anim);
@@ -136,15 +140,15 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			checkAnimationImg.setImageResource(R.drawable.check_anima_1);
 		}
 	}
-	
-	public static String hexToBinary(String s){
+
+	public static String hexToBinary(String s) {
 		return Long.toBinaryString(Long.parseLong(s, 16));
 	}
-	
+
 	private void reloadNewTextSize(float size) {
 		topTitleTx.setTextSize(15.69f * size);
 		fileMenu.setTextSize(12.55f * size);
-		functionMenu.setTextSize(12.55f* size);
+		functionMenu.setTextSize(12.55f * size);
 		cedingMenu.setTextSize(12.55f * size);
 		settingMenu.setTextSize(12.55f * size);
 		shituMenu.setTextSize(12.55f * size);
@@ -152,7 +156,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		helpMenu.setTextSize(12.55f * size);
 		cancelAlarmMenu.setTextSize(12.55f * size);
 		checkFunctionTx.setTextSize(12.55f * size);
-//		checkWayValue.setTextSize(checkWayValue.getTextSize() * size);
+		// checkWayValue.setTextSize(checkWayValue.getTextSize() * size);
 		paikongCheckTime.setTextSize(11.0f * size);
 		checkCheckTime.setTextSize(11.0f * size);
 		co2Tx.setTextSize(11.0f * size);
@@ -160,7 +164,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		checkTimeState.setTextSize(11.0f * size);
 		checkCheckTime.setTextSize(11.0f * size);
 		o2Tx.setTextSize(11.0f * size);
-		
+
 		ph3tx.setTextSize(11.0f * size);
 		rhtx.setTextSize(11.0f * size);
 		ttx.setTextSize(11.0f * size);
@@ -170,7 +174,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		rhState.setTextSize(11.0f * size);
 		tState.setTextSize(11.0f * size);
 		stopMenu.setTextSize(11.0f * size);
-		
+
 		titleResult.setTextSize(11.0f * size);
 		resultCo2.setTextSize(11.0f * size);
 		resultRh.setTextSize(11.0f * size);
@@ -197,21 +201,21 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		cancelAlarmMenu = (TextView) findViewById(R.id.cancel_alarm_menu);
 		checkFunctionTx = (TextView) findViewById(R.id.check_function_tx);
 		titleResult = (TextView) findViewById(R.id.title_result);
-		
+
 		resultCo2 = (TextView) findViewById(R.id.result_co2);
 		resultRh = (TextView) findViewById(R.id.result_rh);
 		resultTc = (TextView) findViewById(R.id.result_tc);
 		digitalClock = (DigitalNewClock) findViewById(R.id.digital_clock);
-		
+
 		co2Danwei = (TextView) findViewById(R.id.co2_danwei);
 		ph3Danwei = (TextView) findViewById(R.id.ph3_danwei);
 		o2Danwei = (TextView) findViewById(R.id.o2_danwei);
 		rhDanwei = (TextView) findViewById(R.id.rh_danwei);
 		tDanwei = (TextView) findViewById(R.id.t_danwei);
-		
+
 		paikongCheckDanwei = (TextView) findViewById(R.id.paikong_check_danwei);
 		checkCheckDanwei = (TextView) findViewById(R.id.check_check_danwei);
-		
+
 		findViewById(R.id.file_menu).setOnClickListener(this);
 		findViewById(R.id.function_menu).setOnClickListener(this);
 		findViewById(R.id.ceding_menu).setOnClickListener(this);
@@ -228,19 +232,19 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		paikongTimeState = (TextView) findViewById(R.id.paikong_time_state);
 		checkTimeState = (TextView) findViewById(R.id.check_time_state);
 		listView = (ListView) findViewById(R.id.listid);
-		
+
 		co2Tx = (TextView) findViewById(R.id.co2_value);
 		o2Tx = (TextView) findViewById(R.id.o2_value);
 		ph3tx = (TextView) findViewById(R.id.ph3_value);
 		rhtx = (TextView) findViewById(R.id.rh_value);
 		ttx = (TextView) findViewById(R.id.t_value);
-		
+
 		co2State = (TextView) findViewById(R.id.co2_value_state);
 		o2State = (TextView) findViewById(R.id.o2_value_state);
 		ph3State = (TextView) findViewById(R.id.ph3_value_state);
 		rhState = (TextView) findViewById(R.id.rh_value_state);
 		tState = (TextView) findViewById(R.id.t_value_state);
-		
+
 		stopMenu = (TextView) findViewById(R.id.stop_menu);
 	}
 
@@ -260,10 +264,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		boolean result = str.matches("[0-9]+");
 		return result;
 	}
-	
+
 	public void addData(RightDataEntry data) {
 		int index = -1;
-		for (int i=0; i< rightList.size(); i++) {
+		for (int i = 0; i < rightList.size(); i++) {
 			RightDataEntry entry = rightList.get(i);
 			if (entry.number.equals(data.number)) {
 				index = i;
@@ -289,7 +293,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			adapter.notifyDataSetChanged();
 		}
 	}
-	
+
 	public Comparator<RightDataEntry> comparatorRight = new Comparator<RightDataEntry>() {
 
 		@Override
@@ -304,7 +308,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			return 1;
 		}
 	};
-	
+
 	public void updatePaikongMinute(String value) {
 		paikongCheckTime.setText(value);
 		if (value.equals("0.0")) {
@@ -313,7 +317,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			showPointView(paikongTimeState, false);
 		}
 	}
-	
+
 	public void updateCheckMinute(String value) {
 		checkCheckTime.setText(value);
 		if (value.equals("0.0")) {
@@ -322,28 +326,27 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			showPointView(checkTimeState, false);
 		}
 	}
-	
+
 	public void initService() {
-		if (!ServiceUtil.isServiceRunning("com.example.testbutton.service.SerialService")) {
+		if (!ServiceUtil
+				.isServiceRunning("com.example.testbutton.service.SerialService")) {
 			Intent service = new Intent(context, SerialService.class);
 			startService(service);
 		}
 	}
-	
+
 	public void finishAll() {
 		super.finish();
 		System.gc();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
-	
+
 	private void showPointView(TextView title, boolean isRed) {
 		Drawable drawable = null;
 		if (isRed) {
-			drawable = getResources().getDrawable(
-					R.drawable.redpoint);
+			drawable = getResources().getDrawable(R.drawable.redpoint);
 		} else {
-			drawable = getResources().getDrawable(
-					R.drawable.big_greenpoint);
+			drawable = getResources().getDrawable(R.drawable.big_greenpoint);
 		}
 		if (drawable != null) {
 			drawable.setBounds(0, 0, drawable.getMinimumWidth(),
@@ -360,7 +363,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		co2Tx.setText(value + "");
 	}
-	
+
 	public void setO2Value(float value) {
 		if (value > 0) {
 			showPointView(o2State, false);
@@ -369,7 +372,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		o2Tx.setText(value + "");
 	}
-	
+
 	public void setPH3Value(long value) {
 		if ((value < 50000 && value > 0) || value == 50000) {
 			showPointView(ph3State, false);
@@ -378,7 +381,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		ph3tx.setText(value + "");
 	}
-	
+
 	public void setRHValue(float value) {
 		if (value > 30.0f) {
 			showPointView(rhState, true);
@@ -387,7 +390,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		rhtx.setText(value + "");
 	}
-	
+
 	public void setTValue(float value) {
 		if ((value < 80.0f && value > 0.0f) || value == 80.0f) {
 			showPointView(tState, false);
@@ -396,7 +399,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		ttx.setText(value + "");
 	}
-	
+
 	public void initAdapter(ArrayList<RightDataEntry> list) {
 		if (adapter == null) {
 			adapter = new RightAdatper(context);
@@ -413,7 +416,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			adapter.notifyDataSetChanged();
 		}
 	}
-	
+
 	public void clearRightData() {
 		if (adapter != null) {
 			adapter.clear();
@@ -421,7 +424,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			adapter.notifyDataSetChanged();
 		}
 	}
-	
+
 	public BroadcastReceiver dataReceiver = new BroadcastReceiver() {
 
 		@Override
@@ -477,7 +480,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								wayCount = 0;
 								checkWayList.clear();
 							}
-							
+
 						} else if (checkState == 0) {
 							number += 1;
 							wayCount = number;
@@ -543,21 +546,24 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						}
 					}
 				}, 500);
-			} else if (intent.getAction().equals(SerialBroadCode.ACTION_START_CHECKING)) {
+			} else if (intent.getAction().equals(
+					SerialBroadCode.ACTION_START_CHECKING)) {
 				showCheckAnim(true);
-			} else if (intent.getAction().equals(SerialBroadCode.ACTION_STOP_CHECKING)) {
+			} else if (intent.getAction().equals(
+					SerialBroadCode.ACTION_STOP_CHECKING)) {
 				showCheckAnim(false);
 			}
 
 		}
 	};
-	
+
 	public void startCutDown(int checkCode) {
 		app.isPause = false;
 		if (checkCode == 0) {
 			String title = wayCount + "";
 			checkWayValue.setText(title);
-		} else if ((checkCode == 1 || checkCode == 2) && checkWayList.size() > 0) {
+		} else if ((checkCode == 1 || checkCode == 2)
+				&& checkWayList.size() > 0) {
 			checkWayValue.setText(checkWayList.get(0));
 		}
 		Intent check = new Intent(SerialBroadCode.ACTION_CHECK_MINUTE);
@@ -565,14 +571,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		check.putExtra("paikong_minute", paikongMinuteValue + "");
 		lbm.sendBroadcast(check);
 	}
-	
+
 	private void setCheckinfo(AlarmInfo alarm) {
 		checkMinuteValue = alarm.checkN * 10;
 		paikongMinuteValue = alarm.paikongN * 10;
 		wayCount = 0;
 		app.oldCheckTime = checkMinuteValue;
 		app.oldPaikongTime = paikongMinuteValue;
-//		fragment.clearRightData();
+		// fragment.clearRightData();
 		if (checkMinuteValue > 0) {
 			float checkF = ((float) checkMinuteValue) / 10.0f;
 			updateCheckMinute(checkF + "");
@@ -599,13 +605,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	private void setAlarmCheck(final AlarmInfo alarm) {
 		if (alarm.firstTimeN < System.currentTimeMillis()) {
-			alarm.firstTimeN = System.currentTimeMillis() + alarm.minuteN * 60 * 1000;
+			alarm.firstTimeN = System.currentTimeMillis() + alarm.minuteN * 60
+					* 1000;
 			alarmInfo = alarm;
 		}
 		if (app.isSetAlarm) {
 			JcAlarm.cancelSendAlarm();
 			handler.postDelayed(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					JcAlarm.setSendAlarm(alarm);
@@ -615,7 +622,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			JcAlarm.setSendAlarm(alarm);
 		}
 	}
-	
+
 	public void sendMessageS(String message) {
 		Intent intent = new Intent(SerialBroadCode.ACTION_SEND_MESSAGE);
 		intent.putExtra("send_message", message);
@@ -630,13 +637,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		startActivityForResult(params, SerialRequestCode.REQUEST_SET_DATA);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}
-	
+
 	private void fillCheckWayList(String result) {
 		checkWayList.clear();
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sbNew = new StringBuilder();
 		String binaryStr = hexToBinary(result);
-		for (int i=0; i < (16 - binaryStr.length()); i++) {
+		for (int i = 0; i < (16 - binaryStr.length()); i++) {
 			sbNew.append("0");
 		}
 		binaryStr = sbNew.toString() + binaryStr;
@@ -652,7 +659,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		showToast("已选择 :" + sb.toString());
 	}
-	
+
 	private int getNextWay(String nowNumber) {
 		if (checkWayList.size() == 0) {
 			showToast("未选择检测通道号");
@@ -662,7 +669,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			return -1;
 		}
 		int position = -1;
-		for (int i=0; i < checkWayList.size(); i++) {
+		for (int i = 0; i < checkWayList.size(); i++) {
 			if (nowNumber.equals(checkWayList.get(i))) {
 				position = i;
 				break;
@@ -691,7 +698,35 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								} else {
 									checkFunctionTx.setText("点检测");
 									sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
-									startCanshuActivity(newType);
+									// startCanshuActivity(newType);
+									displayFragment(true, "point_set", null,
+											new BaseFragmentListener() {
+
+												@Override
+												public void onCallBack(
+														Object object) {
+													if (object instanceof TimeSetEntry) {
+														TimeSetEntry entry = (TimeSetEntry) object;
+														checkMinuteValue = entry.checkTime * 10;
+														paikongMinuteValue = entry.paikongTime * 10;
+														wayCount = 0;
+														app.oldCheckTime = checkMinuteValue;
+														app.oldPaikongTime = paikongMinuteValue;
+														// fragment.clearRightData();
+														if (checkMinuteValue > 0) {
+															float checkF = ((float) checkMinuteValue) / 10.0f;
+															updateCheckMinute(checkF
+																	+ "");
+														}
+														if (paikongMinuteValue > 0) {
+															float paikongF = ((float) paikongMinuteValue) / 10.0f;
+															updatePaikongMinute(paikongF
+																	+ "");
+														}
+													}
+
+												}
+											});
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								newType = 3;
@@ -703,37 +738,50 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						} else if (type == 1) {
 							if (resourceId == R.id.liangan_jiance_menu) {
 								checkState = 0;
+								app.lastWay = "15";
 								showToast("定时器开启");
-								if (alarmInfo != null && alarmInfo.firstTimeN > 0L && alarmInfo.minuteN > 0) {
+								if (alarmInfo != null
+										&& alarmInfo.firstTimeN > 0L
+										&& alarmInfo.minuteN > 0) {
 									setAlarmCheck(alarmInfo);
 								}
 							} else if (resourceId == R.id.point_check_menu) {
+								app.lastWay = checkWayList.get(checkWayList
+										.size() - 1);
 								checkState = 1;
 								sendMessageS(CMDCode.CD_POINT_CHECK);
-								displayFragment(true, "point_select", null, new BaseFragmentListener() {
-									
-									@Override
-									public void onCallBack(Object object) {
-										if (object != null && object instanceof String) {
-											String result = (String) object;
-											fillCheckWayList(result);
-											result = result.substring(0, 2) + " " + result.substring(2, result.length());
-											String message = CMDCode.CD_LIANGAN_CHECK_2 + result + "FF FF";
-											showToast("开始测定");
-											sendMessageS(message);
-											startCutDown(1);
-										}
-									}
-								});
+								displayFragment(true, "point_select", null,
+										new BaseFragmentListener() {
+
+											@Override
+											public void onCallBack(Object object) {
+												if (object != null
+														&& object instanceof String) {
+													String result = (String) object;
+													fillCheckWayList(result);
+													result = result.substring(
+															0, 2)
+															+ " "
+															+ result.substring(
+																	2,
+																	result.length());
+													String message = CMDCode.CD_LIANGAN_CHECK_2
+															+ result + "FF FF";
+													showToast("开始测定");
+													sendMessageS(message);
+													startCutDown(1);
+												}
+											}
+										});
 							} else if (resourceId == R.id.cangan_jiance_menu) {
+								app.lastWay = "0";
 								checkState = 2;
-				
-								 showToast("开始测定");
+								showToast("开始测定");
 								sendMessageS(CMDCode.CD_CANGAN_CHECK);
 								startCutDown(2);
 							}
 						} else if (type == 2) {
-							
+
 						}
 					}
 				});
@@ -749,14 +797,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			functionMenu.showPopupWindow(view);
 		}
 	}
-	
+
 	public void displayFragment(boolean isOpen, String tag, Bundle bundle,
 			BaseFragmentListener listener) {
 		if (isOpen) {
 			((BaseActivity) context).showFragment(tag, -1,
 					createFragment(tag, bundle, listener));
 		} else {
-			((BaseActivity)context).closeFragment(tag);
+			((BaseActivity) context).closeFragment(tag);
 		}
 	}
 
@@ -766,6 +814,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			PointCheckFragment pointF = new PointCheckFragment();
 			pointF.addBaseFragmentListener(listener);
 			return pointF;
+		} else if (tag.equals("point_set")) {
+			PointSetFragment pointSetF = new PointSetFragment();
+			pointSetF.addBaseFragmentListener(listener);
+			return pointSetF;
 		}
 		return null;
 	}
@@ -773,7 +825,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == RESULT_OK  && requestCode == SerialRequestCode.REQUEST_SET_DATA) {
+		if (resultCode == RESULT_OK
+				&& requestCode == SerialRequestCode.REQUEST_SET_DATA) {
 			if (alarmInfo == null) {
 				alarmInfo = new AlarmInfo();
 			}
@@ -784,14 +837,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			setCheckinfo(alarmInfo);
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		Intent service = new Intent(context, SerialService.class);
 		stopService(service);
 	}
-	
+
 	private void showSettingMenu() {
 		SettingPopMenu settingMenu = new SettingPopMenu(context,
 				new OnSettingClickListener() {
@@ -811,54 +864,61 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				});
 		settingMenu.showPopupWindow(findViewById(R.id.setting_menu));
 	}
-	
-	private void showTextSizeMenu() {
-		TextSizeMenu settingMenu = new TextSizeMenu(context, new OnTextSizeClickListener() {
-			
-			@Override
-			public void onClick(int resourceId) {
-				final ProgressDialog dialog = new ProgressDialog(context);
-				dialog.setTitle("正在设置字体，请稍后...");
-				dialog.show();
-				handler.postDelayed(new Runnable() {
-					
-					@Override
-					public void run() {
-						dialog.dismiss();
-					}
-				}, 1000);
-				switch (resourceId) {
-				case R.id.s_small_size:
-					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 1);
-					reloadNewTextSize(1.0f);
-					break;
-					
-				case R.id.small_size:
-					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 2);
-					reloadNewTextSize(1.2f);
-					break;
-					
-				case R.id.normal_size:
-					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 3);
-					reloadNewTextSize(1.4f);
-					break;
-					
-				case R.id.big_size:
-					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 4);
-					reloadNewTextSize(1.6f);
-					break;
-					
-				case R.id.b_big_size:
-					DataUtils.putPreferences(DataUtils.KEY_TEXT_SIZE, 5);
-					reloadNewTextSize(1.8f);
-					break;
 
-				default:
-					break;
-				}
-				
-			}
-		});
+	private void showTextSizeMenu() {
+		TextSizeMenu settingMenu = new TextSizeMenu(context,
+				new OnTextSizeClickListener() {
+
+					@Override
+					public void onClick(int resourceId) {
+						final ProgressDialog dialog = new ProgressDialog(
+								context);
+						dialog.setTitle("正在设置字体，请稍后...");
+						dialog.show();
+						handler.postDelayed(new Runnable() {
+
+							@Override
+							public void run() {
+								dialog.dismiss();
+							}
+						}, 1000);
+						switch (resourceId) {
+						case R.id.s_small_size:
+							DataUtils
+									.putPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+							reloadNewTextSize(1.0f);
+							break;
+
+						case R.id.small_size:
+							DataUtils
+									.putPreferences(DataUtils.KEY_TEXT_SIZE, 2);
+							reloadNewTextSize(1.2f);
+							break;
+
+						case R.id.normal_size:
+							DataUtils
+									.putPreferences(DataUtils.KEY_TEXT_SIZE, 3);
+							reloadNewTextSize(1.4f);
+							break;
+
+						case R.id.big_size:
+							DataUtils
+									.putPreferences(DataUtils.KEY_TEXT_SIZE, 4);
+							reloadNewTextSize(1.6f);
+							break;
+
+						case R.id.b_big_size:
+							DataUtils
+									.putPreferences(DataUtils.KEY_TEXT_SIZE, 5);
+							reloadNewTextSize(1.8f);
+							break;
+
+						default:
+							break;
+						}
+
+					}
+				});
 		settingMenu.showPopupWindow(findViewById(R.id.setting_menu));
 	}
 
@@ -898,7 +958,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				showToast("停止检测");
 				stopMenu.setText("继续");
 				showCheckAnim(false);
-			} else if (app.isPause && !app.isCheckIng){
+			} else if (app.isPause && !app.isCheckIng) {
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = false;
 				showToast("继续检测");
@@ -923,7 +983,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		case R.id.help_menu:
 
 			break;
-			
+
 		case R.id.cancel_alarm_menu:
 			JcAlarm.cancelSendAlarm();
 			showToast("已取消定时器");
