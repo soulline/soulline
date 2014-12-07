@@ -243,7 +243,6 @@ abstract public class BaseOperater {
 				app.clearLogin();
 				Intent i = new Intent(context, LoginActivity.class);
 				i.putExtra("rebuild", true);
-				i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				app.isRebuild = true;
 				if (context instanceof Activity) {
 					((Activity) context).startActivityForResult(i,

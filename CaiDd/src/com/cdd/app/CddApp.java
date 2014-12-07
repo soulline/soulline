@@ -1,6 +1,10 @@
 package com.cdd.app;
 
 import java.lang.ref.WeakReference;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.cdd.mode.AccountInfo;
 import com.cdd.util.DataUtils;
@@ -8,6 +12,7 @@ import com.cdd.util.CddConfig;
 
 
 import android.app.Application;
+import android.telephony.TelephonyManager;
 import android.util.SparseArray;
 
 public class CddApp extends Application {
@@ -22,6 +27,9 @@ public class CddApp extends Application {
 	public void onCreate() {
 		super.onCreate();
 		initInstance();
+		JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        sendAliasJpush();
 	}
 	
 	private void initInstance() {
@@ -40,6 +48,19 @@ public class CddApp extends Application {
 	
 	public String getUID() {
 		return DataUtils.getPreferences(DataUtils.KEY_UUID, "");
+	}
+	
+	private void sendAliasJpush() {
+		String flag = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
+		.getDeviceId();
+		JPushInterface.setAliasAndTags(getApplicationContext(), flag, null, new TagAliasCallback() {
+			
+			@Override
+			public void gotResult(int arg0, String arg1, Set<String> arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	public AccountInfo getAccount() {
