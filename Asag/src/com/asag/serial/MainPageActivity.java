@@ -533,6 +533,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
 				checkState = 0;
+				app.lastWay = "15";
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
 				handler.postDelayed(new Runnable() {
@@ -606,7 +607,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private void setAlarmCheck(final AlarmInfo alarm) {
 		if (alarm.firstTimeN < System.currentTimeMillis()) {
 			alarm.firstTimeN = System.currentTimeMillis() + alarm.minuteN * 60
-					* 1000;
+					* 1000L;
 			alarmInfo = alarm;
 		}
 		if (app.isSetAlarm) {
@@ -738,7 +739,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						} else if (type == 1) {
 							if (resourceId == R.id.liangan_jiance_menu) {
 								checkState = 0;
-								app.lastWay = "15";
 								showToast("定时器开启");
 								if (alarmInfo != null
 										&& alarmInfo.firstTimeN > 0L

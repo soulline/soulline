@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 						fragment.addData(dataEntry);
 					}
 					if (dataEntry.number.equals("15")) {
-						showToast("�?��结束");
+						showToast("检测结束");
 						textView1.setText("0");
 						wayCount = 0;
 					} else {

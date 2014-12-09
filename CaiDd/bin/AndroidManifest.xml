@@ -228,13 +228,6 @@
             android:name="com.cdd.wxapi.WXEntryActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="wx82b3718805053aa5" />
-            </intent-filter>
         </activity>
 
         <!-- QQ分享 -->

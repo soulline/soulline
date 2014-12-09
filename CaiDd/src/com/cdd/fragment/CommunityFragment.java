@@ -451,6 +451,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 	private void getForumList() {
 		final ForumItemOperater forumOp = new ForumItemOperater(getActivity());
+		loadCache(forumOp);
 		forumOp.onRequest(new RequestListener() {
 
 			@Override

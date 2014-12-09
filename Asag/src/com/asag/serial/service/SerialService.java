@@ -99,11 +99,27 @@ public class SerialService extends Service {
 				dataEntry.o2 = subDataHex(array[2]).trim();
 				dataEntry.wendu = subDataHex(array[3]).trim();
 				dataEntry.shidu = subDataHex(array[4]).trim();
-
-				app.isCheckIng = false;
-				stopTimer();
-				app.oldCheckTime = 0;
-				app.oldPaikongTime = 0;
+				if (!dataEntry.number.equals(app.lastWay)) {
+					checkMunite = app.oldCheckTime;
+					paikongMinute = app.oldPaikongTime;
+					CutDownEntry cut1 = new CutDownEntry();
+					cut1.type = 1;
+					cut1.time = checkMunite;
+					CutDownEntry cut2 = new CutDownEntry();
+					cut2.type = 2;
+					cut2.time = paikongMinute;
+					sendCutDownUpdate(cut1);
+					sendCutDownUpdate(cut2);
+					stopTimer();
+					startTimer();
+					Log.d("zhao", " 0 continue ---- ");
+				} else {
+					app.isCheckIng = false ;
+					stopTimer();
+					app.oldCheckTime = 0;
+					app.oldPaikongTime = 0;
+					Log.d("zhao", " 0 stop ---- ");
+				}
 				Intent intent = new Intent(SerialBroadCode.ACTION_PASSWAY_DATA);
 				intent.putExtra("right_data", dataEntry);
 				lbm.sendBroadcast(intent);
@@ -264,7 +280,8 @@ public class SerialService extends Service {
 		dataEntry.co2 = subDataHex(array[0]);
 		dataEntry.wendu = subDataHex(array[1]);
 		dataEntry.shidu = subDataHex(array[2]);
-		if (!dataEntry.number.equals("15")) {
+		Log.d("zhao", "parsePassway : " + app.lastWay);
+		if (!dataEntry.number.equals(app.lastWay)) {
 			checkMunite = app.oldCheckTime;
 			paikongMinute = app.oldPaikongTime;
 			CutDownEntry cut1 = new CutDownEntry();

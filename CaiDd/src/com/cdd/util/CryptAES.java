@@ -24,7 +24,7 @@ public class CryptAES {
 
 	private static SecretKeySpec sKey;
 
-	private final static String key = "ydsw123321";
+	private final static String key = "cdd123321";
 
 	private byte[] iv = { 0xA, 1, 0xB, 5, 4, 0xF, 7, 9, 0x17, 3, 1, 6, 8, 0xC,
 			0xD, 91 };
@@ -99,7 +99,7 @@ public class CryptAES {
 	public void main(String[] args) {
 		CryptAES hahahah123 = CryptAES.getInstance();
 		try {
-			String msg = "{\"re\":[[\"1\",\"摇摇\"]}";
+			String msg = "{\"re\":[[\"1\",\"财叮当\"]}";
 			String base64_ciphertext = hahahah123.onEncrypt(msg);
 			String mm = hahahah123.onDecrypt(base64_ciphertext);
 			if (CddConfig.IS_DEBUG) {

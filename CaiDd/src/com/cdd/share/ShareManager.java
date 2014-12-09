@@ -100,10 +100,13 @@ public class ShareManager implements IWeiboHandler.Response{
 		this.context = context;
 	}
 
-	public void initShare() {
+	public void initShare(IWXAPIEventHandler iwxh) {
 		mWeiboAuth = new WeiboAuth(context, SINA_APP_KEY,
 				"https://api.weibo.com/oauth2/default.html", SINA_SCOPE);
 		wXApi = WXAPIFactory.createWXAPI(context, WX_APP_ID, false);
+		if (wXApi != null) {
+			wXApi.handleIntent(context.getIntent(), iwxh);
+		}
 //		initSinaShare();
 		initShareEntry();
 		mTencent = Tencent.createInstance(QQ_QZONE_ID, CddApp.getInstance());

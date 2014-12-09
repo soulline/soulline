@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
 import com.cdd.activity.findpage.DynamicAdapter;
+import com.cdd.activity.findpage.ForwardDetailActivity;
 import com.cdd.activity.findpage.NewsDetailActivity;
 import com.cdd.activity.findpage.PulishDynamicActivity;
 import com.cdd.activity.findpage.UserInfoActivity;
@@ -29,6 +30,9 @@ import com.cdd.mode.DynamicReplay;
 import com.cdd.mode.PhotosEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.MemberNewsListOp;
+import com.cdd.operater.NewsShareOp;
+import com.cdd.operater.NewsShoucangOp;
+import com.cdd.operater.NewsZanOp;
 import com.cdd.util.CddRequestCode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -180,6 +184,93 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 		}
 		return null;
 	}
+	
+	private void onNewsZanRequest(String cofId, final int position) {
+		NewsZanOp zanOp = new NewsZanOp(context);
+		zanOp.setParams(cofId);
+		zanOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				showToast("点赞成功");
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						String count = adapter.getItem(position).likeCount;
+						int countN = Integer.valueOf(count);
+						countN++;
+						adapter.getItem(position).likeCount = countN + "";
+						adapter.notifyDataSetChanged();
+					}
+				});
+			}
+		});
+	}
+	
+	private void onNewsShoucangRequest(String cofId, final int position) {
+		NewsShoucangOp shoucangOp = new NewsShoucangOp(context);
+		shoucangOp.setParams(cofId);
+		shoucangOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				showToast("收藏成功");
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						String count = adapter.getItem(position).favoriteCount;
+						int countN = Integer.valueOf(count);
+						countN++;
+						adapter.getItem(position).favoriteCount = countN + "";
+						adapter.notifyDataSetChanged();
+					}
+				});
+			}
+		});
+	}
+	
+	private void onNewsShareRequest(String cofId, final int position) {
+		NewsShareOp shareOp = new NewsShareOp(context);
+		shareOp.setParams(cofId);
+		shareOp.onRequest(new RequestListener() {
+			
+			@Override
+			public void onError(Object error) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onCallBack(Object data) {
+				showToast("分享成功");
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						String count = adapter.getItem(position).shareCount;
+						int countN = Integer.valueOf(count);
+						countN++;
+						adapter.getItem(position).shareCount = countN + "";
+						adapter.notifyDataSetChanged();
+					}
+				});
+			}
+		});
+	}
 
 	private void addAdapterListener(DynamicAdapter adapterN) {
 		adapterN.addOnAnswerMemberClickLister(new OnAnswerMemberClickLister() {
@@ -238,6 +329,16 @@ public class MyNewsListActivity extends BaseActivity implements OnClickListener{
 									}
 								}
 							});
+				} else if (type == 0) {
+					onNewsZanRequest(adapter.getItem(position).id, position);
+				} else if (type == 1) {
+					onNewsShoucangRequest(adapter.getItem(position).id, position);
+				} else if (type == 2) {
+					onNewsShareRequest(adapter.getItem(position).id, position);
+				} else if (type == 4) {
+					Intent forward = new Intent(context, ForwardDetailActivity.class);
+					forward.putExtra("cofId", adapter.getItem(position).forward.id);
+					startActivity(forward);
 				}
 
 			}

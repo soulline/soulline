@@ -4,6 +4,7 @@ import com.cdd.R;
 import com.cdd.activity.findpage.DynamicListActivity;
 import com.cdd.activity.findpage.DynamicSearchActivity;
 import com.cdd.activity.findpage.HotNewsListActivity;
+import com.cdd.base.BaseActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -63,7 +64,9 @@ public class FindFragment extends Fragment implements OnClickListener{
 			getActivity().startActivity(hotNews);
 			break;
 		case R.id.group_layout:
-			
+			if (getActivity() instanceof BaseActivity) {
+				((BaseActivity) getActivity()).showToast("群组功能还未开放，敬请期待");
+			}
 			break;
 
 		default:

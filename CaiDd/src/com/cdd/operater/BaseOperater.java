@@ -63,7 +63,7 @@ abstract public class BaseOperater {
 
 	private String extra_data = "";
 
-	private boolean isEncrypt = false;
+	private boolean isEncrypt = true;
 
 	private boolean isShowErrorNetwork = true;
 
@@ -357,9 +357,9 @@ abstract public class BaseOperater {
 						String d = (String) data;
 
 						
-						/*String ed = isEncrypt ? CryptAES.getInstance()
-								.onDecrypt(d) : d;*/
-						// String ed = aes.onDecrypt(d);
+						String ed = isEncrypt ? CryptAES.getInstance()
+								.onDecrypt(d) : d;
+//						 String ed = aes.onDecrypt(d);
 						if (CddConfig.IS_DEBUG) {
 							// RecordUtil.recordDataLog(queryContent,
 							// request.url,
@@ -367,10 +367,10 @@ abstract public class BaseOperater {
 							// RecordUtil.recordDataLog(queryContent,
 							// request.url,
 							// "");
-							Log.d("CDD", d);
-//							Log.d("CDD", ed);
+//							Log.d("CDD", d);
+							Log.d("CDD", ed);
 						}
-						response = new JSONObject(d);
+						response = new JSONObject(ed);
 						if (app.isRebuild)
 							return;
 						if (checkJson()) {

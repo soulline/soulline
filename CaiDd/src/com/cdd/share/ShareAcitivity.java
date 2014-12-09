@@ -39,7 +39,7 @@ public class ShareAcitivity extends BaseActivity implements OnItemClickListener,
 	
 	private void initShared() {
 		shareManager = new ShareManager(this);
-		shareManager.initShare();
+		shareManager.initShare(this);
 	}
 	
 	private void initContent() {
