@@ -733,7 +733,35 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								newType = 3;
 								checkFunctionTx.setText("仓安监测");
 								sendMessageS(CMDCode.FF_CANGAN_CHECK);
-								startCanshuActivity(newType);
+//								startCanshuActivity(newType);
+								displayFragment(true, "point_set", null,
+										new BaseFragmentListener() {
+
+											@Override
+											public void onCallBack(
+													Object object) {
+												if (object instanceof TimeSetEntry) {
+													TimeSetEntry entry = (TimeSetEntry) object;
+													checkMinuteValue = entry.checkTime * 10;
+													paikongMinuteValue = entry.paikongTime * 10;
+													wayCount = 0;
+													app.oldCheckTime = checkMinuteValue;
+													app.oldPaikongTime = paikongMinuteValue;
+													// fragment.clearRightData();
+													if (checkMinuteValue > 0) {
+														float checkF = ((float) checkMinuteValue) / 10.0f;
+														updateCheckMinute(checkF
+																+ "");
+													}
+													if (paikongMinuteValue > 0) {
+														float paikongF = ((float) paikongMinuteValue) / 10.0f;
+														updatePaikongMinute(paikongF
+																+ "");
+													}
+												}
+
+											}
+										});
 							}
 
 						} else if (type == 1) {
@@ -746,6 +774,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									setAlarmCheck(alarmInfo);
 								}
 							} else if (resourceId == R.id.point_check_menu) {
+								if (checkWayList.size() < 0) {
+									showToast("请选择检测通道");
+									return;
+								}
 								app.lastWay = checkWayList.get(checkWayList
 										.size() - 1);
 								checkState = 1;

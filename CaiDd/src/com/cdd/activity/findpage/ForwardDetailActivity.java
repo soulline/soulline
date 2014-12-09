@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.cdd.R;
+import com.cdd.activity.findpage.ReplyDetaiAdapter.OnAnswerMemberClickLister;
 import com.cdd.activity.image.ImageNetPageActivity;
 import com.cdd.base.BaseActivity;
 import com.cdd.fragment.BaseFragmentListener;
@@ -34,8 +35,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 
-public class ForwardDetailActivity extends BaseActivity implements OnClickListener{
-
+public class ForwardDetailActivity extends BaseActivity implements
+		OnClickListener {
 
 	private ImageView askIcon, photo1, photo2, photo3, forwardPhoto;
 
@@ -45,17 +46,17 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 	private String cofId = "";
 
 	private DynamicEntry dynamicEntry = new DynamicEntry();
-	
+
 	private int pageNum = 0;
 
 	private int requestPage = 1;
-	
+
 	private View footMoreView;
-	
+
 	private ArrayList<DynamicReplay> replyList = new ArrayList<DynamicReplay>();
-	
+
 	private PullToRefreshListView replyListView;
-	
+
 	private ReplyDetaiAdapter adapter;
 
 	@Override
@@ -71,7 +72,7 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		requestDynamicInfo();
 		requestDynamicList("1", true);
 	}
-	
+
 	private void loadMore() {
 		replyListView.getRefreshableView().removeFooterView(footMoreView);
 		int page = pageNum + 1;
@@ -83,13 +84,23 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		}
 		requestDynamicList(pageNumber, true);
 	}
-	
+
 	private void initDynamicList(ArrayList<DynamicReplay> list) {
 		replyListView.setVisibility(View.VISIBLE);
 		findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
 		if (adapter == null) {
 			adapter = new ReplyDetaiAdapter(context);
 			adapter.addData(list);
+			adapter.addOnAnswerMemberClickLister(new OnAnswerMemberClickLister() {
+
+				@Override
+				public void onAnswerClick(DynamicReplay replay, int position) {
+					Intent userInfo = new Intent(context,
+							UserInfoActivity.class);
+					userInfo.putExtra("memberId", replay.memberId);
+					startActivity(userInfo);
+				}
+			});
 			replyListView.getRefreshableView().setAdapter(adapter);
 		} else {
 			adapter.clear();
@@ -100,10 +111,9 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 			replyListView.getRefreshableView().addFooterView(footMoreView);
 		}
 	}
-	
+
 	private void doRefreshListView() {
-		replyListView.getRefreshableView().removeFooterView(
-				footMoreView);
+		replyListView.getRefreshableView().removeFooterView(footMoreView);
 		requestPage = 1;
 		String pageNumber = "";
 		if (pageNum == 0) {
@@ -114,7 +124,7 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		replyList.clear();
 		requestDynamicList(pageNumber, false);
 	}
-	
+
 	private void initDynamicListView() {
 		replyListView.getRefreshableView().setOnItemClickListener(
 				new OnItemClickListener() {
@@ -122,14 +132,14 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent detail = new Intent(context, NewsDetailActivity.class);
+						Intent detail = new Intent(context,
+								NewsDetailActivity.class);
 						detail.putExtra("cofId", adapter.getItem(position).id);
 						startActivity(detail);
 					}
 				});
 		replyListView.setMode(Mode.PULL_FROM_START);
-		replyListView.getLoadingLayoutProxy(true, true).setPullLabel(
-				"下拉刷新...");
+		replyListView.getLoadingLayoutProxy(true, true).setPullLabel("下拉刷新...");
 		replyListView.getLoadingLayoutProxy(true, true).setRefreshingLabel(
 				"正在刷新...");
 		replyListView.getLoadingLayoutProxy(true, true).setReleaseLabel(
@@ -144,10 +154,9 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 			}
 		});
 	}
-	
+
 	private void requestDynamicList(String pageNumber, final boolean isShowNow) {
-		final NewsReplyListOp dingdangOp = new NewsReplyListOp(
-				context);
+		final NewsReplyListOp dingdangOp = new NewsReplyListOp(context);
 		dingdangOp.setParams(cofId, "1");
 		dingdangOp.onRequest(new RequestListener() {
 
@@ -223,7 +232,7 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 			}
 		});
 	}
-	
+
 	private void initView() {
 		askIcon = (ImageView) findViewById(R.id.ask_icon);
 		photo1 = (ImageView) findViewById(R.id.photo1);
@@ -276,14 +285,15 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		zanCount.setText("（" + dynamic.likeCount + "）");
 		shoucangCount.setText("（" + dynamic.favoriteCount + "）");
 		shareCount.setText("（" + dynamic.shareCount + "）");
-		
+
 		if (dynamic.isForward.equals("1")) {
 			findViewById(R.id.share_note).setVisibility(View.VISIBLE);
 			findViewById(R.id.forward_layout).setVisibility(View.VISIBLE);
 			findViewById(R.id.ask_content_layout).setVisibility(View.GONE);
 			if (!TextUtils.isEmpty(dynamic.forward.photo)) {
 				forwardPhoto.setVisibility(View.VISIBLE);
-				ImageOperater.getInstance(context).onLoadImage(dynamic.forward.photo, forwardPhoto);
+				ImageOperater.getInstance(context).onLoadImage(
+						dynamic.forward.photo, forwardPhoto);
 			} else {
 				forwardPhoto.setVisibility(View.GONE);
 			}
@@ -305,25 +315,24 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 					PhotosEntry photo = dynamic.photos.get(i);
 					if (i == 0 && !TextUtils.isEmpty(photo.url)) {
 						photo1.setVisibility(View.VISIBLE);
-						ImageOperater.getInstance(context).onLoadImage(photo.url,
-								photo1);
+						ImageOperater.getInstance(context).onLoadImage(
+								photo.url, photo1);
 						photo1.setOnClickListener(this);
 					} else if (i == 1 && !TextUtils.isEmpty(photo.url)) {
 						photo2.setVisibility(View.VISIBLE);
-						ImageOperater.getInstance(context).onLoadImage(photo.url,
-								photo2);
+						ImageOperater.getInstance(context).onLoadImage(
+								photo.url, photo2);
 						photo2.setOnClickListener(this);
 					} else if (i == 2 && !TextUtils.isEmpty(photo.url)) {
 						photo3.setVisibility(View.VISIBLE);
-						ImageOperater.getInstance(context).onLoadImage(photo.url,
-								photo3);
+						ImageOperater.getInstance(context).onLoadImage(
+								photo.url, photo3);
 						photo3.setOnClickListener(this);
 						break;
 					}
 				}
 			} else {
-				findViewById(R.id.answer_photo_layout).setVisibility(
-						View.GONE);
+				findViewById(R.id.answer_photo_layout).setVisibility(View.GONE);
 			}
 		}
 	}
@@ -352,7 +361,7 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 			}
 		});
 	}
-	
+
 	private void gotoPhotoDetail(ArrayList<PhotosEntry> list, int index) {
 		Intent intent = new Intent(context, ImageNetPageActivity.class);
 		intent.putExtra("image_urls", list);
@@ -379,23 +388,23 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		}
 		return null;
 	}
-	
+
 	private void onNewsZanRequest(String cofId) {
 		NewsZanOp zanOp = new NewsZanOp(context);
 		zanOp.setParams(cofId);
 		zanOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 				showToast("点赞成功");
 				handler.post(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						String count = dynamicEntry.likeCount;
@@ -408,52 +417,53 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 			}
 		});
 	}
-	
+
 	private void onNewsShoucangRequest(String cofId) {
 		NewsShoucangOp shoucangOp = new NewsShoucangOp(context);
 		shoucangOp.setParams(cofId);
 		shoucangOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 				showToast("收藏成功");
 				handler.post(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						String count = dynamicEntry.favoriteCount;
 						int countN = Integer.valueOf(count);
 						countN++;
 						dynamicEntry.favoriteCount = countN + "";
-						shoucangCount.setText("（" + dynamicEntry.favoriteCount + "）");
+						shoucangCount.setText("（" + dynamicEntry.favoriteCount
+								+ "）");
 					}
 				});
 			}
 		});
 	}
-	
+
 	private void onNewsShareRequest(String cofId) {
 		NewsShareOp shareOp = new NewsShareOp(context);
 		shareOp.setParams(cofId);
 		shareOp.onRequest(new RequestListener() {
-			
+
 			@Override
 			public void onError(Object error) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onCallBack(Object data) {
 				showToast("分享成功");
 				handler.post(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						String count = dynamicEntry.shareCount;
@@ -473,27 +483,27 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		case R.id.photo1:
 			gotoPhotoDetail(dynamicEntry.photos, 0);
 			break;
-			
+
 		case R.id.photo2:
 			gotoPhotoDetail(dynamicEntry.photos, 1);
 			break;
-			
+
 		case R.id.photo3:
 			gotoPhotoDetail(dynamicEntry.photos, 2);
 			break;
-			
+
 		case R.id.zan_layout:
 			onNewsZanRequest(cofId);
 			break;
-			
+
 		case R.id.shoucang_layout:
 			onNewsShoucangRequest(cofId);
 			break;
-			
+
 		case R.id.zhuanfa_layout:
 			onNewsShareRequest(cofId);
 			break;
-			
+
 		case R.id.reply_layout:
 			Bundle b = new Bundle();
 			b.putString("cofId", dynamicEntry.id);
@@ -512,7 +522,7 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 						}
 					});
 			break;
-			
+
 		case R.id.empty_content_layout:
 			requestDynamicList("1", true);
 			break;
@@ -520,8 +530,7 @@ public class ForwardDetailActivity extends BaseActivity implements OnClickListen
 		default:
 			break;
 		}
-		
-	}
 
+	}
 
 }
