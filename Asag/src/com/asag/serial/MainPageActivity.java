@@ -774,12 +774,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									setAlarmCheck(alarmInfo);
 								}
 							} else if (resourceId == R.id.point_check_menu) {
-								if (checkWayList.size() < 0) {
-									showToast("请选择检测通道");
-									return;
-								}
-								app.lastWay = checkWayList.get(checkWayList
-										.size() - 1);
 								checkState = 1;
 								sendMessageS(CMDCode.CD_POINT_CHECK);
 								displayFragment(true, "point_select", null,
@@ -791,6 +785,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 														&& object instanceof String) {
 													String result = (String) object;
 													fillCheckWayList(result);
+													if (checkWayList.size() < 0) {
+														showToast("请选择检测通道");
+														return;
+													}
+													app.lastWay = checkWayList.get(checkWayList
+															.size() - 1);
 													result = result.substring(
 															0, 2)
 															+ " "
