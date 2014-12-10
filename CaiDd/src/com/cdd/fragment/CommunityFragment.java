@@ -135,7 +135,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		sqListview.setVisibility(View.VISIBLE);
 		view.findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
 		if (sqAdapter == null) {
-			sqAdapter = new SqForumAdapter(context);
+			sqAdapter = new SqForumAdapter(getActivity());
 			sqAdapter.addData(list);
 			sqListview.getRefreshableView().setAdapter(sqAdapter);
 			sqAdapter.addOnZanListener(new onZanListener() {
@@ -156,7 +156,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	}
 
 	private void onZanRequest(final int position) {
-		AskZanOp zanOp = new AskZanOp(context);
+		AskZanOp zanOp = new AskZanOp(getActivity());
 		zanOp.setParmas(sqAdapter.getItem(position).id);
 		zanOp.onRequest(new RequestListener() {
 
@@ -168,19 +168,21 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 			@Override
 			public void onCallBack(Object data) {
-				((BaseActivity) getActivity()).handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						int oldzanCount = Integer.valueOf(sqAdapter
-								.getItem(position).likeCount);
-						oldzanCount++;
-						sqAdapter.getItem(position).likeCount = oldzanCount
-								+ "";
-						sqAdapter.notifyDataSetChanged();
-						((BaseActivity) getActivity()).showToast("点赞成功");
-					}
-				});
+				if (getActivity() != null && getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+						
+						@Override
+						public void run() {
+							int oldzanCount = Integer.valueOf(sqAdapter
+									.getItem(position).likeCount);
+							oldzanCount++;
+							sqAdapter.getItem(position).likeCount = oldzanCount
+									+ "";
+							sqAdapter.notifyDataSetChanged();
+							((BaseActivity) getActivity()).showToast("点赞成功");
+						}
+					});
+				}
 			}
 		});
 	}
@@ -192,19 +194,21 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 			@Override
 			public void onError(Object error) {
-				((BaseActivity) getActivity()).handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						if (sqAdapter == null
-								|| (sqAdapter != null && sqAdapter.getCount() == 0)) {
-							sqListview.setVisibility(View.GONE);
-							view.findViewById(R.id.empty_content_layout)
-									.setVisibility(View.VISIBLE);
+				if (getActivity() != null && getActivity() instanceof BaseActivity) {
+					((BaseActivity) getActivity()).handler.post(new Runnable() {
+						
+						@Override
+						public void run() {
+							if (sqAdapter == null
+									|| (sqAdapter != null && sqAdapter.getCount() == 0)) {
+								sqListview.setVisibility(View.GONE);
+								view.findViewById(R.id.empty_content_layout)
+								.setVisibility(View.VISIBLE);
+							}
+							sqListview.onRefreshComplete();
 						}
-						sqListview.onRefreshComplete();
-					}
-				});
+					});
+				}
 			}
 
 			@Override
@@ -213,53 +217,61 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 					askList.addAll(hotAskOp.getHotAskList());
 					if (isShowNow) {
 						pageNum++;
-						((BaseActivity) getActivity()).handler
-								.post(new Runnable() {
-
-									@Override
-									public void run() {
-										sqListview.onRefreshComplete();
-										initHotSqListView(askList);
-									}
-								});
+						if (getActivity() != null && getActivity() instanceof BaseActivity) {
+							((BaseActivity) getActivity()).handler
+							.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									sqListview.onRefreshComplete();
+									initHotSqListView(askList);
+								}
+							});
+						}
 					} else if (requestPage < pageNum) {
 						requestPage++;
 						String pageN = requestPage + "";
 						requestHotAskList(pageN, false);
 					} else if ((requestPage == pageNum) || (pageNum == 0)) {
-						((BaseActivity) getActivity()).handler
-								.post(new Runnable() {
-
-									@Override
-									public void run() {
-										sqListview.onRefreshComplete();
-										initHotSqListView(askList);
-									}
-								});
+						if (getActivity() != null && getActivity() instanceof BaseActivity) {
+							((BaseActivity) getActivity()).handler
+							.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									sqListview.onRefreshComplete();
+									initHotSqListView(askList);
+								}
+							});
+						}
 					}
 				} else {
 					if (sqAdapter == null
 							|| (sqAdapter != null && sqAdapter.getCount() == 0)) {
-						((BaseActivity) getActivity()).handler
-								.post(new Runnable() {
-
-									@Override
-									public void run() {
-										sqListview.setVisibility(View.GONE);
-										view.findViewById(
-												R.id.empty_content_layout)
-												.setVisibility(View.VISIBLE);
-									}
-								});
+						if (getActivity() != null && getActivity() instanceof BaseActivity) {
+							((BaseActivity) getActivity()).handler
+							.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									sqListview.setVisibility(View.GONE);
+									view.findViewById(
+											R.id.empty_content_layout)
+											.setVisibility(View.VISIBLE);
+								}
+							});
+						}
 					}
 					pageNum = 1;
-					((BaseActivity) getActivity()).handler.post(new Runnable() {
-
-						@Override
-						public void run() {
-							sqListview.onRefreshComplete();
-						}
-					});
+					if (getActivity() != null && getActivity() instanceof BaseActivity) {
+						((BaseActivity) getActivity()).handler.post(new Runnable() {
+							
+							@Override
+							public void run() {
+								sqListview.onRefreshComplete();
+							}
+						});
+					}
 				}
 			}
 		});
@@ -312,7 +324,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 	}
 
 	private void initView() {
-		footMoreView = View.inflate(context, R.layout.load_more_view, null);
+		footMoreView = View.inflate(getActivity(), R.layout.load_more_view, null);
 		footMoreView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -369,7 +381,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent = new Intent(context, SqAskDetailActivity.class);
+				Intent intent = new Intent(getActivity(), SqAskDetailActivity.class);
 				intent.putExtra("ask_id", sqAdapter.getItem(position - 1).id);
 				startActivity(intent);
 			}

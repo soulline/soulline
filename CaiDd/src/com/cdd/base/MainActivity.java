@@ -365,16 +365,16 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		@Override
 		public Fragment getItem(int position) {
 			if (position == 0) {
-				communityF = new CommunityFragment(context);
+				communityF = new CommunityFragment();
 				return communityF;
 			} else if (position == 1) {
-				alarmF = new AlarmFragment(context);
+				alarmF = new AlarmFragment();
 				return alarmF;
 			} else if (position == 2) {
-				findF = new FindFragment(context);
+				findF = new FindFragment();
 				return findF;
 			} else {
-				mineF = new MineFragment(context);
+				mineF = new MineFragment();
 				return mineF;
 			}
 		}
