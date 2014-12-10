@@ -5,6 +5,8 @@ public class CddRequestCode {
 	public static final int LOGIN_REQUEST = 10238;
 
 	public static final int MINE_LOGIN_REQUEST = 10132;
+	
+	public static final int REMIND_LOGIN_REQUEST = 10133;
 
 	public static final int ACTION_PICK_GALLERY = 10456;
 

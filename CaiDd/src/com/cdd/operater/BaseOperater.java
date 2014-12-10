@@ -242,8 +242,8 @@ abstract public class BaseOperater {
 			}*/ if (CddConfig.CODE_ERROR_LOGIN == code) {
 				app.clearLogin();
 				Intent i = new Intent(context, LoginActivity.class);
-				i.putExtra("rebuild", true);
-				app.isRebuild = true;
+//				i.putExtra("rebuild", true);
+//				app.isRebuild = true;
 				if (context instanceof Activity) {
 					((Activity) context).startActivityForResult(i,
 							CddRequestCode.ACTION_LOGIN_REQUEST_CODE);
@@ -367,12 +367,12 @@ abstract public class BaseOperater {
 							// RecordUtil.recordDataLog(queryContent,
 							// request.url,
 							// "");
-//							Log.d("CDD", d);
+							Log.d("CDD", d);
 							Log.d("CDD", ed);
 						}
 						response = new JSONObject(ed);
-						if (app.isRebuild)
-							return;
+//						if (app.isRebuild)
+//							return;
 						if (checkJson()) {
 							if (response.has("re")) {
 								Object obj = response.get("re");

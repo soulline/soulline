@@ -14,6 +14,8 @@ import com.cdd.net.RequestListener;
 import com.cdd.operater.LoginOperater;
 import com.cdd.util.CddRequestCode;
 
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -48,6 +50,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private FindFragment findF;
 
 	private MineFragment mineF;
+	
+	private int backCount = 0;
+	
+	private int loginRequestCode = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +73,62 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		} else if (resultCode == RESULT_OK
 				&& requestCode == CddRequestCode.MINE_LOGIN_REQUEST) {
 			index = 3;
+		} else if (resultCode == RESULT_OK
+				&& requestCode == CddRequestCode.REMIND_LOGIN_REQUEST) {
+			index = 1;
 		} else if (requestCode == CddRequestCode.ACTION_LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
 			
+		}
+	}
+	
+	private void showTipNoteDialog(final String msg) {
+		handler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				Builder b = new Builder(context);
+				b.setMessage(msg);
+				b.setNegativeButton(getString(R.string.action_cancel),
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						});
+				b.setPositiveButton(R.string.action_sure,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int arg1) {
+								finish();
+								dialog.dismiss();
+							}
+						});
+				b.show();
+			}
+		});
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (backCount == 1) {
+			showTipNoteDialog("确定要退出财叮当吗？");
+		} else {
+			backCount++;
+			showToast("再按一次返回键退出");
 		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		backCount = 0;
+		if ((loginRequestCode == 1 && app.isLogin()) 
+				|| (loginRequestCode == 3 && app.isLogin())) {
+			index = loginRequestCode;
+		}
 		mainViewPager.setCurrentItem(index);
 		setCheckTitle(index);
 		initFragmentContent(index);
@@ -138,6 +192,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 					Intent login = new Intent(context, LoginActivity.class);
 					startActivityForResult(login,
 							CddRequestCode.MINE_LOGIN_REQUEST);
+					setCheckTitle(index);
+					mainViewPager.setCurrentItem(index);
+				} else if (position == 1 && !app.isLogin()) {
+					Intent login = new Intent(context, LoginActivity.class);
+					startActivityForResult(login,
+							CddRequestCode.REMIND_LOGIN_REQUEST);
 					setCheckTitle(index);
 					mainViewPager.setCurrentItem(index);
 				} else {
@@ -333,8 +393,16 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			setCheckTitle(0);
 			break;
 		case R.id.alarm_title_layout:
-			index = 1;
-			setCheckTitle(1);
+			if (!app.isLogin()) {
+				loginRequestCode = 1;
+				Intent login = new Intent(context, LoginActivity.class);
+				startActivityForResult(login, CddRequestCode.REMIND_LOGIN_REQUEST);
+				setCheckTitle(index);
+				mainViewPager.setCurrentItem(index);
+			} else {
+				index = 1;
+				setCheckTitle(1);
+			}
 			break;
 		case R.id.find_title_layout:
 			index = 2;
@@ -342,6 +410,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.mine_title_layout:
 			if (!app.isLogin()) {
+				loginRequestCode = 3;
 				Intent login = new Intent(context, LoginActivity.class);
 				startActivityForResult(login, CddRequestCode.MINE_LOGIN_REQUEST);
 				setCheckTitle(index);

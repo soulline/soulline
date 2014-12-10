@@ -24,7 +24,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	private EditText accountInput, pwInput;
 	
-	private boolean isRebuild = false;
+//	private boolean isRebuild = false;
 	
 	private QQLoginManger qqLoginManager = null;
 
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(bundle);
 		setContentView(R.layout.login_activity);
 		initView();
-		isRebuild = getIntent().getBooleanExtra("rebuild", false);
+//		isRebuild = getIntent().getBooleanExtra("rebuild", false);
 		app.putClosePath(CddConfig.LOGIN_PATH_KEY, new BaseActivityCloseListener() {
 			
 			@Override
@@ -66,7 +66,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void doLogin(LoginEntry login) {
-		app.isRebuild = false;
+//		app.isRebuild = false;
 		final LoginOperater loginOp = new LoginOperater(context);
 		loginOp.setParams(login);
 		loginOp.onRequest(new RequestListener() {

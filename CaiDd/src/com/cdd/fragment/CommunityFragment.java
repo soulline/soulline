@@ -276,7 +276,9 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 
 	public void initContent() {
 		setCheck(checkCode);
-		loadMemberInfo();
+		if (CddApp.getInstance().isLogin()) {
+			loadMemberInfo();
+		}
 	}
 
 	private void doSignToday() {
@@ -495,7 +497,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 					getActivity().getResources().getColor(R.color.white));
 			dingdangSqTx.setTextColor(getActivity().getResources().getColor(
 					R.color.sq_blue));
-			getForumList();
+			initSqList();
 			break;
 		case 1:
 			sqHotThreadImg
@@ -511,7 +513,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 					getActivity().getResources().getColor(R.color.sq_blue));
 			dingdangSqTx.setTextColor(getActivity().getResources().getColor(
 					R.color.white));
-			initSqList();
+			getForumList();
 			break;
 
 		default:
