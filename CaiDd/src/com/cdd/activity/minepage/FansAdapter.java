@@ -90,7 +90,7 @@ public class FansAdapter extends ArrayAdapter<FansEntry> {
 			holder.listenState.setBackgroundResource(R.drawable.add_listen_selector);
 		} else if (type == 1 && entry.relation.equals("1")) {
 			holder.listenState.setBackgroundResource(R.drawable.eachother_listen_selector);
-		} else if (type == 2 && entry.relation.equals("0")) {
+		} else if (type == 2 && entry.relation.equals("2")) {
 			holder.listenState.setBackgroundResource(R.drawable.cancel_listen_selector);
 		} else if (type == 2 && entry.relation.equals("1")) {
 			holder.listenState.setBackgroundResource(R.drawable.eachother_listen_selector);

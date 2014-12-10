@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -468,12 +469,21 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						int number = Integer.valueOf(dataEntry.number);
 						if (checkState == 1) {
 							int next = getNextWay(number + "");
+							Log.d("zhao", "next : " + next + " -- size : " + checkWayList.size());
 							if (next != -1) {
-								checkWayValue.setText(next + "");
-								float check = ((float) checkMinuteValue) / 10.0f;
-								float paikong = ((float) paikongMinuteValue) / 10.0f;
-								updateCheckMinute(check + "");
-								updatePaikongMinute(paikong + "");
+								if (next < checkWayList.size()) {
+									String checkWay = checkWayList.get(next + 1);
+									checkWayValue.setText(checkWay + "");
+									float check = ((float) checkMinuteValue) / 10.0f;
+									float paikong = ((float) paikongMinuteValue) / 10.0f;
+									updateCheckMinute(check + "");
+									updatePaikongMinute(paikong + "");
+								} else {
+									showToast("检测结束");
+									checkWayValue.setText("0");
+									wayCount = 0;
+									checkWayList.clear();
+								}
 							} else {
 								showToast("检测结束");
 								checkWayValue.setText("0");
@@ -658,7 +668,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				sb.append(way).append(",");
 			}
 		}
-		showToast("已选择 :" + sb.toString());
+		Log.d("zhao", "aready_check : " + sb.toString());
 	}
 
 	private int getNextWay(String nowNumber) {
@@ -784,6 +794,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 												if (object != null
 														&& object instanceof String) {
 													String result = (String) object;
+													Log.d("zhao", "result : " + result);
 													fillCheckWayList(result);
 													if (checkWayList.size() < 0) {
 														showToast("请选择检测通道");
