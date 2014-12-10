@@ -45,6 +45,7 @@ public class ForumItemOperater extends BaseOperater {
 
 	@Override
 	public void onParser(JSONArray response) {
+		itemList.clear();
 		for (int i=0; i < response.length(); i++) {
 			JSONObject obj = response.optJSONObject(i);
 			ForumItem entry = new ForumItem();
