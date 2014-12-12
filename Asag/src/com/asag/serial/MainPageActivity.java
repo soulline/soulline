@@ -465,6 +465,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						checkWayValue.setText("0");
 						wayCount = 0;
 						checkWayList.clear();
+						setAlarmCheck(app.alarmInfo);
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
 						if (checkState == 1) {
@@ -781,6 +782,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (alarmInfo != null
 										&& alarmInfo.firstTimeN > 0L
 										&& alarmInfo.minuteN > 0) {
+									app.alarmInfo = alarmInfo;
 									setAlarmCheck(alarmInfo);
 								}
 							} else if (resourceId == R.id.point_check_menu) {

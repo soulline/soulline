@@ -409,7 +409,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			setCheckTitle(2);
 			break;
 		case R.id.mine_title_layout:
-			if (!app.isLogin()) {
+			if (!app.isLogin()) {  
 				loginRequestCode = 3;
 				Intent login = new Intent(context, LoginActivity.class);
 				startActivityForResult(login, CddRequestCode.MINE_LOGIN_REQUEST);

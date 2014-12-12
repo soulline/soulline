@@ -21,5 +21,7 @@
       <color name="pop_menu_blue">#556AF7</color>
       <color name="title_blue">#576AF7</color>
       <color name="params_white">#FFFFFD</color>
+      <color name="center_devider_black">#656565</color>
+      <color name="normal_white">#FFFFFF</color>
       
 </resources>

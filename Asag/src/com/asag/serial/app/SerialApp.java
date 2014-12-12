@@ -1,6 +1,9 @@
 package com.asag.serial.app;
 
 import java.lang.ref.WeakReference;
+
+import com.asag.serial.mode.AlarmInfo;
+
 import android.app.Application;
 
 public class SerialApp extends Application {
@@ -18,6 +21,8 @@ public class SerialApp extends Application {
 	public boolean isCheckIng = false;
 	
 	public boolean isSetAlarm = false;
+	
+	public AlarmInfo alarmInfo = new AlarmInfo();
 	
 	@Override
 	public void onCreate() {
