@@ -373,9 +373,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			} */else if (position == 1) {
 				findF = new FindFragment();
 				return findF;
-			} else {
+			} else if (position == 2) {
 				mineF = new MineFragment();
 				return mineF;
+			} else {
+				return null;
 			}
 		}
 
