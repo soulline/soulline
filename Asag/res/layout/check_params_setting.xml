@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:numeric="integer"
                 android:padding="5dp"/>
             
             <TextView
@@ -56,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:numeric="integer"
                 android:padding="5dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -69,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:numeric="integer"
                 android:padding="5dp"/>
         </LinearLayout>
         
@@ -100,6 +103,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
@@ -114,6 +118,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -127,6 +132,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -140,6 +146,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
         </LinearLayout>
@@ -164,6 +171,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
@@ -178,6 +186,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -191,6 +200,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -204,6 +214,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
         </LinearLayout>
@@ -227,6 +238,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
@@ -241,6 +253,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -254,6 +267,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -267,6 +281,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
         </LinearLayout>
@@ -290,6 +305,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
@@ -304,6 +320,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -317,6 +334,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -330,6 +348,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
         </LinearLayout>
@@ -370,6 +389,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
@@ -384,6 +404,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -396,6 +417,7 @@
             <EditText android:id="@+id/r_2_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -409,6 +431,7 @@
             <EditText android:id="@+id/r_3_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -435,6 +458,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
@@ -449,6 +473,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             <TextView
@@ -461,6 +486,7 @@
             <EditText android:id="@+id/r_6_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -474,6 +500,7 @@
             <EditText android:id="@+id/r_7_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -496,6 +523,7 @@
             <EditText android:id="@+id/r_8_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -510,6 +538,7 @@
             <EditText android:id="@+id/r_9_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -523,6 +552,7 @@
             <EditText android:id="@+id/r_10_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -536,6 +566,7 @@
             <EditText android:id="@+id/r_11_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -560,6 +591,7 @@
             <EditText android:id="@+id/r_12_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -574,6 +606,7 @@
             <EditText android:id="@+id/r_13_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -587,6 +620,7 @@
             <EditText android:id="@+id/r_14_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -600,6 +634,7 @@
             <EditText android:id="@+id/r_15_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>

@@ -900,6 +900,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						case R.id.textSize_menu:
 							showTextSizeMenu();
 							break;
+							
+						case R.id.check_params_menu:
+							Intent checkParam = new Intent(context, CheckParamsSetActivity.class);
+							startActivity(checkParam);
+							break;
 
 						default:
 							break;
