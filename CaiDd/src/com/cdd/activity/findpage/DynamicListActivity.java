@@ -341,6 +341,10 @@ public class DynamicListActivity extends BaseActivity implements
 					Intent forward = new Intent(context, ForwardDetailActivity.class);
 					forward.putExtra("cofId", adapter.getItem(position).forward.id);
 					startActivity(forward);
+				} else if (type == 5) {
+					Intent userInfo = new Intent(context, UserInfoActivity.class);
+					userInfo.putExtra("memberId", adapter.getItem(position).memberId);
+					startActivity(userInfo);
 				}
 
 			}

@@ -263,6 +263,8 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener{
 		findViewById(R.id.empty_content_layout).setOnClickListener(this);
 		replyListView = (PullToRefreshListView) findViewById(R.id.dynamic_list);
 		initDynamicListView();
+		askIcon.setOnClickListener(this);
+		askName.setOnClickListener(this);
 	}
 
 	private void loadDynamicInfo(DynamicEntry dynamic) {
@@ -532,11 +534,25 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener{
 		case R.id.empty_content_layout:
 			requestDynamicList("1", true);
 			break;
+			
+		case R.id.ask_icon:
+			gotoMemberDetail();
+			break;
+			
+		case R.id.ask_name:
+			gotoMemberDetail();
+			break;
 
 		default:
 			break;
 		}
 		
+	}
+	
+	private void gotoMemberDetail() {
+		Intent userInfo = new Intent(context, UserInfoActivity.class);
+		userInfo.putExtra("memberId", dynamicEntry.memberId);
+		startActivity(userInfo);
 	}
 
 }

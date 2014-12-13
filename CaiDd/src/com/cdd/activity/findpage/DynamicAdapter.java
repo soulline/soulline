@@ -42,7 +42,7 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	public interface OnPackListener {
 		public void onPack(int position, boolean pack);
 	}
-	
+
 	public interface OnAnswerMemberClickLister {
 		public void onAnswerClick(DynamicReplay replay, int position);
 	}
@@ -52,7 +52,7 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	private OnWorkListener workListener;
 
 	private OnPackListener packListener;
-	
+
 	private OnAnswerMemberClickLister answerClickListener;
 
 	public DynamicAdapter(Context context) {
@@ -71,8 +71,9 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 	public void addOnPackListener(OnPackListener packListener) {
 		this.packListener = packListener;
 	}
-	
-	public void addOnAnswerMemberClickLister(OnAnswerMemberClickLister answerClickListener) {
+
+	public void addOnAnswerMemberClickLister(
+			OnAnswerMemberClickLister answerClickListener) {
 		this.answerClickListener = answerClickListener;
 	}
 
@@ -111,8 +112,10 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 			holder.packIcon = (ImageView) convertView
 					.findViewById(R.id.pack_icon);
 			holder.packTv = (TextView) convertView.findViewById(R.id.pack_tv);
-			holder.forwardPhoto = (ImageView) convertView.findViewById(R.id.forward_photo);
-			holder.forwardTx = (TextView) convertView.findViewById(R.id.forward_tx);
+			holder.forwardPhoto = (ImageView) convertView
+					.findViewById(R.id.forward_photo);
+			holder.forwardTx = (TextView) convertView
+					.findViewById(R.id.forward_tx);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -133,7 +136,8 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 				DynamicReplay replay = dynamic.replyList.get(i);
 				View childView = View.inflate(context,
 						R.layout.dynamic_answer_item, null);
-				TextView txV = (TextView) childView.findViewById(R.id.answer_tx);
+				TextView txV = (TextView) childView
+						.findViewById(R.id.answer_tx);
 				SpannableString spanStr = getSpannableString(replay, i, txV);
 				txV.setHighlightColor(Color.TRANSPARENT);
 				txV.setText(spanStr);
@@ -149,41 +153,49 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 			final int position, final TextView txV) {
 		String span = replay.memberName + "：" + replay.message;
 		final SpannableString spanStr = new SpannableString(span);
-		spanStr.setSpan(new ClickableSpan() {
+		spanStr.setSpan(
+				new ClickableSpan() {
 
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setColor(Color.YELLOW);
-				ds.setUnderlineText(false);
-			}
-
-			@Override
-			public void onClick(View widget) {
-				spanStr.setSpan(new ForegroundColorSpan(context.getResources()
-						.getColor(R.color.regist_yellow)), 0, (replay.memberName
-						.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				txV.setText(spanStr);
-				Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
-					
 					@Override
-					public void run() {
-						spanStr.setSpan(new ForegroundColorSpan(context.getResources()
-								.getColor(R.color.messageto_tx_selector)), 0, (replay.memberName
-								.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-						txV.setText(spanStr);
+					public void updateDrawState(TextPaint ds) {
+						super.updateDrawState(ds);
+						ds.setColor(Color.YELLOW);
+						ds.setUnderlineText(false);
 					}
-				}, 800);
-				if (answerClickListener != null) {
-					answerClickListener.onAnswerClick(replay, position);
-				}
-			}
-		}, 0, (replay.memberName.length() + 1),
+
+					@Override
+					public void onClick(View widget) {
+						spanStr.setSpan(
+								new ForegroundColorSpan(context.getResources()
+										.getColor(R.color.regist_yellow)), 0,
+								(replay.memberName.length() + 1),
+								Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						txV.setText(spanStr);
+						Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+
+							@Override
+							public void run() {
+								spanStr.setSpan(
+										new ForegroundColorSpan(
+												context.getResources()
+														.getColor(
+																R.color.messageto_tx_selector)),
+										0, (replay.memberName.length() + 1),
+										Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+								txV.setText(spanStr);
+							}
+						}, 800);
+						if (answerClickListener != null) {
+							answerClickListener.onAnswerClick(replay, position);
+						}
+					}
+				}, 0, (replay.memberName.length() + 1),
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources()
-				.getColor(R.color.messageto_tx_selector)), 0, (replay.memberName
-				.length() + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				.getColor(R.color.messageto_tx_selector)), 0,
+				(replay.memberName.length() + 1),
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spanStr;
 	}
 
@@ -209,33 +221,40 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 		doWithWorkfor(position, convertView, holder, dynamic);
 		final int itemPosition = position;
 		if (dynamic.isForward.equals("1")) {
-			convertView.findViewById(R.id.share_note).setVisibility(View.VISIBLE);
-			convertView.findViewById(R.id.forward_layout).setVisibility(View.VISIBLE);
-			convertView.findViewById(R.id.ask_content_layout).setVisibility(View.GONE);
+			convertView.findViewById(R.id.share_note).setVisibility(
+					View.VISIBLE);
+			convertView.findViewById(R.id.forward_layout).setVisibility(
+					View.VISIBLE);
+			convertView.findViewById(R.id.ask_content_layout).setVisibility(
+					View.GONE);
 			if (!TextUtils.isEmpty(dynamic.forward.photo)) {
 				holder.forwardPhoto.setVisibility(View.VISIBLE);
-				ImageOperater.getInstance(context).onLoadImage(dynamic.forward.photo, holder.forwardPhoto);
+				ImageOperater.getInstance(context).onLoadImage(
+						dynamic.forward.photo, holder.forwardPhoto);
 			} else {
 				holder.forwardPhoto.setVisibility(View.GONE);
 			}
 			holder.forwardTx.setText(dynamic.forward.content);
-			convertView.findViewById(R.id.forward_layout).setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					if (workListener != null) {
-						workListener.onWork(itemPosition, 4);
-					}
-				}
-			});
+			convertView.findViewById(R.id.forward_layout).setOnClickListener(
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							if (workListener != null) {
+								workListener.onWork(itemPosition, 4);
+							}
+						}
+					});
 		} else {
 			convertView.findViewById(R.id.share_note).setVisibility(View.GONE);
-			convertView.findViewById(R.id.forward_layout).setVisibility(View.GONE);
-			convertView.findViewById(R.id.ask_content_layout).setVisibility(View.VISIBLE);
+			convertView.findViewById(R.id.forward_layout).setVisibility(
+					View.GONE);
+			convertView.findViewById(R.id.ask_content_layout).setVisibility(
+					View.VISIBLE);
 			final boolean isPack = dynamic.isPack;
 			convertView.findViewById(R.id.pack_up_layout).setOnClickListener(
 					new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							if (packListener != null) {
@@ -267,8 +286,8 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 						View.GONE);
 			}
 			if (dynamic.photos.size() > 0) {
-				convertView.findViewById(R.id.answer_photo_layout).setVisibility(
-						View.VISIBLE);
+				convertView.findViewById(R.id.answer_photo_layout)
+						.setVisibility(View.VISIBLE);
 				holder.photo1.setVisibility(View.GONE);
 				holder.photo2.setVisibility(View.GONE);
 				holder.photo3.setVisibility(View.GONE);
@@ -276,10 +295,10 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 					PhotosEntry photo = dynamic.photos.get(i);
 					if (i == 0 && !TextUtils.isEmpty(photo.url)) {
 						holder.photo1.setVisibility(View.VISIBLE);
-						ImageOperater.getInstance(context).onLoadImage(photo.url,
-								holder.photo1);
+						ImageOperater.getInstance(context).onLoadImage(
+								photo.url, holder.photo1);
 						holder.photo1.setOnClickListener(new OnClickListener() {
-							
+
 							@Override
 							public void onClick(View v) {
 								if (imgListener != null) {
@@ -289,10 +308,10 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 						});
 					} else if (i == 1 && !TextUtils.isEmpty(photo.url)) {
 						holder.photo2.setVisibility(View.VISIBLE);
-						ImageOperater.getInstance(context).onLoadImage(photo.url,
-								holder.photo2);
+						ImageOperater.getInstance(context).onLoadImage(
+								photo.url, holder.photo2);
 						holder.photo2.setOnClickListener(new OnClickListener() {
-							
+
 							@Override
 							public void onClick(View v) {
 								if (imgListener != null) {
@@ -302,10 +321,10 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 						});
 					} else if (i == 2 && !TextUtils.isEmpty(photo.url)) {
 						holder.photo3.setVisibility(View.VISIBLE);
-						ImageOperater.getInstance(context).onLoadImage(photo.url,
-								holder.photo3);
+						ImageOperater.getInstance(context).onLoadImage(
+								photo.url, holder.photo3);
 						holder.photo3.setOnClickListener(new OnClickListener() {
-							
+
 							@Override
 							public void onClick(View v) {
 								if (imgListener != null) {
@@ -317,8 +336,8 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 					}
 				}
 			} else {
-				convertView.findViewById(R.id.answer_photo_layout).setVisibility(
-						View.GONE);
+				convertView.findViewById(R.id.answer_photo_layout)
+						.setVisibility(View.GONE);
 			}
 		}
 		if (position == (getCount() - 1)) {
@@ -366,19 +385,41 @@ public class DynamicAdapter extends ArrayAdapter<DynamicEntry> {
 						}
 					}
 				});
-		convertView.findViewById(R.id.reply_layout).setOnClickListener(new OnClickListener() {
-			
+		convertView.findViewById(R.id.reply_layout).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (workListener != null) {
+							workListener.onWork(itemPosition, 3);
+						}
+					}
+				});
+		holder.askIcon.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				if (workListener != null) {
-					workListener.onWork(itemPosition, 3);
+					workListener.onWork(itemPosition, 5);
 				}
+
+			}
+		});
+		holder.askName.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (workListener != null) {
+					workListener.onWork(itemPosition, 5);
+				}
+
 			}
 		});
 	}
 
 	public class ViewHolder {
-		public ImageView askIcon, photo1, photo2, photo3, packIcon, forwardPhoto;
+		public ImageView askIcon, photo1, photo2, photo3, packIcon,
+				forwardPhoto;
 
 		public TextView askName, askLevel, zanCount, shoucangCount, shareCount,
 				askContent, askDate, packTv, forwardTx;

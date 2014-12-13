@@ -516,6 +516,10 @@ public class MyCollectActivity extends BaseActivity implements OnClickListener{
 					Intent forward = new Intent(context, ForwardDetailActivity.class);
 					forward.putExtra("cofId", dynamicAdapter.getItem(position).forward.id);
 					startActivity(forward);
+				} else if (type == 5) {
+					Intent userInfo = new Intent(context, UserInfoActivity.class);
+					userInfo.putExtra("memberId", dynamicAdapter.getItem(position).memberId);
+					startActivity(userInfo);
 				}
 			}
 		});

@@ -93,12 +93,13 @@ public class UploadOperater {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			byte[] data = toByteArray(is, baos);
 			String result = new String(data);
-//			String resultNew = CryptAES.getInstance().onDecrypt(result);
-			listener.onSuccess(result);
+			String resultNew = CryptAES.getInstance().onDecrypt(result);
+			listener.onSuccess(resultNew);
 			/* 关闭DataOutputStream */
 			ds.close();
 			if (CddConfig.IS_DEBUG) {
 				Log.i("CDD", result);
+				Log.i("CDD", resultNew);
 			}
 		} catch (Exception e) {
 			listener.onError("上传失败");

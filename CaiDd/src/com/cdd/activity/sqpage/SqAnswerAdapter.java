@@ -27,10 +27,16 @@ public class SqAnswerAdapter extends ArrayAdapter<SqAnswerDetailEntry> {
 	public interface OnImageClickListener {
 		public void onImageClick(int position, int index);
 	}
+	
+	public interface OnUserInfoListener {
+		public void onUser(int position);
+	}
 
 	private OnZanClickListener zanListener;
 
 	private OnImageClickListener imgListener;
+	
+	private OnUserInfoListener userListener;
 
 	public void addOnZanClickListener(OnZanClickListener zanListener) {
 		this.zanListener = zanListener;
@@ -38,6 +44,10 @@ public class SqAnswerAdapter extends ArrayAdapter<SqAnswerDetailEntry> {
 
 	public void addOnImageClickListener(OnImageClickListener imgListener) {
 		this.imgListener = imgListener;
+	}
+	
+	public void addOnUserInfoListener(OnUserInfoListener listener) {
+		this.userListener = listener;
 	}
 
 	public SqAnswerAdapter(Context context) {
@@ -117,6 +127,24 @@ public class SqAnswerAdapter extends ArrayAdapter<SqAnswerDetailEntry> {
 						}
 					}
 				});
+		holder.answerIcon.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (userListener != null) {
+					userListener.onUser(zanPosition);
+				}
+			}
+		});
+		holder.answerName.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (userListener != null) {
+					userListener.onUser(zanPosition);
+				}
+			}
+		});
 		if (answer.photos.size() > 0) {
 			convertView.findViewById(R.id.answer_photo_layout).setVisibility(
 					View.VISIBLE);

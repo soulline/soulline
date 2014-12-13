@@ -12,8 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdd.R;
+import com.cdd.activity.findpage.UserInfoActivity;
 import com.cdd.activity.image.ImageNetPageActivity;
 import com.cdd.activity.sqpage.SqAnswerAdapter.OnImageClickListener;
+import com.cdd.activity.sqpage.SqAnswerAdapter.OnUserInfoListener;
 import com.cdd.activity.sqpage.SqAnswerAdapter.OnZanClickListener;
 import com.cdd.base.BaseActivity;
 import com.cdd.mode.PhotosEntry;
@@ -440,6 +442,15 @@ public class SqAskDetailActivity extends BaseActivity implements
 				@Override
 				public void onImageClick(int position, int index) {
 					gotoPhotoDetail(adapter.getItem(position).photos, index);
+				}
+			});
+			adapter.addOnUserInfoListener(new OnUserInfoListener() {
+				
+				@Override
+				public void onUser(int position) {
+					Intent intent = new Intent(context, UserInfoActivity.class);
+					intent.putExtra("memberId", adapter.getItem(position).memberId);
+					startActivity(intent);
 				}
 			});
 		} else {

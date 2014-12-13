@@ -38,10 +38,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private int index = 0;
 
-	private ImageView titleCommunityImg, titleAlarmImg, titleFindImg,
+	private ImageView titleCommunityImg, titleFindImg,
 			titleMineImg;
 
-	private TextView communityTx, alarmTx, findTx, mineTx;
+	private TextView communityTx, findTx, mineTx;
 
 	private CommunityFragment communityF;
 
@@ -72,10 +72,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				&& requestCode == CddRequestCode.LOGIN_REQUEST) {
 		} else if (resultCode == RESULT_OK
 				&& requestCode == CddRequestCode.MINE_LOGIN_REQUEST) {
-			index = 3;
+			index = 2;
 		} else if (resultCode == RESULT_OK
 				&& requestCode == CddRequestCode.REMIND_LOGIN_REQUEST) {
-			index = 1;
+//			index = 1;
 		} else if (requestCode == CddRequestCode.ACTION_LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
 			
 		}
@@ -125,8 +125,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 		backCount = 0;
-		if ((loginRequestCode == 1 && app.isLogin()) 
-				|| (loginRequestCode == 3 && app.isLogin())) {
+		if (/*(loginRequestCode == 1 && app.isLogin()) 
+				|| */(loginRequestCode == 2 && app.isLogin())) {
 			index = loginRequestCode;
 		}
 		mainViewPager.setCurrentItem(index);
@@ -143,19 +143,19 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 
-		case 1:
+/*		case 1:
 			if (alarmF != null) {
 				alarmF.initContent();
 			}
-			break;
+			break;*/
 
-		case 2:
+		case 1:
 			if (findF != null) {
 				findF.initContent();
 			}
 			break;
 
-		case 3:
+		case 2:
 			if (mineF != null) {
 				mineF.initContent();
 			}
@@ -168,17 +168,17 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private void initView() {
 		findViewById(R.id.community_title_layout).setOnClickListener(this);
-		findViewById(R.id.alarm_title_layout).setOnClickListener(this);
+//		findViewById(R.id.alarm_title_layout).setOnClickListener(this);
 		findViewById(R.id.find_title_layout).setOnClickListener(this);
 		findViewById(R.id.mine_title_layout).setOnClickListener(this);
 
 		titleCommunityImg = (ImageView) findViewById(R.id.title_community_img);
-		titleAlarmImg = (ImageView) findViewById(R.id.title_alarm_img);
+//		titleAlarmImg = (ImageView) findViewById(R.id.title_alarm_img);
 		titleFindImg = (ImageView) findViewById(R.id.title_find_img);
 		titleMineImg = (ImageView) findViewById(R.id.title_mine_img);
 
 		communityTx = (TextView) findViewById(R.id.community_tx);
-		alarmTx = (TextView) findViewById(R.id.alarm_tx);
+//		alarmTx = (TextView) findViewById(R.id.alarm_tx);
 		findTx = (TextView) findViewById(R.id.find_tx);
 		mineTx = (TextView) findViewById(R.id.mine_tx);
 
@@ -188,19 +188,19 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onPageSelected(int position) {
-				if (position == 3 && !app.isLogin()) {
+				if (position == 2 && !app.isLogin()) {
 					Intent login = new Intent(context, LoginActivity.class);
 					startActivityForResult(login,
 							CddRequestCode.MINE_LOGIN_REQUEST);
 					setCheckTitle(index);
 					mainViewPager.setCurrentItem(index);
-				} else if (position == 1 && !app.isLogin()) {
+				} /*else if (position == 1 && !app.isLogin()) {
 					Intent login = new Intent(context, LoginActivity.class);
 					startActivityForResult(login,
 							CddRequestCode.REMIND_LOGIN_REQUEST);
 					setCheckTitle(index);
 					mainViewPager.setCurrentItem(index);
-				} else {
+				}*/ else {
 					index = position;
 					setCheckTitle(index);
 					initFragmentContent(index);
@@ -229,44 +229,44 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		case 0:
 			titleCommunityImg
 					.setBackgroundResource(R.drawable.title_community_choose);
-			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm);
+//			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm);
 			titleFindImg.setBackgroundResource(R.drawable.title_find);
 			titleMineImg.setBackgroundResource(R.drawable.title_mine);
 			communityTx.setTextColor(getResources().getColor(
 					R.color.bottom_title_txblue));
-			alarmTx.setTextColor(getResources().getColor(R.color.white));
+//			alarmTx.setTextColor(getResources().getColor(R.color.white));
 			findTx.setTextColor(getResources().getColor(R.color.white));
 			mineTx.setTextColor(getResources().getColor(R.color.white));
 			break;
-		case 1:
+/*		case 1:
 			titleCommunityImg.setBackgroundResource(R.drawable.title_community);
-			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm_choose);
+//			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm_choose);
 			titleFindImg.setBackgroundResource(R.drawable.title_find);
 			titleMineImg.setBackgroundResource(R.drawable.title_mine);
 			communityTx.setTextColor(getResources().getColor(R.color.white));
-			alarmTx.setTextColor(getResources().getColor(
-					R.color.bottom_title_txblue));
+//			alarmTx.setTextColor(getResources().getColor(
+//					R.color.bottom_title_txblue));
 			findTx.setTextColor(getResources().getColor(R.color.white));
 			mineTx.setTextColor(getResources().getColor(R.color.white));
-			break;
-		case 2:
+			break;*/
+		case 1:
 			titleCommunityImg.setBackgroundResource(R.drawable.title_community);
-			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm);
+//			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm);
 			titleFindImg.setBackgroundResource(R.drawable.title_find_choose);
 			titleMineImg.setBackgroundResource(R.drawable.title_mine);
 			communityTx.setTextColor(getResources().getColor(R.color.white));
-			alarmTx.setTextColor(getResources().getColor(R.color.white));
+//			alarmTx.setTextColor(getResources().getColor(R.color.white));
 			findTx.setTextColor(getResources().getColor(
 					R.color.bottom_title_txblue));
 			mineTx.setTextColor(getResources().getColor(R.color.white));
 			break;
-		case 3:
+		case 2:
 			titleCommunityImg.setBackgroundResource(R.drawable.title_community);
-			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm);
+//			titleAlarmImg.setBackgroundResource(R.drawable.title_alarm);
 			titleFindImg.setBackgroundResource(R.drawable.title_find);
 			titleMineImg.setBackgroundResource(R.drawable.title_mine_choose);
 			communityTx.setTextColor(getResources().getColor(R.color.white));
-			alarmTx.setTextColor(getResources().getColor(R.color.white));
+//			alarmTx.setTextColor(getResources().getColor(R.color.white));
 			findTx.setTextColor(getResources().getColor(R.color.white));
 			mineTx.setTextColor(getResources().getColor(
 					R.color.bottom_title_txblue));
@@ -367,10 +367,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			if (position == 0) {
 				communityF = new CommunityFragment();
 				return communityF;
-			} else if (position == 1) {
+			}/* else if (position == 1) {
 				alarmF = new AlarmFragment();
 				return alarmF;
-			} else if (position == 2) {
+			} */else if (position == 1) {
 				findF = new FindFragment();
 				return findF;
 			} else {
@@ -381,7 +381,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public int getCount() {
-			return 4;
+			return 3;
 		}
 	}
 
@@ -392,7 +392,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			index = 0;
 			setCheckTitle(0);
 			break;
-		case R.id.alarm_title_layout:
+		/*case R.id.alarm_title_layout:
 			if (!app.isLogin()) {
 				loginRequestCode = 1;
 				Intent login = new Intent(context, LoginActivity.class);
@@ -403,21 +403,21 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				index = 1;
 				setCheckTitle(1);
 			}
-			break;
+			break;*/
 		case R.id.find_title_layout:
-			index = 2;
-			setCheckTitle(2);
+			index = 1;
+			setCheckTitle(1);
 			break;
 		case R.id.mine_title_layout:
 			if (!app.isLogin()) {  
-				loginRequestCode = 3;
+				loginRequestCode = 2;
 				Intent login = new Intent(context, LoginActivity.class);
 				startActivityForResult(login, CddRequestCode.MINE_LOGIN_REQUEST);
 				setCheckTitle(index);
 				mainViewPager.setCurrentItem(index);
 			} else {
-				index = 3;
-				setCheckTitle(3);
+				index = 2;
+				setCheckTitle(2);
 			}
 			break;
 

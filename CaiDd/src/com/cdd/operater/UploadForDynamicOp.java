@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.cdd.app.CddApp;
 import com.cdd.util.CddConfig;
+import com.cdd.util.CryptAES;
 
 public class UploadForDynamicOp {
 
@@ -102,10 +103,11 @@ public class UploadForDynamicOp {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			byte[] data = toByteArray(is, baos);
 			String result = new String(data);
+			String resultNew = CryptAES.getInstance().onDecrypt(result);
 			if (CddConfig.IS_DEBUG) {
-				Log.i("CDD", result);
+				Log.i("CDD", resultNew);
 			}
-			listener.onSuccess(result);
+			listener.onSuccess(resultNew);
 		} catch (Exception e) {
 			listener.onError("上传失败");
 		}

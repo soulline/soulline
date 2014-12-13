@@ -251,6 +251,8 @@ public class ForwardDetailActivity extends BaseActivity implements
 		findViewById(R.id.shoucang_layout).setOnClickListener(this);
 		findViewById(R.id.zhuanfa_layout).setOnClickListener(this);
 		findViewById(R.id.reply_layout).setOnClickListener(this);
+		askIcon.setOnClickListener(this);
+		askName.setOnClickListener(this);
 		footMoreView = View.inflate(context, R.layout.load_more_view, null);
 		footMoreView.setOnClickListener(new OnClickListener() {
 
@@ -526,11 +528,25 @@ public class ForwardDetailActivity extends BaseActivity implements
 		case R.id.empty_content_layout:
 			requestDynamicList("1", true);
 			break;
+			
+		case R.id.ask_icon:
+			gotoMemberDetail();
+			break;
+			
+		case R.id.ask_name:
+			gotoMemberDetail();
+			break;
 
 		default:
 			break;
 		}
 
+	}
+	
+	private void gotoMemberDetail() {
+		Intent userInfo = new Intent(context, UserInfoActivity.class);
+		userInfo.putExtra("memberId", dynamicEntry.memberId);
+		startActivity(userInfo);
 	}
 
 }
