@@ -64,7 +64,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.mine_fragment, null);
 		initView();
-		initContent();
+//		initContent();
 		return view;
 	}
 

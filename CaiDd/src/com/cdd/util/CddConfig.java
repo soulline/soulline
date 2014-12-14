@@ -6,7 +6,7 @@ import android.os.Environment;
 
 public class CddConfig {
 
-	public static final boolean IS_DEBUG = true;
+	public static final boolean IS_DEBUG = false;
 	
 	public static final String BASE_URL = "http://123.57.45.145:8080/api/";
 	
