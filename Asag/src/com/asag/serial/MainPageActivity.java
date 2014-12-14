@@ -905,6 +905,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							Intent checkParam = new Intent(context, CheckParamsSetActivity.class);
 							startActivity(checkParam);
 							break;
+							
+						case R.id.point_set_menu:
+							Intent intent = new Intent(context, PointLocationActivity.class);
+							startActivity(intent);
+							break;
 
 						default:
 							break;

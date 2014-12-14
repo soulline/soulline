@@ -1,5 +1,6 @@
 package com.asag.serial.service;
 
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -7,6 +8,7 @@ import com.asag.serial.app.SerialApp;
 import com.asag.serial.mode.CutDownEntry;
 import com.asag.serial.mode.RightDataEntry;
 import com.asag.serial.utils.CMDCode;
+import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
 import com.asag.serial.utils.SerialPortManager;
 
@@ -40,15 +42,56 @@ public class SerialService extends Service {
 	private SerialApp app = SerialApp.getInstance();
 
 	private int count = 0;
+	
+	private HashMap<String, String> tMap = new HashMap<String, String>();
+	
+	private HashMap<String, String> rMap = new HashMap<String, String>();
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		initMap();
 	}
 
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
+	}
+	
+	private void initMap() {
+		tMap.put("0", "t_0_input");
+		tMap.put("1", "t_1_input");
+		tMap.put("2", "t_2_input");
+		tMap.put("3", "t_3_input");
+		tMap.put("4", "t_4_input");
+		tMap.put("5", "t_5_input");
+		tMap.put("6", "t_6_input");
+		tMap.put("7", "t_7_input");
+		tMap.put("8", "t_8_input");
+		tMap.put("9", "t_9_input");
+		tMap.put("10", "t_10_input");
+		tMap.put("11", "t_11_input");
+		tMap.put("12", "t_12_input");
+		tMap.put("13", "t_13_input");
+		tMap.put("14", "t_14_input");
+		tMap.put("15", "t_15_input");
+		
+		rMap.put("0", "r_0_input");
+		rMap.put("1", "r_1_input");
+		rMap.put("2", "r_2_input");
+		rMap.put("3", "r_3_input");
+		rMap.put("4", "r_4_input");
+		rMap.put("5", "r_5_input");
+		rMap.put("6", "r_6_input");
+		rMap.put("7", "r_7_input");
+		rMap.put("8", "r_8_input");
+		rMap.put("9", "r_9_input");
+		rMap.put("10", "r_10_input");
+		rMap.put("11", "r_11_input");
+		rMap.put("12", "r_12_input");
+		rMap.put("13", "r_13_input");
+		rMap.put("14", "r_14_input");
+		rMap.put("15", "r_15_input");
 	}
 
 	private void initSerialPort() {
@@ -99,6 +142,21 @@ public class SerialService extends Service {
 				dataEntry.o2 = subDataHex(array[2]).trim();
 				dataEntry.wendu = subDataHex(array[3]).trim();
 				dataEntry.shidu = subDataHex(array[4]).trim();
+				String co2P = DataUtils.getPreferences("co2_input", "0");
+				float co2N = Float.valueOf(dataEntry.co2) + Float.valueOf(co2P);
+				dataEntry.co2 = co2N + "";
+				String ph3P = DataUtils.getPreferences("ph3_input", "0");
+				float ph3N = Float.valueOf(dataEntry.ph3data) + Float.valueOf(ph3P);
+				dataEntry.ph3data = ph3N + "";
+				String o2P = DataUtils.getPreferences("o2_input", "0");
+				float o2N = Float.valueOf(dataEntry.o2) + Float.valueOf(o2P);
+				dataEntry.o2 = o2N + "";
+				String wenduP = DataUtils.getPreferences("t_0_input", "0");
+				float wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
+				dataEntry.wendu = wenduN + "";
+				String shiduP = DataUtils.getPreferences("r_0_input", "0");
+				float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
+				dataEntry.shidu = shiduN + "";
 				if (!dataEntry.number.equals(app.lastWay)) {
 					checkMunite = app.oldCheckTime;
 					paikongMinute = app.oldPaikongTime;
@@ -133,6 +191,9 @@ public class SerialService extends Service {
 		data = data.substring(6);
 		data = data.replaceAll("FF", "");
 		String co2Str = getAsiicForHex(data) + "";
+		String co2P = DataUtils.getPreferences("co2_input", "0");
+		float co2N = Float.valueOf(co2Str) + Float.valueOf(co2P);
+		co2Str = co2N + "";
 		Intent intent = new Intent(SerialBroadCode.ACTION_CO2_RECEIVED);
 		intent.putExtra("co2_data", co2Str);
 		lbm.sendBroadcast(intent);
@@ -144,6 +205,9 @@ public class SerialService extends Service {
 		int o2Int = getAsiicForHex(data);
 		float o2i = ((float) o2Int) / 10f;
 		String o2Str = o2i + "";
+		String o2P = DataUtils.getPreferences("o2_input", "0");
+		float o2N = Float.valueOf(o2Str) + Float.valueOf(o2P);
+		o2Str = o2N + "";
 		Intent intent = new Intent(SerialBroadCode.ACTION_O2_RECEIVED);
 		intent.putExtra("o2_data", o2Str);
 		lbm.sendBroadcast(intent);
@@ -280,6 +344,15 @@ public class SerialService extends Service {
 		dataEntry.co2 = subDataHex(array[0]);
 		dataEntry.wendu = subDataHex(array[1]);
 		dataEntry.shidu = subDataHex(array[2]);
+		String co2P = DataUtils.getPreferences("co2_input", "0");
+		float co2N = Float.valueOf(dataEntry.co2) + Float.valueOf(co2P);
+		dataEntry.co2 = co2N + "";
+		String wenduP = DataUtils.getPreferences(tMap.get(dataEntry.number), "0");
+		float wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
+		dataEntry.wendu = wenduN + "";
+		String shiduP = DataUtils.getPreferences(rMap.get(dataEntry.number), "0");
+		float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
+		dataEntry.shidu = shiduN + "";
 		Log.d("zhao", "parsePassway : " + app.lastWay);
 		if (!dataEntry.number.equals(app.lastWay)) {
 			checkMunite = app.oldCheckTime;
