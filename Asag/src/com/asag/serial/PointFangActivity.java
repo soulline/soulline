@@ -1,6 +1,8 @@
 package com.asag.serial;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.app.ProgressDialog;
 import android.database.Cursor;
@@ -70,7 +72,7 @@ public class PointFangActivity extends BaseActivity {
 	}
 	
 	private void showLoading(final boolean isShow) {
-		handler.post(new Runnable() {
+		runOnUiThread(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -85,6 +87,22 @@ public class PointFangActivity extends BaseActivity {
 		});
 	}
 	
+	private void sortList(ArrayList<PointInfo> list) {
+		Collections.sort(list, new Comparator<PointInfo>() {
+			@Override
+			public int compare(PointInfo lhs, PointInfo rhs) {
+				int lh = Integer.valueOf(lhs.way);
+				int rh = Integer.valueOf(rhs.way);
+				if (lh > rh) {
+					return 1;
+				} else if (lh < rh || lh == rh) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+	}
+	
 	private void initContent() {
 		showLoading(true);
 		new Thread(new Runnable() {
@@ -92,6 +110,7 @@ public class PointFangActivity extends BaseActivity {
 			@Override
 			public void run() {
 				ArrayList<PointInfo> list = queryData();
+				sortList(list);
 				showList(list);
 				showLoading(false);
 			}

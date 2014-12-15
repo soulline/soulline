@@ -169,9 +169,8 @@ public class PointProvider extends ContentProvider {
 
 	static {  
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);  
-        // 这个地方的persons要和PersonColumns.CONTENT_URI中最后面的一个Segment一致  
-        sUriMatcher.addURI(AsagProvider.AUTHORITY, "point", POINT);  
-        sUriMatcher.addURI(AsagProvider.AUTHORITY, "point/#", POINT_ID);  
+        sUriMatcher.addURI(AsagProvider.AUTHORITY, "point_info", POINT);  
+        sUriMatcher.addURI(AsagProvider.AUTHORITY, "point_info/#", POINT_ID);  
   
         sPersonsProjectionMap = new HashMap<String, String>();  
         sPersonsProjectionMap.put(AsagProvider.PointColumns._ID, AsagProvider.PointColumns._ID);  

@@ -82,7 +82,7 @@
             </intent-filter>
         </receiver>
         <provider android:name="com.asag.serial.data.PointProvider"  
-            android:authorities="com.serial.provider.point" />  
+            android:authorities="com.asag.serial" />  
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + AsagProvider.PointColumns.NUMBER + " TEXT,"  
                 + AsagProvider.PointColumns.XPOINT + " TEXT,"
                 + AsagProvider.PointColumns.YPOINT + " TEXT,"
-                + AsagProvider.PointColumns.ZPOINT + " TEXT,"
+                + AsagProvider.PointColumns.ZPOINT + " TEXT"
                 + ");");  
 
 	}
