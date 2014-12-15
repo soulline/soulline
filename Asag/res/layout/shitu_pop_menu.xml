@@ -18,13 +18,13 @@
     <View android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/gray_line"/>
-    <TextView android:id="@+id/point_trend_menu"
+    <!-- <TextView android:id="@+id/point_trend_menu"
         android:layout_width="match_parent"
         android:layout_height="39dp"
         android:gravity="center"
         android:background="@drawable/pop_menu_selector"
         android:textSize="15dp"
         android:textColor="@color/serial_black"
-        android:text="点趋势线显示"/>
+        android:text="点趋势线显示"/> -->
 
 </LinearLayout>

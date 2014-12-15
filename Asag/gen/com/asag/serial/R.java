@@ -377,14 +377,14 @@ public final class R {
         public static final int yellow_state=0x7f020056;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0130;
+        public static final int action_settings=0x7f0b012f;
         public static final int all_select=0x7f0b0107;
-        public static final int b_big_size=0x7f0b012f;
+        public static final int b_big_size=0x7f0b012e;
         public static final int base_content_=0x7f0b0010;
         public static final int base_extra_layout=0x7f0b0011;
         public static final int base_loading=0x7f0b0012;
         public static final int base_title_layout=0x7f0b000f;
-        public static final int big_size=0x7f0b012e;
+        public static final int big_size=0x7f0b012d;
         public static final int bt_ceding=0x7f0b008d;
         public static final int bt_file=0x7f0b008b;
         public static final int bt_function=0x7f0b008c;
@@ -486,7 +486,7 @@ public final class R {
         public static final int lujing=0x7f0b0042;
         public static final int minute_check=0x7f0b009b;
         public static final int minute_paikong=0x7f0b009c;
-        public static final int normal_size=0x7f0b012d;
+        public static final int normal_size=0x7f0b012c;
         public static final int o2_danwei=0x7f0b006d;
         public static final int o2_input=0x7f0b0016;
         public static final int o2_status_img=0x7f0b0084;
@@ -515,7 +515,6 @@ public final class R {
         public static final int point_distribute_menu=0x7f0b0126;
         public static final int point_grid=0x7f0b00d1;
         public static final int point_set_menu=0x7f0b0123;
-        public static final int point_trend_menu=0x7f0b0127;
         public static final int pop_local=0x7f0b0043;
         public static final int pop_network=0x7f0b0045;
         public static final int pop_remote=0x7f0b0041;
@@ -549,7 +548,7 @@ public final class R {
         public static final int rk_date_input=0x7f0b00ae;
         public static final int route_menu=0x7f0b003e;
         public static final int ruku_time_title=0x7f0b00ad;
-        public static final int s_small_size=0x7f0b012b;
+        public static final int s_small_size=0x7f0b012a;
         public static final int save_as=0x7f0b010a;
         public static final int search_menu=0x7f0b0059;
         public static final int sendButton=0x7f0b000b;
@@ -562,10 +561,10 @@ public final class R {
         public static final int shuifen_title=0x7f0b00aa;
         public static final int shuliang_dun=0x7f0b00a9;
         public static final int shuliang_title=0x7f0b00a7;
-        public static final int small_size=0x7f0b012c;
+        public static final int small_size=0x7f0b012b;
         public static final int spinner=0x7f0b0096;
-        public static final int spinner_item_tx=0x7f0b0128;
-        public static final int spinner_list=0x7f0b0129;
+        public static final int spinner_item_tx=0x7f0b0127;
+        public static final int spinner_list=0x7f0b0128;
         public static final int start_date_input=0x7f0b00b5;
         public static final int start_date_title=0x7f0b00b4;
         public static final int start_time=0x7f0b009d;
@@ -629,7 +628,7 @@ public final class R {
         public static final int tuichu=0x7f0b0046;
         public static final int water_input=0x7f0b00ab;
         public static final int way_title=0x7f0b0102;
-        public static final int welcome_loading=0x7f0b012a;
+        public static final int welcome_loading=0x7f0b0129;
         public static final int wendu_value=0x7f0b011f;
         public static final int x_0_input=0x7f0b00d2;
         public static final int x_10_input=0x7f0b00f0;

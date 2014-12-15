@@ -57,7 +57,7 @@ public class ShituPopMenu extends PopupWindow implements OnClickListener{
 	
 	private void reloadNewTextSize(float size) {
 		pointdistributemenu.setTextSize(pointdistributemenu.getTextSize() * size);
-		pointTrendMenu.setTextSize(pointTrendMenu.getTextSize() * size);
+//		pointTrendMenu.setTextSize(pointTrendMenu.getTextSize() * size);
 	}
 
 	public ShituPopMenu(Context context, OnShituClickListener listener) {
@@ -86,9 +86,9 @@ public class ShituPopMenu extends PopupWindow implements OnClickListener{
 	
 	private void initView() {
 		pointdistributemenu = (TextView) view.findViewById(R.id.point_distribute_menu);
-		pointTrendMenu = (TextView) view.findViewById(R.id.point_trend_menu);
+//		pointTrendMenu = (TextView) view.findViewById(R.id.point_trend_menu);
 		view.findViewById(R.id.point_distribute_menu).setOnClickListener(this);
-		view.findViewById(R.id.point_trend_menu).setOnClickListener(this);
+//		view.findViewById(R.id.point_trend_menu).setOnClickListener(this);
 	}
 	
 	public void showPopupWindow(View parent) {  

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.asag.serial.base.BaseActivity;
 import com.asag.serial.data.AsagProvider;
 import com.asag.serial.mode.PointInfo;
+import com.asag.serial.utils.DataUtils;
 
 public class PointLocationActivity extends BaseActivity implements OnClickListener{
 
@@ -267,8 +268,14 @@ public class PointLocationActivity extends BaseActivity implements OnClickListen
         values.put(AsagProvider.PointColumns.XPOINT, info.xpoint);  
         values.put(AsagProvider.PointColumns.YPOINT, info.ypoint);
         values.put(AsagProvider.PointColumns.ZPOINT, info.zpoint);
-        getContentResolver().update(AsagProvider.PointColumns.CONTENT_URI, values, AsagProvider.PointColumns.NUMBER
-        		+ "=" + info.way, null);
+        boolean iscache = DataUtils.getPreferences(DataUtils.KEY_IS_CACHE, false);
+        if (!iscache) {
+        	getContentResolver().insert(AsagProvider.PointColumns.CONTENT_URI, values);
+        	DataUtils.getPreferences(DataUtils.KEY_IS_CACHE, true);
+        } else {
+        	getContentResolver().update(AsagProvider.PointColumns.CONTENT_URI, values, AsagProvider.PointColumns.NUMBER
+        			+ "=" + info.way, null);
+        }
 	}
 	
 	@Override

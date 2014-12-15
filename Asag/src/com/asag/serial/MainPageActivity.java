@@ -826,7 +826,15 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								startCutDown(2);
 							}
 						} else if (type == 2) {
-
+							Intent record = new Intent(context, PointRecordActivity.class);
+							if (resourceId == R.id.liangan_jiance_menu) {
+								record.putExtra("record_title", "粮安监测结果");
+							} else if (resourceId == R.id.point_check_menu) {
+								record.putExtra("record_title", "粮安检测结果");
+							} else if (resourceId == R.id.cangan_jiance_menu) {
+								record.putExtra("record_title", "仓安检测结果");
+							}
+							startActivity(record);
 						}
 					}
 				});
@@ -983,7 +991,15 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 					@Override
 					public void onClick(int resourceId) {
-						// TODO Auto-generated method stub
+						switch (resourceId) {
+						case R.id.point_distribute_menu:
+							Intent gotoV = new Intent(context, PointFangActivity.class);
+							startActivity(gotoV);
+							break;
+
+						default:
+							break;
+						}
 
 					}
 				});
