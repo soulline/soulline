@@ -510,6 +510,7 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 			dingdangSqTx.setTextColor(getActivity().getResources().getColor(
 					R.color.sq_blue));
 			view.findViewById(R.id.empty_content_layout).setVisibility(View.GONE);
+			askList.clear();
 			initSqList();
 			break;
 		case 1:
