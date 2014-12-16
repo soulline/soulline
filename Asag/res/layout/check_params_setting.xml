@@ -30,10 +30,11 @@
             android:orientation="horizontal"
             android:paddingLeft="200dp" >
 
-            <TextView
+            <TextView android:id="@+id/co2_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CO₂/ppm："
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
             
@@ -41,13 +42,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
                 android:textSize="14dp"
                 android:numeric="integer"
                 android:padding="5dp"/>
             
-            <TextView
+            <TextView android:id="@+id/ph3_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_gravity="center_vertical"
                 android:text="PH₃/ppm："
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -56,12 +60,15 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
                 android:textSize="14dp"
                 android:numeric="integer"
                 android:padding="5dp"/>
-            <TextView
+            <TextView android:id="@+id/o2_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_gravity="center_vertical"
                 android:text="O₂/%："
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -70,6 +77,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
                 android:textSize="14dp"
                 android:numeric="integer"
                 android:padding="5dp"/>
@@ -84,17 +92,18 @@
             android:paddingLeft="20dp" >
 
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_title"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="T/℃："
                 android:textColor="@color/black"
                 android:textSize="14dp" />
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_0_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_gravity="center_vertical"
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -103,13 +112,17 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_1_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="1"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -118,12 +131,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_2_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="2"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -132,12 +149,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
                 android:numeric="integer"
+                android:layout_gravity="center_vertical"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_3_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="3"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -146,6 +167,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -160,9 +182,10 @@
 
             
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_4_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="4"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -170,14 +193,18 @@
             <EditText android:id="@+id/t_4_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_5_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="90dp"
                 android:text="5"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -185,14 +212,18 @@
             <EditText android:id="@+id/t_5_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_6_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
                 android:text="6"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
             
@@ -201,11 +232,15 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:numeric="integer"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_7_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="90dp"
                 android:text="7"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -214,6 +249,8 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
@@ -227,8 +264,9 @@
             android:paddingLeft="160dp" >
 
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_8_title"
+                android:layout_width="30dp"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 android:text="8"
                 android:textColor="@color/black"
@@ -238,13 +276,17 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_9_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="9"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -252,13 +294,17 @@
             <EditText android:id="@+id/t_9_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_10_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="10"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -267,12 +313,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_11_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="11"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -280,6 +330,8 @@
             <EditText android:id="@+id/t_11_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:numeric="integer"
                 android:textSize="14dp"
@@ -294,9 +346,10 @@
             android:paddingLeft="160dp" >
 
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_12_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="12"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -305,13 +358,17 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            
-            <TextView
-                android:layout_width="wrap_content"
+             
+            <TextView android:id="@+id/t_13_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="13"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -320,12 +377,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_14_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="14"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -334,13 +395,17 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/t_15_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="15"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
             
@@ -370,17 +435,17 @@
             android:paddingLeft="20dp" >
 
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/rh_title"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="RH/%："
                 android:textColor="@color/black"
                 android:textSize="14dp" />
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_0_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_gravity="center_vertical"
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -388,14 +453,18 @@
             <EditText android:id="@+id/r_0_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_1_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="1"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -404,12 +473,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_2_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="2"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -417,13 +490,17 @@
             <EditText android:id="@+id/r_2_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_3_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="3"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -431,6 +508,8 @@
             <EditText android:id="@+id/r_3_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
@@ -447,9 +526,10 @@
 
             
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_4_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="4"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -458,13 +538,17 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_5_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="5"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -472,13 +556,17 @@
             <EditText android:id="@+id/r_5_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:numeric="integer"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_6_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="6"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -487,12 +575,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:numeric="integer"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_7_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="7"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -500,6 +592,8 @@
             <EditText android:id="@+id/r_7_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
@@ -513,9 +607,10 @@
             android:paddingLeft="160dp" >
 
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_8_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="8"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -523,14 +618,18 @@
             <EditText android:id="@+id/r_8_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_9_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="9"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -538,13 +637,17 @@
             <EditText android:id="@+id/r_9_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_10_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="10"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -552,13 +655,17 @@
             <EditText android:id="@+id/r_10_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_11_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="11"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -566,6 +673,8 @@
             <EditText android:id="@+id/r_11_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
@@ -581,9 +690,10 @@
             android:paddingLeft="160dp" >
 
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_12_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="12"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -591,14 +701,18 @@
             <EditText android:id="@+id/r_12_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
             
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_13_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="13"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -607,12 +721,16 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:numeric="integer"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_14_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:text="14"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -620,20 +738,26 @@
             <EditText android:id="@+id/r_14_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:padding="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/r_15_title"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="15"
+                android:layout_marginLeft="90dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
             
             <EditText android:id="@+id/r_15_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:numeric="integer"
                 android:textColor="@color/black"
                 android:textSize="14dp"

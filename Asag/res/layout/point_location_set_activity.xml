@@ -40,14 +40,14 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
+                    <TextView android:id="@+id/number_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="点号"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
-                    <TextView
+                    <TextView android:id="@+id/x_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="200dp"
@@ -55,7 +55,7 @@
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
-                    <TextView
+                    <TextView android:id="@+id/y_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="200dp"
@@ -63,7 +63,7 @@
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
-                    <TextView
+                    <TextView android:id="@+id/z_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="200dp"
@@ -79,8 +79,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_0_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/black"
@@ -90,7 +90,6 @@
                         android:id="@+id/x_0_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -100,7 +99,7 @@
                         android:id="@+id/y_0_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -110,7 +109,7 @@
                         android:id="@+id/z_0_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -124,8 +123,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_1_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="1"
                         android:textColor="@color/black"
@@ -135,7 +134,6 @@
                         android:id="@+id/x_1_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -145,7 +143,7 @@
                         android:id="@+id/y_1_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -155,7 +153,7 @@
                         android:id="@+id/z_1_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -169,8 +167,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_2_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="2"
                         android:textColor="@color/black"
@@ -180,7 +178,6 @@
                         android:id="@+id/x_2_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -190,7 +187,7 @@
                         android:id="@+id/y_2_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -200,7 +197,7 @@
                         android:id="@+id/z_2_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -214,8 +211,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_3_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="3"
                         android:textColor="@color/black"
@@ -225,7 +222,6 @@
                         android:id="@+id/x_3_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -235,7 +231,7 @@
                         android:id="@+id/y_3_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -245,7 +241,7 @@
                         android:id="@+id/z_3_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -259,8 +255,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_4_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="4"
                         android:textColor="@color/black"
@@ -270,7 +266,6 @@
                         android:id="@+id/x_4_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -280,7 +275,7 @@
                         android:id="@+id/y_4_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -290,7 +285,7 @@
                         android:id="@+id/z_4_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -304,8 +299,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_5_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="5"
                         android:textColor="@color/black"
@@ -315,7 +310,6 @@
                         android:id="@+id/x_5_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -325,7 +319,7 @@
                         android:id="@+id/y_5_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -335,7 +329,7 @@
                         android:id="@+id/z_5_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -349,8 +343,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_6_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="6"
                         android:textColor="@color/black"
@@ -360,7 +354,6 @@
                         android:id="@+id/x_6_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -370,7 +363,7 @@
                         android:id="@+id/y_6_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -380,7 +373,7 @@
                         android:id="@+id/z_6_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -394,8 +387,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_7_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="7"
                         android:textColor="@color/black"
@@ -405,7 +398,6 @@
                         android:id="@+id/x_7_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -415,7 +407,7 @@
                         android:id="@+id/y_7_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -425,7 +417,7 @@
                         android:id="@+id/z_7_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -439,8 +431,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_8_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="8"
                         android:textColor="@color/black"
@@ -450,7 +442,6 @@
                         android:id="@+id/x_8_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -460,7 +451,7 @@
                         android:id="@+id/y_8_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -470,7 +461,7 @@
                         android:id="@+id/z_8_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -484,8 +475,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_9_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="9"
                         android:textColor="@color/black"
@@ -495,7 +486,6 @@
                         android:id="@+id/x_9_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -505,7 +495,7 @@
                         android:id="@+id/y_9_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -515,7 +505,7 @@
                         android:id="@+id/z_9_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -529,8 +519,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_10_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="10"
                         android:textColor="@color/black"
@@ -540,7 +530,6 @@
                         android:id="@+id/x_10_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -550,7 +539,7 @@
                         android:id="@+id/y_10_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -560,7 +549,7 @@
                         android:id="@+id/z_10_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -574,8 +563,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_11_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="11"
                         android:textColor="@color/black"
@@ -585,7 +574,6 @@
                         android:id="@+id/x_11_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -595,7 +583,7 @@
                         android:id="@+id/y_11_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -605,7 +593,7 @@
                         android:id="@+id/z_11_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -619,8 +607,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_12_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="12"
                         android:textColor="@color/black"
@@ -630,7 +618,6 @@
                         android:id="@+id/x_12_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -640,7 +627,7 @@
                         android:id="@+id/y_12_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -650,7 +637,7 @@
                         android:id="@+id/z_12_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -664,8 +651,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_13_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="13"
                         android:textColor="@color/black"
@@ -675,7 +662,6 @@
                         android:id="@+id/x_13_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -685,7 +671,7 @@
                         android:id="@+id/y_13_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -695,7 +681,7 @@
                         android:id="@+id/z_13_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -709,8 +695,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_14_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="14"
                         android:textColor="@color/black"
@@ -720,7 +706,6 @@
                         android:id="@+id/x_14_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -730,7 +715,7 @@
                         android:id="@+id/y_14_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -740,7 +725,7 @@
                         android:id="@+id/z_14_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -754,8 +739,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="100dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/number_15_title"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="15"
                         android:textColor="@color/black"
@@ -765,7 +750,6 @@
                         android:id="@+id/x_15_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -775,7 +759,7 @@
                         android:id="@+id/y_15_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"
@@ -785,7 +769,7 @@
                         android:id="@+id/z_15_input"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:numeric="integer"
                         android:padding="5dp"
                         android:textColor="@color/black"

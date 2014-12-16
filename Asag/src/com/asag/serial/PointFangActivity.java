@@ -8,10 +8,12 @@ import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.asag.serial.base.BaseActivity;
 import com.asag.serial.data.AsagProvider;
 import com.asag.serial.mode.PointInfo;
+import com.asag.serial.utils.DataUtils;
 
 public class PointFangActivity extends BaseActivity {
 
@@ -23,16 +25,48 @@ public class PointFangActivity extends BaseActivity {
 	
 	private ProgressDialog dialog;
 	
+	private TextView top_title_tx;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.point_fang_activity);
 		initView();
+		initTextSize();
 		initContent();
 	}
 
 	private void initView() {
 		pointGrid = (GridView) findViewById(R.id.point_grid);
+		top_title_tx = (TextView) findViewById(R.id.top_title_tx);
+	}
+	
+	private void initTextSize() {
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		switch (size) {
+		case 1:
+			reloadTextSize(1.0f);
+			break;
+		case 2:
+			reloadTextSize(1.2f);
+			break;
+		case 3:
+			reloadTextSize(1.4f);
+			break;
+		case 4:
+			reloadTextSize(1.6f);
+			break;
+		case 5:
+			reloadTextSize(1.8f);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private void reloadTextSize(float size) {
+		top_title_tx.setTextSize(top_title_tx.getTextSize() * size);
 	}
 	
 	private ArrayList<PointInfo> queryData() {
@@ -58,13 +92,16 @@ public class PointFangActivity extends BaseActivity {
 			
 			@Override
 			public void run() {
+				int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
 				if (adapter == null) {
 					adapter = new PointFangAdapter(context);
 					adapter.addData(list);
+					adapter.setItemTextSize(size);
 					pointGrid.setAdapter(adapter);
 				} else {
 					adapter.clear();
 					adapter.addData(list);
+					adapter.setItemTextSize(size);
 					adapter.notifyDataSetChanged();
 				}
 			}

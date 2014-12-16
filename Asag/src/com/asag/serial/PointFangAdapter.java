@@ -14,6 +14,35 @@ public class PointFangAdapter extends ArrayAdapter<PointInfo> {
 
 	private Context context;
 	
+	private float size = 1.0f;
+	
+	public void setItemTextSize(int bili) {
+		switch (bili) {
+		case 1:
+			size = 1.0f;
+			break;
+		case 2:
+			size = 1.2f;
+			break;
+
+		case 3:
+			size = 1.4f;
+			break;
+
+		case 4:
+			size = 1.6f;
+			break;
+
+		case 5:
+			size = 1.8f;
+			break;
+
+
+		default:
+			break;
+		}
+	}
+	
 	public PointFangAdapter(Context context) {
 		super(context, 0);
 		this.context = context;
@@ -42,6 +71,10 @@ public class PointFangAdapter extends ArrayAdapter<PointInfo> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		PointInfo info = getItem(position);
+		holder.way.setTextSize(20.0f* size);
+		holder.x_point.setTextSize(14.0f * size);
+		holder.y_point.setTextSize(14.0f* size);
+		holder.z_point.setTextSize(14.0f * size);
 		holder.way.setText(info.way);
 		holder.x_point.setText(info.xpoint);
 		holder.y_point.setText(info.ypoint);
