@@ -355,8 +355,10 @@ public class SerialService extends Service {
 		dataEntry.wendu = subDataHex(array[1]);
 		dataEntry.shidu = subDataHex(array[2]);
 		String co2P = DataUtils.getPreferences("co2_input", "0");
-		float co2N = Float.valueOf(dataEntry.co2) + Float.valueOf(co2P);
-		dataEntry.co2 = co2N + "";
+		if (isNumber(co2P) && isNumber(dataEntry.co2)) {
+			Long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
+			dataEntry.co2 = co2N + "";
+		}
 		String wenduP = DataUtils.getPreferences(tMap.get(dataEntry.number), "0");
 		float wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
 		dataEntry.wendu = wenduN + "";
