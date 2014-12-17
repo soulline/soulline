@@ -143,11 +143,15 @@ public class SerialService extends Service {
 				dataEntry.wendu = subDataHex(array[3]).trim();
 				dataEntry.shidu = subDataHex(array[4]).trim();
 				String co2P = DataUtils.getPreferences("co2_input", "0");
-				long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
-				dataEntry.co2 = co2N + "";
+				if (isNumber(co2P)) {
+					long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
+					dataEntry.co2 = co2N + "";
+				}
 				String ph3P = DataUtils.getPreferences("ph3_input", "0");
-				long ph3N = Long.valueOf(dataEntry.ph3data) + Long.valueOf(ph3P);
-				dataEntry.ph3data = ph3N + "";
+				if (isNumber(ph3P)) {
+					long ph3N = Long.valueOf(dataEntry.ph3data) + Long.valueOf(ph3P);
+					dataEntry.ph3data = ph3N + "";
+				}
 				String o2P = DataUtils.getPreferences("o2_input", "0");
 				float o2N = Float.valueOf(dataEntry.o2) + Float.valueOf(o2P);
 				dataEntry.o2 = o2N + "";
@@ -211,6 +215,11 @@ public class SerialService extends Service {
 		Intent intent = new Intent(SerialBroadCode.ACTION_O2_RECEIVED);
 		intent.putExtra("o2_data", o2Str);
 		lbm.sendBroadcast(intent);
+	}
+	
+	private boolean isNumber(String str) {
+		boolean result = str.matches("[0-9]+");
+		return result;
 	}
 
 	private int getAsiicForHex(String source) {
