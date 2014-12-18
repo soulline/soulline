@@ -1,0 +1,307 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:id="@+id/base_content_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/top_title_tx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_blue_bg"
+            android:gravity="center"
+            android:minHeight="40dp"
+            android:text="粮安监测详细记录"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/first_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="一、基础信息"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="120dp" >
+
+            <TextView
+                android:id="@+id/cang_number_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="仓号："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/cang_number_value"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+            
+            <TextView
+                android:id="@+id/liangzhong_number_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="粮种："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/liangzhong_number_value"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+            
+            <TextView
+                android:id="@+id/shuliang_number_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数量："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/shuliang_number_value"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+            
+            <TextView
+                android:id="@+id/shuliang_number_danwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="T"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView
+                android:id="@+id/shuifen_number_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="水分："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/shuifen_number_value"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+            
+            <TextView
+                android:id="@+id/shuifen_number_danwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="120dp">
+             <TextView
+                android:id="@+id/chandi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产地："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/chandi_value"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+            
+            <TextView
+                android:id="@+id/ruku_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="入库时间："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/ruku_date_value"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+            
+            <TextView
+                android:id="@+id/check_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="监测时间："
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+            
+            <TextView android:id="@+id/check_date_value"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
+        </LinearLayout>
+        
+        <TextView
+            android:id="@+id/second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="二、检测结果"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="60dp">
+            <TextView android:id="@+id/bianhao_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:text="编号"/>
+            
+            <TextView android:id="@+id/co2_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginLeft="200dp"
+                android:textSize="14dp"
+                android:text="CO₂/ppm"/>
+            
+            <TextView android:id="@+id/rh_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginLeft="200dp"
+                android:textSize="14dp"
+                android:text="RH/%"/>
+            
+            <TextView android:id="@+id/t_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginLeft="200dp"
+                android:textSize="14dp"
+                android:text="T/℃"/>
+            
+            <TextView android:id="@+id/ssi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginLeft="200dp"
+                android:textSize="14dp"
+                android:text="SSI"/>
+            
+            <TextView android:id="@+id/mmi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginLeft="200dp"
+                android:textSize="14dp"
+                android:text="MMI"/>
+        </LinearLayout>
+        <ListView android:id="@+id/point_detail_listview"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="60dp"
+            android:layout_height="550dp"/>
+        
+        <TextView
+            android:id="@+id/third_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="三、储粮状况"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="60dp">
+            <TextView
+            android:id="@+id/yisidian_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="疑似点："
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+            
+            <TextView
+            android:id="@+id/yisidian_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="60dp">
+            <TextView
+            android:id="@+id/qianzaidian_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="潜在点："
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+            
+            <TextView
+            android:id="@+id/qianzai_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+        </LinearLayout>
+        
+        <TextView
+            android:id="@+id/fourth_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="四、建议"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+        
+        <TextView
+            android:id="@+id/jianyi_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <!-- Extra Fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/base_extra_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+    <!-- Loading layout -->
+
+    <FrameLayout
+        android:id="@+id/base_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+</RelativeLayout>
