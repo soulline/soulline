@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,44 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 	private Context context;
 
 	private HashMap<String, Integer> drawableMap = new HashMap<String, Integer>();
+	
+	private float size = 1.0f;
+	
+	private int pointSelect = -1;
+
+	public int getSelectPosition() {
+		return pointSelect;
+	}
+	
+	public void setSelectPosition(int position) {
+		this.pointSelect = position;
+	}
+	
+	public void setItemTextSize(int bili) {
+		switch (bili) {
+		case 1:
+			size = 1.0f;
+			break;
+		case 2:
+			size = 1.2f;
+			break;
+
+		case 3:
+			size = 1.4f;
+			break;
+
+		case 4:
+			size = 1.6f;
+			break;
+
+		case 5:
+			size = 1.8f;
+			break;
+
+		default:
+			break;
+		}
+	}
 
 	public PointRecordAdapter(Context context) {
 		super(context, 0);
@@ -87,6 +127,7 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		PointRecord record = getItem(position);
+		holder.item_date.setTextSize(14.0f * size);
 		holder.item_check.setChecked(record.isCheck);
 		holder.item_date.setText(record.date);
 		holder.state_0_icon.setBackgroundResource(drawableMap.get(record.way0State));
@@ -105,6 +146,16 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 		holder.state_13_icon.setBackgroundResource(drawableMap.get(record.way13State));
 		holder.state_14_icon.setBackgroundResource(drawableMap.get(record.way14State));
 		holder.state_15_icon.setBackgroundResource(drawableMap.get(record.way15State));
+		final int finalPosition = position;
+		holder.item_check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					pointSelect = finalPosition;
+				}
+			}
+		});
 		return convertView;
 	}
 

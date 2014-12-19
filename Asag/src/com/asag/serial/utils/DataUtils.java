@@ -20,7 +20,9 @@ public class DataUtils {
 	public static SharedPreferences sharedPreferences = SerialApp.getInstance()
 			.getSharedPreferences(SerialApp.getInstance().getPackageName(), 0);
 	
-	public static final String KEY_IS_CACHE = "key_is_cache";
+	public static final String KEY_ISPOINTF_CACHE = "key_ispointf_cache";
+	
+	public static final String KEY_CHECK_TODAY = "key_check_today";
 
 	public static void removePreferences(String key) {
 		if (key == null) {

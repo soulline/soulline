@@ -1,32 +1,313 @@
 package com.asag.serial;
 
+import java.util.ArrayList;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.asag.serial.base.BaseActivity;
+import com.asag.serial.data.AsagProvider;
+import com.asag.serial.mode.CheckDetailItem;
+import com.asag.serial.mode.PointInfo;
+import com.asag.serial.mode.PointItemRecord;
+import com.asag.serial.mode.PointRecord;
+import com.asag.serial.utils.DataUtils;
 
-public class PointRecordActivity extends BaseActivity {
+public class PointRecordActivity extends BaseActivity implements OnClickListener{
 
 	private TextView top_title_tx;
+
+	private TextView date_title, way_0_title, way_1_title, way_2_title,
+			way_3_title, way_4_title, way_5_title, way_6_title, way_7_title,
+			way_8_title, way_9_title, way_10_title, way_11_title, way_12_title,
+			way_13_title, way_14_title, way_15_title;
+
+	private TextView all_select, detail_btn, delete_item, save_as;
+	
+	private ProgressDialog dialog;
+	
+	private ArrayList<CheckDetailItem> checkList = new ArrayList<CheckDetailItem>();
+	
+	private PointRecordAdapter adapter;
+	
+	private ListView record_list;
+	
+	private int checkState = -1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.point_record_activity);
 		initView();
+		initTextSize();
 		initContent();
 	}
+
+	private void initTextSize() {
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		switch (size) {
+		case 1:
+			reloadTextSize(1.0f);
+			break;
+		case 2:
+			reloadTextSize(1.2f);
+			break;
+		case 3:
+			reloadTextSize(1.4f);
+			break;
+		case 4:
+			reloadTextSize(1.6f);
+			break;
+		case 5:
+			reloadTextSize(1.8f);
+			break;
+
+		default:
+			break;
+		}
+	}
 	
+	private ArrayList<CheckDetailItem> queryData() {
+		ArrayList<CheckDetailItem> list = new ArrayList<CheckDetailItem>();
+		Cursor cursor = getContentResolver().query(AsagProvider.CheckDetail.CONTENT_URI, new String[] { AsagProvider.CheckDetail.CANGHAO, AsagProvider.CheckDetail.CHANDI, AsagProvider.CheckDetail.CHECKDATE
+				,AsagProvider.CheckDetail.CHECKTYPE, AsagProvider.CheckDetail.LIANGZHONG, AsagProvider.CheckDetail.RUKUDATE, AsagProvider.CheckDetail.SHUIFEN, AsagProvider.CheckDetail.SHULIANG},
+				AsagProvider.CheckDetail.CHECKTYPE + "=" + checkState, null, null);
+		if (cursor != null) {
+			while(cursor.moveToNext()) {
+				CheckDetailItem point = new CheckDetailItem();
+				point.canghao = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CANGHAO));
+				point.liangzhong = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.LIANGZHONG));
+				point.shuliang = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHULIANG));
+				point.shuifen = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHUIFEN));
+				point.chandi = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHANDI));
+				point.rukuDate = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.RUKUDATE));
+				point.checkDate = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKDATE));
+				point.checkType = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+				
+				Cursor cursor1 = getContentResolver().query(AsagProvider.PointRecord.CONTENT_URI, new String[] { AsagProvider.PointRecord.WAYNUMBER, AsagProvider.PointRecord.COTWO, AsagProvider.PointRecord.CHECKDATE
+						,AsagProvider.PointRecord.CHECKTYPE, AsagProvider.PointRecord.MMI, AsagProvider.PointRecord.RHVALUE, AsagProvider.PointRecord.SSI, AsagProvider.PointRecord.TVALUE, AsagProvider.PointRecord.STATUS},
+						AsagProvider.PointRecord.CHECKDATE + "=" + point.checkDate + 
+						" AND " + AsagProvider.PointRecord.CHECKTYPE + "=" + point.checkType, null, null);
+				if (cursor1 != null) {
+					while (cursor1.moveToNext()) {
+						PointItemRecord record = new PointItemRecord();
+						record.wayNum = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
+						record.co2 = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
+						record.mmi = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
+						record.rhValue = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
+						record.ssi = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
+						record.status = cursor.getInt(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
+						record.checkDate = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKDATE));
+						record.checkType = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKTYPE));
+						record.tValue = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
+						point.pointList.add(record);
+					}
+				}
+				list.add(point);
+			}
+			cursor.close();
+		}
+		return list;
+	}
+	
+	private PointRecord getWayState(ArrayList<PointItemRecord> recordList) {
+		PointRecord state = new PointRecord();
+		for (PointItemRecord record : recordList) {
+			state.date = record.checkDate;
+			if (record.wayNum.equals("0")) {
+				state.way0State = record.status + "";
+			} else if (record.wayNum.equals("1")) {
+				state.way1State = record.status + "";
+			} else if (record.wayNum.equals("2")) {
+				state.way2State = record.status + "";
+			} else if (record.wayNum.equals("3")) {
+				state.way3State = record.status + "";
+			} else if (record.wayNum.equals("4")) {
+				state.way4State = record.status + "";
+			} else if (record.wayNum.equals("5")) {
+				state.way5State = record.status + "";
+			} else if (record.wayNum.equals("6")) {
+				state.way6State = record.status + "";
+			} else if (record.wayNum.equals("7")) {
+				state.way7State = record.status + "";
+			} else if (record.wayNum.equals("8")) {
+				state.way8State = record.status + "";
+			} else if (record.wayNum.equals("9")) {
+				state.way9State = record.status + "";
+			} else if (record.wayNum.equals("10")) {
+				state.way10State = record.status + "";
+			} else if (record.wayNum.equals("11")) {
+				state.way11State = record.status + "";
+			} else if (record.wayNum.equals("12")) {
+				state.way12State = record.status + "";
+			} else if (record.wayNum.equals("13")) {
+				state.way13State = record.status + "";
+			} else if (record.wayNum.equals("14")) {
+				state.way14State = record.status + "";
+			} else if (record.wayNum.equals("15")) {
+				state.way15State = record.status + "";
+			}
+		}
+		return state;
+	}
+
+	private void reloadTextSize(float size) {
+		top_title_tx.setTextSize(top_title_tx.getTextSize() * size);
+		date_title.setTextSize(date_title.getTextSize() * size);
+		way_0_title.setTextSize(way_0_title.getTextSize() * size);
+		way_1_title.setTextSize(way_1_title.getTextSize() * size);
+		way_2_title.setTextSize(way_2_title.getTextSize() * size);
+		way_3_title.setTextSize(way_3_title.getTextSize() * size);
+		way_4_title.setTextSize(way_4_title.getTextSize() * size);
+		way_5_title.setTextSize(way_5_title.getTextSize() * size);
+		way_6_title.setTextSize(way_6_title.getTextSize() * size);
+		way_7_title.setTextSize(way_7_title.getTextSize() * size);
+		way_8_title.setTextSize(way_8_title.getTextSize() * size);
+		way_9_title.setTextSize(way_9_title.getTextSize() * size);
+		way_10_title.setTextSize(way_10_title.getTextSize() * size);
+		way_11_title.setTextSize(way_11_title.getTextSize() * size);
+		way_12_title.setTextSize(way_12_title.getTextSize() * size);
+		way_13_title.setTextSize(way_13_title.getTextSize() * size);
+		way_14_title.setTextSize(way_14_title.getTextSize() * size);
+		way_15_title.setTextSize(way_15_title.getTextSize() * size);
+		all_select.setTextSize(all_select.getTextSize() * size);
+		detail_btn.setTextSize(detail_btn.getTextSize() * size);
+		delete_item.setTextSize(delete_item.getTextSize() * size);
+		save_as.setTextSize(save_as.getTextSize() * size);
+	}
+
 	private void initView() {
 		top_title_tx = (TextView) findViewById(R.id.top_title_tx);
+		record_list = (ListView) findViewById(R.id.record_list);
+
+		date_title = (TextView) findViewById(R.id.date_title);
+		way_0_title = (TextView) findViewById(R.id.way_0_title);
+		way_1_title = (TextView) findViewById(R.id.way_1_title);
+		way_2_title = (TextView) findViewById(R.id.way_2_title);
+		way_3_title = (TextView) findViewById(R.id.way_3_title);
+		way_4_title = (TextView) findViewById(R.id.way_4_title);
+		way_5_title = (TextView) findViewById(R.id.way_5_title);
+		way_6_title = (TextView) findViewById(R.id.way_6_title);
+		way_7_title = (TextView) findViewById(R.id.way_7_title);
+		way_8_title = (TextView) findViewById(R.id.way_8_title);
+		way_9_title = (TextView) findViewById(R.id.way_9_title);
+		way_10_title = (TextView) findViewById(R.id.way_10_title);
+		way_11_title = (TextView) findViewById(R.id.way_11_title);
+		way_12_title = (TextView) findViewById(R.id.way_12_title);
+		way_13_title = (TextView) findViewById(R.id.way_13_title);
+		way_14_title = (TextView) findViewById(R.id.way_14_title);
+		way_15_title = (TextView) findViewById(R.id.way_15_title);
+
+		all_select = (TextView) findViewById(R.id.all_select);
+		detail_btn = (TextView) findViewById(R.id.detail_btn);
+		delete_item = (TextView) findViewById(R.id.delete_item);
+		save_as = (TextView) findViewById(R.id.save_as);
+		
+		all_select.setOnClickListener(this);
+		detail_btn.setOnClickListener(this);
+		delete_item.setOnClickListener(this);
+		save_as.setOnClickListener(this);
+	}
+
+	private void showLoading(final boolean isShow) {
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (isShow) {
+					dialog = new ProgressDialog(context);
+					dialog.setTitle("提示");
+					dialog.setMessage("正在加载中，请稍后...");
+					dialog.show();
+				} else if (dialog != null) {
+					dialog.dismiss();
+				}
+			}
+		});
 	}
 	
 	private void initContent() {
 		String title = getIntent().getStringExtra("record_title");
+		checkState = getIntent().getIntExtra("record_type", -1);
 		if (!TextUtils.isEmpty(title)) {
 			top_title_tx.setText(title);
 		}
+		showLoading(true);
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				checkList = queryData();
+				final ArrayList<PointRecord> recordList = getRecordStateList(checkList);
+				showLoading(false);
+				handler.post(new Runnable() {
+					
+					@Override
+					public void run() {
+						initRecordAdapter(recordList);
+					}
+				});
+			}
+		}).start();
+	}
+	
+	private ArrayList<PointRecord> getRecordStateList(ArrayList<CheckDetailItem> checkList) {
+		ArrayList<PointRecord> recordList = new ArrayList<PointRecord>();
+		for (CheckDetailItem detailItem : checkList) {
+			recordList.add(getWayState(detailItem.pointList));
+		}
+		return recordList;
+	}
+	
+	private void initRecordAdapter(ArrayList<PointRecord> list) {
+		if (adapter == null) {
+			adapter = new PointRecordAdapter(context);
+			adapter.addData(list);
+			record_list.setAdapter(adapter);
+		} else {
+			adapter.clear();
+			adapter.addData(list);
+			adapter.notifyDataSetChanged();
+		}
 	}
 
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.all_select:
+			if (adapter != null) {
+				adapter.setSelectPosition(-1);
+			}
+			break;
+			
+		case R.id.detail_btn:
+			if (adapter != null && adapter.getSelectPosition() != -1) {
+				CheckDetailItem checkDetail = checkList.get(adapter.getSelectPosition());
+				Intent intent = new Intent(context, CheckDetailRecordActivity.class);
+				intent.putExtra("check_detail", checkDetail);
+				startActivity(intent);
+			}
+			break;
+			
+		case R.id.delete_item:
+			
+			break;
+			
+		case R.id.save_as:
+			
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+	
 }

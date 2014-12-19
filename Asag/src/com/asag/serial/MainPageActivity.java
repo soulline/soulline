@@ -1,11 +1,13 @@
 package com.asag.serial;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,12 +32,17 @@ import com.asag.serial.TextSizeMenu.OnTextSizeClickListener;
 import com.asag.serial.alarm.JcAlarm;
 import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
+import com.asag.serial.data.AsagProvider;
 import com.asag.serial.fragment.BaseFragmentListener;
 import com.asag.serial.fragment.InputSureFragment;
 import com.asag.serial.fragment.PointCheckFragment;
 import com.asag.serial.fragment.PointSetFragment;
 import com.asag.serial.mode.AlarmInfo;
+import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.CutDownEntry;
+import com.asag.serial.mode.PointInfo;
+import com.asag.serial.mode.PointItemRecord;
+import com.asag.serial.mode.PointRecord;
 import com.asag.serial.mode.RightDataEntry;
 import com.asag.serial.mode.TimeSetEntry;
 import com.asag.serial.service.SerialService;
@@ -92,6 +99,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private ArrayList<String> checkWayList = new ArrayList<String>();
 
 	private int checkState = 0;
+	
+	private CheckDetailItem checkDetail = new CheckDetailItem();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -425,6 +434,32 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			adapter.notifyDataSetChanged();
 		}
 	}
+	
+	private int getCo2Status(String co2value) {
+		long co2v = Long.valueOf(co2value);
+		if (co2v < 800) {
+			return 1;
+		} else if (co2v == 800 || (co2v > 800 && co2v < 2000)) {
+			return 2;
+		} else if (co2v == 2000 || (co2v > 2000 && co2v < 5000) || co2v == 5000) {
+			return 3;
+		} else if (co2v > 5000) {
+			return 4;
+		}
+		return 0;
+	}
+	
+	private float getMmi(String tvalue) {
+		if (checkDetail == null) return 0.0f;
+		for (PointItemRecord record : checkDetail.pointList) {
+			if (record.wayNum.equals("0")) {
+				float a = Float.valueOf(tvalue);
+				float b = Float.valueOf(record.tValue);
+				return Math.abs(a - b);
+			}
+		}
+		return 0.0f;
+	}
 
 	public BroadcastReceiver dataReceiver = new BroadcastReceiver() {
 
@@ -457,8 +492,22 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							float value = Float.valueOf(dataEntry.wendu);
 							setTValue(value);
 						}
+						
 					} else {
 						addData(dataEntry);
+					}
+					PointItemRecord record = new PointItemRecord();
+					record.checkDate = checkDetail.checkDate;
+					record.checkType = checkDetail.checkType;
+					record.co2 = dataEntry.co2;
+					record.rhValue = dataEntry.shidu;
+					record.tValue = dataEntry.wendu;
+					record.wayNum = dataEntry.number;
+					record.ssi = dataEntry.co2;
+					record.status = getCo2Status(record.ssi);
+					record.mmi = getMmi(dataEntry.wendu) + "";
+					if (checkDetail != null) {
+						checkDetail.pointList.add(record);
 					}
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
@@ -466,6 +515,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						wayCount = 0;
 						checkWayList.clear();
 						setAlarmCheck(app.alarmInfo);
+						saveCheckInNewTask(checkDetail);
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
 						if (checkState == 1) {
@@ -484,12 +534,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									checkWayValue.setText("0");
 									wayCount = 0;
 									checkWayList.clear();
+									saveCheckInNewTask(checkDetail);
 								}
 							} else {
 								showToast("检测结束");
 								checkWayValue.setText("0");
 								wayCount = 0;
 								checkWayList.clear();
+								saveCheckInNewTask(checkDetail);
 							}
 
 						} else if (checkState == 0) {
@@ -505,6 +557,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							checkWayValue.setText("0");
 							wayCount = 0;
 							checkWayList.clear();
+							saveCheckInNewTask(checkDetail);
 						}
 					}
 				}
@@ -568,6 +621,61 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 		}
 	};
+	
+	private void saveCheckInNewTask(final CheckDetailItem check) {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				saveCheckDetail(check);
+			}
+		}).start();
+	}
+	
+	private void saveCheckDetail(CheckDetailItem check) {
+		ContentValues values = new ContentValues();
+		values.put(AsagProvider.CheckDetail.CANGHAO, check.canghao);
+		values.put(AsagProvider.CheckDetail.LIANGZHONG, check.liangzhong);
+		values.put(AsagProvider.CheckDetail.SHULIANG, check.shuliang);
+		values.put(AsagProvider.CheckDetail.SHUIFEN, check.shuifen);
+		values.put(AsagProvider.CheckDetail.CHANDI, check.chandi);
+		values.put(AsagProvider.CheckDetail.RUKUDATE, check.rukuDate);
+		values.put(AsagProvider.CheckDetail.CHECKDATE, check.checkDate);
+		values.put(AsagProvider.CheckDetail.CHECKTYPE, check.checkType);
+		String cacheDate = DataUtils.getPreferences(DataUtils.KEY_CHECK_TODAY,
+				"");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String today = format.format(System.currentTimeMillis());
+		if (cacheDate.equals(today)) {
+			getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
+					values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate,
+					null);
+		} else {
+			getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
+					values);
+			DataUtils.putPreferences(DataUtils.KEY_CHECK_TODAY, today);
+		}
+		for (PointItemRecord record : check.pointList) {
+			saveCheckItemRecord(record);
+		}
+	}
+	
+	private void saveCheckItemRecord(PointItemRecord record) {
+		getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
+				AsagProvider.PointRecord.CHECKDATE + "=" + record.checkDate + 
+				" AND " + AsagProvider.PointRecord.CHECKTYPE + "=" + record.checkType, null);
+		ContentValues values = new ContentValues();
+		values.put(AsagProvider.PointRecord.COTWO, record.co2);
+		values.put(AsagProvider.PointRecord.MMI, record.mmi);
+		values.put(AsagProvider.PointRecord.RHVALUE, record.rhValue);
+		values.put(AsagProvider.PointRecord.SSI, record.ssi);
+		values.put(AsagProvider.PointRecord.STATUS, record.status);
+		values.put(AsagProvider.PointRecord.TVALUE, record.tValue);
+		values.put(AsagProvider.PointRecord.WAYNUMBER, record.wayNum);
+		values.put(AsagProvider.PointRecord.CHECKDATE, record.checkDate);
+		values.put(AsagProvider.PointRecord.CHECKTYPE, record.checkType);
+		getContentResolver().insert(AsagProvider.PointRecord.CONTENT_URI, values);
+	}
 
 	public void startCutDown(int checkCode) {
 		app.isPause = false;
@@ -646,6 +754,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (newType != -1) {
 			params.putExtra("set_type", newType);
 		}
+		checkDetail = new CheckDetailItem();
 		startActivityForResult(params, SerialRequestCode.REQUEST_SET_DATA);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 	}
@@ -829,10 +938,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							Intent record = new Intent(context, PointRecordActivity.class);
 							if (resourceId == R.id.liangan_jiance_menu) {
 								record.putExtra("record_title", "粮安监测结果");
+								record.putExtra("record_type", 0);
 							} else if (resourceId == R.id.point_check_menu) {
 								record.putExtra("record_title", "粮安检测结果");
+								record.putExtra("record_type", 1);
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								record.putExtra("record_title", "仓安检测结果");
+								record.putExtra("record_type", 2);
 							}
 							startActivity(record);
 						}
@@ -888,6 +1000,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.firstTimeN = data.getLongExtra("first_alarm_time", 0L);
 			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
 			setCheckinfo(alarmInfo);
+			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
 		}
 	}
 

@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.asag.serial.base.BaseActivity;
+import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.PointItemRecord;
 import com.asag.serial.utils.DataUtils;
 
@@ -23,12 +24,36 @@ public class CheckDetailRecordActivity extends BaseActivity {
 	
 	private RecordItemAdapter adapter;
 	
+	private CheckDetailItem checkDetail = new CheckDetailItem();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.check_detail_record);
 		initView();
 		initTextSize();
+		initContent();
+	}
+	
+	private void initContent() {
+		checkDetail = (CheckDetailItem) getIntent().getSerializableExtra("check_detail");
+		if (checkDetail != null) {
+			if (checkDetail.checkType.equals("0")) {
+				top_title_tx.setText("粮安监测详细记录");
+			} else if (checkDetail.checkType.equals("1")) {
+				top_title_tx.setText("粮安检测详细记录");
+			}
+			cang_number_value.setText(checkDetail.canghao);
+			liangzhong_number_value.setText(checkDetail.liangzhong);
+			shuliang_number_value.setText(checkDetail.shuliang);
+			shuifen_number_value.setText(checkDetail.shuifen);
+			chandi_value.setText(checkDetail.chandi);
+			ruku_date_value.setText(checkDetail.rukuDate);
+			check_date_value.setText(checkDetail.checkDate);
+			if (checkDetail.pointList.size() > 0) {
+				initAdapter(checkDetail.pointList);
+			}
+		}
 	}
 	
 	private void initTextSize() {

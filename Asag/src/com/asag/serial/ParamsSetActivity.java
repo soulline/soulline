@@ -25,6 +25,7 @@ import com.asag.serial.base.BaseActivity;
 import com.asag.serial.fragment.BaseFragmentListener;
 import com.asag.serial.fragment.DatePickFragment;
 import com.asag.serial.fragment.InputSureFragment;
+import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.InputEntry;
 import com.asag.serial.mode.SpinnerItem;
 import com.asag.serial.utils.CMDCode;
@@ -59,6 +60,8 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 	private long chooseTime = 0L;
 
 	private long firstAlarmTime = 0L;
+	
+	private CheckDetailItem checkDetail = new CheckDetailItem();
 
 	private LocalBroadcastManager lbm = LocalBroadcastManager
 			.getInstance(SerialApp.getInstance());
@@ -371,6 +374,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 									"yyyy-MM-dd");
 							String dateStr = format.format(date.getTime());
 							rkDateInput.setText(dateStr);
+							checkDetail.rukuDate = dateStr;
 							SimpleDateFormat format2 = new SimpleDateFormat(
 									"yyyyMMdd");
 							 String timeMsg =
@@ -462,6 +466,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 					public void onClick(SpinnerItem item) {
 						liangzhongSpinner.setText(item.name);
 						sendFoodCode(item.code);
+						checkDetail.liangzhong = item.name;
 					}
 				}, foodList);
 		liangzhongMenu.showPopupWindow(liangzhongSpinner);
@@ -475,6 +480,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 					public void onClick(SpinnerItem item) {
 						chandiSpinner.setText(item.name);
 						sendChandiCode(item.code);
+						checkDetail.chandi = item.name;
 					}
 				}, chandiList);
 		chandiMenu.showPopupWindow(chandiSpinner);
@@ -600,6 +606,13 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 
 		case R.id.btn_ok:
 			if (checkStartInput()) {
+				long today = System.currentTimeMillis();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				checkDetail.canghao = cangNumInput.getText().toString().trim();
+				checkDetail.checkDate = format.format(today);
+				checkDetail.checkType = setTpye + "";
+				checkDetail.shuifen = waterInput.getText().toString().trim();
+				checkDetail.shuliang = countInput.getText().toString().trim();
 				Intent data = new Intent();
 				int check = 0;
 				int paikong = 0;
@@ -621,6 +634,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 				data.putExtra("check_value", check);
 				data.putExtra("paikong_value", paikong);
 				data.putExtra("first_alarm_time", firstAlarmTime);
+				data.putExtra("check_detail", checkDetail);
 				sendMessageS(CMDCode.PREPARE_OK);
 				setResult(RESULT_OK, data);
 				finish();

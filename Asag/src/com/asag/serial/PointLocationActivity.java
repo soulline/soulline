@@ -288,111 +288,111 @@ public class PointLocationActivity extends BaseActivity implements
 		info0.xpoint = x_0_input.getText().toString().trim();
 		info0.ypoint = y_0_input.getText().toString().trim();
 		info0.zpoint = z_0_input.getText().toString().trim();
-		savaValues(info0);
+		saveValues(info0);
 		PointInfo info1 = new PointInfo();
 		info1.way = "1";
 		info1.xpoint = x_1_input.getText().toString().trim();
 		info1.ypoint = y_1_input.getText().toString().trim();
 		info1.zpoint = z_1_input.getText().toString().trim();
-		savaValues(info1);
+		saveValues(info1);
 
 		PointInfo info2 = new PointInfo();
 		info2.way = "2";
 		info2.xpoint = x_2_input.getText().toString().trim();
 		info2.ypoint = y_2_input.getText().toString().trim();
 		info2.zpoint = z_2_input.getText().toString().trim();
-		savaValues(info2);
+		saveValues(info2);
 
 		PointInfo info3 = new PointInfo();
 		info3.way = "3";
 		info3.xpoint = x_3_input.getText().toString().trim();
 		info3.ypoint = y_3_input.getText().toString().trim();
 		info3.zpoint = z_3_input.getText().toString().trim();
-		savaValues(info3);
+		saveValues(info3);
 
 		PointInfo info4 = new PointInfo();
 		info4.way = "4";
 		info4.xpoint = x_4_input.getText().toString().trim();
 		info4.ypoint = y_4_input.getText().toString().trim();
 		info4.zpoint = z_4_input.getText().toString().trim();
-		savaValues(info4);
+		saveValues(info4);
 
 		PointInfo info5 = new PointInfo();
 		info5.way = "5";
 		info5.xpoint = x_5_input.getText().toString().trim();
 		info5.ypoint = y_5_input.getText().toString().trim();
 		info5.zpoint = z_5_input.getText().toString().trim();
-		savaValues(info5);
+		saveValues(info5);
 
 		PointInfo info6 = new PointInfo();
 		info6.way = "6";
 		info6.xpoint = x_6_input.getText().toString().trim();
 		info6.ypoint = y_6_input.getText().toString().trim();
 		info6.zpoint = z_6_input.getText().toString().trim();
-		savaValues(info6);
+		saveValues(info6);
 
 		PointInfo info7 = new PointInfo();
 		info7.way = "7";
 		info7.xpoint = x_7_input.getText().toString().trim();
 		info7.ypoint = y_7_input.getText().toString().trim();
 		info7.zpoint = z_7_input.getText().toString().trim();
-		savaValues(info7);
+		saveValues(info7);
 
 		PointInfo info8 = new PointInfo();
 		info8.way = "8";
 		info8.xpoint = x_8_input.getText().toString().trim();
 		info8.ypoint = y_8_input.getText().toString().trim();
 		info8.zpoint = z_8_input.getText().toString().trim();
-		savaValues(info8);
+		saveValues(info8);
 
 		PointInfo info9 = new PointInfo();
 		info9.way = "9";
 		info9.xpoint = x_9_input.getText().toString().trim();
 		info9.ypoint = y_9_input.getText().toString().trim();
 		info9.zpoint = z_9_input.getText().toString().trim();
-		savaValues(info9);
+		saveValues(info9);
 
 		PointInfo info10 = new PointInfo();
 		info10.way = "10";
 		info10.xpoint = x_10_input.getText().toString().trim();
 		info10.ypoint = y_10_input.getText().toString().trim();
 		info10.zpoint = z_10_input.getText().toString().trim();
-		savaValues(info10);
+		saveValues(info10);
 
 		PointInfo info11 = new PointInfo();
 		info11.way = "11";
 		info11.xpoint = x_11_input.getText().toString().trim();
 		info11.ypoint = y_11_input.getText().toString().trim();
 		info11.zpoint = z_11_input.getText().toString().trim();
-		savaValues(info11);
+		saveValues(info11);
 
 		PointInfo info12 = new PointInfo();
 		info12.way = "12";
 		info12.xpoint = x_12_input.getText().toString().trim();
 		info12.ypoint = y_12_input.getText().toString().trim();
 		info12.zpoint = z_12_input.getText().toString().trim();
-		savaValues(info12);
+		saveValues(info12);
 
 		PointInfo info13 = new PointInfo();
 		info13.way = "13";
 		info13.xpoint = x_13_input.getText().toString().trim();
 		info13.ypoint = y_13_input.getText().toString().trim();
 		info13.zpoint = z_13_input.getText().toString().trim();
-		savaValues(info13);
+		saveValues(info13);
 
 		PointInfo info14 = new PointInfo();
 		info14.way = "14";
 		info14.xpoint = x_14_input.getText().toString().trim();
 		info14.ypoint = y_14_input.getText().toString().trim();
 		info14.zpoint = z_14_input.getText().toString().trim();
-		savaValues(info14);
+		saveValues(info14);
 
 		PointInfo info15 = new PointInfo();
 		info15.way = "15";
 		info15.xpoint = x_15_input.getText().toString().trim();
 		info15.ypoint = y_15_input.getText().toString().trim();
 		info15.zpoint = z_15_input.getText().toString().trim();
-		savaValues(info15);
+		saveValues(info15);
 		showToast("保存成功");
 		showLoading(false);
 		handler.post(new Runnable() {
@@ -420,18 +420,18 @@ public class PointLocationActivity extends BaseActivity implements
 		});
 	}
 
-	private void savaValues(PointInfo info) {
+	private void saveValues(PointInfo info) {
 		ContentValues values = new ContentValues();
 		values.put(AsagProvider.PointColumns.NUMBER, info.way);
 		values.put(AsagProvider.PointColumns.XPOINT, info.xpoint);
 		values.put(AsagProvider.PointColumns.YPOINT, info.ypoint);
 		values.put(AsagProvider.PointColumns.ZPOINT, info.zpoint);
-		boolean iscache = DataUtils.getPreferences(DataUtils.KEY_IS_CACHE,
+		boolean iscache = DataUtils.getPreferences(DataUtils.KEY_ISPOINTF_CACHE,
 				false);
 		if (!iscache) {
 			getContentResolver().insert(AsagProvider.PointColumns.CONTENT_URI,
 					values);
-			DataUtils.getPreferences(DataUtils.KEY_IS_CACHE, true);
+			DataUtils.putPreferences(DataUtils.KEY_ISPOINTF_CACHE, true);
 		} else {
 			getContentResolver().update(AsagProvider.PointColumns.CONTENT_URI,
 					values, AsagProvider.PointColumns.NUMBER + "=" + info.way,

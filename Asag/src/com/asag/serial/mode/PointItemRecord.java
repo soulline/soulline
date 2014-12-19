@@ -13,4 +13,10 @@ public class PointItemRecord extends BaseEntry {
 	public String ssi = "";
 	
 	public String mmi = "";
+	
+	public String checkDate = "";
+	
+	public String checkType = "";
+	
+	public int status = 0;
 }

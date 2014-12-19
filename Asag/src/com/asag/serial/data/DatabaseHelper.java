@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	private static final String DATABASE_NAME = "asag_data.db";  
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,7 +21,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + AsagProvider.PointColumns.XPOINT + " TEXT,"
                 + AsagProvider.PointColumns.YPOINT + " TEXT,"
                 + AsagProvider.PointColumns.ZPOINT + " TEXT"
-                + ");");  
+                + ");");
+		
+		db.execSQL("CREATE TABLE " + AsagProvider.PointRecord.TABLE_NAME + " ("  
+                + AsagProvider.PointRecord._ID + " INTEGER PRIMARY KEY,"  
+                + AsagProvider.PointRecord.WAYNUMBER + " TEXT,"  
+                + AsagProvider.PointRecord.COTWO + " TEXT,"
+                + AsagProvider.PointRecord.RHVALUE + " TEXT,"
+                + AsagProvider.PointRecord.TVALUE + " TEXT,"
+                + AsagProvider.PointRecord.SSI + " TEXT,"
+                + AsagProvider.PointRecord.MMI + " TEXT,"
+                + AsagProvider.PointRecord.CHECKDATE + " TEXT,"
+                + AsagProvider.PointRecord.CHECKTYPE + " TEXT,"
+                + AsagProvider.PointRecord.STATUS + " INTEGER"
+                + ");");
+		db.execSQL("CREATE TABLE " + AsagProvider.CheckDetail.TABLE_NAME + " ("  
+                + AsagProvider.CheckDetail._ID + " INTEGER PRIMARY KEY,"  
+                + AsagProvider.CheckDetail.CANGHAO + " TEXT,"  
+                + AsagProvider.CheckDetail.LIANGZHONG + " TEXT,"
+                + AsagProvider.CheckDetail.SHULIANG + " TEXT,"
+                + AsagProvider.CheckDetail.SHUIFEN + " TEXT,"
+                + AsagProvider.CheckDetail.CHANDI + " TEXT,"
+                + AsagProvider.CheckDetail.RUKUDATE + " TEXT,"
+                + AsagProvider.CheckDetail.CHECKDATE + " TEXT,"
+                + AsagProvider.CheckDetail.CHECKTYPE + " TEXT"
+                + ");");
 
 	}
 
