@@ -3,9 +3,7 @@ package com.asag.serial;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.asag.serial.RecordItemAdapter.OnPointCheckListener;
 import com.asag.serial.mode.PointItemRecord;
-import com.asag.serial.mode.PointRecord;
 
 import android.content.Context;
 import android.view.View;
