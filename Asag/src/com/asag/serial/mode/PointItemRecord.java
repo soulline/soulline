@@ -2,6 +2,8 @@ package com.asag.serial.mode;
 
 public class PointItemRecord extends BaseEntry {
 
+	public int id = -1;
+	
 	public String wayNum = "";
 	
 	public String co2 = "";
@@ -17,6 +19,12 @@ public class PointItemRecord extends BaseEntry {
 	public String checkDate = "";
 	
 	public String checkType = "";
+	
+	public String ph3Value = "";
+	
+	public String o2Value = "";
+	
+	public boolean isCheck = false;
 	
 	public int status = 0;
 }

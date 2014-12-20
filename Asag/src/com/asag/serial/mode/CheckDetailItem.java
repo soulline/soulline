@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class CheckDetailItem extends BaseEntry {
 
+	public int id = -1;
+	
 	public String canghao = "";
 	
 	public String liangzhong = "";

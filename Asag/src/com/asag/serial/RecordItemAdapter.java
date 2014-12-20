@@ -2,6 +2,7 @@ package com.asag.serial;
 
 import java.util.ArrayList;
 
+import com.asag.serial.PointRecordAdapter.OnPointCheckListener;
 import com.asag.serial.mode.PointItemRecord;
 
 import android.content.Context;
@@ -78,12 +79,12 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		PointItemRecord record = getItem(position);
-		holder.bianhao_value.setTextSize(14.0f* size);
-		holder.co2_value.setTextSize(14.0f* size);
-		holder.rh_value.setTextSize(14.0f* size);
-		holder.t_value.setTextSize(14.0f* size);
-		holder.ssi_value.setTextSize(14.0f* size);
-		holder.mmi_value.setTextSize(14.0f* size);
+		holder.bianhao_value.setTextSize(14.0f * size);
+		holder.co2_value.setTextSize(14.0f * size);
+		holder.rh_value.setTextSize(14.0f * size);
+		holder.t_value.setTextSize(14.0f * size);
+		holder.ssi_value.setTextSize(14.0f * size);
+		holder.mmi_value.setTextSize(14.0f * size);
 		holder.bianhao_value.setText(record.wayNum);
 		holder.co2_value.setText(record.co2);
 		holder.rh_value.setText(record.rhValue);

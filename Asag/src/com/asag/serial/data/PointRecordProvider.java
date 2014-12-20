@@ -127,6 +127,12 @@ public class PointRecordProvider extends ContentProvider {
         if (values.containsKey(AsagProvider.PointRecord.WAYNUMBER) == false) {  
             values.put(AsagProvider.PointRecord.WAYNUMBER, "");  
         } 
+        if (values.containsKey(AsagProvider.PointRecord.OTWO) == false) {  
+            values.put(AsagProvider.PointRecord.OTWO, "");  
+        }
+        if (values.containsKey(AsagProvider.PointRecord.PHVALUE) == false) {  
+            values.put(AsagProvider.PointRecord.PHVALUE, "");  
+        }
         
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();  
         long rowId = db.insert(AsagProvider.PointRecord.TABLE_NAME, AsagProvider.PointRecord.WAYNUMBER, values);  
@@ -202,5 +208,7 @@ public class PointRecordProvider extends ContentProvider {
         sPersonsProjectionMap.put(AsagProvider.PointRecord.STATUS, AsagProvider.PointRecord.STATUS);
         sPersonsProjectionMap.put(AsagProvider.PointRecord.TVALUE, AsagProvider.PointRecord.TVALUE);
         sPersonsProjectionMap.put(AsagProvider.PointRecord.WAYNUMBER, AsagProvider.PointRecord.WAYNUMBER);
+        sPersonsProjectionMap.put(AsagProvider.PointRecord.OTWO, AsagProvider.PointRecord.OTWO);
+        sPersonsProjectionMap.put(AsagProvider.PointRecord.PHVALUE, AsagProvider.PointRecord.PHVALUE);
     }  
 }

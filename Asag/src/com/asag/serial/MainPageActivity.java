@@ -506,6 +506,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					record.ssi = dataEntry.co2;
 					record.status = getCo2Status(record.ssi);
 					record.mmi = getMmi(dataEntry.wendu) + "";
+					record.o2Value = dataEntry.o2;
+					record.ph3Value = dataEntry.ph3data;
 					if (checkDetail != null) {
 						checkDetail.pointList.add(record);
 					}
@@ -674,6 +676,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.PointRecord.WAYNUMBER, record.wayNum);
 		values.put(AsagProvider.PointRecord.CHECKDATE, record.checkDate);
 		values.put(AsagProvider.PointRecord.CHECKTYPE, record.checkType);
+		values.put(AsagProvider.PointRecord.OTWO, record.o2Value);
+		values.put(AsagProvider.PointRecord.PHVALUE, record.ph3Value);
 		getContentResolver().insert(AsagProvider.PointRecord.CONTENT_URI, values);
 	}
 
@@ -940,7 +944,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								record.putExtra("record_title", "粮安监测结果");
 								record.putExtra("record_type", 0);
 							} else if (resourceId == R.id.point_check_menu) {
-								record.putExtra("record_title", "粮安检测结果");
+								record.putExtra("record_title", "点检测结果");
 								record.putExtra("record_type", 1);
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								record.putExtra("record_title", "仓安检测结果");

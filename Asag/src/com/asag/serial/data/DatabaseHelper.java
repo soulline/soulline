@@ -33,6 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + AsagProvider.PointRecord.MMI + " TEXT,"
                 + AsagProvider.PointRecord.CHECKDATE + " TEXT,"
                 + AsagProvider.PointRecord.CHECKTYPE + " TEXT,"
+                + AsagProvider.PointRecord.OTWO + " TEXT,"
+                + AsagProvider.PointRecord.PHVALUE + " TEXT,"
                 + AsagProvider.PointRecord.STATUS + " INTEGER"
                 + ");");
 		db.execSQL("CREATE TABLE " + AsagProvider.CheckDetail.TABLE_NAME + " ("  

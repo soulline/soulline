@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/record_item_layout"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
+    
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp">
+        <LinearLayout android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+        <CheckBox android:id="@+id/item_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/point_check_selector"
+            android:background="@null"/>
+        <TextView android:id="@+id/item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            android:text="2014-12-14"/>
+        </LinearLayout>
+        <ImageView android:id="@+id/safe_state_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/red_state"/>
+        
+        <TextView android:id="@+id/ph3_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:textColor="@color/black"
+            android:textSize="14dp"/>
+        
+        <TextView android:id="@+id/o2_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:textColor="@color/black"
+            android:textSize="14dp"/>
+        
+        <TextView android:id="@+id/co2_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:textColor="@color/black"
+            android:textSize="14dp"/>
+        
+    </LinearLayout>
+
+</LinearLayout>

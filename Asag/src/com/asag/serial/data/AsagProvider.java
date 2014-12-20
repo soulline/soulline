@@ -36,6 +36,9 @@ public class AsagProvider {
 			public static final String TVALUE = "tvalue";
 			public static final String SSI = "ssi";
 			
+			public static final String OTWO = "otwo";
+			public static final String PHVALUE = "phvalue";
+			
 			public static final String MMI = "mmi";
 			public static final String CHECKDATE = "checkdate";
 			public static final String CHECKTYPE = "checktype";

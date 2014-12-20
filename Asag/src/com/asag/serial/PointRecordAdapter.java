@@ -23,14 +23,14 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 	
 	private float size = 1.0f;
 	
-	private int pointSelect = -1;
-
-	public int getSelectPosition() {
-		return pointSelect;
+	private OnPointCheckListener listener;
+	
+	public interface OnPointCheckListener {
+		public void onCheck(int position);
 	}
 	
-	public void setSelectPosition(int position) {
-		this.pointSelect = position;
+	public void addOnPointCheckListener(OnPointCheckListener listener) {
+		this.listener = listener;
 	}
 	
 	public void setItemTextSize(int bili) {
@@ -146,13 +146,18 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 		holder.state_13_icon.setBackgroundResource(drawableMap.get(record.way13State));
 		holder.state_14_icon.setBackgroundResource(drawableMap.get(record.way14State));
 		holder.state_15_icon.setBackgroundResource(drawableMap.get(record.way15State));
+		if (record.isCheck) {
+			convertView.findViewById(R.id.record_item_layout).setBackgroundColor(context.getResources().getColor(R.color.gray));
+		} else {
+			convertView.findViewById(R.id.record_item_layout).setBackgroundColor(context.getResources().getColor(R.color.white));
+		}
 		final int finalPosition = position;
 		holder.item_check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					pointSelect = finalPosition;
+				if (listener != null) {
+					listener.onCheck(finalPosition);
 				}
 			}
 		});
