@@ -13,6 +13,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,6 +64,22 @@ public class CanganRecordActivity extends BaseActivity implements
 		save_as = (TextView) findViewById(R.id.save_as);
 
 		record_list = (ListView) findViewById(R.id.record_list);
+		record_list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (adapter != null && adapter.getItem(position).isCheck) {
+					adapter.getItem(position).isCheck = false;
+				    recordList.get(position).isCheck = false;
+				    adapter.notifyDataSetChanged();
+				} else if (adapter != null && !adapter.getItem(position).isCheck) {
+					recordList.get(position).isCheck = true;
+					adapter.getItem(position).isCheck = true;
+					adapter.notifyDataSetChanged();
+				}
+			}
+		});
 	}
 
 	private void initContent() {
