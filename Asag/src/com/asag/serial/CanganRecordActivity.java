@@ -37,6 +37,8 @@ public class CanganRecordActivity extends BaseActivity implements
 	
 	private ProgressDialog dialog;
 	
+	private ProgressDialog dialogNew;
+	
 	private CanganRecordAdapter adapter;
 
 	private ArrayList<CheckDetailItem> checkList = new ArrayList<CheckDetailItem>();
@@ -84,7 +86,7 @@ public class CanganRecordActivity extends BaseActivity implements
 	}
 
 	private void initContent() {
-		showLoading(true);
+		showLoading(true, 1);
 		new Thread(new Runnable() {
 
 			@Override
@@ -92,7 +94,7 @@ public class CanganRecordActivity extends BaseActivity implements
 				checkList = queryData();
 				sortList(checkList);
 				recordList = getRecordStateList(checkList);
-				showLoading(false);
+				showLoading(false, 1);
 				handler.post(new Runnable() {
 
 					@Override
@@ -148,7 +150,7 @@ public class CanganRecordActivity extends BaseActivity implements
 		return recordList;
 	}
 	
-	private void showLoading(final boolean isShow) {
+	private void showLoading(final boolean isShow, final int type) {
 		runOnUiThread(new Runnable() {
 			
 			@Override
@@ -156,7 +158,13 @@ public class CanganRecordActivity extends BaseActivity implements
 				if (dialog == null) {
 					dialog = new ProgressDialog(context);
 					dialog.setTitle("提示");
+				}
+				if (type == 1) {
 					dialog.setMessage("正在加载中，请稍后...");
+				} else if (type == 2) {
+					dialog.setMessage("正在删除中，请稍后...");
+				} else if (type == 3) {
+					dialog.setMessage("正在导出中，请稍后...");
 				}
 				if (isShow) {
 					dialog.show();
@@ -166,7 +174,7 @@ public class CanganRecordActivity extends BaseActivity implements
 			}
 		});
 	}
-
+	
 	private ArrayList<CheckDetailItem> queryData() {
 		ArrayList<CheckDetailItem> list = new ArrayList<CheckDetailItem>();
 		Cursor cursor = getContentResolver().query(
@@ -371,6 +379,7 @@ public class CanganRecordActivity extends BaseActivity implements
 
 		case R.id.delete_item:
 			final ArrayList<Integer> selectListD = getSelectList();
+			showLoading(true, 2);
 			if (selectListD.size() > 0) {
 				new Thread(new Runnable() {
 					
@@ -388,7 +397,7 @@ public class CanganRecordActivity extends BaseActivity implements
 						}
 						sortList(checkList);
 						recordList = getRecordStateList(checkList);
-						showLoading(false);
+						showLoading(false, 2);
 						handler.post(new Runnable() {
 
 							@Override
@@ -402,7 +411,7 @@ public class CanganRecordActivity extends BaseActivity implements
 			break;
 
 		case R.id.save_as:
-			showLoading(true);
+			showLoading(true, 3);
 			new Thread(new Runnable() {
 				
 				@Override
@@ -413,11 +422,11 @@ public class CanganRecordActivity extends BaseActivity implements
 						try {
 							ExcellUtils.writeExcell(ExcellUtils.getCanganCheckList(checkDetail), checkDetail.checkDate + "cangan", "cangan");
 							showToast("导出成功");
-							showLoading(false);
+							showLoading(false, 3);
 						} catch (Exception e) {
 							e.printStackTrace();
 							showToast("导出失败");
-							showLoading(false);
+							showLoading(false, 3);
 						}
 					}
 				}

@@ -314,15 +314,23 @@ public class PointRecordActivity extends BaseActivity implements
 		});
 	}
 
-	private void showLoading(final boolean isShow) {
+	private void showLoading(final boolean isShow, final int type) {
 		runOnUiThread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-				if (isShow) {
+				if (dialog == null) {
 					dialog = new ProgressDialog(context);
 					dialog.setTitle("提示");
+				}
+				if (type == 1) {
 					dialog.setMessage("正在加载中，请稍后...");
+				} else if (type == 2) {
+					dialog.setMessage("正在删除中，请稍后...");
+				} else if (type == 3) {
+					dialog.setMessage("正在导出中，请稍后...");
+				}
+				if (isShow) {
 					dialog.show();
 				} else if (dialog != null) {
 					dialog.dismiss();
@@ -337,7 +345,7 @@ public class PointRecordActivity extends BaseActivity implements
 		if (!TextUtils.isEmpty(title)) {
 			top_title_tx.setText(title);
 		}
-		showLoading(true);
+		showLoading(true, 1);
 		new Thread(new Runnable() {
 
 			@Override
@@ -348,7 +356,7 @@ public class PointRecordActivity extends BaseActivity implements
 					sortPoint(detail.pointList);
 				}
 				recordList = getRecordStateList(checkList);
-				showLoading(false);
+				showLoading(false, 1);
 				handler.post(new Runnable() {
 
 					@Override
@@ -477,6 +485,7 @@ public class PointRecordActivity extends BaseActivity implements
 
 		case R.id.delete_item:
 			final ArrayList<Integer> selectListD = getSelectList();
+			showLoading(true, 2);
 			if (selectListD.size() > 0) {
 				new Thread(new Runnable() {
 
@@ -508,7 +517,7 @@ public class PointRecordActivity extends BaseActivity implements
 							sortPoint(detail.pointList);
 						}
 						recordList = getRecordStateList(checkList);
-						showLoading(false);
+						showLoading(false, 2);
 						handler.post(new Runnable() {
 
 							@Override
@@ -522,7 +531,7 @@ public class PointRecordActivity extends BaseActivity implements
 			break;
 
 		case R.id.save_as:
-			showLoading(true);
+			showLoading(true, 3);
 			new Thread(new Runnable() {
 				
 				@Override
@@ -533,11 +542,11 @@ public class PointRecordActivity extends BaseActivity implements
 						try {
 							ExcellUtils.writeExcell(ExcellUtils.getPointCheckList(checkDetail), checkDetail.checkDate + "type" + checkDetail.checkType, "checkwith" + checkDetail.checkType);
 							showToast("导出成功");
-							showLoading(false);
+							showLoading(false, 3);
 						} catch (Exception e) {
 							e.printStackTrace();
 							showToast("导出失败");
-							showLoading(false);
+							showLoading(false, 3);
 						}
 					}
 				}
