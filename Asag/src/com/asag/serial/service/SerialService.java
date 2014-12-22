@@ -351,9 +351,9 @@ public class SerialService extends Service {
 		dataEntry.number = getAsiicForHex(data.substring(0, 2)) + "";
 		data = data.substring(2);
 		String[] array = data.split("FF");
-		dataEntry.co2 = subDataHex(array[0]);
-		dataEntry.wendu = subDataHex(array[1]);
-		dataEntry.shidu = subDataHex(array[2]);
+		dataEntry.co2 = subDataHex(array[0]).trim();
+		dataEntry.wendu = subDataHex(array[1]).trim();
+		dataEntry.shidu = subDataHex(array[2]).trim();
 		String co2P = DataUtils.getPreferences("co2_input", "0");
 		if (isNumber(co2P) && isNumber(dataEntry.co2)) {
 			Long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);

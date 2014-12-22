@@ -24,6 +24,7 @@ import com.asag.serial.data.AsagProvider;
 import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.PointItemRecord;
 import com.asag.serial.utils.DataUtils;
+import com.asag.serial.utils.ExcellUtils;
 
 public class CanganRecordActivity extends BaseActivity implements
 		OnClickListener {
@@ -401,6 +402,26 @@ public class CanganRecordActivity extends BaseActivity implements
 			break;
 
 		case R.id.save_as:
+			showLoading(true);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ArrayList<Integer> selectList = getSelectList();
+					for (int check : selectList) {
+						CheckDetailItem checkDetail = checkList.get(check);
+						try {
+							ExcellUtils.writeExcell(ExcellUtils.getCanganCheckList(checkDetail), checkDetail.checkDate + "cangan", "cangan");
+							showToast("导出成功");
+							showLoading(false);
+						} catch (Exception e) {
+							e.printStackTrace();
+							showToast("导出失败");
+							showLoading(false);
+						}
+					}
+				}
+			}).start();
 
 			break;
 

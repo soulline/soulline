@@ -184,8 +184,8 @@ public class CheckDetailProvider extends ContentProvider {
 
 	static {  
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);  
-        sUriMatcher.addURI(AsagProvider.AUTHORITY, "check_detail", POINT);  
-        sUriMatcher.addURI(AsagProvider.AUTHORITY, "check_detail/#", POINT_ID);  
+        sUriMatcher.addURI(AsagProvider.CheckDetail.AUTHORITY, "check_detail", POINT);  
+        sUriMatcher.addURI(AsagProvider.CheckDetail.AUTHORITY, "check_detail/#", POINT_ID);  
   
         sPersonsProjectionMap = new HashMap<String, String>();  
         sPersonsProjectionMap.put(AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail._ID);  

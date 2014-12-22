@@ -436,6 +436,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private int getCo2Status(String co2value) {
+		if (!isNumber(co2value)) {
+			return 1;
+		}
 		long co2v = Long.valueOf(co2value);
 		if (co2v < 800) {
 			return 1;
@@ -446,7 +449,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else if (co2v > 5000) {
 			return 4;
 		}
-		return 0;
+		return 1;
 	}
 	
 	private float getMmi(String tvalue) {

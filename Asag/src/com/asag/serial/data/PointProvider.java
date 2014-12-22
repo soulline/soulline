@@ -169,8 +169,8 @@ public class PointProvider extends ContentProvider {
 
 	static {  
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);  
-        sUriMatcher.addURI(AsagProvider.AUTHORITY, "point_info", POINT);  
-        sUriMatcher.addURI(AsagProvider.AUTHORITY, "point_info/#", POINT_ID);  
+        sUriMatcher.addURI(AsagProvider.PointColumns.AUTHORITY, "point_info", POINT);  
+        sUriMatcher.addURI(AsagProvider.PointColumns.AUTHORITY, "point_info/#", POINT_ID);  
   
         sPersonsProjectionMap = new HashMap<String, String>();  
         sPersonsProjectionMap.put(AsagProvider.PointColumns._ID, AsagProvider.PointColumns._ID);  

@@ -4,14 +4,12 @@ import android.provider.BaseColumns;
 
 public class AsagProvider {
 
-		// 这个是每个Provider的标识，在Manifest中使用
-		public static final String AUTHORITY = "com.asag.serial";
-		
 	    public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.asag.serial";
 
 	    public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.asag.serial";
 
 		public static final class PointColumns implements BaseColumns {
+			public static final String AUTHORITY = "com.asag.serial.point";
 			// CONTENT_URI跟数据库的表关联，最后根据CONTENT_URI来查询对应的表
 			public static final Uri CONTENT_URI = Uri.parse("content://"+ AUTHORITY +"/point_info");
 			public static final String TABLE_NAME = "point_info";
@@ -25,6 +23,7 @@ public class AsagProvider {
 		}
 		
 		public static final class PointRecord implements BaseColumns {
+			public static final String AUTHORITY = "com.asag.serial.record";
 			// CONTENT_URI跟数据库的表关联，最后根据CONTENT_URI来查询对应的表
 			public static final Uri CONTENT_URI = Uri.parse("content://"+ AUTHORITY +"/point_record");
 			public static final String TABLE_NAME = "point_record";
@@ -47,6 +46,7 @@ public class AsagProvider {
 		}
 		
 		public static final class CheckDetail implements BaseColumns {
+			public static final String AUTHORITY = "com.asag.serial.check";
 			// CONTENT_URI跟数据库的表关联，最后根据CONTENT_URI来查询对应的表
 			public static final Uri CONTENT_URI = Uri.parse("content://"+ AUTHORITY +"/check_detail");
 			public static final String TABLE_NAME = "check_detail";

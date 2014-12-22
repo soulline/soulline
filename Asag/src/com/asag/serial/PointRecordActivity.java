@@ -27,8 +27,10 @@ import com.asag.serial.mode.PointInfo;
 import com.asag.serial.mode.PointItemRecord;
 import com.asag.serial.mode.PointRecord;
 import com.asag.serial.utils.DataUtils;
+import com.asag.serial.utils.ExcellUtils;
 
-public class PointRecordActivity extends BaseActivity implements OnClickListener{
+public class PointRecordActivity extends BaseActivity implements
+		OnClickListener {
 
 	private TextView top_title_tx;
 
@@ -38,19 +40,19 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 			way_13_title, way_14_title, way_15_title;
 
 	private TextView all_select, detail_btn, delete_item, save_as;
-	
+
 	private ProgressDialog dialog;
-	
+
 	private ArrayList<CheckDetailItem> checkList = new ArrayList<CheckDetailItem>();
-	
+
 	private ArrayList<PointRecord> recordList = new ArrayList<PointRecord>();
-	
+
 	private PointRecordAdapter adapter;
-	
+
 	private ListView record_list;
-	
+
 	private int checkState = -1;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,45 +85,107 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 			break;
 		}
 	}
-	
+
 	private ArrayList<CheckDetailItem> queryData() {
 		ArrayList<CheckDetailItem> list = new ArrayList<CheckDetailItem>();
-		Cursor cursor = getContentResolver().query(AsagProvider.CheckDetail.CONTENT_URI, new String[] { AsagProvider.CheckDetail.CANGHAO, AsagProvider.CheckDetail.CHANDI, AsagProvider.CheckDetail.CHECKDATE
-				,AsagProvider.CheckDetail.CHECKTYPE, AsagProvider.CheckDetail.LIANGZHONG, AsagProvider.CheckDetail.RUKUDATE, AsagProvider.CheckDetail.SHUIFEN, AsagProvider.CheckDetail.SHULIANG},
-				AsagProvider.CheckDetail.CHECKTYPE + "=" + checkState, null, null);
+		Cursor cursor = getContentResolver().query(
+				AsagProvider.CheckDetail.CONTENT_URI,
+				new String[] { AsagProvider.CheckDetail.CANGHAO,
+						AsagProvider.CheckDetail.CHANDI,
+						AsagProvider.CheckDetail.CHECKDATE,
+						AsagProvider.CheckDetail.CHECKTYPE,
+						AsagProvider.CheckDetail.LIANGZHONG,
+						AsagProvider.CheckDetail.RUKUDATE,
+						AsagProvider.CheckDetail.SHUIFEN,
+						AsagProvider.CheckDetail.SHULIANG },
+				AsagProvider.CheckDetail.CHECKTYPE + "=" + checkState, null,
+				null);
 		if (cursor != null) {
-			while(cursor.moveToNext()) {
+			while (cursor.moveToNext()) {
 				CheckDetailItem point = new CheckDetailItem();
-				point.id = cursor.getInt(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail._ID));
-				point.canghao = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CANGHAO));
-				point.liangzhong = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.LIANGZHONG));
-				point.shuliang = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHULIANG));
-				point.shuifen = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHUIFEN));
-				point.chandi = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHANDI));
-				point.rukuDate = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.RUKUDATE));
-				point.checkDate = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKDATE));
-				point.checkType = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
-				
-				Cursor cursor1 = getContentResolver().query(AsagProvider.PointRecord.CONTENT_URI, new String[] { AsagProvider.PointRecord.WAYNUMBER, AsagProvider.PointRecord.COTWO, AsagProvider.PointRecord.CHECKDATE
-						,AsagProvider.PointRecord.CHECKTYPE, AsagProvider.PointRecord.MMI, AsagProvider.PointRecord.RHVALUE, AsagProvider.PointRecord.SSI, AsagProvider.PointRecord.TVALUE, AsagProvider.PointRecord.OTWO,
-						AsagProvider.PointRecord.PHVALUE ,AsagProvider.PointRecord.STATUS},
-						AsagProvider.PointRecord.CHECKDATE + "=" + point.checkDate + 
-						" AND " + AsagProvider.PointRecord.CHECKTYPE + "=" + point.checkType, null, null);
+				point.id = cursor.getInt(cursor
+						.getColumnIndexOrThrow(AsagProvider.CheckDetail._ID));
+				point.canghao = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CANGHAO));
+				point.liangzhong = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.LIANGZHONG));
+				point.shuliang = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHULIANG));
+				point.shuifen = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHUIFEN));
+				point.chandi = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHANDI));
+				point.rukuDate = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.RUKUDATE));
+				point.checkDate = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKDATE));
+				point.checkType = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+
+				Cursor cursor1 = getContentResolver().query(
+						AsagProvider.PointRecord.CONTENT_URI,
+						new String[] { AsagProvider.PointRecord.WAYNUMBER,
+								AsagProvider.PointRecord.COTWO,
+								AsagProvider.PointRecord.CHECKDATE,
+								AsagProvider.PointRecord.CHECKTYPE,
+								AsagProvider.PointRecord.MMI,
+								AsagProvider.PointRecord.RHVALUE,
+								AsagProvider.PointRecord.SSI,
+								AsagProvider.PointRecord.TVALUE,
+								AsagProvider.PointRecord.OTWO,
+								AsagProvider.PointRecord.PHVALUE,
+								AsagProvider.PointRecord.STATUS },
+						AsagProvider.PointRecord.CHECKDATE + "="
+								+ point.checkDate + " AND "
+								+ AsagProvider.PointRecord.CHECKTYPE + "="
+								+ point.checkType, null, null);
 				if (cursor1 != null) {
 					while (cursor1.moveToNext()) {
 						PointItemRecord record = new PointItemRecord();
-						record.id = cursor1.getInt(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
-						record.wayNum = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
-						record.co2 = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
-						record.mmi = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
-						record.rhValue = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
-						record.ssi = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
-						record.status = cursor1.getInt(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
-						record.checkDate = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKDATE));
-						record.checkType = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKTYPE));
-						record.tValue = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
-						record.o2Value = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
-						record.ph3Value = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
+						record.id = cursor1
+								.getInt(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
+						record.wayNum = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
+						record.co2 = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
+						record.mmi = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
+						record.rhValue = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
+						record.ssi = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
+						record.status = cursor1
+								.getInt(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
+						record.checkDate = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKDATE));
+						record.checkType = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKTYPE));
+						record.tValue = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
+						record.o2Value = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
+						record.ph3Value = cursor1
+								.getString(cursor1
+										.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
 						point.pointList.add(record);
 					}
 					cursor1.close();
@@ -132,7 +196,7 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 		}
 		return list;
 	}
-	
+
 	private PointRecord getWayState(ArrayList<PointItemRecord> recordList) {
 		PointRecord state = new PointRecord();
 		for (PointItemRecord record : recordList) {
@@ -225,7 +289,7 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 		detail_btn = (TextView) findViewById(R.id.detail_btn);
 		delete_item = (TextView) findViewById(R.id.delete_item);
 		save_as = (TextView) findViewById(R.id.save_as);
-		
+
 		all_select.setOnClickListener(this);
 		detail_btn.setOnClickListener(this);
 		delete_item.setOnClickListener(this);
@@ -237,21 +301,22 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 					int position, long id) {
 				if (adapter != null && adapter.getItem(position).isCheck) {
 					adapter.getItem(position).isCheck = false;
-				    recordList.get(position).isCheck = false;
-				    adapter.notifyDataSetChanged();
-				} else if (adapter != null && !adapter.getItem(position).isCheck) {
+					recordList.get(position).isCheck = false;
+					adapter.notifyDataSetChanged();
+				} else if (adapter != null
+						&& !adapter.getItem(position).isCheck) {
 					recordList.get(position).isCheck = true;
 					adapter.getItem(position).isCheck = true;
 					adapter.notifyDataSetChanged();
 				}
-				
+
 			}
 		});
 	}
 
 	private void showLoading(final boolean isShow) {
 		runOnUiThread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (isShow) {
@@ -265,7 +330,7 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 			}
 		});
 	}
-	
+
 	private void initContent() {
 		String title = getIntent().getStringExtra("record_title");
 		checkState = getIntent().getIntExtra("record_type", -1);
@@ -274,15 +339,18 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 		}
 		showLoading(true);
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				checkList = queryData();
 				sortList(checkList);
+				for (CheckDetailItem detail : checkList) {
+					sortPoint(detail.pointList);
+				}
 				recordList = getRecordStateList(checkList);
 				showLoading(false);
 				handler.post(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						initRecordAdapter(recordList);
@@ -291,21 +359,22 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 			}
 		}).start();
 	}
-	
-	private ArrayList<PointRecord> getRecordStateList(ArrayList<CheckDetailItem> checkList) {
+
+	private ArrayList<PointRecord> getRecordStateList(
+			ArrayList<CheckDetailItem> checkList) {
 		ArrayList<PointRecord> recordList = new ArrayList<PointRecord>();
 		for (CheckDetailItem detailItem : checkList) {
 			recordList.add(getWayState(detailItem.pointList));
 		}
 		return recordList;
 	}
-	
+
 	private void initRecordAdapter(ArrayList<PointRecord> list) {
 		if (adapter == null) {
 			adapter = new PointRecordAdapter(context);
 			adapter.addData(list);
 			adapter.addOnPointCheckListener(new OnPointCheckListener() {
-				
+
 				@Override
 				public void onCheck(int position) {
 					PointRecord record = adapter.getItem(position);
@@ -326,17 +395,17 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 			adapter.notifyDataSetChanged();
 		}
 	}
-	
+
 	private void selectAll() {
 		for (PointRecord record : recordList) {
 			record.isCheck = true;
 		}
 		initRecordAdapter(recordList);
 	}
-	
+
 	private ArrayList<Integer> getSelectList() {
 		ArrayList<Integer> selectList = new ArrayList<Integer>();
-		for (int i=0; i < recordList.size(); i++) {
+		for (int i = 0; i < recordList.size(); i++) {
 			PointRecord record = recordList.get(i);
 			if (record.isCheck) {
 				selectList.add(i);
@@ -344,8 +413,7 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 		}
 		return selectList;
 	}
-	
-	
+
 	private void sortList(ArrayList<CheckDetailItem> list) {
 		Collections.sort(list, new Comparator<CheckDetailItem>() {
 			@Override
@@ -369,18 +437,35 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 		});
 	}
 
+	private void sortPoint(ArrayList<PointItemRecord> list) {
+		Collections.sort(list, new Comparator<PointItemRecord>() {
+			@Override
+			public int compare(PointItemRecord lhs, PointItemRecord rhs) {
+				int lhI = Integer.valueOf(lhs.wayNum);
+				long rhI = Integer.valueOf(rhs.wayNum);
+				if (lhI > rhI) {
+					return 1;
+				} else if (lhI < rhI || lhI == rhI) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.all_select:
 			selectAll();
 			break;
-			
+
 		case R.id.detail_btn:
 			ArrayList<Integer> selectList = getSelectList();
 			if (selectList.size() == 1 && adapter != null) {
 				CheckDetailItem checkDetail = checkList.get(selectList.get(0));
-				Intent intent = new Intent(context, CheckDetailRecordActivity.class);
+				Intent intent = new Intent(context,
+						CheckDetailRecordActivity.class);
 				intent.putExtra("check_detail", checkDetail);
 				startActivity(intent);
 			} else if (selectList.size() > 1) {
@@ -389,25 +474,39 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 				showToast("请选择一项后查询详细");
 			}
 			break;
-			
+
 		case R.id.delete_item:
 			final ArrayList<Integer> selectListD = getSelectList();
 			if (selectListD.size() > 0) {
 				new Thread(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						for (int i : selectListD) {
 							CheckDetailItem checkDetail = checkList.get(i);
-							getContentResolver().delete(AsagProvider.CheckDetail.CONTENT_URI, AsagProvider.CheckDetail._ID + "=" + checkDetail.id, null);
-							getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI, AsagProvider.PointRecord.CHECKDATE + "=" + checkDetail.checkDate + " AND " + 
-									AsagProvider.PointRecord.CHECKTYPE + "=" + checkDetail.checkType, null);
+							getContentResolver().delete(
+									AsagProvider.CheckDetail.CONTENT_URI,
+									AsagProvider.CheckDetail._ID + "="
+											+ checkDetail.id, null);
+							getContentResolver()
+									.delete(AsagProvider.PointRecord.CONTENT_URI,
+											AsagProvider.PointRecord.CHECKDATE
+													+ "="
+													+ checkDetail.checkDate
+													+ " AND "
+													+ AsagProvider.PointRecord.CHECKTYPE
+													+ "="
+													+ checkDetail.checkType,
+											null);
 						}
 						showToast("删除成功");
 						for (int i : selectListD) {
 							checkList.remove(i);
 						}
 						sortList(checkList);
+						for (CheckDetailItem detail : checkList) {
+							sortPoint(detail.pointList);
+						}
 						recordList = getRecordStateList(checkList);
 						showLoading(false);
 						handler.post(new Runnable() {
@@ -421,15 +520,34 @@ public class PointRecordActivity extends BaseActivity implements OnClickListener
 				}).start();
 			}
 			break;
-			
+
 		case R.id.save_as:
-			
+			showLoading(true);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ArrayList<Integer> selectList = getSelectList();
+					for (int check : selectList) {
+						CheckDetailItem checkDetail = checkList.get(check);
+						try {
+							ExcellUtils.writeExcell(ExcellUtils.getPointCheckList(checkDetail), checkDetail.checkDate + "type" + checkDetail.checkType, "checkwith" + checkDetail.checkType);
+							showToast("导出成功");
+							showLoading(false);
+						} catch (Exception e) {
+							e.printStackTrace();
+							showToast("导出失败");
+							showLoading(false);
+						}
+					}
+				}
+			}).start();
 			break;
 
 		default:
 			break;
 		}
-		
+
 	}
-	
+
 }
