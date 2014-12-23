@@ -511,6 +511,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					record.mmi = getMmi(dataEntry.wendu) + "";
 					record.o2Value = dataEntry.o2;
 					record.ph3Value = dataEntry.ph3data;
+					Log.d("zhaoz", "receive checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
 					if (checkDetail != null) {
 						checkDetail.pointList.add(record);
 					}
@@ -666,6 +667,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void saveCheckItemRecord(PointItemRecord record) {
+		Log.d("zhao", "checkdate : " + record.checkDate + " checkType : " + record.checkType);
 		getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
 				AsagProvider.PointRecord.CHECKDATE + "=" + record.checkDate + 
 				" AND " + AsagProvider.PointRecord.CHECKTYPE + "=" + record.checkType, null);
@@ -1008,6 +1010,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
 			setCheckinfo(alarmInfo);
 			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
+			if (checkDetail != null) {
+				Log.d("zhaoz", "receive checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
+			}
 		}
 	}
 

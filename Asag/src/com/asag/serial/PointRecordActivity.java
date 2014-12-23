@@ -90,7 +90,7 @@ public class PointRecordActivity extends BaseActivity implements
 		ArrayList<CheckDetailItem> list = new ArrayList<CheckDetailItem>();
 		Cursor cursor = getContentResolver().query(
 				AsagProvider.CheckDetail.CONTENT_URI,
-				new String[] { AsagProvider.CheckDetail.CANGHAO,
+				new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
 						AsagProvider.CheckDetail.CHANDI,
 						AsagProvider.CheckDetail.CHECKDATE,
 						AsagProvider.CheckDetail.CHECKTYPE,
@@ -132,7 +132,7 @@ public class PointRecordActivity extends BaseActivity implements
 
 				Cursor cursor1 = getContentResolver().query(
 						AsagProvider.PointRecord.CONTENT_URI,
-						new String[] { AsagProvider.PointRecord.WAYNUMBER,
+						new String[] { AsagProvider.PointRecord._ID, AsagProvider.PointRecord.WAYNUMBER,
 								AsagProvider.PointRecord.COTWO,
 								AsagProvider.PointRecord.CHECKDATE,
 								AsagProvider.PointRecord.CHECKTYPE,
