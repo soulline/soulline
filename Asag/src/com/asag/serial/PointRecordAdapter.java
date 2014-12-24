@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.asag.serial.mode.PointRecord;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -61,6 +62,7 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 
 	public PointRecordAdapter(Context context) {
 		super(context, 0);
+		this.context = context;
 		initMap();
 	}
 
@@ -130,6 +132,8 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 		holder.item_date.setTextSize(14.0f * size);
 		holder.item_check.setChecked(record.isCheck);
 		holder.item_date.setText(record.date);
+		Log.d("zhao", "way0state : " + record.way0State);
+		Log.d("zhao", "map draw : " + drawableMap.get(record.way0State));
 		holder.state_0_icon.setBackgroundResource(drawableMap.get(record.way0State));
 		holder.state_1_icon.setBackgroundResource(drawableMap.get(record.way1State));
 		holder.state_2_icon.setBackgroundResource(drawableMap.get(record.way2State));

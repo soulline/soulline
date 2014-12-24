@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -635,6 +636,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 				data.putExtra("paikong_value", paikong);
 				data.putExtra("first_alarm_time", firstAlarmTime);
 				data.putExtra("check_detail", checkDetail);
+				Log.d("zhao", "set_params : checkDate : " + checkDetail.checkDate + " -- checkType : " + checkDetail.checkType);
 				sendMessageS(CMDCode.PREPARE_OK);
 				setResult(RESULT_OK, data);
 				finish();

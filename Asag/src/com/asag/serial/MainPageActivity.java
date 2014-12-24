@@ -629,6 +629,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	};
 	
 	private void saveCheckInNewTask(final CheckDetailItem check) {
+		Log.d("zhao", "saveCheckInNewTask date : " + check.checkDate + "  -- type: " + check.checkType);
 		new Thread(new Runnable() {
 			
 			@Override
@@ -836,6 +837,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 												public void onCallBack(
 														Object object) {
 													if (object instanceof TimeSetEntry) {
+														long today = System.currentTimeMillis();
+														SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+														checkDetail.checkDate = format.format(today);
+														checkDetail.checkType = 2 + "";
 														TimeSetEntry entry = (TimeSetEntry) object;
 														checkMinuteValue = entry.checkTime * 10;
 														paikongMinuteValue = entry.paikongTime * 10;
@@ -870,6 +875,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 											public void onCallBack(
 													Object object) {
 												if (object instanceof TimeSetEntry) {
+													long today = System.currentTimeMillis();
+													SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+													checkDetail.checkDate = format.format(today);
+													checkDetail.checkType = 3 + "";
 													TimeSetEntry entry = (TimeSetEntry) object;
 													checkMinuteValue = entry.checkTime * 10;
 													paikongMinuteValue = entry.paikongTime * 10;
@@ -1010,8 +1019,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
 			setCheckinfo(alarmInfo);
 			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
+			Log.d("zhao", "activityresult checkDetail : " + checkDetail);
 			if (checkDetail != null) {
-				Log.d("zhaoz", "receive checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
+				Log.d("zhaoz", "activityresult checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
 			}
 		}
 	}
