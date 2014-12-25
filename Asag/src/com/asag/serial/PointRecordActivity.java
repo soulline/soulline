@@ -130,6 +130,7 @@ public class PointRecordActivity extends BaseActivity implements
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+				list.add(point);
 				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
 						"  -- checkType : " + point.checkType);
 				
@@ -139,7 +140,7 @@ public class PointRecordActivity extends BaseActivity implements
 		return list;
 	}
 	
-	private void fillPointRecord(CheckDetailItem point) {
+	private synchronized void fillPointRecord(CheckDetailItem point) {
 		Cursor cursor1 = getContentResolver().query(
 				AsagProvider.PointRecord.CONTENT_URI,
 				new String[] { AsagProvider.PointRecord._ID, AsagProvider.PointRecord.WAYNUMBER,
@@ -153,10 +154,14 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.PointRecord.OTWO,
 						AsagProvider.PointRecord.PHVALUE,
 						AsagProvider.PointRecord.STATUS },
-				AsagProvider.PointRecord.CHECKDATE + "="
-						+ point.checkDate + " AND "
+				AsagProvider.PointRecord.CHECKDATE + "='"
+					    + point.checkDate.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
-						+ point.checkType, null, null);
+						+ point.checkType.trim(), null, null);
+		Log.d("zhao", " fillPointRecord  checkDate : " + point + " checkTYPE : " + point.checkType);
+		if (cursor1 != null) {
+			Log.d("zhao", "query fillPointRecord cursor1 count : " + cursor1.getCount());
+		}
 		if (cursor1 != null) {
 			while (cursor1.moveToNext()) {
 				PointItemRecord record = new PointItemRecord();
@@ -512,12 +517,12 @@ public class PointRecordActivity extends BaseActivity implements
 							getContentResolver()
 									.delete(AsagProvider.PointRecord.CONTENT_URI,
 											AsagProvider.PointRecord.CHECKDATE
-													+ "="
+													+ "='"
 													+ checkDetail.checkDate
-													+ " AND "
+													+ "' AND "
 													+ AsagProvider.PointRecord.CHECKTYPE
-													+ "="
-													+ checkDetail.checkType,
+													+ "='"
+													+ checkDetail.checkType + "'",
 											null);
 						}
 						showToast("删除成功");

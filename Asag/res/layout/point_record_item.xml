@@ -9,8 +9,7 @@
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="35dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp">
+        android:gravity="center_vertical" >
         <LinearLayout android:layout_width="200dp"
             android:layout_height="35dp"
             android:gravity="center_vertical"
@@ -31,97 +30,97 @@
         <ImageView android:id="@+id/state_0_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_1_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_2_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_3_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_4_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_5_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_6_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_7_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_8_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_9_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_10_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_11_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_12_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_13_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_14_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
         
         <ImageView android:id="@+id/state_15_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/red_state"/>
+            android:background="@drawable/uncheck_state"/>
     </LinearLayout>
 
 </LinearLayout>

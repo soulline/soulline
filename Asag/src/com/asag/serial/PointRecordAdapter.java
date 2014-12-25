@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.asag.serial.mode.PointRecord;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,22 +135,54 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 		holder.item_date.setText(record.date);
 		Log.d("zhao", "way0state : " + record.way0State);
 		Log.d("zhao", "map draw : " + drawableMap.get(record.way0State));
-		holder.state_0_icon.setBackgroundResource(drawableMap.get(record.way0State));
-		holder.state_1_icon.setBackgroundResource(drawableMap.get(record.way1State));
-		holder.state_2_icon.setBackgroundResource(drawableMap.get(record.way2State));
-		holder.state_3_icon.setBackgroundResource(drawableMap.get(record.way3State));
-		holder.state_4_icon.setBackgroundResource(drawableMap.get(record.way4State));
-		holder.state_5_icon.setBackgroundResource(drawableMap.get(record.way5State));
-		holder.state_6_icon.setBackgroundResource(drawableMap.get(record.way6State));
-		holder.state_7_icon.setBackgroundResource(drawableMap.get(record.way7State));
-		holder.state_8_icon.setBackgroundResource(drawableMap.get(record.way8State));
-		holder.state_9_icon.setBackgroundResource(drawableMap.get(record.way9State));
-		holder.state_10_icon.setBackgroundResource(drawableMap.get(record.way10State));
-		holder.state_11_icon.setBackgroundResource(drawableMap.get(record.way11State));
-		holder.state_12_icon.setBackgroundResource(drawableMap.get(record.way12State));
-		holder.state_13_icon.setBackgroundResource(drawableMap.get(record.way13State));
-		holder.state_14_icon.setBackgroundResource(drawableMap.get(record.way14State));
-		holder.state_15_icon.setBackgroundResource(drawableMap.get(record.way15State));
+		if (!TextUtils.isEmpty(record.way0State)) {
+			holder.state_0_icon.setBackgroundResource(drawableMap.get(record.way0State));
+		}
+		if (!TextUtils.isEmpty(record.way1State)) {
+			holder.state_1_icon.setBackgroundResource(drawableMap.get(record.way1State));
+		}
+		if (!TextUtils.isEmpty(record.way2State)) {
+			holder.state_2_icon.setBackgroundResource(drawableMap.get(record.way2State));
+		}
+		if (!TextUtils.isEmpty(record.way3State)) {
+			holder.state_3_icon.setBackgroundResource(drawableMap.get(record.way3State));
+		}
+		if (!TextUtils.isEmpty(record.way4State)) {
+			holder.state_4_icon.setBackgroundResource(drawableMap.get(record.way4State));
+		}
+		if (!TextUtils.isEmpty(record.way5State)) {
+			holder.state_5_icon.setBackgroundResource(drawableMap.get(record.way5State));
+		}
+		if (!TextUtils.isEmpty(record.way6State)) {
+			holder.state_6_icon.setBackgroundResource(drawableMap.get(record.way6State));
+		}
+		if (!TextUtils.isEmpty(record.way7State)) {
+			holder.state_7_icon.setBackgroundResource(drawableMap.get(record.way7State));
+		}
+		if (!TextUtils.isEmpty(record.way8State)) {
+			holder.state_8_icon.setBackgroundResource(drawableMap.get(record.way8State));
+		}
+		if (!TextUtils.isEmpty(record.way9State)) {
+			holder.state_9_icon.setBackgroundResource(drawableMap.get(record.way9State));
+		}
+		if (!TextUtils.isEmpty(record.way10State)) {
+			holder.state_10_icon.setBackgroundResource(drawableMap.get(record.way10State));
+		}
+		if (!TextUtils.isEmpty(record.way11State)) {
+			holder.state_11_icon.setBackgroundResource(drawableMap.get(record.way11State));
+		}
+		if (!TextUtils.isEmpty(record.way12State)) {
+			holder.state_12_icon.setBackgroundResource(drawableMap.get(record.way12State));
+		}
+		if (!TextUtils.isEmpty(record.way13State)) {
+			holder.state_13_icon.setBackgroundResource(drawableMap.get(record.way13State));
+		}
+		if (!TextUtils.isEmpty(record.way14State)) {
+			holder.state_14_icon.setBackgroundResource(drawableMap.get(record.way14State));
+		}
+		if (!TextUtils.isEmpty(record.way15State)) {
+			holder.state_15_icon.setBackgroundResource(drawableMap.get(record.way15State));
+		}
 		if (record.isCheck) {
 			convertView.findViewById(R.id.record_item_layout).setBackgroundColor(context.getResources().getColor(R.color.gray));
 		} else {

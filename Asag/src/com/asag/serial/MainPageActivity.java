@@ -662,6 +662,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					values);
 			DataUtils.putPreferences(DataUtils.KEY_CHECK_TODAY, today);
 		}
+		getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
+				AsagProvider.PointRecord.CHECKDATE + "='" + check.checkDate + 
+				"' AND " + AsagProvider.PointRecord.CHECKTYPE + "='" + check.checkType + "'", null);
 		for (PointItemRecord record : check.pointList) {
 			saveCheckItemRecord(record);
 		}
@@ -669,9 +672,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	private void saveCheckItemRecord(PointItemRecord record) {
 		Log.d("zhao", "checkdate : " + record.checkDate + " checkType : " + record.checkType);
-		getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
-				AsagProvider.PointRecord.CHECKDATE + "=" + record.checkDate + 
-				" AND " + AsagProvider.PointRecord.CHECKTYPE + "=" + record.checkType, null);
 		ContentValues values = new ContentValues();
 		values.put(AsagProvider.PointRecord.COTWO, record.co2);
 		values.put(AsagProvider.PointRecord.MMI, record.mmi);

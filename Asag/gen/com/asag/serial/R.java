@@ -372,9 +372,10 @@ public final class R {
         public static final int title_diver=0x7f020051;
         public static final int title_menu_selector=0x7f020052;
         public static final int title_tap_selecotr=0x7f020053;
-        public static final int view=0x7f020054;
-        public static final int welcome=0x7f020055;
-        public static final int yellow_state=0x7f020056;
+        public static final int uncheck_state=0x7f020054;
+        public static final int view=0x7f020055;
+        public static final int welcome=0x7f020056;
+        public static final int yellow_state=0x7f020057;
     }
     public static final class id {
         public static final int action_settings=0x7f0b019d;
