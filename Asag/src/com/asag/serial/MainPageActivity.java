@@ -956,13 +956,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							Intent record = new Intent(context, PointRecordActivity.class);
 							if (resourceId == R.id.liangan_jiance_menu) {
 								record.putExtra("record_title", "粮安监测结果");
-								record.putExtra("record_type", 0);
+								record.putExtra("record_type", 1);
 							} else if (resourceId == R.id.point_check_menu) {
 								record.putExtra("record_title", "点检测结果");
-								record.putExtra("record_type", 1);
+								record.putExtra("record_type", 2);
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								record.putExtra("record_title", "仓安检测结果");
-								record.putExtra("record_type", 2);
+								record.putExtra("record_type", 3);
 							}
 							startActivity(record);
 						}

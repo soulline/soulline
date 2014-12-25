@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -51,7 +52,7 @@ public class PointRecordActivity extends BaseActivity implements
 
 	private ListView record_list;
 
-	private int checkState = -1;
+	private int checkState = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +99,7 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
 						AsagProvider.CheckDetail.SHULIANG },
-				AsagProvider.CheckDetail.CHECKTYPE + "=" + checkState, null,
+				AsagProvider.CheckDetail.CHECKTYPE + "=" + checkState , null,
 				null);
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
@@ -129,72 +130,78 @@ public class PointRecordActivity extends BaseActivity implements
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
-
-				Cursor cursor1 = getContentResolver().query(
-						AsagProvider.PointRecord.CONTENT_URI,
-						new String[] { AsagProvider.PointRecord._ID, AsagProvider.PointRecord.WAYNUMBER,
-								AsagProvider.PointRecord.COTWO,
-								AsagProvider.PointRecord.CHECKDATE,
-								AsagProvider.PointRecord.CHECKTYPE,
-								AsagProvider.PointRecord.MMI,
-								AsagProvider.PointRecord.RHVALUE,
-								AsagProvider.PointRecord.SSI,
-								AsagProvider.PointRecord.TVALUE,
-								AsagProvider.PointRecord.OTWO,
-								AsagProvider.PointRecord.PHVALUE,
-								AsagProvider.PointRecord.STATUS },
-						AsagProvider.PointRecord.CHECKDATE + "="
-								+ point.checkDate + " AND "
-								+ AsagProvider.PointRecord.CHECKTYPE + "="
-								+ point.checkType, null, null);
-				if (cursor1 != null) {
-					while (cursor1.moveToNext()) {
-						PointItemRecord record = new PointItemRecord();
-						record.id = cursor1
-								.getInt(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
-						record.wayNum = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
-						record.co2 = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
-						record.mmi = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
-						record.rhValue = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
-						record.ssi = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
-						record.status = cursor1
-								.getInt(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
-						record.checkDate = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKDATE));
-						record.checkType = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKTYPE));
-						record.tValue = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
-						record.o2Value = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
-						record.ph3Value = cursor1
-								.getString(cursor1
-										.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
-						point.pointList.add(record);
-					}
-					cursor1.close();
-				}
-				list.add(point);
+				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
+						"  -- checkType : " + point.checkType);
+				
 			}
 			cursor.close();
 		}
 		return list;
+	}
+	
+	private void fillPointRecord(CheckDetailItem point) {
+		Cursor cursor1 = getContentResolver().query(
+				AsagProvider.PointRecord.CONTENT_URI,
+				new String[] { AsagProvider.PointRecord._ID, AsagProvider.PointRecord.WAYNUMBER,
+						AsagProvider.PointRecord.COTWO,
+						AsagProvider.PointRecord.CHECKDATE,
+						AsagProvider.PointRecord.CHECKTYPE,
+						AsagProvider.PointRecord.MMI,
+						AsagProvider.PointRecord.RHVALUE,
+						AsagProvider.PointRecord.SSI,
+						AsagProvider.PointRecord.TVALUE,
+						AsagProvider.PointRecord.OTWO,
+						AsagProvider.PointRecord.PHVALUE,
+						AsagProvider.PointRecord.STATUS },
+				AsagProvider.PointRecord.CHECKDATE + "="
+						+ point.checkDate + " AND "
+						+ AsagProvider.PointRecord.CHECKTYPE + "="
+						+ point.checkType, null, null);
+		if (cursor1 != null) {
+			while (cursor1.moveToNext()) {
+				PointItemRecord record = new PointItemRecord();
+				record.id = cursor1
+						.getInt(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
+				record.wayNum = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
+				record.co2 = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
+				record.mmi = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
+				record.rhValue = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
+				record.ssi = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
+				record.status = cursor1
+						.getInt(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
+				record.checkDate = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKDATE));
+				record.checkType = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKTYPE));
+				record.tValue = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
+				record.o2Value = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
+				record.ph3Value = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
+				point.pointList.add(record);
+				Log.d("zhao", "query PointRecord cursor1 id : " + point.id);
+				point.pointList.add(record);
+			}
+			cursor1.close();
+		}
 	}
 
 	private PointRecord getWayState(ArrayList<PointItemRecord> recordList) {
@@ -341,7 +348,7 @@ public class PointRecordActivity extends BaseActivity implements
 
 	private void initContent() {
 		String title = getIntent().getStringExtra("record_title");
-		checkState = getIntent().getIntExtra("record_type", -1);
+		checkState = getIntent().getIntExtra("record_type", 1);
 		if (!TextUtils.isEmpty(title)) {
 			top_title_tx.setText(title);
 		}
@@ -350,12 +357,17 @@ public class PointRecordActivity extends BaseActivity implements
 
 			@Override
 			public void run() {
+				Log.d("zhao", "checkState : " + checkState);
 				checkList = queryData();
+				for (CheckDetailItem detailItem : checkList) {
+					fillPointRecord(detailItem);
+				}
 				sortList(checkList);
 				for (CheckDetailItem detail : checkList) {
 					sortPoint(detail.pointList);
 				}
 				recordList = getRecordStateList(checkList);
+				Log.d("zhao", "PointRecordActivity recordList size : " + recordList.size());
 				showLoading(false, 1);
 				handler.post(new Runnable() {
 

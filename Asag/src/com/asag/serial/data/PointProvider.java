@@ -33,34 +33,21 @@ public class PointProvider extends ContentProvider {
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
-		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();  
-        qb.setTables(AsagProvider.PointColumns.TABLE_NAME);  
-  
+		SQLiteDatabase db = mOpenHelper.getReadableDatabase();  
+		Cursor c;
         switch (sUriMatcher.match(uri)) {  
         case POINT:  
-            qb.setProjectionMap(sPersonsProjectionMap);  
+        	c = db.query(AsagProvider.PointColumns.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
             break;  
   
         case POINT_ID:  
-            qb.setProjectionMap(sPersonsProjectionMap);  
-            qb.appendWhere(AsagProvider.PointColumns._ID + "=" + uri.getPathSegments().get(1));  
+        	String id = uri.getPathSegments().get(1);
+            c = db.query(AsagProvider.PointColumns.TABLE_NAME, projection, AsagProvider.PointColumns._ID + "="+id+(!TextUtils.isEmpty(selection)?"AND("+selection+')':""),selectionArgs, null, null, sortOrder);
             break;  
   
         default:  
             throw new IllegalArgumentException("Unknown URI " + uri);  
         }  
-  
-        // If no sort order is specified use the default  
-        String orderBy;  
-        if (TextUtils.isEmpty(sortOrder)) {  
-            orderBy = AsagProvider.PointColumns.DEFAULT_SORT_ORDER;  
-        } else {  
-            orderBy = sortOrder;  
-        }  
-  
-        // Get the database and run the query  
-        SQLiteDatabase db = mOpenHelper.getReadableDatabase();  
-        Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, orderBy);  
   
         // Tell the cursor what uri to watch, so it knows when its source data changes  
         c.setNotificationUri(getContext().getContentResolver(), uri);  
