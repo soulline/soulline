@@ -43,6 +43,7 @@
                 android:id="@+id/state_0_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -54,6 +55,7 @@
                 android:id="@+id/state_1_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -65,6 +67,7 @@
                 android:id="@+id/state_2_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -76,6 +79,7 @@
                 android:id="@+id/state_3_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -87,6 +91,7 @@
                 android:id="@+id/state_4_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -98,6 +103,7 @@
                 android:id="@+id/state_5_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -109,6 +115,7 @@
                 android:id="@+id/state_6_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -120,6 +127,7 @@
                 android:id="@+id/state_7_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -131,6 +139,7 @@
                 android:id="@+id/state_8_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -142,6 +151,7 @@
                 android:id="@+id/state_9_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -153,6 +163,7 @@
                 android:id="@+id/state_10_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -164,6 +175,7 @@
                 android:id="@+id/state_11_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -175,6 +187,7 @@
                 android:id="@+id/state_12_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -186,6 +199,7 @@
                 android:id="@+id/state_13_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -197,6 +211,7 @@
                 android:id="@+id/state_14_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
 
@@ -208,6 +223,7 @@
                 android:id="@+id/state_15_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:background="@drawable/uncheck_state" />
         </RelativeLayout>
     </LinearLayout>
