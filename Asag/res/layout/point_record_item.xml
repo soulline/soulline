@@ -1,126 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/record_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/record_item_layout"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
-    
-    <LinearLayout android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical" >
-        <LinearLayout android:layout_width="200dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="200dp"
             android:layout_height="35dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
-        <CheckBox android:id="@+id/item_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/point_check_selector"
-            android:background="@null"/>
-        <TextView android:id="@+id/item_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            android:text="2014-12-14"/>
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/item_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@drawable/point_check_selector" />
+
+            <TextView
+                android:id="@+id/item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="2014-12-14"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
         </LinearLayout>
-        <ImageView android:id="@+id/state_0_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_1_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_2_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_3_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_4_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_5_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_6_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_7_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_8_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_9_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_10_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_11_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_12_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_13_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_14_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
-        
-        <ImageView android:id="@+id/state_15_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/uncheck_state"/>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_0_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_1_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_2_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_3_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_4_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_5_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_6_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_7_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_8_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_9_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_10_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_11_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_12_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_13_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_14_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="52dp"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/state_15_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uncheck_state" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>
