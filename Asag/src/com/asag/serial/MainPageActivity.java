@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -14,6 +15,7 @@ import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
 import com.asag.serial.data.AsagProvider;
 import com.asag.serial.fragment.BaseFragmentListener;
+import com.asag.serial.fragment.DatePickFragment;
 import com.asag.serial.fragment.InputSureFragment;
 import com.asag.serial.fragment.PointCheckFragment;
 import com.asag.serial.fragment.PointSetFragment;
@@ -1001,6 +1004,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			PointSetFragment pointSetF = new PointSetFragment();
 			pointSetF.addBaseFragmentListener(listener);
 			return pointSetF;
+		} else if (tag.equals("time_set")) {
+			DatePickFragment datePickF = new DatePickFragment(context, b);
+			datePickF.setIsTime(true);
+			datePickF.addFragmentListener(listener);
+			return datePickF;
 		}
 		return null;
 	}
@@ -1052,6 +1060,23 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						case R.id.point_set_menu:
 							Intent intent = new Intent(context, PointLocationActivity.class);
 							startActivity(intent);
+							break;
+							
+						case R.id.date_set_menu:
+							Bundle b = new Bundle();
+							b.putSerializable("choose_time", System.currentTimeMillis());
+							displayFragment(true, "time_set", b, new BaseFragmentListener() {
+								
+								@Override
+								public void onCallBack(Object object) {
+									if (object instanceof Date) {
+										Date date = (Date) object;
+										if (date != null) {
+											SystemClock.setCurrentTimeMillis(date.getTime());
+										}
+									}
+								}
+							});
 							break;
 
 						default:
