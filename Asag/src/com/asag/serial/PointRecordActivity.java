@@ -204,7 +204,6 @@ public class PointRecordActivity extends BaseActivity implements
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
 				point.pointList.add(record);
 				Log.d("zhao", "query PointRecord cursor1 id : " + point.id);
-				point.pointList.add(record);
 			}
 			cursor1.close();
 		}
@@ -492,6 +491,7 @@ public class PointRecordActivity extends BaseActivity implements
 				CheckDetailItem checkDetail = checkList.get(selectList.get(0));
 				Intent intent = new Intent(context,
 						CheckDetailRecordActivity.class);
+				Log.d("zhao", "goto detail checkDetail size : " + checkDetail.pointList.size() + " " + checkDetail.checkDate);
 				intent.putExtra("check_detail", checkDetail);
 				startActivity(intent);
 			} else if (selectList.size() > 1) {

@@ -605,10 +605,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				}
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
+				Log.d("zhao", "alarm_receiver_stating====");
 				checkState = 0;
 				app.lastWay = "15";
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
+				if (alarmInfo != null) {
+					Log.d("zhao", "alarm stating check time : " + alarmInfo.checkN + "  == paikong time : " + alarmInfo.paikongN);
+				}
 				handler.postDelayed(new Runnable() {
 
 					@Override
@@ -913,6 +917,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 										&& alarmInfo.firstTimeN > 0L
 										&& alarmInfo.minuteN > 0) {
 									app.alarmInfo = alarmInfo;
+									Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
 									setAlarmCheck(alarmInfo);
 								}
 							} else if (resourceId == R.id.point_check_menu) {
@@ -960,14 +965,18 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							if (resourceId == R.id.liangan_jiance_menu) {
 								record.putExtra("record_title", "粮安监测结果");
 								record.putExtra("record_type", 1);
+								startActivity(record);
 							} else if (resourceId == R.id.point_check_menu) {
 								record.putExtra("record_title", "点检测结果");
 								record.putExtra("record_type", 2);
+								startActivity(record);
 							} else if (resourceId == R.id.cangan_jiance_menu) {
-								record.putExtra("record_title", "仓安检测结果");
-								record.putExtra("record_type", 3);
+								Intent canganRec = new Intent(context, CanganRecordActivity.class);
+								canganRec.putExtra("record_title", "仓安检测结果");
+								canganRec.putExtra("record_type", 3);
+								startActivity(canganRec);
 							}
-							startActivity(record);
+							
 						}
 					}
 				});
@@ -1024,7 +1033,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.checkN = data.getIntExtra("check_value", 0);
 			alarmInfo.paikongN = data.getIntExtra("paikong_value", 0);
 			alarmInfo.firstTimeN = data.getLongExtra("first_alarm_time", 0L);
-			alarmInfo.minuteN = data.getIntExtra("   interval_time", 0);
+			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
 			setCheckinfo(alarmInfo);
 			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
 			Log.d("zhao", "activityresult checkDetail : " + checkDetail);

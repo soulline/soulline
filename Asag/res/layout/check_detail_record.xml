@@ -169,49 +169,44 @@
             android:orientation="horizontal"
             android:paddingLeft="60dp">
             <TextView android:id="@+id/bianhao_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:text="编号"/>
             
             <TextView android:id="@+id/co2_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginLeft="200dp"
                 android:textSize="14dp"
                 android:text="CO₂/ppm"/>
             
             <TextView android:id="@+id/rh_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginLeft="200dp"
                 android:textSize="14dp"
                 android:text="RH/%"/>
             
             <TextView android:id="@+id/t_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginLeft="200dp"
                 android:textSize="14dp"
                 android:text="T/℃"/>
             
             <TextView android:id="@+id/ssi_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginLeft="200dp"
                 android:textSize="14dp"
                 android:text="SSI"/>
             
             <TextView android:id="@+id/mmi_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_marginLeft="200dp"
                 android:textSize="14dp"
                 android:text="MMI"/>
         </LinearLayout>

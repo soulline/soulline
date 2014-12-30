@@ -295,7 +295,6 @@ public class CanganRecordActivity extends BaseActivity implements
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
 				point.pointList.add(record);
 				Log.d("zhao", "query PointRecord cursor1 id : " + point.id);
-				point.pointList.add(record);
 			}
 			cursor1.close();
 		}

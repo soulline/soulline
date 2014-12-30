@@ -76,10 +76,10 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 	}
 
 	private void initMap() {
-		drawableMap.put("1", R.drawable.red_state);
-		drawableMap.put("2", R.drawable.orange_state);
-		drawableMap.put("3", R.drawable.yellow_state);
-		drawableMap.put("4", R.drawable.green_state);
+		drawableMap.put("1", R.drawable.green_state);
+		drawableMap.put("2", R.drawable.yellow_state);
+		drawableMap.put("3", R.drawable.orange_state);
+		drawableMap.put("4", R.drawable.red_state);
 	}
 
 	@Override

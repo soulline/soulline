@@ -21,7 +21,7 @@ public class JcAlarm {
 		PendingIntent sender = PendingIntent.getBroadcast(SerialApp.getInstance(), 0, intent, 0);
 		long interval = alarm.minuteN * 60 * 1000;
 		manager.set(AlarmManager.RTC, alarm.firstTimeN, sender);
-//		manager.setRepeating(AlarmManager.RTC_WAKEUP, alarm.firstTimeN, interval, sender);
+//		manager.setRepeating(AlarmManager.RTC, alarm.firstTimeN, interval, sender);
 	}
 	
 	public static void cancelSendAlarm() {

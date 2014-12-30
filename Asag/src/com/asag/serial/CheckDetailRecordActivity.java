@@ -3,6 +3,7 @@ package com.asag.serial;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class CheckDetailRecordActivity extends BaseActivity {
 	private void initContent() {
 		checkDetail = (CheckDetailItem) getIntent().getSerializableExtra("check_detail");
 		if (checkDetail != null) {
+			Log.d("zhao", "checkDetail size : " + checkDetail.pointList.size());
 			if (checkDetail.checkType.equals("0")) {
 				top_title_tx.setText("粮安监测详细记录");
 			} else if (checkDetail.checkType.equals("1")) {

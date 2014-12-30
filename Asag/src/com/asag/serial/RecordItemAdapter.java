@@ -74,7 +74,7 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 					.findViewById(R.id.ssi_value);
 			holder.mmi_value = (TextView) convertView
 					.findViewById(R.id.mmi_value);
-			convertView.setTag(convertView);
+			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
