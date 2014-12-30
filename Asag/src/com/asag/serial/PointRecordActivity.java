@@ -100,8 +100,9 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
 						AsagProvider.CheckDetail.SHULIANG },
-				AsagProvider.CheckDetail.CHECKTYPE + "=" + checkState , null,
+				AsagProvider.CheckDetail.CHECKTYPE + "='" + checkState + "'", null,
 				null);
+		Log.d("zhao", "cursor count : " + cursor.getCount());
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
 				CheckDetailItem point = new CheckDetailItem();
@@ -203,7 +204,7 @@ public class PointRecordActivity extends BaseActivity implements
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
 				point.pointList.add(record);
-				Log.d("zhao", "query PointRecord cursor1 id : " + point.id);
+				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
 			}
 			cursor1.close();
 		}
@@ -584,6 +585,7 @@ public class PointRecordActivity extends BaseActivity implements
 							showLoading(false, 3);
 						} catch (Exception e) {
 							e.printStackTrace();
+							Log.d("zhao", "导出失败==== " + e.getMessage());
 							showToast("导出失败");
 							showLoading(false, 3);
 						}

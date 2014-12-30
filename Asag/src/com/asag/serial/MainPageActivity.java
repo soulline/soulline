@@ -662,7 +662,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		String today = format.format(System.currentTimeMillis());
 		if (cacheDate.equals(today)) {
 			getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
-					values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate,
+					values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate + " AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
 					null);
 		} else {
 			getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,

@@ -66,6 +66,10 @@ public class CanganRecordActivity extends BaseActivity implements
 		detail_btn = (TextView) findViewById(R.id.detail_btn);
 		delete_item = (TextView) findViewById(R.id.delete_item);
 		save_as = (TextView) findViewById(R.id.save_as);
+		all_select.setOnClickListener(this);
+		detail_btn.setOnClickListener(this);
+		delete_item.setOnClickListener(this);
+		save_as.setOnClickListener(this);
 
 		record_list = (ListView) findViewById(R.id.record_list);
 		record_list.setOnItemClickListener(new OnItemClickListener() {
@@ -294,7 +298,7 @@ public class CanganRecordActivity extends BaseActivity implements
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
 				point.pointList.add(record);
-				Log.d("zhao", "query PointRecord cursor1 id : " + point.id);
+				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
 			}
 			cursor1.close();
 		}
@@ -427,13 +431,17 @@ public class CanganRecordActivity extends BaseActivity implements
 			break;
 
 		case R.id.save_as:
+			final ArrayList<Integer> selectListS = getSelectList();
+			if (selectListS.size() == 0) {
+				showToast("请选择指定导出的检测记录");
+				return;
+			}
 			showLoading(true, 3);
 			new Thread(new Runnable() {
 				
 				@Override
 				public void run() {
-					ArrayList<Integer> selectList = getSelectList();
-					for (int check : selectList) {
+					for (int check : selectListS) {
 						CheckDetailItem checkDetail = checkList.get(check);
 						try {
 							ExcellUtils.writeExcell(ExcellUtils.getCanganCheckList(checkDetail), checkDetail.checkDate + "cangan", "cangan");

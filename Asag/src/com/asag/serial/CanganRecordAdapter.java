@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.asag.serial.mode.PointItemRecord;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -113,6 +114,8 @@ public class CanganRecordAdapter extends ArrayAdapter<PointItemRecord> {
 		holder.ph3_value.setText(record.ph3Value);
 		holder.o2_value.setText(record.o2Value);
 		holder.co2_value.setText(record.co2);
+		Log.d("zhao", "record status : " + record.status);
+		holder.safe_state.setBackgroundResource(drawableMap.get(record.status + ""));
 		if (record.isCheck) {
 			convertView.findViewById(R.id.record_item_layout)
 					.setBackgroundColor(

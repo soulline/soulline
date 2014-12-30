@@ -28,29 +28,30 @@
             android:textColor="@color/black"
             android:text="2014-12-14"/>
         </LinearLayout>
+        <RelativeLayout android:layout_width="120dp"
+            android:layout_height="35dp">
         <ImageView android:id="@+id/safe_state_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/red_state"/>
+            android:layout_centerVertical="true"
+            android:background="@drawable/uncheck_state"/>
+        </RelativeLayout>
         
         <TextView android:id="@+id/ph3_value"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
             android:textColor="@color/black"
             android:textSize="14dp"/>
         
         <TextView android:id="@+id/o2_value"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
             android:textColor="@color/black"
             android:textSize="14dp"/>
         
         <TextView android:id="@+id/co2_value"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
             android:textColor="@color/black"
             android:textSize="14dp"/>
         

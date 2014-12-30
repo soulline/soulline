@@ -45,7 +45,7 @@
 
             <TextView
                 android:id="@+id/safe_state_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="安全状况"
                 android:textColor="@color/black"
@@ -53,27 +53,24 @@
 
             <TextView
                 android:id="@+id/ph_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
                 android:text="PH₃/ppm"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/yangqi_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
                 android:text="O₂/%"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/co2_title"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
                 android:text="CO₂/ppm"
                 android:textColor="@color/black"
                 android:textSize="14dp" />

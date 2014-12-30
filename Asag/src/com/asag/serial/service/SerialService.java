@@ -1,5 +1,6 @@
 package com.asag.serial.service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,9 +43,9 @@ public class SerialService extends Service {
 	private SerialApp app = SerialApp.getInstance();
 
 	private int count = 0;
-	
+
 	private HashMap<String, String> tMap = new HashMap<String, String>();
-	
+
 	private HashMap<String, String> rMap = new HashMap<String, String>();
 
 	@Override
@@ -57,7 +58,7 @@ public class SerialService extends Service {
 	public IBinder onBind(Intent intent) {
 		return null;
 	}
-	
+
 	private void initMap() {
 		tMap.put("0", "t_0_input");
 		tMap.put("1", "t_1_input");
@@ -75,7 +76,7 @@ public class SerialService extends Service {
 		tMap.put("13", "t_13_input");
 		tMap.put("14", "t_14_input");
 		tMap.put("15", "t_15_input");
-		
+
 		rMap.put("0", "r_0_input");
 		rMap.put("1", "r_1_input");
 		rMap.put("2", "r_2_input");
@@ -144,23 +145,31 @@ public class SerialService extends Service {
 				dataEntry.shidu = subDataHex(array[4]).trim();
 				String co2P = DataUtils.getPreferences("co2_input", "0");
 				if (isNumber(co2P) && isNumber(dataEntry.co2)) {
-					long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
+					long co2N = Long.valueOf(dataEntry.co2)
+							+ Long.valueOf(co2P);
 					dataEntry.co2 = co2N + "";
 				}
 				String ph3P = DataUtils.getPreferences("ph3_input", "0");
 				if (isNumber(ph3P) && isNumber(dataEntry.ph3data)) {
-					Log.d("zhao", "原始PH3 : " + dataEntry.ph3data + "   校正参数ph3：" + ph3P);
-					long ph3N = Long.valueOf(dataEntry.ph3data) + Long.valueOf(ph3P);
+					Log.d("zhao", "原始PH3 : " + dataEntry.ph3data
+							+ "   校正参数ph3：" + ph3P);
+					long ph3N = Long.valueOf(dataEntry.ph3data)
+							+ Long.valueOf(ph3P);
 					dataEntry.ph3data = ph3N + "";
 				}
 				String o2P = DataUtils.getPreferences("o2_input", "0");
 				float o2N = Float.valueOf(dataEntry.o2) + Float.valueOf(o2P);
 				dataEntry.o2 = o2N + "";
 				String wenduP = DataUtils.getPreferences("t_0_input", "0");
-				float wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
-				dataEntry.wendu = wenduN + "";
+				float wenduN = Float.valueOf(dataEntry.wendu)
+						+ Float.valueOf(wenduP);
+				BigDecimal b = new BigDecimal(wenduN);
+				float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
+						.floatValue();
+				dataEntry.wendu = fwendu + "";
 				String shiduP = DataUtils.getPreferences("r_0_input", "0");
-				float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
+				float shiduN = Float.valueOf(dataEntry.shidu)
+						+ Float.valueOf(shiduP);
 				dataEntry.shidu = shiduN + "";
 				if (!dataEntry.number.equals(app.lastWay)) {
 					checkMunite = app.oldCheckTime;
@@ -177,7 +186,7 @@ public class SerialService extends Service {
 					startTimer();
 					Log.d("zhao", " 0 continue ---- ");
 				} else {
-					app.isCheckIng = false ;
+					app.isCheckIng = false;
 					stopTimer();
 					app.oldCheckTime = 0;
 					app.oldPaikongTime = 0;
@@ -217,7 +226,7 @@ public class SerialService extends Service {
 		intent.putExtra("o2_data", o2Str);
 		lbm.sendBroadcast(intent);
 	}
-	
+
 	private boolean isNumber(String str) {
 		boolean result = str.matches("[0-9]+");
 		return result;
@@ -359,10 +368,15 @@ public class SerialService extends Service {
 			Long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
 			dataEntry.co2 = co2N + "";
 		}
-		String wenduP = DataUtils.getPreferences(tMap.get(dataEntry.number), "0");
+		String wenduP = DataUtils.getPreferences(tMap.get(dataEntry.number),
+				"0");
 		float wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
-		dataEntry.wendu = wenduN + "";
-		String shiduP = DataUtils.getPreferences(rMap.get(dataEntry.number), "0");
+		BigDecimal b = new BigDecimal(wenduN);
+		float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
+				.floatValue();
+		dataEntry.wendu = fwendu + "";
+		String shiduP = DataUtils.getPreferences(rMap.get(dataEntry.number),
+				"0");
 		float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
 		dataEntry.shidu = shiduN + "";
 		Log.d("zhao", "parsePassway : " + app.lastWay);

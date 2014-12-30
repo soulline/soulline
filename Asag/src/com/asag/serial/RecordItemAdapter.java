@@ -1,11 +1,13 @@
 package com.asag.serial;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import com.asag.serial.PointRecordAdapter.OnPointCheckListener;
 import com.asag.serial.mode.PointItemRecord;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -88,11 +90,21 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 		holder.bianhao_value.setText(record.wayNum);
 		holder.co2_value.setText(record.co2);
 		holder.rh_value.setText(record.rhValue);
-		holder.t_value.setText(record.tValue);
+		float thv = Float.valueOf(record.tValue);
+		BigDecimal b = new BigDecimal(thv);
+		float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
+				.floatValue();
+		holder.t_value.setText(fwendu + "");
 		holder.ssi_value.setText(record.ssi);
-		holder.mmi_value.setText(record.mmi);
+		float mmiv = Float.valueOf(record.mmi);
+		BigDecimal b1 = new BigDecimal(mmiv);
+		float fmmi = b1.setScale(1, BigDecimal.ROUND_HALF_UP)
+				.floatValue();
+		holder.mmi_value.setText(fmmi + "");
+		Log.d("zhao", "show item mmi : " + fmmi + "ssi : " + record.ssi + "  tvalue : " + record.tValue + " after tvalue : " + fwendu);
 		return convertView;
 	}
+	
 
 	public class ViewHolder {
 		public TextView bianhao_value, co2_value, rh_value, t_value, ssi_value,
