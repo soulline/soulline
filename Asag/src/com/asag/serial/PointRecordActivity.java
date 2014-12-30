@@ -1,5 +1,6 @@
 package com.asag.serial;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -548,17 +549,38 @@ public class PointRecordActivity extends BaseActivity implements
 			break;
 
 		case R.id.save_as:
+			final ArrayList<Integer> selectListS = getSelectList();
+			if (selectListS.size() == 0) {
+				showToast("请选择指定导出的检测记录");
+				return;
+			}
 			showLoading(true, 3);
 			new Thread(new Runnable() {
 				
 				@Override
 				public void run() {
-					ArrayList<Integer> selectList = getSelectList();
-					for (int check : selectList) {
+					
+					Log.d("zhao", "save list size : " + selectListS.size());
+					for (int check : selectListS) {
 						CheckDetailItem checkDetail = checkList.get(check);
 						try {
 							ExcellUtils.writeExcell(ExcellUtils.getPointCheckList(checkDetail), checkDetail.checkDate + "type" + checkDetail.checkType, "checkwith" + checkDetail.checkType);
-							showToast("导出成功");
+							File fileSd = new File(ExcellUtils.sdcardfilePath);
+							int saveType = 1;
+							if (fileSd.isDirectory()) {
+								saveType = 1;
+							} else {
+								File upanFile = new File(ExcellUtils.upanfilePath);
+								if (upanFile.isDirectory()) {
+									saveType = 2;
+								}
+							}
+							if (saveType == 1) {
+								showToast("已成功导出到sd卡");
+							} else if (saveType == 2) {
+								showToast("已成功导出到U盘");
+							}
+							
 							showLoading(false, 3);
 						} catch (Exception e) {
 							e.printStackTrace();

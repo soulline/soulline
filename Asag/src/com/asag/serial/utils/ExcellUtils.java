@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.PointItemRecord;
 
@@ -15,9 +18,26 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 public class ExcellUtils {
+	
+	
+	public static final  String sdcardfilePath = "/storage/sdcard1/";
+	
+	public static String upanfilePath = "/storage/udisk1/disk-1/";
 
 	public static void writeExcell(List list, String fileName, String sheetName) throws Exception {
-		WritableWorkbook book= Workbook.createWorkbook(new File("/storage/udisk1/disk-1/asag" + fileName + ".xls")); 
+		File fileSd = new File(sdcardfilePath);
+		String path = "";
+		Log.d("zhao", "sdcard isDirectory : " + fileSd.isDirectory());
+		if (fileSd.isDirectory()) {
+			path = sdcardfilePath;
+		} else {
+			File upanFile = new File(upanfilePath);
+			Log.d("zhao", "upan isDirectory : " + upanFile.isDirectory());
+			if (upanFile.isDirectory()) {
+				path = upanfilePath;
+			}
+		}
+		WritableWorkbook book= Workbook.createWorkbook(new File(path + "asag" + fileName + ".xls")); 
         WritableSheet sheet=book.createSheet(sheetName, 0); 
         writeDataToSheet(sheet, list);
         book.write(); 

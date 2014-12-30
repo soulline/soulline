@@ -387,7 +387,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 
 	public void setPH3Value(long value) {
-		if ((value < 50000 && value > 0) || value == 50000) {
+		if ((value < 50000 && (value > 0 || value == 0)) || value == 50000) {
 			showPointView(ph3State, false);
 		} else if (value > 50000) {
 			showPointView(ph3State, true);
@@ -398,14 +398,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	public void setRHValue(float value) {
 		if (value > 30.0f) {
 			showPointView(rhState, true);
-		} else if ((value < 30.0f && value > 0) || value == 30.0f) {
+		} else if ((value < 30.0f && (value > 0 || value == 0)) || value == 30.0f) {
 			showPointView(rhState, false);
 		}
 		rhtx.setText(value + "");
 	}
 
 	public void setTValue(float value) {
-		if ((value < 80.0f && value > 0.0f) || value == 80.0f) {
+		if ((value < 80.0f && (value > 0.0f || value == 0.0f)) || value == 80.0f) {
 			showPointView(tState, false);
 		} else if (value > 80.0f) {
 			showPointView(tState, true);
@@ -1024,7 +1024,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.checkN = data.getIntExtra("check_value", 0);
 			alarmInfo.paikongN = data.getIntExtra("paikong_value", 0);
 			alarmInfo.firstTimeN = data.getLongExtra("first_alarm_time", 0L);
-			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
+			alarmInfo.minuteN = data.getIntExtra("   interval_time", 0);
 			setCheckinfo(alarmInfo);
 			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
 			Log.d("zhao", "activityresult checkDetail : " + checkDetail);
