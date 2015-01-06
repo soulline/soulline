@@ -14,7 +14,7 @@
         android:padding="10dp"
         android:text="时间选择"
         android:textColor="@color/white"
-        android:textSize="17dp" />
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:gravity="center"
                 android:text="确定"
                 android:textColor="@color/serial_black"
-                android:textSize="14dp" />
+                android:textSize="16dp" />
 
             <Button
                 android:id="@+id/content_cancel"
@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:text="取消"
                 android:textColor="@color/serial_black"
-                android:textSize="14dp" />
+                android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
 

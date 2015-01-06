@@ -29,23 +29,23 @@ public class FilePopupMenu extends PopupWindow implements OnClickListener{
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
 		switch (size) {
 		case 1:
-			reloadNewTextSize(1.0f);
+			reloadNewTextSize(1.4f);
 			this.setWidth(80 * 1);
 			break;
 		case 2:
-			reloadNewTextSize(1.2f);
+			reloadNewTextSize(1.6f);
 			this.setWidth((80 * 6) / 5);
 			break;
 		case 3:
-			reloadNewTextSize(1.4f);
+			reloadNewTextSize(1.8f);
 			this.setWidth((80 * 7) / 5);
 			break;
 		case 4:
-			reloadNewTextSize(1.6f);
+			reloadNewTextSize(2.0f);
 			this.setWidth((80 * 8) / 5);
 			break;
 		case 5:
-			reloadNewTextSize(1.8f);
+			reloadNewTextSize(2.2f);
 			this.setWidth((80 * 9) / 5);
 			break;
 

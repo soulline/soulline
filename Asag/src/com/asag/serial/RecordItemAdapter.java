@@ -22,22 +22,22 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 	public void setItemTextSize(int bili) {
 		switch (bili) {
 		case 1:
-			size = 1.0f;
-			break;
-		case 2:
-			size = 1.2f;
-			break;
-
-		case 3:
 			size = 1.4f;
 			break;
-
-		case 4:
+		case 2:
 			size = 1.6f;
 			break;
 
-		case 5:
+		case 3:
 			size = 1.8f;
+			break;
+
+		case 4:
+			size = 2.0f;
+			break;
+
+		case 5:
+			size = 2.2f;
 			break;
 
 		default:

@@ -76,19 +76,19 @@ public class PointLocationActivity extends BaseActivity implements
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
 		switch (size) {
 		case 1:
-			reloadTextSize(1.0f);
-			break;
-		case 2:
-			reloadTextSize(1.2f);
-			break;
-		case 3:
 			reloadTextSize(1.4f);
 			break;
-		case 4:
+		case 2:
 			reloadTextSize(1.6f);
 			break;
-		case 5:
+		case 3:
 			reloadTextSize(1.8f);
+			break;
+		case 4:
+			reloadTextSize(2.0f);
+			break;
+		case 5:
+			reloadTextSize(2.2f);
 			break;
 
 		default:

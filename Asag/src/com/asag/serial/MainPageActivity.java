@@ -123,19 +123,19 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		switch (size) {
 		case 1:
-			reloadNewTextSize(1.0f);
-			break;
-		case 2:
-			reloadNewTextSize(1.2f);
-			break;
-		case 3:
 			reloadNewTextSize(1.4f);
 			break;
-		case 4:
+		case 2:
 			reloadNewTextSize(1.6f);
 			break;
-		case 5:
+		case 3:
 			reloadNewTextSize(1.8f);
+			break;
+		case 4:
+			reloadNewTextSize(2.0f);
+			break;
+		case 5:
+			reloadNewTextSize(2.2f);
 			break;
 
 		default:
