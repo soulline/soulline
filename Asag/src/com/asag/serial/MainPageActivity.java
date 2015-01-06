@@ -619,7 +619,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					public void run() {
 						sendMessageS(CMDCode.CD_LIANGAN_CHECK_1);
 						if (alarmInfo != null) {
-							setCheckinfo(alarmInfo);
+							setCheckinfo(alarmInfo, 0);
 							startCutDown(0);
 						}
 					}
@@ -709,10 +709,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		lbm.sendBroadcast(check);
 	}
 
-	private void setCheckinfo(AlarmInfo alarm) {
+	private void setCheckinfo(AlarmInfo alarm, int wayNow) {
 		checkMinuteValue = alarm.checkN * 10;
 		paikongMinuteValue = alarm.paikongN * 10;
-		wayCount = 0;
+		wayCount = wayNow;
 		app.oldCheckTime = checkMinuteValue;
 		app.oldPaikongTime = paikongMinuteValue;
 		// fragment.clearRightData();
@@ -910,13 +910,20 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							}
 
 						} else if (type == 1) {
+							clearRightData();
 							if (resourceId == R.id.liangan_jiance_menu) {
 								checkState = 0;
 								showToast("定时器开启");
+								if (alarmInfo == null) {
+									alarmInfo = new AlarmInfo();
+								}
 								if (alarmInfo != null
 										&& alarmInfo.firstTimeN > 0L
 										&& alarmInfo.minuteN > 0) {
 									app.alarmInfo = alarmInfo;
+									app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+									app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+									setCheckinfo(alarmInfo, 0);
 									Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
 									setAlarmCheck(alarmInfo);
 								}
@@ -933,12 +940,24 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 													String result = (String) object;
 													Log.d("zhao", "result : " + result);
 													fillCheckWayList(result);
-													if (checkWayList.size() < 0) {
+													if (checkWayList.size() == 0) {
 														showToast("请选择检测通道");
 														return;
 													}
 													app.lastWay = checkWayList.get(checkWayList
 															.size() - 1);
+													if (alarmInfo == null) {
+														alarmInfo = new AlarmInfo();
+													}
+													app.alarmInfo = alarmInfo;
+													app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+													app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+													String wayN = checkWayList.get(0);
+													int way = 0;
+													if (isNumber(wayN)) {
+														way = Integer.valueOf(wayN);
+													}
+													setCheckinfo(alarmInfo, way);
 													result = result.substring(
 															0, 2)
 															+ " "
@@ -956,6 +975,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								app.lastWay = "0";
 								checkState = 2;
+								if (alarmInfo == null) {
+									alarmInfo = new AlarmInfo();
+								}
+								app.alarmInfo = alarmInfo;
+								app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+								app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+								setCheckinfo(alarmInfo, 0);
 								showToast("开始测定");
 								sendMessageS(CMDCode.CD_CANGAN_CHECK);
 								startCutDown(2);
@@ -1034,7 +1060,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.paikongN = data.getIntExtra("paikong_value", 0);
 			alarmInfo.firstTimeN = data.getLongExtra("first_alarm_time", 0L);
 			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
-			setCheckinfo(alarmInfo);
+			setCheckinfo(alarmInfo, 0);
 			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
 			Log.d("zhao", "activityresult checkDetail : " + checkDetail);
 			if (checkDetail != null) {
@@ -1174,7 +1200,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				});
 		shituMenu.showPopupWindow(findViewById(R.id.shitu_menu));
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {

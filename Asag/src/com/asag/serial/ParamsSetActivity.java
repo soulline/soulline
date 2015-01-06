@@ -632,6 +632,8 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 					int interIn = Integer.valueOf(interval);
 					data.putExtra("interval_time", interIn);
 				}
+				DataUtils.putPreferences("check_time", check);
+				DataUtils.putPreferences("paikong_time", paikong);
 				data.putExtra("check_value", check);
 				data.putExtra("paikong_value", paikong);
 				data.putExtra("first_alarm_time", firstAlarmTime);

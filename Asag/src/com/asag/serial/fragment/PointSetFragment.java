@@ -5,6 +5,7 @@ import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
 import com.asag.serial.mode.TimeSetEntry;
 import com.asag.serial.utils.CMDCode;
+import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
 
 import android.content.Intent;
@@ -86,11 +87,13 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 						.trim())) {
 					entry.checkTime = Integer.valueOf(jianceInput.getText()
 							.toString().trim());
+					DataUtils.putPreferences("check_time", entry.checkTime);
 				}
 				if (!TextUtils.isEmpty(paikongInput.getText().toString()
 						.trim())) {
 					entry.paikongTime = Integer.valueOf(paikongInput.getText()
 							.toString().trim());
+					DataUtils.putPreferences("paikong_time", entry.paikongTime);
 				}
 				if (listener != null) {
 					listener.onCallBack(entry);

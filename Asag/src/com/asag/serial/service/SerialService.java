@@ -141,8 +141,8 @@ public class SerialService extends Service {
 				dataEntry.co2 = subDataHex(array[0]).trim();
 				dataEntry.ph3data = subDataHex(array[1]).trim();
 				dataEntry.o2 = subDataHex(array[2]).trim();
-				dataEntry.wendu = subDataHex(array[3]).trim();
-				dataEntry.shidu = subDataHex(array[4]).trim();
+				dataEntry.shidu = subDataHex(array[3]).trim();
+				dataEntry.wendu = subDataHex(array[4]).trim();
 				String co2P = DataUtils.getPreferences("co2_input", "0");
 				if (isNumber(co2P) && isNumber(dataEntry.co2)) {
 					long co2N = Long.valueOf(dataEntry.co2)
@@ -361,8 +361,8 @@ public class SerialService extends Service {
 		data = data.substring(2);
 		String[] array = data.split("FF");
 		dataEntry.co2 = subDataHex(array[0]).trim();
-		dataEntry.wendu = subDataHex(array[1]).trim();
-		dataEntry.shidu = subDataHex(array[2]).trim();
+		dataEntry.shidu = subDataHex(array[1]).trim();
+		dataEntry.wendu = subDataHex(array[2]).trim();
 		String co2P = DataUtils.getPreferences("co2_input", "0");
 		if (isNumber(co2P) && isNumber(dataEntry.co2)) {
 			Long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
