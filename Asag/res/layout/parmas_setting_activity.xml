@@ -65,9 +65,8 @@
 
                 <TextView
                     android:id="@+id/cang_num_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:hint="请输入仓号"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
@@ -99,9 +98,8 @@
 
                 <TextView
                     android:id="@+id/count_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:hint="请输入数量"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
@@ -132,9 +130,8 @@
 
                 <TextView
                     android:id="@+id/water_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:hint="请输入水分值"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
@@ -156,9 +153,8 @@
 
                 <TextView
                     android:id="@+id/rk_date_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:hint="请输入入库时间"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -235,10 +231,9 @@
 
                 <TextView
                     android:id="@+id/start_date_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="请输入起始日期"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -261,10 +256,9 @@
 
                 <TextView
                     android:id="@+id/paikong_time_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="请输入排空时间"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
@@ -286,10 +280,9 @@
 
                 <TextView
                     android:id="@+id/jiance_time_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="请输入检测时间"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
@@ -320,10 +313,9 @@
 
                 <TextView
                     android:id="@+id/start_time_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="请输入起始时间"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
@@ -337,10 +329,9 @@
 
                 <TextView
                     android:id="@+id/jiange_time_input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="请输入间隔时间"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
