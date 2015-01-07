@@ -1,5 +1,6 @@
 package com.asag.serial;
 
+import com.asag.serial.utils.ButtonUtils;
 import com.asag.serial.utils.DataUtils;
 
 import android.content.Context;
@@ -104,6 +105,9 @@ public class FunctionPopMenu extends PopupWindow implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		if (ButtonUtils.isFastClick()) {
+			return;
+		}
 		if (listener != null) {
 			listener.onClick(v.getId());
 		}

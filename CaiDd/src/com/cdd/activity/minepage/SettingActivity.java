@@ -15,6 +15,7 @@ import com.cdd.base.BaseActivity;
 import com.cdd.mode.VersionEntry;
 import com.cdd.net.RequestListener;
 import com.cdd.operater.CheckVersionOp;
+import com.cdd.web.WebViewActivity;
 
 public class SettingActivity extends BaseActivity implements OnClickListener{
 
@@ -22,7 +23,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.setting_activity);
-		initTitle("设置");
+		initTitle(R.string.action_setting);
 		initView();
 	}
 	
@@ -91,6 +92,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 				if (version != null && version.upgrade.equals("1")) {
 					showTipNoteDialog(getString(R.string.new_version_note).replaceAll("%", version.ver),
 							version.address);
+				} else {
+					showToast("您的版本已是最新");
 				}
 			}
 		});
@@ -101,6 +104,17 @@ public class SettingActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.version_check_layout:
 			checkVersion();
+			break;
+			
+		case R.id.mianze_layout:
+			Intent mianze = new Intent(context, WebViewActivity.class);
+			mianze.putExtra("web_url", "http://123.57.45.145:8080/html/disclaimer.html");
+			startActivity(mianze);
+			break;
+			
+		case R.id.about_layout:
+			Intent about = new Intent(context, AboutActivity.class);
+			startActivity(about);
 			break;
 
 		default:

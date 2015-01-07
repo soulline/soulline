@@ -28,6 +28,7 @@ import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.PointInfo;
 import com.asag.serial.mode.PointItemRecord;
 import com.asag.serial.mode.PointRecord;
+import com.asag.serial.utils.ButtonUtils;
 import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.ExcellUtils;
 
@@ -481,6 +482,9 @@ public class PointRecordActivity extends BaseActivity implements
 
 	@Override
 	public void onClick(View v) {
+		if (ButtonUtils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.all_select:
 			selectAll();

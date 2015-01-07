@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cdd"
     android:versionCode="2"
-    android:versionName="1.1" >
+    android:versionName="1.2" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -209,6 +209,16 @@
         </activity>
         <activity
             android:name="com.cdd.activity.findpage.DynamicSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.web.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseActivityTheme" >
+        </activity>
+        <activity
+            android:name="com.cdd.activity.minepage.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseActivityTheme" >
         </activity>

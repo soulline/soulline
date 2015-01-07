@@ -12,6 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ import com.asag.serial.mode.PointRecord;
 import com.asag.serial.mode.RightDataEntry;
 import com.asag.serial.mode.TimeSetEntry;
 import com.asag.serial.service.SerialService;
+import com.asag.serial.utils.ButtonUtils;
 import com.asag.serial.utils.CMDCode;
 import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
@@ -608,6 +610,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				Log.d("zhao", "alarm_receiver_stating====");
 				checkState = 0;
 				app.lastWay = "15";
+				long today = System.currentTimeMillis();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				checkDetail.checkDate = format.format(today);
+				checkDetail.checkType = 1 + "";
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
 				if (alarmInfo != null) {
@@ -656,19 +662,32 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.CheckDetail.RUKUDATE, check.rukuDate);
 		values.put(AsagProvider.CheckDetail.CHECKDATE, check.checkDate);
 		values.put(AsagProvider.CheckDetail.CHECKTYPE, check.checkType);
-		String cacheDate = DataUtils.getPreferences(DataUtils.KEY_CHECK_TODAY,
-				"");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String today = format.format(System.currentTimeMillis());
-		if (cacheDate.equals(today)) {
+		Cursor cursor = getContentResolver().query(
+				AsagProvider.CheckDetail.CONTENT_URI,
+				new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
+						AsagProvider.CheckDetail.CHANDI,
+						AsagProvider.CheckDetail.CHECKDATE,
+						AsagProvider.CheckDetail.CHECKTYPE,
+						AsagProvider.CheckDetail.LIANGZHONG,
+						AsagProvider.CheckDetail.RUKUDATE,
+						AsagProvider.CheckDetail.SHUIFEN,
+						AsagProvider.CheckDetail.SHULIANG }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
+						check.checkDate + "' AND "+
+				AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'", null,
+				null);
+		Log.d("zhao", "save qeury cursor --- " + cursor);
+		if (cursor != null) {
+			Log.d("zhao", "save qeury cursor count --- " + cursor.getCount());
+		}
+		if (cursor != null && cursor.getCount() > 0) {
 			getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
 					values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate + " AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
 					null);
 		} else {
 			getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
 					values);
-			DataUtils.putPreferences(DataUtils.KEY_CHECK_TODAY, today);
 		}
+		cursor.close();
 		getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
 				AsagProvider.PointRecord.CHECKDATE + "='" + check.checkDate + 
 				"' AND " + AsagProvider.PointRecord.CHECKTYPE + "='" + check.checkType + "'", null);
@@ -825,10 +844,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						if (type == 0) {
 							int newType = -1;
 							if (resourceId == R.id.liangan_jiance_menu) {
-								newType = 1;
-								checkFunctionTx.setText("粮安监测");
-								sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
-								startCanshuActivity(newType);
+								if (app.isCheckIng) {
+									showToast("检测正在进行中，无法开启新检测");
+								} else {
+									newType = 1;
+									checkFunctionTx.setText("粮安监测");
+									sendMessageS(CMDCode.FF_LIANGAN_CHECK_1);
+									startCanshuActivity(newType);
+								}
 							} else if (resourceId == R.id.point_check_menu) {
 								newType = 2;
 								if (app.isCheckIng) {
@@ -872,119 +895,145 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								newType = 3;
-								checkFunctionTx.setText("仓安监测");
-								sendMessageS(CMDCode.FF_CANGAN_CHECK);
+								if (app.isCheckIng) {
+									showToast("检测正在进行中，无法开启新检测");
+								} else {
+									checkFunctionTx.setText("仓安监测");
+									sendMessageS(CMDCode.FF_CANGAN_CHECK);
 //								startCanshuActivity(newType);
-								displayFragment(true, "point_set", null,
-										new BaseFragmentListener() {
-
-											@Override
-											public void onCallBack(
-													Object object) {
-												if (object instanceof TimeSetEntry) {
-													long today = System.currentTimeMillis();
-													SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-													checkDetail.checkDate = format.format(today);
-													checkDetail.checkType = 3 + "";
-													TimeSetEntry entry = (TimeSetEntry) object;
-													checkMinuteValue = entry.checkTime * 10;
-													paikongMinuteValue = entry.paikongTime * 10;
-													wayCount = 0;
-													app.oldCheckTime = checkMinuteValue;
-													app.oldPaikongTime = paikongMinuteValue;
-													// fragment.clearRightData();
-													if (checkMinuteValue > 0) {
-														float checkF = ((float) checkMinuteValue) / 10.0f;
-														updateCheckMinute(checkF
-																+ "");
-													}
-													if (paikongMinuteValue > 0) {
-														float paikongF = ((float) paikongMinuteValue) / 10.0f;
-														updatePaikongMinute(paikongF
-																+ "");
-													}
+									displayFragment(true, "point_set", null,
+											new BaseFragmentListener() {
+										
+										@Override
+										public void onCallBack(
+												Object object) {
+											if (object instanceof TimeSetEntry) {
+												long today = System.currentTimeMillis();
+												SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+												checkDetail.checkDate = format.format(today);
+												checkDetail.checkType = 3 + "";
+												TimeSetEntry entry = (TimeSetEntry) object;
+												checkMinuteValue = entry.checkTime * 10;
+												paikongMinuteValue = entry.paikongTime * 10;
+												wayCount = 0;
+												app.oldCheckTime = checkMinuteValue;
+												app.oldPaikongTime = paikongMinuteValue;
+												// fragment.clearRightData();
+												if (checkMinuteValue > 0) {
+													float checkF = ((float) checkMinuteValue) / 10.0f;
+													updateCheckMinute(checkF
+															+ "");
 												}
-
+												if (paikongMinuteValue > 0) {
+													float paikongF = ((float) paikongMinuteValue) / 10.0f;
+													updatePaikongMinute(paikongF
+															+ "");
+												}
 											}
-										});
+											
+										}
+									});
+								}
 							}
 
 						} else if (type == 1) {
-							clearRightData();
 							if (resourceId == R.id.liangan_jiance_menu) {
-								checkState = 0;
-								showToast("定时器开启");
-								if (alarmInfo == null) {
-									alarmInfo = new AlarmInfo();
+								if (app.isCheckIng) {
+									showToast("检测正在进行中，无法开启新检测");
+								} else {
+									clearRightData();
+									checkState = 0;
+									showToast("定时器开启");
+									if (alarmInfo == null) {
+										alarmInfo = new AlarmInfo();
+									}
+									if (alarmInfo != null
+											&& alarmInfo.firstTimeN > 0L
+											&& alarmInfo.minuteN > 0) {
+										app.alarmInfo = alarmInfo;
+										app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+										app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+										setCheckinfo(alarmInfo, 0);
+										Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
+										setAlarmCheck(alarmInfo);
+									}
 								}
-								if (alarmInfo != null
-										&& alarmInfo.firstTimeN > 0L
-										&& alarmInfo.minuteN > 0) {
+							} else if (resourceId == R.id.point_check_menu) {
+								if (app.isCheckIng) {
+									showToast("检测正在进行中，无法开启新检测");
+								} else {
+									clearRightData();
+									checkState = 1;
+									sendMessageS(CMDCode.CD_POINT_CHECK);
+									displayFragment(true, "point_select", null,
+											new BaseFragmentListener() {
+										
+										@Override
+										public void onCallBack(Object object) {
+											if (object != null
+													&& object instanceof String) {
+												String result = (String) object;
+												Log.d("zhao", "result : " + result);
+												fillCheckWayList(result);
+												if (checkWayList.size() == 0) {
+													showToast("请选择检测通道");
+													return;
+												}
+												app.lastWay = checkWayList.get(checkWayList
+														.size() - 1);
+												if (alarmInfo == null) {
+													alarmInfo = new AlarmInfo();
+												}
+												long today = System.currentTimeMillis();
+												SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+												checkDetail.checkDate = format.format(today);
+												checkDetail.checkType = 2 + "";
+												app.alarmInfo = alarmInfo;
+												app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+												app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+												String wayN = checkWayList.get(0);
+												int way = 0;
+												if (isNumber(wayN)) {
+													way = Integer.valueOf(wayN);
+												}
+												setCheckinfo(alarmInfo, way);
+												result = result.substring(
+														0, 2)
+														+ " "
+														+ result.substring(
+																2,
+																result.length());
+												String message = CMDCode.CD_LIANGAN_CHECK_2
+														+ result + "FF FF";
+												showToast("开始测定");
+												sendMessageS(message);
+												startCutDown(1);
+											}
+										}
+									});
+								}
+							} else if (resourceId == R.id.cangan_jiance_menu) {
+								if (app.isCheckIng) {
+									showToast("检测正在进行中，无法开启新检测");
+								} else {
+									clearRightData();
+									app.lastWay = "0";
+									checkState = 2;
+									if (alarmInfo == null) {
+										alarmInfo = new AlarmInfo();
+									}
+									long today = System.currentTimeMillis();
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+									checkDetail.checkDate = format.format(today);
+									checkDetail.checkType = 3 + "";
 									app.alarmInfo = alarmInfo;
 									app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
 									app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
 									setCheckinfo(alarmInfo, 0);
-									Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
-									setAlarmCheck(alarmInfo);
+									showToast("开始测定");
+									sendMessageS(CMDCode.CD_CANGAN_CHECK);
+									startCutDown(2);
 								}
-							} else if (resourceId == R.id.point_check_menu) {
-								checkState = 1;
-								sendMessageS(CMDCode.CD_POINT_CHECK);
-								displayFragment(true, "point_select", null,
-										new BaseFragmentListener() {
-
-											@Override
-											public void onCallBack(Object object) {
-												if (object != null
-														&& object instanceof String) {
-													String result = (String) object;
-													Log.d("zhao", "result : " + result);
-													fillCheckWayList(result);
-													if (checkWayList.size() == 0) {
-														showToast("请选择检测通道");
-														return;
-													}
-													app.lastWay = checkWayList.get(checkWayList
-															.size() - 1);
-													if (alarmInfo == null) {
-														alarmInfo = new AlarmInfo();
-													}
-													app.alarmInfo = alarmInfo;
-													app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-													app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
-													String wayN = checkWayList.get(0);
-													int way = 0;
-													if (isNumber(wayN)) {
-														way = Integer.valueOf(wayN);
-													}
-													setCheckinfo(alarmInfo, way);
-													result = result.substring(
-															0, 2)
-															+ " "
-															+ result.substring(
-																	2,
-																	result.length());
-													String message = CMDCode.CD_LIANGAN_CHECK_2
-															+ result + "FF FF";
-													showToast("开始测定");
-													sendMessageS(message);
-													startCutDown(1);
-												}
-											}
-										});
-							} else if (resourceId == R.id.cangan_jiance_menu) {
-								app.lastWay = "0";
-								checkState = 2;
-								if (alarmInfo == null) {
-									alarmInfo = new AlarmInfo();
-								}
-								app.alarmInfo = alarmInfo;
-								app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-								app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
-								setCheckinfo(alarmInfo, 0);
-								showToast("开始测定");
-								sendMessageS(CMDCode.CD_CANGAN_CHECK);
-								startCutDown(2);
 							}
 						} else if (type == 2) {
 							Intent record = new Intent(context, PointRecordActivity.class);
@@ -1203,6 +1252,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
+		if (ButtonUtils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.file_menu:
 			showFileMenu();

@@ -29,6 +29,7 @@ import com.asag.serial.fragment.InputSureFragment;
 import com.asag.serial.mode.CheckDetailItem;
 import com.asag.serial.mode.InputEntry;
 import com.asag.serial.mode.SpinnerItem;
+import com.asag.serial.utils.ButtonUtils;
 import com.asag.serial.utils.CMDCode;
 import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
@@ -591,6 +592,9 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		if (ButtonUtils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.liangzhong_spinner:
 			showLiangzhongMenu();

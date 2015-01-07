@@ -17,6 +17,7 @@
     <string name="share_return">发送返回</string>
     <string name="share_faided_try_later">无法分享，请稍后重试</string>
     <string name="new_version_note">有新的版本%，是否需要更新？</string>
+    <string name="action_setting">设置</string>
     
     <!-- 社区string array -->
     <string-array name="accounting_array_1">
