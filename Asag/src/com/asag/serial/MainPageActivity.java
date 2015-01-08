@@ -106,6 +106,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private int checkState = 0;
 	
 	private CheckDetailItem checkDetail = new CheckDetailItem();
+	
+	private boolean isSaving = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -610,6 +612,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				Log.d("zhao", "alarm_receiver_stating====");
 				checkState = 0;
 				app.lastWay = "15";
+				clearRightData();
+				if (checkDetail != null) {
+					checkDetail.pointList.clear();
+				}
 				long today = System.currentTimeMillis();
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				checkDetail.checkDate = format.format(today);
@@ -647,12 +653,15 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void run() {
-				saveCheckDetail(check);
+				if (!isSaving) {
+					isSaving = true;
+					saveCheckDetail(check);
+				}
 			}
 		}).start();
 	}
 	
-	private void saveCheckDetail(CheckDetailItem check) {
+	private synchronized void saveCheckDetail(CheckDetailItem check) {
 		ContentValues values = new ContentValues();
 		values.put(AsagProvider.CheckDetail.CANGHAO, check.canghao);
 		values.put(AsagProvider.CheckDetail.LIANGZHONG, check.liangzhong);
@@ -674,7 +683,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						AsagProvider.CheckDetail.SHULIANG }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
 						check.checkDate + "' AND "+
 				AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'", null,
-				null);
+				null); 
 		Log.d("zhao", "save qeury cursor --- " + cursor);
 		if (cursor != null) {
 			Log.d("zhao", "save qeury cursor count --- " + cursor.getCount());
@@ -694,6 +703,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		for (PointItemRecord record : check.pointList) {
 			saveCheckItemRecord(record);
 		}
+		isSaving =false;
 	}
 	
 	private void saveCheckItemRecord(PointItemRecord record) {
@@ -944,6 +954,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									clearRightData();
 									checkState = 0;
 									showToast("定时器开启");
+									if (checkDetail != null) {
+										checkDetail.pointList.clear();
+									}
 									if (alarmInfo == null) {
 										alarmInfo = new AlarmInfo();
 									}
@@ -963,6 +976,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
 									clearRightData();
+									if (checkDetail != null) {
+										checkDetail.pointList.clear();
+									}
 									checkState = 1;
 									sendMessageS(CMDCode.CD_POINT_CHECK);
 									displayFragment(true, "point_select", null,
@@ -1019,6 +1035,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									clearRightData();
 									app.lastWay = "0";
 									checkState = 2;
+									if (checkDetail != null) {
+										checkDetail.pointList.clear();
+									}
 									if (alarmInfo == null) {
 										alarmInfo = new AlarmInfo();
 									}

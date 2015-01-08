@@ -49,9 +49,10 @@
 
                 <TextView
                     android:id="@+id/way_0_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -63,9 +64,10 @@
 
                 <TextView
                     android:id="@+id/way_1_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:text="1"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -77,9 +79,10 @@
 
                 <TextView
                     android:id="@+id/way_2_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:text="2"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -91,8 +94,9 @@
 
                 <TextView
                     android:id="@+id/way_3_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="3"
                     android:textColor="@color/black"
@@ -105,9 +109,10 @@
 
                 <TextView
                     android:id="@+id/way_4_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:text="4"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -119,8 +124,9 @@
 
                 <TextView
                     android:id="@+id/way_5_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="5"
                     android:textColor="@color/black"
@@ -133,9 +139,10 @@
 
                 <TextView
                     android:id="@+id/way_6_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:text="6"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -147,9 +154,10 @@
 
                 <TextView
                     android:id="@+id/way_7_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:text="7"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -161,8 +169,9 @@
 
                 <TextView
                     android:id="@+id/way_8_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="8"
                     android:textColor="@color/black"
@@ -175,8 +184,9 @@
 
                 <TextView
                     android:id="@+id/way_9_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="9"
                     android:textColor="@color/black"
@@ -189,8 +199,9 @@
 
                 <TextView
                     android:id="@+id/way_10_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="10"
                     android:textColor="@color/black"
@@ -203,8 +214,9 @@
 
                 <TextView
                     android:id="@+id/way_11_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="11"
                     android:textColor="@color/black"
@@ -217,8 +229,9 @@
 
                 <TextView
                     android:id="@+id/way_12_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="12"
                     android:textColor="@color/black"
@@ -231,8 +244,9 @@
 
                 <TextView
                     android:id="@+id/way_13_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="13"
                     android:textColor="@color/black"
@@ -245,8 +259,9 @@
 
                 <TextView
                     android:id="@+id/way_14_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="14"
                     android:textColor="@color/black"
@@ -259,8 +274,9 @@
 
                 <TextView
                     android:id="@+id/way_15_title"
-                    android:layout_width="22dp"
+                    android:layout_width="52dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:text="15"
                     android:textColor="@color/black"
@@ -280,7 +296,7 @@
             <ListView
                 android:id="@+id/record_list"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="40dp" />
 
             <RelativeLayout

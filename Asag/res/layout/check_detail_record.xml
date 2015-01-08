@@ -213,7 +213,7 @@
         <ListView android:id="@+id/point_detail_listview"
             android:layout_width="match_parent"
             android:layout_marginLeft="60dp"
-            android:layout_height="550dp"/>
+            android:layout_height="220dp"/>
         
         <TextView
             android:id="@+id/third_title"
