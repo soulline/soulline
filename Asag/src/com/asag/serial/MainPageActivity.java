@@ -948,7 +948,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 						} else if (type == 1) {
 							if (resourceId == R.id.liangan_jiance_menu) {
-								if (app.isCheckIng) {
+								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
 									clearRightData();
@@ -972,7 +972,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									}
 								}
 							} else if (resourceId == R.id.point_check_menu) {
-								if (app.isCheckIng) {
+								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
 									clearRightData();
@@ -1029,7 +1029,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									});
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
-								if (app.isCheckIng) {
+								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
 									clearRightData();
@@ -1291,7 +1291,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			if (!app.isPause && app.isCheckIng) {
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = true;
-//				app.isCheckIng = false;
+				app.isCheckIng = false;
 				showToast("停止检测");
 				stopMenu.setText("继续");
 				showCheckAnim(false);
@@ -1299,7 +1299,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = false;
 				showToast("继续检测");
-//				app.isCheckIng = true;
+				app.isCheckIng = true;
 				stopMenu.setText("停止");
 				showCheckAnim(true);
 			}

@@ -288,14 +288,14 @@ public class SerialService extends Service {
 								serialManager.sendMsg(CMDCode.CHECK_TIME_HALF);
 							} else if (checkMunite == 0) {
 								serialManager.sendMsg(CMDCode.CHECK_TIME_END);
-								handler.postDelayed(new Runnable() {
+								/*handler.postDelayed(new Runnable() {
 
 									@Override
 									public void run() {
 										serialManager
 												.sendMsg(CMDCode.CHECK_TIME_END);
 									}
-								}, 2000);
+								}, 2000);*/
 							}
 							CutDownEntry entry = new CutDownEntry();
 							entry.type = 1;
