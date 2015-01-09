@@ -540,6 +540,8 @@ public class CommunityFragment extends Fragment implements OnClickListener {
 		accountingListview.setVisibility(View.VISIBLE);
 		sqListview.setVisibility(View.GONE);
 		examListview.setVisibility(View.GONE);
+		view.findViewById(R.id.empty_content_layout)
+		.setVisibility(View.GONE);
 		if (list.size() == 0 && accountingAdapter != null) {
 			accountingAdapter.clear();
 			accountingAdapter.notifyDataSetChanged();

@@ -527,6 +527,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						checkWayValue.setText("0");
 						wayCount = 0;
 						checkWayList.clear();
+						app.isSetAlarm = false;
 						setAlarmCheck(app.alarmInfo);
 						saveCheckInNewTask(checkDetail);
 					} else {
