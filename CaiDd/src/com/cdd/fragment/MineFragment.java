@@ -133,7 +133,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 		view.findViewById(R.id.trends_content_layout).setOnClickListener(this);
 		view.findViewById(R.id.listen_content_layout).setOnClickListener(this);
 		view.findViewById(R.id.fans_content_layout).setOnClickListener(this);
-		view.findViewById(R.id.exam_alarm_layout).setOnClickListener(this);
+//		view.findViewById(R.id.exam_alarm_layout).setOnClickListener(this);
 		view.findViewById(R.id.my_question_layout).setOnClickListener(this);
 		view.findViewById(R.id.my_answers_layout).setOnClickListener(this);
 		view.findViewById(R.id.my_collect_layout).setOnClickListener(this);
@@ -172,10 +172,10 @@ public class MineFragment extends Fragment implements OnClickListener {
 			fans.putExtra("fans_type", "1");
 			getActivity().startActivity(fans);
 			break;
-		case R.id.exam_alarm_layout:
+		/*case R.id.exam_alarm_layout:
 			Intent exam = new Intent(getActivity(), AlarmActivity.class);
 			getActivity().startActivity(exam);
-			break;
+			break;*/
 		case R.id.my_question_layout:
 			Intent question = new Intent(getActivity(), MyForumActivity.class);
 			question.putExtra("content_type", 1);

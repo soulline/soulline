@@ -1291,7 +1291,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			if (!app.isPause && app.isCheckIng) {
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = true;
-				app.isCheckIng = false;
+//				app.isCheckIng = false;
 				showToast("停止检测");
 				stopMenu.setText("继续");
 				showCheckAnim(false);
@@ -1299,7 +1299,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				sendMessageS(CMDCode.STOP_CMD);
 				app.isPause = false;
 				showToast("继续检测");
-				app.isCheckIng = true;
+//				app.isCheckIng = true;
 				stopMenu.setText("停止");
 				showCheckAnim(true);
 			}

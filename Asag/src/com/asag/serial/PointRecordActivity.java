@@ -40,7 +40,7 @@ public class PointRecordActivity extends BaseActivity implements
 	private TextView date_title, way_0_title, way_1_title, way_2_title,
 			way_3_title, way_4_title, way_5_title, way_6_title, way_7_title,
 			way_8_title, way_9_title, way_10_title, way_11_title, way_12_title,
-			way_13_title, way_14_title, way_15_title;
+			way_13_title, way_14_title, way_15_title; 
 
 	private TextView all_select, detail_btn, delete_item, save_as;
 
