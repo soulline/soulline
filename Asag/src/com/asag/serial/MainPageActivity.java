@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
+import android.app.KeyguardManager;
+import android.app.KeyguardManager.KeyguardLock;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
@@ -16,6 +18,7 @@ import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -108,6 +111,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private CheckDetailItem checkDetail = new CheckDetailItem();
 	
 	private boolean isSaving = false;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +123,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initTextSize();
 	}
 
+	
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
 		if (adapter != null && adapter.getCount() > 0) {
@@ -528,7 +533,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						wayCount = 0;
 						checkWayList.clear();
 						app.isSetAlarm = false;
-						setAlarmCheck(app.alarmInfo);
+//						setAlarmCheck(app.alarmInfo);
 						saveCheckInNewTask(checkDetail);
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
@@ -990,7 +995,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
 									if (app.isAreadyAlarm) {
-										restartAlarmSet();
+//										restartAlarmSet();
 									}
 								} else {
 									clearRightData();
@@ -1049,9 +1054,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
-									if (app.isAreadyAlarm) {
+									/*if (app.isAreadyAlarm) {
 										restartAlarmSet();
-									}
+									}*/
 								} else {
 									clearRightData();
 									app.lastWay = "0";

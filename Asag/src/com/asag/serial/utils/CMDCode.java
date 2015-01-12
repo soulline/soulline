@@ -53,4 +53,6 @@ public class CMDCode {
 	public static final String DATA_TRANSFER_START = "5A A5 00 01 FF FF";
 	
 	public static final String DATA_TRANSFER_FINISH = "5A A5 00 02 FF FF";
+	
+	public static final String DATA_INTERRUP_STOP = "5A A5 00 03 FF FF";
 }
