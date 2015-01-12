@@ -69,6 +69,10 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 			.getInstance(SerialApp.getInstance());
 
 	private int setTpye = -1;
+	
+	private SpinnerItem liangzhongItem = new SpinnerItem();
+	
+	private SpinnerItem chandiItem = new SpinnerItem();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -466,6 +470,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 
 					@Override
 					public void onClick(SpinnerItem item) {
+						liangzhongItem = item;
 						liangzhongSpinner.setText(item.name);
 						sendFoodCode(item.code);
 						checkDetail.liangzhong = item.name;
@@ -480,6 +485,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 
 					@Override
 					public void onClick(SpinnerItem item) {
+						chandiItem = item;
 						chandiSpinner.setText(item.name);
 						sendChandiCode(item.code);
 						checkDetail.chandi = item.name;
@@ -638,6 +644,15 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 				}
 				DataUtils.putPreferences("check_time", check);
 				DataUtils.putPreferences("paikong_time", paikong);
+				DataUtils.putPreferences("canghao_data", cangNumInput.getText().toString().trim());
+				DataUtils.putPreferences("liangzhong_data", liangzhongItem.code);
+				DataUtils.putPreferences("check_count_data", countInput.getText().toString().trim());
+				DataUtils.putPreferences("shuifen_data", waterInput.getText().toString().trim());
+				SimpleDateFormat format2 = new SimpleDateFormat(
+						"yyyyMMdd");
+				String timeMsg = format2.format(chooseTime);
+				DataUtils.putPreferences("ruku_date", timeMsg);
+				DataUtils.putPreferences("chandi_data", chandiItem.code);
 				data.putExtra("check_value", check);
 				data.putExtra("paikong_value", paikong);
 				data.putExtra("first_alarm_time", firstAlarmTime);

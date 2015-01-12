@@ -49,4 +49,8 @@ public class CMDCode {
 	public static final String PREPARE_CANCLE = "5A A5 02 01 08 FF FF";
 	
 	public static final String PASSWAY_DATA = "5A A5 0C";
+	
+	public static final String DATA_TRANSFER_START = "5A A5 00 01 FF FF";
+	
+	public static final String DATA_TRANSFER_FINISH = "5A A5 00 02 FF FF";
 }
