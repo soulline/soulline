@@ -623,6 +623,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				checkDetail.checkType = 1 + "";
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
+				setCheckinfo(alarmInfo, 0);
 				if (alarmInfo != null) {
 					Log.d("zhao", "alarm stating check time : " + alarmInfo.checkN + "  == paikong time : " + alarmInfo.paikongN);
 				}
@@ -788,6 +789,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else {
 			JcAlarm.setSendAlarm(alarm);
 		}
+		app.isAreadyAlarm = true;
 	}
 
 	public void sendMessageS(String message) {
@@ -846,6 +848,18 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		return position;
 	}
 
+	private void restartAlarmSet() {
+		if (app.isAreadyAlarm && app.alarmInfo != null
+				&& app.alarmInfo.minuteN > 0) {
+			app.alarmInfo = alarmInfo;
+			app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+			app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+//			setCheckinfo(alarmInfo, 0);
+			Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
+			setAlarmCheck(app.alarmInfo);
+		}
+	}
+	
 	private void showFunctionMenu(final int type) {
 		FunctionPopMenu functionMenu = new FunctionPopMenu(context,
 				new OnFunctionClickListener() {
@@ -975,6 +989,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							} else if (resourceId == R.id.point_check_menu) {
 								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
+									if (app.isAreadyAlarm) {
+										restartAlarmSet();
+									}
 								} else {
 									clearRightData();
 									if (checkDetail != null) {
@@ -1032,6 +1049,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							} else if (resourceId == R.id.cangan_jiance_menu) {
 								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
+									if (app.isAreadyAlarm) {
+										restartAlarmSet();
+									}
 								} else {
 									clearRightData();
 									app.lastWay = "0";
@@ -1323,6 +1343,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.cancel_alarm_menu:
+			app.isAreadyAlarm = false;
 			JcAlarm.cancelSendAlarm();
 			showToast("已取消定时器");
 			break;

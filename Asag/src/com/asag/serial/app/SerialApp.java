@@ -22,6 +22,8 @@ public class SerialApp extends Application {
 	
 	public boolean isSetAlarm = false;
 	
+	public boolean isAreadyAlarm = false;
+	
 	public AlarmInfo alarmInfo = new AlarmInfo();
 	
 	@Override
