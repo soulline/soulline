@@ -615,6 +615,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				}
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
+				lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_FINISH_CHECKING));
+				sendMessageS(CMDCode.DATA_INTERRUP_STOP);
+				if (checkDetail != null) {
+					saveCheckInNewTask(checkDetail);
+				}
+				checkWayList.clear();
+				app.isPause = false;
+				app.isCheckIng = false;
 				Log.d("zhao", "alarm_receiver_stating====");
 				checkState = 0;
 				app.lastWay = "15";
@@ -642,7 +650,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							startCutDown(0);
 						}
 					}
-				}, 500);
+				}, 1500);
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_START_CHECKING)) {
 				showCheckAnim(true);
@@ -887,7 +895,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
-									checkFunctionTx.setText("点检测");
+									checkFunctionTx.setText("粮安检测");
 									sendMessageS(CMDCode.FF_LIANGAN_CHECK_2);
 									// startCanshuActivity(newType);
 									displayFragment(true, "point_set", null,
@@ -1087,7 +1095,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								record.putExtra("record_type", 1);
 								startActivity(record);
 							} else if (resourceId == R.id.point_check_menu) {
-								record.putExtra("record_title", "点检测结果");
+								record.putExtra("record_title", "粮安检测结果");
 								record.putExtra("record_type", 2);
 								startActivity(record);
 							} else if (resourceId == R.id.cangan_jiance_menu) {

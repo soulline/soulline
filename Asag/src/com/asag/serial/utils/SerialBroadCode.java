@@ -26,4 +26,6 @@ public class SerialBroadCode {
 	
 	public static final String ACTION_STOP_CHECKING = "com.serial.action.ACTION_STOP_CHECKING";
 	
+	public static final String ACTION_FINISH_CHECKING = "com.serial.action.ACTION_FINISH_CHECKING";
+	
 }

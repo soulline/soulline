@@ -20,24 +20,24 @@ public class JcAlarmReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		if (intent.getAction().equals(SerialBroadCode.ACTION_ALARM_CHECK)) {
 			Log.d("SERIAL", "received ----- ");
-			if (SerialApp.getInstance().isCheckIng) {
-				Toast.makeText(context, "检测正在进行中，定时器此次触发无效", Toast.LENGTH_SHORT)
-						.show();
-			} else {
-				AlarmInfo alarm = (AlarmInfo) intent
-						.getSerializableExtra("alarm_info");
-				LocalBroadcastManager lbm = LocalBroadcastManager
-						.getInstance(context);
-				Intent data = new Intent(
-						SerialBroadCode.ACTION_ALARM_CHECK_STARTING);
-				if (alarm != null) {
-					data.putExtra("alarm_info", alarm);
-				}
-				unlock(context);
-				lbm.sendBroadcast(data);
-				Toast.makeText(context, "定时器开始检测", Toast.LENGTH_SHORT).show();
+			/*
+			 * if (SerialApp.getInstance().isCheckIng) { Toast.makeText(context,
+			 * "检测正在进行中，定时器此次触发无效", Toast.LENGTH_SHORT) .show(); } else {
+			 */
+			AlarmInfo alarm = (AlarmInfo) intent
+					.getSerializableExtra("alarm_info");
+			LocalBroadcastManager lbm = LocalBroadcastManager
+					.getInstance(context);
+			Intent data = new Intent(
+					SerialBroadCode.ACTION_ALARM_CHECK_STARTING);
+			if (alarm != null) {
+				data.putExtra("alarm_info", alarm);
 			}
+			unlock(context);
+			lbm.sendBroadcast(data);
+			Toast.makeText(context, "定时器开始检测", Toast.LENGTH_SHORT).show();
 		}
+		// }
 	}
 
 	private void unlock(Context context) {

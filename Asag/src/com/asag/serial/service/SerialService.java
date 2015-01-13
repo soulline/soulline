@@ -443,6 +443,7 @@ public class SerialService extends Service {
 				SerialBroadCode.ACTION_SEND_MESSAGE);
 		filter.addAction(SerialBroadCode.ACTION_CHECK_MINUTE);
 		filter.addAction(SerialBroadCode.ACTION_PAIKONG_MINUTE);
+		filter.addAction(SerialBroadCode.ACTION_FINISH_CHECKING);
 		lbm.registerReceiver(serialPortReceiver, filter);
 	}
 
@@ -507,6 +508,8 @@ public class SerialService extends Service {
 				}
 				stopTimer();
 				startTimer();
+			} else if (intent.getAction().equals(SerialBroadCode.ACTION_FINISH_CHECKING)) {
+				stopTimer();
 			}
 		}
 	};
