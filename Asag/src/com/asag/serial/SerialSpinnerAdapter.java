@@ -14,7 +14,7 @@ public class SerialSpinnerAdapter extends ArrayAdapter<SpinnerItem> {
 
 	private Context context;
 	
-	private float size = 1.0f;
+	private float size = 2.2f;
 	
 	public SerialSpinnerAdapter(Context context) {
 		super(context, 0);

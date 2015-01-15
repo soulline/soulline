@@ -178,7 +178,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void initTextSize() {
-		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		if (adapter != null && adapter.getCount() > 0) {
 			adapter.setItemTextSize(size);
 			adapter.notifyDataSetChanged();

@@ -23,7 +23,7 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 
 	private HashMap<String, Integer> drawableMap = new HashMap<String, Integer>();
 	
-	private float size = 1.0f;
+	private float size = 2.2f;
 	
 	private OnPointCheckListener listener;
 	

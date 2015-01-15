@@ -17,7 +17,7 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 
 	private Context context;
 
-	private float size = 1.0f;
+	private float size = 2.2f;
 
 	public void setItemTextSize(int bili) {
 		switch (bili) {

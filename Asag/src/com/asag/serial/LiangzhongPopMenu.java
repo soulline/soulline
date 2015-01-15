@@ -33,7 +33,7 @@ public class LiangzhongPopMenu extends PopupWindow {
 	}
 	
 	private void initTextSize() {
-		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		if (adapter != null) {
 			adapter.setItemTextSize(size);
 			adapter.notifyDataSetChanged();

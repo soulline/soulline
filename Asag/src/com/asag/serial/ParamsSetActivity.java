@@ -85,7 +85,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void initTextSize() {
-		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		switch (size) {
 		case 1:
 			reloadTextSize(1.4f);

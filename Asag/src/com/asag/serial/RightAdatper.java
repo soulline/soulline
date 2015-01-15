@@ -14,7 +14,7 @@ public class RightAdatper extends ArrayAdapter<RightDataEntry> {
 
 	private Context context;
 	
-	private float size = 1.0f;
+	private float size = 2.2f;
 	
 	public RightAdatper(Context context) {
 		super(context, 0);
