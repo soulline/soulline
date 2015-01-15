@@ -1,5 +1,6 @@
 package com.asag.serial;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -121,8 +122,60 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initView();
 		registerReceiver();
 		initTextSize();
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				initRecord();
+			}
+		}).start();
 	}
 
+	private void initRecord() {
+		ArrayList<CheckDetailItem> checkList = queryData();
+		for (CheckDetailItem detailItem : checkList) {
+			fillPointRecord(detailItem);
+		}
+		if (checkList.size() > 0) {
+			CheckDetailItem detail = checkList.get(0);
+			for (PointItemRecord record : detail.pointList) {
+				RightDataEntry dataEntry = new RightDataEntry();
+				dataEntry.co2 = record.co2;
+				dataEntry.number = record.wayNum;
+				dataEntry.o2 = record.o2Value;
+				dataEntry.ph3data = record.ph3Value;
+				dataEntry.shidu = record.rhValue;
+				dataEntry.wendu = record.tValue;
+				if (dataEntry.number.equals("0")) {
+					if (!TextUtils.isEmpty(dataEntry.co2)
+							&& isNumber(dataEntry.co2)) {
+						long value = Long.valueOf(dataEntry.co2);
+						setCo2Value(value);
+					}
+					if (!TextUtils.isEmpty(dataEntry.o2)) {
+						float value = Float.valueOf(dataEntry.o2);
+						setO2Value(value);
+					}
+					if (!TextUtils.isEmpty(dataEntry.ph3data)
+							&& isNumber(dataEntry.ph3data)) {
+						long value = Long.valueOf(dataEntry.ph3data);
+						setPH3Value(value);
+					}
+					if (!TextUtils.isEmpty(dataEntry.shidu)) {
+						float value = Float.valueOf(dataEntry.shidu);
+						setRHValue(value);
+					}
+					if (!TextUtils.isEmpty(dataEntry.wendu)) {
+						float value = Float.valueOf(dataEntry.wendu);
+						setTValue(value);
+					}
+					
+				} else {
+					addData(dataEntry);
+				}
+			}
+		}
+	}
 	
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
@@ -615,28 +668,29 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				}
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_ALARM_CHECK_STARTING)) {
+				if (checkState == 0 && app.isCheckIng) {
+					showToast("粮安监测正在进行中..请等待下一次监测");
+					return;
+				}
 				lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_FINISH_CHECKING));
-				sendMessageS(CMDCode.DATA_INTERRUP_STOP);
-				if (checkDetail != null) {
-					saveCheckInNewTask(checkDetail);
+				if (checkDetail != null && app.isCheckIng) {
+					sendMessageS(CMDCode.DATA_INTERRUP_STOP);
+					CheckDetailItem checkNew = checkDetail;
+					saveCheckInNewTask(checkNew);
 				}
 				checkWayList.clear();
-				app.isPause = false;
+				if (app.isPause) {
+					Log.d("zhao", "interrup  pause : " + app.isPause);
+					app.isPause = false;
+				}
 				app.isCheckIng = false;
 				Log.d("zhao", "alarm_receiver_stating====");
 				checkState = 0;
 				app.lastWay = "15";
 				clearRightData();
-				if (checkDetail != null) {
-					checkDetail.pointList.clear();
-				}
-				long today = System.currentTimeMillis();
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				checkDetail.checkDate = format.format(today);
-				checkDetail.checkType = 1 + "";
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
-				setCheckinfo(alarmInfo, 0);
+//				setCheckinfo(alarmInfo, 0);
 				if (alarmInfo != null) {
 					Log.d("zhao", "alarm stating check time : " + alarmInfo.checkN + "  == paikong time : " + alarmInfo.paikongN);
 				}
@@ -645,12 +699,19 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					@Override
 					public void run() {
 						sendMessageS(CMDCode.CD_LIANGAN_CHECK_1);
+						if (checkDetail != null) {
+							checkDetail.pointList.clear();
+						}
+						long today = System.currentTimeMillis();
+						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+						checkDetail.checkDate = format.format(today);
+						checkDetail.checkType = 1 + "";
 						if (alarmInfo != null) {
 							setCheckinfo(alarmInfo, 0);
 							startCutDown(0);
 						}
 					}
-				}, 1500);
+				}, 2000);
 			} else if (intent.getAction().equals(
 					SerialBroadCode.ACTION_START_CHECKING)) {
 				showCheckAnim(true);
@@ -663,7 +724,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	};
 	
 	private void saveCheckInNewTask(final CheckDetailItem check) {
-		Log.d("zhao", "saveCheckInNewTask date : " + check.checkDate + "  -- type: " + check.checkType);
+		Log.d("zhao", "saveCheckInNewTask date : " + check.checkDate + "  -- type: " + check.checkType + 
+				"    -- point size : " + check.pointList.size());
 		new Thread(new Runnable() {
 			
 			@Override
@@ -686,35 +748,41 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.CheckDetail.RUKUDATE, check.rukuDate);
 		values.put(AsagProvider.CheckDetail.CHECKDATE, check.checkDate);
 		values.put(AsagProvider.CheckDetail.CHECKTYPE, check.checkType);
-		Cursor cursor = getContentResolver().query(
-				AsagProvider.CheckDetail.CONTENT_URI,
-				new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
-						AsagProvider.CheckDetail.CHANDI,
-						AsagProvider.CheckDetail.CHECKDATE,
-						AsagProvider.CheckDetail.CHECKTYPE,
-						AsagProvider.CheckDetail.LIANGZHONG,
-						AsagProvider.CheckDetail.RUKUDATE,
-						AsagProvider.CheckDetail.SHUIFEN,
-						AsagProvider.CheckDetail.SHULIANG }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
-						check.checkDate + "' AND "+
-				AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'", null,
-				null); 
-		Log.d("zhao", "save qeury cursor --- " + cursor);
-		if (cursor != null) {
-			Log.d("zhao", "save qeury cursor count --- " + cursor.getCount());
-		}
-		if (cursor != null && cursor.getCount() > 0) {
-			getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
-					values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate + " AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
-					null);
+		if (check.checkType.equals("1")) {
+			Cursor cursor = getContentResolver().query(
+					AsagProvider.CheckDetail.CONTENT_URI,
+					new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
+							AsagProvider.CheckDetail.CHANDI,
+							AsagProvider.CheckDetail.CHECKDATE,
+							AsagProvider.CheckDetail.CHECKTYPE,
+							AsagProvider.CheckDetail.LIANGZHONG,
+							AsagProvider.CheckDetail.RUKUDATE,
+							AsagProvider.CheckDetail.SHUIFEN,
+							AsagProvider.CheckDetail.SHULIANG }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
+									check.checkDate + "' AND "+
+									AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'", null,
+									null); 
+			Log.d("zhao", "save qeury cursor --- " + cursor);
+			if (cursor != null) {
+				Log.d("zhao", "save qeury cursor count --- " + cursor.getCount());
+			}
+			if (cursor != null && cursor.getCount() > 0) {
+				getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
+						values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate + " AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
+						null);
+			} else {
+				getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
+						values);
+			}
+			cursor.close();
+			getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
+					AsagProvider.PointRecord.CHECKDATE + "='" + check.checkDate + 
+					"' AND " + AsagProvider.PointRecord.CHECKTYPE + "='" + check.checkType + "'", null);
 		} else {
 			getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
 					values);
 		}
-		cursor.close();
-		getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
-				AsagProvider.PointRecord.CHECKDATE + "='" + check.checkDate + 
-				"' AND " + AsagProvider.PointRecord.CHECKTYPE + "='" + check.checkType + "'", null);
+		Log.d("zhao", "save point --- " + check.pointList.size());
 		for (PointItemRecord record : check.pointList) {
 			saveCheckItemRecord(record);
 		}
@@ -870,6 +938,132 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 //			setCheckinfo(alarmInfo, 0);
 			Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
 			setAlarmCheck(app.alarmInfo);
+		}
+	}
+	
+	private ArrayList<CheckDetailItem> queryData() {
+		long today = System.currentTimeMillis();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String date = format.format(today);
+		ArrayList<CheckDetailItem> list = new ArrayList<CheckDetailItem>();
+		Cursor cursor = getContentResolver().query(
+				AsagProvider.CheckDetail.CONTENT_URI,
+				new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
+						AsagProvider.CheckDetail.CHANDI,
+						AsagProvider.CheckDetail.CHECKDATE,
+						AsagProvider.CheckDetail.CHECKTYPE,
+						AsagProvider.CheckDetail.LIANGZHONG,
+						AsagProvider.CheckDetail.RUKUDATE,
+						AsagProvider.CheckDetail.SHUIFEN,
+						AsagProvider.CheckDetail.SHULIANG },AsagProvider.CheckDetail.CHECKDATE + "='"
+							    + date + "' AND " +
+				AsagProvider.CheckDetail.CHECKTYPE + "='" + "1" + "'", null,
+				null);
+		Log.d("zhao", "cursor count : " + cursor.getCount());
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				CheckDetailItem point = new CheckDetailItem();
+				point.id = cursor.getInt(cursor
+						.getColumnIndexOrThrow(AsagProvider.CheckDetail._ID));
+				point.canghao = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CANGHAO));
+				point.liangzhong = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.LIANGZHONG));
+				point.shuliang = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHULIANG));
+				point.shuifen = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHUIFEN));
+				point.chandi = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHANDI));
+				point.rukuDate = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.RUKUDATE));
+				point.checkDate = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKDATE));
+				point.checkType = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+				list.add(point);
+				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
+						"  -- checkType : " + point.checkType);
+				
+			}
+			cursor.close();
+		}
+		return list;
+	}
+	
+	private synchronized void fillPointRecord(CheckDetailItem point) {
+		Cursor cursor1 = getContentResolver().query(
+				AsagProvider.PointRecord.CONTENT_URI,
+				new String[] { AsagProvider.PointRecord._ID, AsagProvider.PointRecord.WAYNUMBER,
+						AsagProvider.PointRecord.COTWO,
+						AsagProvider.PointRecord.CHECKDATE,
+						AsagProvider.PointRecord.CHECKTYPE,
+						AsagProvider.PointRecord.MMI,
+						AsagProvider.PointRecord.RHVALUE,
+						AsagProvider.PointRecord.SSI,
+						AsagProvider.PointRecord.TVALUE,
+						AsagProvider.PointRecord.OTWO,
+						AsagProvider.PointRecord.PHVALUE,
+						AsagProvider.PointRecord.STATUS },
+				AsagProvider.PointRecord.CHECKDATE + "='"
+					    + point.checkDate.trim() + "' AND "
+						+ AsagProvider.PointRecord.CHECKTYPE + "="
+						+ point.checkType.trim(), null, null);
+		Log.d("zhao", " fillPointRecord  checkDate : " + point + " checkTYPE : " + point.checkType);
+		if (cursor1 != null) {
+			Log.d("zhao", "query fillPointRecord cursor1 count : " + cursor1.getCount());
+		}
+		if (cursor1 != null) {
+			while (cursor1.moveToNext()) {
+				PointItemRecord record = new PointItemRecord();
+				record.id = cursor1
+						.getInt(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
+				record.wayNum = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
+				record.co2 = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
+				record.mmi = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
+				record.rhValue = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
+				record.ssi = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
+				record.status = cursor1
+						.getInt(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
+				record.checkDate = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKDATE));
+				record.checkType = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.CHECKTYPE));
+				record.tValue = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
+				record.o2Value = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
+				record.ph3Value = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
+				point.pointList.add(record);
+				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
+			}
+			cursor1.close();
 		}
 	}
 	
@@ -1174,6 +1368,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		lbm.unregisterReceiver(dataReceiver);
 		Intent service = new Intent(context, SerialService.class);
 		stopService(service);
 	}

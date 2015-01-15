@@ -47,6 +47,8 @@ public class SerialService extends Service {
 	private HashMap<String, String> tMap = new HashMap<String, String>();
 
 	private HashMap<String, String> rMap = new HashMap<String, String>();
+	
+	private long sendTimeMills = 0L;
 
 	@Override
 	public void onCreate() {
@@ -171,6 +173,7 @@ public class SerialService extends Service {
 				float shiduN = Float.valueOf(dataEntry.shidu)
 						+ Float.valueOf(shiduP);
 				dataEntry.shidu = shiduN + "";
+				Log.d("zhao", "dataentry.number : " + dataEntry.number + "   -- lastway: " + app.lastWay);
 				if (!dataEntry.number.equals(app.lastWay)) {
 					checkMunite = app.oldCheckTime;
 					paikongMinute = app.oldPaikongTime;
@@ -379,7 +382,7 @@ public class SerialService extends Service {
 				"0");
 		float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
 		dataEntry.shidu = shiduN + "";
-		Log.d("zhao", "parsePassway : " + app.lastWay);
+		Log.d("zhao", "parsePassway dataentry.number : " + dataEntry.number + "   -- lastway: " + app.lastWay);
 		if (!dataEntry.number.equals(app.lastWay)) {
 			checkMunite = app.oldCheckTime;
 			paikongMinute = app.oldPaikongTime;
@@ -464,6 +467,7 @@ public class SerialService extends Service {
 		if (serialManager != null) {
 			serialManager.closeSerialPort();
 		}
+		lbm.unregisterReceiver(serialPortReceiver);
 	}
 
 	@Override
@@ -480,6 +484,12 @@ public class SerialService extends Service {
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(SerialBroadCode.ACTION_SEND_MESSAGE)) {
 				final String src = intent.getStringExtra("send_message");
+				long nowTime = System.currentTimeMillis();
+				long deep = nowTime - sendTimeMills;
+				sendTimeMills = nowTime;
+				if (deep > 0L && deep < 100L) {
+					return;
+				}
 				new Thread(new Runnable() {
 
 					@Override
