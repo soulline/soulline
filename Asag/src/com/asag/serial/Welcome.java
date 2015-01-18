@@ -117,7 +117,7 @@ public class Welcome extends BaseActivity {
 			public void run() {
 				String chandiCode = DataUtils.getPreferences("chandi_data", "");
 				if (!TextUtils.isEmpty(chandiCode)) {
-					sendChandiCode(chandiCode);
+					sendChandiCode(chandiCode);	
 				}
 				sendMessageS(CMDCode.DATA_TRANSFER_FINISH);
 			}
