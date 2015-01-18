@@ -100,7 +100,8 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.CheckDetail.LIANGZHONG,
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
-						AsagProvider.CheckDetail.SHULIANG },
+						AsagProvider.CheckDetail.SHULIANG,
+						AsagProvider.CheckDetail.SAVE_TIME},
 				AsagProvider.CheckDetail.CHECKTYPE + "='" + checkState + "'", null,
 				null);
 		Log.d("zhao", "cursor count : " + cursor.getCount());
@@ -133,6 +134,7 @@ public class PointRecordActivity extends BaseActivity implements
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+				point.saveTime = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SAVE_TIME));
 				list.add(point);
 				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
 						"  -- checkType : " + point.checkType);
@@ -156,7 +158,8 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.PointRecord.TVALUE,
 						AsagProvider.PointRecord.OTWO,
 						AsagProvider.PointRecord.PHVALUE,
-						AsagProvider.PointRecord.STATUS },
+						AsagProvider.PointRecord.STATUS,
+						AsagProvider.PointRecord.SAVE_TIME },
 				AsagProvider.PointRecord.CHECKDATE + "='"
 					    + point.checkDate.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
@@ -204,6 +207,7 @@ public class PointRecordActivity extends BaseActivity implements
 				record.ph3Value = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
+				record.saveTime = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.SAVE_TIME));
 				point.pointList.add(record);
 				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
 			}
@@ -522,9 +526,9 @@ public class PointRecordActivity extends BaseActivity implements
 											+ checkDetail.id, null);
 							getContentResolver()
 									.delete(AsagProvider.PointRecord.CONTENT_URI,
-											AsagProvider.PointRecord.CHECKDATE
+											AsagProvider.PointRecord.SAVE_TIME
 													+ "='"
-													+ checkDetail.checkDate
+													+ checkDetail.saveTime
 													+ "' AND "
 													+ AsagProvider.PointRecord.CHECKTYPE
 													+ "='"

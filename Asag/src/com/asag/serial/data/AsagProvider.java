@@ -43,6 +43,8 @@ public class AsagProvider {
 			public static final String CHECKTYPE = "checktype";
 			public static final String STATUS = "status";
 			
+			public static final String SAVE_TIME = "save_time";
+			
 		}
 		
 		public static final class CheckDetail implements BaseColumns {
@@ -61,6 +63,8 @@ public class AsagProvider {
 			public static final String RUKUDATE = "rukudate";
 			public static final String CHECKDATE = "checkdate";
 			public static final String CHECKTYPE = "checktype";
+			
+			public static final String SAVE_TIME = "save_time";
 			
 		}
 		

@@ -105,7 +105,7 @@ public class PointRecordProvider extends ContentProvider {
         } 
         
         if (values.containsKey(AsagProvider.PointRecord.STATUS) == false) {  
-            values.put(AsagProvider.PointRecord.STATUS, "");  
+            values.put(AsagProvider.PointRecord.STATUS, -1);  
         } 
         
         if (values.containsKey(AsagProvider.PointRecord.TVALUE) == false) {  
@@ -119,6 +119,10 @@ public class PointRecordProvider extends ContentProvider {
         }
         if (values.containsKey(AsagProvider.PointRecord.PHVALUE) == false) {  
             values.put(AsagProvider.PointRecord.PHVALUE, "");  
+        }
+        
+        if (values.containsKey(AsagProvider.PointRecord.SAVE_TIME) == false) {
+        	values.put(AsagProvider.PointRecord.SAVE_TIME, "");
         }
         
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();  
@@ -197,5 +201,6 @@ public class PointRecordProvider extends ContentProvider {
         sPersonsProjectionMap.put(AsagProvider.PointRecord.WAYNUMBER, AsagProvider.PointRecord.WAYNUMBER);
         sPersonsProjectionMap.put(AsagProvider.PointRecord.OTWO, AsagProvider.PointRecord.OTWO);
         sPersonsProjectionMap.put(AsagProvider.PointRecord.PHVALUE, AsagProvider.PointRecord.PHVALUE);
+        sPersonsProjectionMap.put(AsagProvider.PointRecord.SAVE_TIME, AsagProvider.PointRecord.SAVE_TIME);
     }  
 }

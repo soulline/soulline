@@ -22,6 +22,8 @@ public class CheckDetailItem extends BaseEntry {
 	
 	public String checkType = "";
 	
+	public String saveTime = "";
+	
 	public ArrayList<PointItemRecord> pointList = new ArrayList<PointItemRecord>();
 	
 }

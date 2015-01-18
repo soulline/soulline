@@ -195,7 +195,8 @@ public class CanganRecordActivity extends BaseActivity implements
 						AsagProvider.CheckDetail.LIANGZHONG,
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
-						AsagProvider.CheckDetail.SHULIANG },
+						AsagProvider.CheckDetail.SHULIANG,
+						AsagProvider.CheckDetail.SAVE_TIME},
 				AsagProvider.CheckDetail.CHECKTYPE + "=" + "'3'" , null,
 				null);
 		if (cursor != null) {
@@ -227,6 +228,7 @@ public class CanganRecordActivity extends BaseActivity implements
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+				point.saveTime = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SAVE_TIME));
 				list.add(point);
 				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
 						"  -- checkType : " + point.checkType);
@@ -250,12 +252,13 @@ public class CanganRecordActivity extends BaseActivity implements
 						AsagProvider.PointRecord.TVALUE,
 						AsagProvider.PointRecord.OTWO,
 						AsagProvider.PointRecord.PHVALUE,
-						AsagProvider.PointRecord.STATUS },
-				AsagProvider.PointRecord.CHECKDATE + "='"
-					    + point.checkDate.trim() + "' AND "
+						AsagProvider.PointRecord.STATUS,
+						AsagProvider.PointRecord.SAVE_TIME },
+				AsagProvider.PointRecord.SAVE_TIME + "='"
+					    + point.saveTime.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
 						+ point.checkType.trim(), null, null);
-		Log.d("zhao", " fillPointRecord  checkDate : " + point + " checkTYPE : " + point.checkType);
+		Log.d("zhao", " fillPointRecord  saveTime : " + point.saveTime + " checkTYPE : " + point.checkType);
 		if (cursor1 != null) {
 			Log.d("zhao", "query fillPointRecord cursor1 count : " + cursor1.getCount());
 		}
@@ -298,6 +301,7 @@ public class CanganRecordActivity extends BaseActivity implements
 				record.ph3Value = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
+				record.saveTime = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.SAVE_TIME));
 				point.pointList.add(record);
 				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
 			}
@@ -412,7 +416,7 @@ public class CanganRecordActivity extends BaseActivity implements
 						for (int i : selectListD) {
 							CheckDetailItem checkDetail = checkList.get(i);
 							getContentResolver().delete(AsagProvider.CheckDetail.CONTENT_URI, AsagProvider.CheckDetail._ID + "=" + checkDetail.id, null);
-							getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI, AsagProvider.PointRecord.CHECKDATE + "='" + checkDetail.checkDate + "' AND " + 
+							getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI, AsagProvider.PointRecord.SAVE_TIME + "='" + checkDetail.saveTime + "' AND " + 
 									AsagProvider.PointRecord.CHECKTYPE + "='" + checkDetail.checkType + "'", null);
 						}
 						showToast("删除成功");

@@ -109,7 +109,10 @@ public class CheckDetailProvider extends ContentProvider {
         } 
         if (values.containsKey(AsagProvider.CheckDetail.CHECKDATE) == false) {  
             values.put(AsagProvider.CheckDetail.CHECKDATE, "");  
-        } 
+        }
+        if (values.containsKey(AsagProvider.CheckDetail.SAVE_TIME)) {
+        	values.put(AsagProvider.CheckDetail.SAVE_TIME, "");
+        }
         
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();  
         long rowId = db.insert(AsagProvider.CheckDetail.TABLE_NAME, AsagProvider.CheckDetail.CHECKDATE, values);  
@@ -184,5 +187,6 @@ public class CheckDetailProvider extends ContentProvider {
         sPersonsProjectionMap.put(AsagProvider.CheckDetail.SHUIFEN, AsagProvider.CheckDetail.SHUIFEN);
         sPersonsProjectionMap.put(AsagProvider.CheckDetail.CHANDI, AsagProvider.CheckDetail.CHANDI);
         sPersonsProjectionMap.put(AsagProvider.CheckDetail.RUKUDATE, AsagProvider.CheckDetail.RUKUDATE);
+        sPersonsProjectionMap.put(AsagProvider.CheckDetail.SAVE_TIME, AsagProvider.CheckDetail.SAVE_TIME);
     }  
 }

@@ -739,6 +739,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private synchronized void saveCheckDetail(CheckDetailItem check) {
+		check.saveTime = System.currentTimeMillis() + "";
 		ContentValues values = new ContentValues();
 		values.put(AsagProvider.CheckDetail.CANGHAO, check.canghao);
 		values.put(AsagProvider.CheckDetail.LIANGZHONG, check.liangzhong);
@@ -748,6 +749,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.CheckDetail.RUKUDATE, check.rukuDate);
 		values.put(AsagProvider.CheckDetail.CHECKDATE, check.checkDate);
 		values.put(AsagProvider.CheckDetail.CHECKTYPE, check.checkType);
+		values.put(AsagProvider.CheckDetail.SAVE_TIME, check.saveTime);
 		if (check.checkType.equals("1")) {
 			Cursor cursor = getContentResolver().query(
 					AsagProvider.CheckDetail.CONTENT_URI,
@@ -784,9 +786,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		Log.d("zhao", "save point --- " + check.pointList.size());
 		for (PointItemRecord record : check.pointList) {
+			record.saveTime = check.saveTime;
 			saveCheckItemRecord(record);
 		}
-		isSaving =false;
+		isSaving = false;
 	}
 	
 	private void saveCheckItemRecord(PointItemRecord record) {
@@ -803,6 +806,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.PointRecord.CHECKTYPE, record.checkType);
 		values.put(AsagProvider.PointRecord.OTWO, record.o2Value);
 		values.put(AsagProvider.PointRecord.PHVALUE, record.ph3Value);
+		values.put(AsagProvider.PointRecord.SAVE_TIME, record.saveTime);
 		getContentResolver().insert(AsagProvider.PointRecord.CONTENT_URI, values);
 	}
 
@@ -955,7 +959,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						AsagProvider.CheckDetail.LIANGZHONG,
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
-						AsagProvider.CheckDetail.SHULIANG },AsagProvider.CheckDetail.CHECKDATE + "='"
+						AsagProvider.CheckDetail.SHULIANG,
+						AsagProvider.CheckDetail.SAVE_TIME },AsagProvider.CheckDetail.CHECKDATE + "='"
 							    + date + "' AND " +
 				AsagProvider.CheckDetail.CHECKTYPE + "='" + "1" + "'", null,
 				null);
@@ -989,6 +994,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
+				point.saveTime = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SAVE_TIME));
 				list.add(point);
 				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
 						"  -- checkType : " + point.checkType);
@@ -1012,7 +1018,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						AsagProvider.PointRecord.TVALUE,
 						AsagProvider.PointRecord.OTWO,
 						AsagProvider.PointRecord.PHVALUE,
-						AsagProvider.PointRecord.STATUS },
+						AsagProvider.PointRecord.STATUS,
+						AsagProvider.PointRecord.SAVE_TIME },
 				AsagProvider.PointRecord.CHECKDATE + "='"
 					    + point.checkDate.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
@@ -1060,6 +1067,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				record.ph3Value = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
+				record.saveTime = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.SAVE_TIME));
 				point.pointList.add(record);
 				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
 			}

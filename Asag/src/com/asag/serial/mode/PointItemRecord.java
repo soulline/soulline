@@ -24,6 +24,8 @@ public class PointItemRecord extends BaseEntry {
 	
 	public String o2Value = "";
 	
+	public String saveTime = "";
+	
 	public boolean isCheck = false;
 	
 	public int status = 0;

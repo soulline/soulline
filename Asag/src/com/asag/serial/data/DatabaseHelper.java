@@ -35,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + AsagProvider.PointRecord.CHECKTYPE + " TEXT,"
                 + AsagProvider.PointRecord.OTWO + " TEXT,"
                 + AsagProvider.PointRecord.PHVALUE + " TEXT,"
+                + AsagProvider.CheckDetail.SAVE_TIME + " TEXT,"
                 + AsagProvider.PointRecord.STATUS + " INTEGER"
                 + ");");
 		db.execSQL("CREATE TABLE " + AsagProvider.CheckDetail.TABLE_NAME + " ("  
@@ -46,7 +47,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + AsagProvider.CheckDetail.CHANDI + " TEXT,"
                 + AsagProvider.CheckDetail.RUKUDATE + " TEXT,"
                 + AsagProvider.CheckDetail.CHECKDATE + " TEXT,"
-                + AsagProvider.CheckDetail.CHECKTYPE + " TEXT"
+                + AsagProvider.CheckDetail.CHECKTYPE + " TEXT,"
+                + AsagProvider.CheckDetail.SAVE_TIME + " TEXT"
                 + ");");
 
 	}
