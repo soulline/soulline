@@ -47,7 +47,7 @@ public class LiangzhongPopMenu extends PopupWindow {
 		view = inflater.inflate(R.layout.spinner_pop_menu, null);
 		this.listener = listener;
 		this.setContentView(view);
-		this.setWidth(60);
+		this.setWidth(70);
 		this.setHeight(LayoutParams.WRAP_CONTENT);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);

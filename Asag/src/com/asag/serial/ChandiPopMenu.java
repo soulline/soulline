@@ -35,7 +35,7 @@ public class ChandiPopMenu extends PopupWindow {
 	}
 	
 	private void initTextSize() {
-		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		if (adapter != null) {
 			adapter.setItemTextSize(size);
 			adapter.notifyDataSetChanged();
@@ -49,7 +49,7 @@ public class ChandiPopMenu extends PopupWindow {
 		view = inflater.inflate(R.layout.spinner_pop_menu, null);
 		this.listener = listener;
 		this.setContentView(view);
-		this.setWidth(50);
+		this.setWidth(80);
 		this.setHeight(200);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
