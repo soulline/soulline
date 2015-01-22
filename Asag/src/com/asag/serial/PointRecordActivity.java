@@ -160,8 +160,8 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.PointRecord.PHVALUE,
 						AsagProvider.PointRecord.STATUS,
 						AsagProvider.PointRecord.SAVE_TIME },
-				AsagProvider.PointRecord.CHECKDATE + "='"
-					    + point.checkDate.trim() + "' AND "
+				AsagProvider.PointRecord.SAVE_TIME + "='"
+					    + point.saveTime.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
 						+ point.checkType.trim(), null, null);
 		Log.d("zhao", " fillPointRecord  checkDate : " + point + " checkTYPE : " + point.checkType);

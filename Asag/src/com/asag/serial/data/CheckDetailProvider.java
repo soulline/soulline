@@ -110,7 +110,7 @@ public class CheckDetailProvider extends ContentProvider {
         if (values.containsKey(AsagProvider.CheckDetail.CHECKDATE) == false) {  
             values.put(AsagProvider.CheckDetail.CHECKDATE, "");  
         }
-        if (values.containsKey(AsagProvider.CheckDetail.SAVE_TIME)) {
+        if (values.containsKey(AsagProvider.CheckDetail.SAVE_TIME) == false) {
         	values.put(AsagProvider.CheckDetail.SAVE_TIME, "");
         }
         

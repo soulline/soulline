@@ -146,33 +146,41 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				dataEntry.ph3data = record.ph3Value;
 				dataEntry.shidu = record.rhValue;
 				dataEntry.wendu = record.tValue;
-				if (dataEntry.number.equals("0")) {
-					if (!TextUtils.isEmpty(dataEntry.co2)
-							&& isNumber(dataEntry.co2)) {
-						long value = Long.valueOf(dataEntry.co2);
-						setCo2Value(value);
-					}
-					if (!TextUtils.isEmpty(dataEntry.o2)) {
-						float value = Float.valueOf(dataEntry.o2);
-						setO2Value(value);
-					}
-					if (!TextUtils.isEmpty(dataEntry.ph3data)
-							&& isNumber(dataEntry.ph3data)) {
-						long value = Long.valueOf(dataEntry.ph3data);
-						setPH3Value(value);
-					}
-					if (!TextUtils.isEmpty(dataEntry.shidu)) {
-						float value = Float.valueOf(dataEntry.shidu);
-						setRHValue(value);
-					}
-					if (!TextUtils.isEmpty(dataEntry.wendu)) {
-						float value = Float.valueOf(dataEntry.wendu);
-						setTValue(value);
-					}
+				final RightDataEntry entry = dataEntry;
+				handler.post(new Runnable() {
 					
-				} else {
-					addData(dataEntry);
-				}
+					@Override
+					public void run() {
+						if (entry.number.equals("0")) {
+							if (!TextUtils.isEmpty(entry.co2)
+									&& isNumber(entry.co2)) {
+								long value = Long.valueOf(entry.co2);
+								setCo2Value(value);
+							}
+							if (!TextUtils.isEmpty(entry.o2)) {
+								float value = Float.valueOf(entry.o2);
+								setO2Value(value);
+							}
+							if (!TextUtils.isEmpty(entry.ph3data)
+									&& isNumber(entry.ph3data)) {
+								long value = Long.valueOf(entry.ph3data);
+								setPH3Value(value);
+							}
+							if (!TextUtils.isEmpty(entry.shidu)) {
+								float value = Float.valueOf(entry.shidu);
+								setRHValue(value);
+							}
+							if (!TextUtils.isEmpty(entry.wendu)) {
+								float value = Float.valueOf(entry.wendu);
+								setTValue(value);
+							}
+							
+						} else {
+							addData(entry);
+						}
+					}
+				});
+				
 			}
 		}
 	}
@@ -440,8 +448,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 
 	public void setO2Value(float value) {
-		if (value > 0) {
-			showPointView(o2State, false);
+		if (value < 15) {
+			showPointView(o2State, true);
 		} else {
 			showPointView(o2State, false);
 		}
@@ -740,6 +748,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	private synchronized void saveCheckDetail(CheckDetailItem check) {
 		check.saveTime = System.currentTimeMillis() + "";
+		Log.d("zhao", "save time : " + check.saveTime);
 		ContentValues values = new ContentValues();
 		values.put(AsagProvider.CheckDetail.CANGHAO, check.canghao);
 		values.put(AsagProvider.CheckDetail.LIANGZHONG, check.liangzhong);
@@ -760,7 +769,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							AsagProvider.CheckDetail.LIANGZHONG,
 							AsagProvider.CheckDetail.RUKUDATE,
 							AsagProvider.CheckDetail.SHUIFEN,
-							AsagProvider.CheckDetail.SHULIANG }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
+							AsagProvider.CheckDetail.SHULIANG,
+							AsagProvider.CheckDetail.SAVE_TIME }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
 									check.checkDate + "' AND "+
 									AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'", null,
 									null); 
@@ -770,7 +780,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			}
 			if (cursor != null && cursor.getCount() > 0) {
 				getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
-						values, AsagProvider.CheckDetail.CHECKDATE + "=" + check.checkDate + " AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
+						values, AsagProvider.CheckDetail.CHECKDATE + "='" + check.checkDate + "' AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
 						null);
 			} else {
 				getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
@@ -1020,8 +1030,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						AsagProvider.PointRecord.PHVALUE,
 						AsagProvider.PointRecord.STATUS,
 						AsagProvider.PointRecord.SAVE_TIME },
-				AsagProvider.PointRecord.CHECKDATE + "='"
-					    + point.checkDate.trim() + "' AND "
+				AsagProvider.PointRecord.SAVE_TIME + "='"
+					    + point.saveTime.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
 						+ point.checkType.trim(), null, null);
 		Log.d("zhao", " fillPointRecord  checkDate : " + point + " checkTYPE : " + point.checkType);
