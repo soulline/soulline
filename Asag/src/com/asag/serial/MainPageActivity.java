@@ -99,7 +99,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			checkFunctionTx;
 
 	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei,
-			ph3Danwei, o2Danwei, rhDanwei, tDanwei;
+			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangState, chuliangStateValue,
+			shuifenState, shuifenStateValue;
 
 	private TextView paikongCheckDanwei, checkCheckDanwei;
 
@@ -270,6 +271,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		tDanwei.setTextSize(11.0f * size);
 		paikongCheckDanwei.setTextSize(11.0f * size);
 		checkCheckDanwei.setTextSize(11.0f * size);
+		chuliangState.setTextSize(11.0f * size);
+		chuliangStateValue.setTextSize(11.0f * size);
+		shuifenState.setTextSize(11.0f * size);
+		shuifenStateValue.setTextSize(11.0f * size);
 	}
 
 	private void initView() {
@@ -298,6 +303,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 		paikongCheckDanwei = (TextView) findViewById(R.id.paikong_check_danwei);
 		checkCheckDanwei = (TextView) findViewById(R.id.check_check_danwei);
+		
+		chuliangState = (TextView) findViewById(R.id.chuliang_state);
+		chuliangStateValue = (TextView) findViewById(R.id.chuliang_state_value);
+		shuifenState = (TextView) findViewById(R.id.shuifen_state);
+		shuifenStateValue = (TextView) findViewById(R.id.shuifen_state_value);
 
 		findViewById(R.id.file_menu).setOnClickListener(this);
 		findViewById(R.id.function_menu).setOnClickListener(this);
@@ -456,10 +466,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		o2Tx.setText(value + "");
 	}
 
-	public void setPH3Value(long value) {
-		if ((value < 50000 && (value > 0 || value == 0)) || value == 50000) {
+	public void setPH3Value(double value) {
+		if ((value < 0.15d && (value > 0 || value == 0))) {
 			showPointView(ph3State, false);
-		} else if (value > 50000) {
+		} else {
 			showPointView(ph3State, true);
 		}
 		ph3tx.setText(value + "");
@@ -536,6 +546,46 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		return 0.0f;
 	}
+	
+	private CheckDetailItem checkState(CheckDetailItem check) {
+		StringBuilder sb1 = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder();
+		boolean safe1 = true;
+		boolean safe2 = true;
+		boolean safe3 = true;
+		sb1.append("有潜在风险：");
+		sb2.append("有潜在风险：");
+		for (PointItemRecord record : check.pointList) {
+			if (record.status > 2) {
+				safe1 = false;
+				safe2 = false;
+				sb1.append(record.wayNum).append("、");
+			} else if (record.status == 2) {
+				safe1 = false;
+				safe2 = true;
+			}
+			float wendu = Float.valueOf(record.tValue);
+			if (wendu >= 8.0f) {
+				safe3 = false;
+				sb2.append(record.wayNum).append("、");
+			} else {
+				safe3 = true;
+			}
+		}
+		if (safe1 && safe2) {
+			check.chuliangState = "安全";
+		} else if (!safe1 && safe2) {
+			check.chuliangState = "基本安全";
+		} else {
+			check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
+		}
+		if (!safe3) {
+			check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
+		} else {
+			check.shuifenState = "安全";
+		}
+		return check;
+	}
 
 	public BroadcastReceiver dataReceiver = new BroadcastReceiver() {
 
@@ -557,7 +607,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						}
 						if (!TextUtils.isEmpty(dataEntry.ph3data)
 								&& isNumber(dataEntry.ph3data)) {
-							long value = Long.valueOf(dataEntry.ph3data);
+							double value = Double.valueOf(dataEntry.ph3data);
 							setPH3Value(value);
 						}
 						if (!TextUtils.isEmpty(dataEntry.shidu)) {
@@ -588,12 +638,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					if (checkDetail != null) {
 						checkDetail.pointList.add(record);
 					}
+					checkDetail = checkState(checkDetail);
+					chuliangStateValue.setText(checkDetail.chuliangState);
+					shuifenStateValue.setText(checkDetail.shuifenState);
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
 						checkWayValue.setText("0");
 						wayCount = 0;
 						checkWayList.clear();
-						app.isSetAlarm = false;
 //						setAlarmCheck(app.alarmInfo);
 						saveCheckInNewTask(checkDetail);
 					} else {
@@ -759,6 +811,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.CheckDetail.CHECKDATE, check.checkDate);
 		values.put(AsagProvider.CheckDetail.CHECKTYPE, check.checkType);
 		values.put(AsagProvider.CheckDetail.SAVE_TIME, check.saveTime);
+		values.put(AsagProvider.CheckDetail.CHULIANGSTATE, check.chuliangState);
+		values.put(AsagProvider.CheckDetail.SHUIFENSTATE, check.shuifenState);
 		if (check.checkType.equals("1")) {
 			Cursor cursor = getContentResolver().query(
 					AsagProvider.CheckDetail.CONTENT_URI,
@@ -872,19 +926,21 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					* 1000L;
 			alarmInfo = alarm;
 		}
-		if (app.isSetAlarm) {
+		if (app.isAreadyAlarm) {
 			JcAlarm.cancelSendAlarm();
+			app.isAreadyAlarm = false;
 			handler.postDelayed(new Runnable() {
 
 				@Override
 				public void run() {
 					JcAlarm.setSendAlarm(alarm);
+					app.isAreadyAlarm = true;
 				}
 			}, 500);
 		} else {
 			JcAlarm.setSendAlarm(alarm);
+			app.isAreadyAlarm = true;
 		}
-		app.isAreadyAlarm = true;
 	}
 
 	public void sendMessageS(String message) {
@@ -970,6 +1026,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
 						AsagProvider.CheckDetail.SHULIANG,
+						AsagProvider.CheckDetail.CHULIANGSTATE,
+						AsagProvider.CheckDetail.SHUIFENSTATE,
 						AsagProvider.CheckDetail.SAVE_TIME },AsagProvider.CheckDetail.CHECKDATE + "='"
 							    + date + "' AND " +
 				AsagProvider.CheckDetail.CHECKTYPE + "='" + "1" + "'", null,
@@ -1200,6 +1258,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									if (alarmInfo == null) {
 										alarmInfo = new AlarmInfo();
 									}
+									DataUtils.putPreferences("first_alarm_time", alarmInfo.firstTimeN);
+									DataUtils.putPreferences("interval", alarmInfo.minuteN);
 									if (alarmInfo != null
 											&& alarmInfo.firstTimeN > 0L
 											&& alarmInfo.minuteN > 0) {

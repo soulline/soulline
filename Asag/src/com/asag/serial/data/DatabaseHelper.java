@@ -48,6 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + AsagProvider.CheckDetail.RUKUDATE + " TEXT,"
                 + AsagProvider.CheckDetail.CHECKDATE + " TEXT,"
                 + AsagProvider.CheckDetail.CHECKTYPE + " TEXT,"
+                + AsagProvider.CheckDetail.CHULIANGSTATE + " TEXT,"
+                + AsagProvider.CheckDetail.SHUIFENSTATE + " TEXT,"
                 + AsagProvider.CheckDetail.SAVE_TIME + " TEXT"
                 + ");");
 

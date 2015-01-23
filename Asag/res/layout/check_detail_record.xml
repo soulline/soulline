@@ -231,7 +231,7 @@
             android:id="@+id/yisidian_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="疑似点："
+            android:text="储粮状况："
             android:textColor="@color/black"
             android:textSize="14dp" />
             
@@ -251,7 +251,7 @@
             android:id="@+id/qianzaidian_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="潜在点："
+            android:text="水分迁移："
             android:textColor="@color/black"
             android:textSize="14dp" />
             

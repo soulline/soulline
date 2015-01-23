@@ -101,6 +101,8 @@ public class PointRecordActivity extends BaseActivity implements
 						AsagProvider.CheckDetail.RUKUDATE,
 						AsagProvider.CheckDetail.SHUIFEN,
 						AsagProvider.CheckDetail.SHULIANG,
+						AsagProvider.CheckDetail.CHULIANGSTATE,
+						AsagProvider.CheckDetail.SHUIFENSTATE,
 						AsagProvider.CheckDetail.SAVE_TIME},
 				AsagProvider.CheckDetail.CHECKTYPE + "='" + checkState + "'", null,
 				null);

@@ -51,6 +51,8 @@ public class CheckDetailRecordActivity extends BaseActivity {
 			shuifen_number_value.setText(checkDetail.shuifen);
 			chandi_value.setText(checkDetail.chandi);
 			ruku_date_value.setText(checkDetail.rukuDate);
+			yisidian_value.setText(checkDetail.chuliangState);
+			qianzai_value.setText(checkDetail.shuifenState);
 			check_date_value.setText(checkDetail.checkDate);
 			if (checkDetail.pointList.size() > 0) {
 				initAdapter(checkDetail.pointList);

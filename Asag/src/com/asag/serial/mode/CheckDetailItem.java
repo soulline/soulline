@@ -24,6 +24,10 @@ public class CheckDetailItem extends BaseEntry {
 	
 	public String saveTime = "";
 	
+	public String chuliangState = "";
+	
+	public String shuifenState = "";
+	
 	public ArrayList<PointItemRecord> pointList = new ArrayList<PointItemRecord>();
 	
 }

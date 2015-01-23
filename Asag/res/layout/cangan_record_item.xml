@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingLeft="15dp">
-        <LinearLayout android:layout_width="200dp"
+        <LinearLayout android:layout_width="230dp"
             android:layout_height="35dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -33,7 +33,7 @@
         <ImageView android:id="@+id/safe_state_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:background="@drawable/uncheck_state"/>
         </RelativeLayout>
         

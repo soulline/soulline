@@ -90,6 +90,17 @@ public class ExcellUtils {
 			row.add(point.status + "");
 			list.add(row);
 		}
+		List<String> row6 = new ArrayList<String>();
+		row6.add("三、储粮状况");
+		List<String> row7 = new ArrayList<String>();
+		row7.add("储粮状况：");
+		row7.add(checkDetail.chuliangState);
+		List<String> row8 = new ArrayList<String>();
+		row8.add("水分迁移:");
+		row8.add(checkDetail.shuifenState);
+		list.add(row6);
+		list.add(row7);
+		list.add(row8);
 		return list;
 	}
 	

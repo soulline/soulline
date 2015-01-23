@@ -113,6 +113,12 @@ public class CheckDetailProvider extends ContentProvider {
         if (values.containsKey(AsagProvider.CheckDetail.SAVE_TIME) == false) {
         	values.put(AsagProvider.CheckDetail.SAVE_TIME, "");
         }
+        if (values.containsKey(AsagProvider.CheckDetail.CHULIANGSTATE) == false) {
+        	values.put(AsagProvider.CheckDetail.CHULIANGSTATE, "");
+        }
+        if (values.containsKey(AsagProvider.CheckDetail.SHUIFENSTATE) == false) {
+        	values.put(AsagProvider.CheckDetail.SHUIFENSTATE, "");
+        }
         
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();  
         long rowId = db.insert(AsagProvider.CheckDetail.TABLE_NAME, AsagProvider.CheckDetail.CHECKDATE, values);  
@@ -188,5 +194,7 @@ public class CheckDetailProvider extends ContentProvider {
         sPersonsProjectionMap.put(AsagProvider.CheckDetail.CHANDI, AsagProvider.CheckDetail.CHANDI);
         sPersonsProjectionMap.put(AsagProvider.CheckDetail.RUKUDATE, AsagProvider.CheckDetail.RUKUDATE);
         sPersonsProjectionMap.put(AsagProvider.CheckDetail.SAVE_TIME, AsagProvider.CheckDetail.SAVE_TIME);
+        sPersonsProjectionMap.put(AsagProvider.CheckDetail.CHULIANGSTATE, AsagProvider.CheckDetail.CHULIANGSTATE);
+        sPersonsProjectionMap.put(AsagProvider.CheckDetail.SHUIFENSTATE, AsagProvider.CheckDetail.SHUIFENSTATE);
     }  
 }

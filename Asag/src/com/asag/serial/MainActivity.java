@@ -311,15 +311,18 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			alarmInfo = alarm;
 		}
 		if (app.isSetAlarm) {
+			app.isAreadyAlarm = false;
 			JcAlarm.cancelSendAlarm();
 			handler.postDelayed(new Runnable() {
 				
 				@Override
 				public void run() {
+					app.isAreadyAlarm = true;
 					JcAlarm.setSendAlarm(alarm);
 				}
 			}, 500);
 		} else {
+			app.isAreadyAlarm = true;
 			JcAlarm.setSendAlarm(alarm);
 		}
 	}

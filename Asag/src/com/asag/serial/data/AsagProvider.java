@@ -64,6 +64,10 @@ public class AsagProvider {
 			public static final String CHECKDATE = "checkdate";
 			public static final String CHECKTYPE = "checktype";
 			
+			public static final String CHULIANGSTATE = "chuliangstate";
+			
+			public static final String SHUIFENSTATE = "shuifenstate";
+			
 			public static final String SAVE_TIME = "save_time";
 			
 		}
