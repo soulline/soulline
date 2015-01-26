@@ -23,6 +23,8 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
             AlarmInfo alarmInfo = new AlarmInfo();
             alarmInfo.firstTimeN = DataUtils.getPreferences("first_alarm_time", 0L);
 			alarmInfo.minuteN = DataUtils.getPreferences("interval_time", 0);
+			alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+			alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
 			SerialApp.getInstance().alarmInfo = alarmInfo;
 			Log.d("zhao", "boot firstTime : " + alarmInfo.firstTimeN + "   -- minuteN : " + alarmInfo.minuteN);
 			if (alarmInfo.firstTimeN > 0 && alarmInfo.minuteN > 0) {
