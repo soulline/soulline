@@ -24,6 +24,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
             alarmInfo.firstTimeN = DataUtils.getPreferences("first_alarm_time", 0L);
 			alarmInfo.minuteN = DataUtils.getPreferences("interval_time", 0);
 			SerialApp.getInstance().alarmInfo = alarmInfo;
+			Log.d("zhao", "boot firstTime : " + alarmInfo.firstTimeN + "   -- minuteN : " + alarmInfo.minuteN);
 			if (alarmInfo.firstTimeN > 0 && alarmInfo.minuteN > 0) {
 				Log.d("zhao", "boot setAlarm...");
 				setAlarmCheck(alarmInfo);
@@ -44,7 +45,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
 
 				@Override
 				public void run() {
-					JcAlarm.setSendAlarm(alarm);
+					JcAlarm.setSendAlarm(alarm); 
 					SerialApp.getInstance().isAreadyAlarm = true;
 				}
 			}, 500);

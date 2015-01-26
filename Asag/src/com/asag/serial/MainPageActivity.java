@@ -1259,7 +1259,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 										alarmInfo = new AlarmInfo();
 									}
 									DataUtils.putPreferences("first_alarm_time", alarmInfo.firstTimeN);
-									DataUtils.putPreferences("interval", alarmInfo.minuteN);
+									DataUtils.putPreferences("interval_time", alarmInfo.minuteN);
 									if (alarmInfo != null
 											&& alarmInfo.firstTimeN > 0L
 											&& alarmInfo.minuteN > 0) {
