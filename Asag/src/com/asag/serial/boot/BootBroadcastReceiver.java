@@ -1,6 +1,6 @@
 package com.asag.serial.boot;
 
-import com.asag.serial.MainPageActivity;
+import com.asag.serial.Welcome;
 import com.asag.serial.alarm.JcAlarm;
 import com.asag.serial.app.SerialApp;
 import com.asag.serial.mode.AlarmInfo;
@@ -17,7 +17,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
-            Intent ootStartIntent=new Intent(context, MainPageActivity.class);
+            Intent ootStartIntent=new Intent(context, Welcome.class);
             ootStartIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(ootStartIntent);
             AlarmInfo alarmInfo = new AlarmInfo();
@@ -36,8 +36,17 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
 	
 	private void setAlarmCheck(final AlarmInfo alarm) {
 		if (alarm.firstTimeN < System.currentTimeMillis()) {
-			alarm.firstTimeN = System.currentTimeMillis() + alarm.minuteN * 60
-					* 1000L;
+			float mbei = (float) (System.currentTimeMillis() - alarm.firstTimeN) / (alarm.minuteN * 60 * 1000L);
+			long mod = (System.currentTimeMillis() - alarm.firstTimeN) % (alarm.minuteN * 60 * 1000L);
+			long nminute = alarm.minuteN * 60 * 1000L - mod;
+			int nbei = 0;
+			if (nminute > 60 * 1000L) {
+				nbei = (int) Math.ceil(mbei);
+			} else {
+				nbei = (int) Math.ceil(mbei) + 1;
+			}
+			alarm.firstTimeN = alarm.firstTimeN + alarm.minuteN * 60
+					* 1000L * nbei;
 		}
 		if (SerialApp.getInstance().isAreadyAlarm) {
 			JcAlarm.cancelSendAlarm();

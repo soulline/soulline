@@ -319,6 +319,7 @@ public class PointRecordActivity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Log.d("zhao", "pointRecord onItemClick position : " + position + "   check : " + adapter.getItem(position).isCheck);
 				if (adapter != null && adapter.getItem(position).isCheck) {
 					adapter.getItem(position).isCheck = false;
 					recordList.get(position).isCheck = false;
@@ -406,7 +407,7 @@ public class PointRecordActivity extends BaseActivity implements
 		if (adapter == null) {
 			adapter = new PointRecordAdapter(context);
 			adapter.addData(list);
-			adapter.addOnPointCheckListener(new OnPointCheckListener() {
+			/*adapter.addOnPointCheckListener(new OnPointCheckListener() {
 
 				@Override
 				public void onCheck(int position) {
@@ -420,7 +421,7 @@ public class PointRecordActivity extends BaseActivity implements
 					}
 					adapter.notifyDataSetChanged();
 				}
-			});
+			});*/
 			record_list.setAdapter(adapter);
 		} else {
 			adapter.clear();

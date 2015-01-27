@@ -22,7 +22,6 @@
                 android:id="@+id/item_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null"
                 android:button="@drawable/point_check_selector" />
 
             <TextView

@@ -922,8 +922,17 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	private void setAlarmCheck(final AlarmInfo alarm) {
 		if (alarm.firstTimeN < System.currentTimeMillis()) {
-			alarm.firstTimeN = System.currentTimeMillis() + alarm.minuteN * 60
-					* 1000L;
+			float mbei = (float) (System.currentTimeMillis() - alarm.firstTimeN) / (alarm.minuteN * 60 * 1000L);
+			long mod = (System.currentTimeMillis() - alarm.firstTimeN) % (alarm.minuteN * 60 * 1000L);
+			long nminute = alarm.minuteN * 60 * 1000L - mod;
+			int nbei = 0;
+			if (nminute > 60 * 1000L) {
+				nbei = (int) Math.ceil(mbei);
+			} else {
+				nbei = (int) Math.ceil(mbei) + 1;
+			}
+			alarm.firstTimeN = alarm.firstTimeN + alarm.minuteN * 60
+					* 1000L * nbei;
 			alarmInfo = alarm;
 		}
 		if (app.isAreadyAlarm) {

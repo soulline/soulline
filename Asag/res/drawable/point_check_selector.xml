@@ -2,5 +2,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:state_checked="true" android:drawable="@drawable/point_item_check"></item>
     <item android:state_pressed="true" android:drawable="@drawable/point_item_check"></item>
-    <item android:drawable="@drawable/point_item_normal"></item>
+    <item android:state_checked="false" android:drawable="@drawable/point_item_normal"></item>
 </selector>
