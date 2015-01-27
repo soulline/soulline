@@ -119,7 +119,7 @@ public class CanganRecordActivity extends BaseActivity implements
 		if (adapter == null) {
 			adapter = new CanganRecordAdapter(context);
 			adapter.addData(list);
-			adapter.addOnPointCheckListener(new OnPointCheckListener() {
+			/*adapter.addOnPointCheckListener(new OnPointCheckListener() {
 				
 				@Override
 				public void onCheck(int position) {
@@ -133,7 +133,7 @@ public class CanganRecordActivity extends BaseActivity implements
 					}
 					adapter.notifyDataSetChanged();
 				}
-			});
+			});*/
 			record_list.setAdapter(adapter);
 		} else {
 			adapter.clear();

@@ -2,8 +2,10 @@ package com.asag.serial;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -426,16 +428,26 @@ public class PointLocationActivity extends BaseActivity implements
 		values.put(AsagProvider.PointColumns.XPOINT, info.xpoint);
 		values.put(AsagProvider.PointColumns.YPOINT, info.ypoint);
 		values.put(AsagProvider.PointColumns.ZPOINT, info.zpoint);
-		boolean iscache = DataUtils.getPreferences(DataUtils.KEY_ISPOINTF_CACHE,
-				false);
-		if (!iscache) {
-			getContentResolver().insert(AsagProvider.PointColumns.CONTENT_URI,
-					values);
-			DataUtils.putPreferences(DataUtils.KEY_ISPOINTF_CACHE, true);
-		} else {
+		Cursor cursor = getContentResolver().query(
+				AsagProvider.PointColumns.CONTENT_URI,
+				new String[] { AsagProvider.PointColumns._ID,
+						AsagProvider.PointColumns.NUMBER,
+						AsagProvider.PointColumns.XPOINT,
+						AsagProvider.PointColumns.YPOINT,
+						AsagProvider.PointColumns.ZPOINT }, AsagProvider.PointColumns.NUMBER + "='" + 
+								info.way + "'", null,
+								null);
+		Log.d("zhao", "save Point value cursor : " + cursor);
+		if (cursor != null) {
+			Log.d("zhao", "save Point value count : " + cursor.getCount());
+		}
+		if (cursor != null && cursor.getCount() > 0) {
 			getContentResolver().update(AsagProvider.PointColumns.CONTENT_URI,
 					values, AsagProvider.PointColumns.NUMBER + "=" + info.way,
 					null);
+		} else {
+			getContentResolver().insert(AsagProvider.PointColumns.CONTENT_URI,
+					values);
 		}
 	}
 

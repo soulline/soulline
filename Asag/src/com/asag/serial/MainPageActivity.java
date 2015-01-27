@@ -370,7 +370,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (index != -1 && rightList != null) {
 			rightList.remove(index);
 		}
-		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 1);
+		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		if (adapter == null) {
 			adapter = new RightAdatper(context);
 			rightList.add(data);
@@ -739,6 +739,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					saveCheckInNewTask(checkNew);
 				}
 				checkWayList.clear();
+				checkFunctionTx.setText("粮安监测");
 				if (app.isPause) {
 					Log.d("zhao", "interrup  pause : " + app.isPause);
 					app.isPause = false;
@@ -1258,6 +1259,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isPause) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
+									checkFunctionTx.setText("粮安监测");
 									clearRightData();
 									checkState = 0;
 									showToast("定时器开启");
@@ -1287,6 +1289,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 //										restartAlarmSet();
 									}
 								} else {
+									checkFunctionTx.setText("粮安检测");
 									clearRightData();
 									if (checkDetail != null) {
 										checkDetail.pointList.clear();
@@ -1347,6 +1350,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 										restartAlarmSet();
 									}*/
 								} else {
+									checkFunctionTx.setText("仓安监测");
 									clearRightData();
 									app.lastWay = "0";
 									checkState = 2;
@@ -1467,9 +1471,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					@Override
 					public void onClick(int resourceId) {
 						switch (resourceId) {
-						case R.id.textSize_menu:
-							showTextSizeMenu();
-							break;
 							
 						case R.id.check_params_menu:
 							Intent checkParam = new Intent(context, CheckParamsSetActivity.class);

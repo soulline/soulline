@@ -168,7 +168,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
@@ -180,6 +180,16 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/params_btn_selector"
                     android:text="确定"
+                    android:textColor="@color/serial_black"
+                    android:textSize="17dp" />
+                
+                <Button
+                    android:id="@+id/all_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/params_btn_selector"
+                    android:layout_centerInParent="true"
+                    android:text="全选"
                     android:textColor="@color/serial_black"
                     android:textSize="17dp" />
 

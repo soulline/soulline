@@ -20,7 +20,7 @@ public class SettingPopMenu extends PopupWindow implements OnClickListener{
 	
 	private OnSettingClickListener listener;
 
-	private TextView dateSetMenu, pointSetMenu, checkParamsMenu, textSizeMenu;
+	private TextView dateSetMenu, pointSetMenu, checkParamsMenu;
 	
 	public interface OnSettingClickListener {
 		public void onClick(int resourceId);
@@ -59,7 +59,6 @@ public class SettingPopMenu extends PopupWindow implements OnClickListener{
 		dateSetMenu.setTextSize(dateSetMenu.getTextSize() * size);
 		pointSetMenu.setTextSize(pointSetMenu.getTextSize() * size);
 		checkParamsMenu.setTextSize(checkParamsMenu.getTextSize() * size);
-		textSizeMenu.setTextSize(textSizeMenu.getTextSize() * size);
 	}
 	
 	public SettingPopMenu(Context context, OnSettingClickListener listener) {
@@ -90,11 +89,9 @@ public class SettingPopMenu extends PopupWindow implements OnClickListener{
 		dateSetMenu = (TextView) view.findViewById(R.id.date_set_menu);
 		pointSetMenu = (TextView) view.findViewById(R.id.point_set_menu);
 		checkParamsMenu = (TextView) view.findViewById(R.id.check_params_menu);
-		textSizeMenu = (TextView) view.findViewById(R.id.textSize_menu);
 		view.findViewById(R.id.date_set_menu).setOnClickListener(this);
 		view.findViewById(R.id.point_set_menu).setOnClickListener(this);
 		view.findViewById(R.id.check_params_menu).setOnClickListener(this);
-		view.findViewById(R.id.textSize_menu).setOnClickListener(this);
 	}
 	
 	public void showPopupWindow(View parent) {  

@@ -57,6 +57,7 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 		check15 = (SerialCheck) view.findViewById(R.id.check_way_15);
 		view.findViewById(R.id.btn_ok).setOnClickListener(this);
 		view.findViewById(R.id.btn_cancel).setOnClickListener(this);
+		view.findViewById(R.id.all_select).setOnClickListener(this);
 	}
 	
 	private String getCheckResult() {
@@ -154,6 +155,28 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 	public String binaryToHex(String s){
 		return Long.toHexString(Long.parseLong(s,2));
 	}
+	
+	private void doAllSelect() {
+		check0.setCheck(true);
+		check1.setCheck(true);
+		check2.setCheck(true);
+		check3.setCheck(true);
+		check4.setCheck(true);
+		check5.setCheck(true);
+		check6.setCheck(true);
+		check7.setCheck(true);
+		check8.setCheck(true);
+		check9.setCheck(true);
+		check10.setCheck(true);
+		check11.setCheck(true);
+		check12.setCheck(true);
+		check13.setCheck(true);
+		check14.setCheck(true);
+		check15.setCheck(true);
+		if (listener != null) {
+			listener.onCallBack(getCheckResult());
+		}
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -162,6 +185,11 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 			if (listener != null) {
 				listener.onCallBack(getCheckResult());
 			}
+			dismissAllowingStateLoss();
+			break;
+			
+		case R.id.all_select:
+			doAllSelect();
 			dismissAllowingStateLoss();
 			break;
 			

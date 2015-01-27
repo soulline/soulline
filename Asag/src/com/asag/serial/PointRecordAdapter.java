@@ -89,7 +89,7 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 			holder = new ViewHolder();
 			convertView = View.inflate(context, R.layout.point_record_item,
 					null);
-			holder.item_check = (CheckBox) convertView
+			holder.item_check = (ImageView) convertView
 					.findViewById(R.id.item_check);
 			holder.item_date = (TextView) convertView
 					.findViewById(R.id.item_date);
@@ -131,7 +131,11 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 		}
 		PointRecord record = getItem(position);
 		holder.item_date.setTextSize(14.0f * size);
-		holder.item_check.setChecked(record.isCheck);
+		if (record.isCheck) {
+			holder.item_check.setBackgroundResource(R.drawable.point_item_check);
+		} else {
+			holder.item_check.setBackgroundResource(R.drawable.point_item_normal);
+		}
 		holder.item_date.setText(record.date);
 		Log.d("zhao", "way0state : " + record.way0State);
 		Log.d("zhao", "map draw : " + drawableMap.get(record.way0State));
@@ -188,21 +192,11 @@ public class PointRecordAdapter extends ArrayAdapter<PointRecord> {
 		} else {
 			convertView.findViewById(R.id.record_item_layout).setBackgroundColor(context.getResources().getColor(R.color.white));
 		}
-		final int finalPosition = position;
-		holder.item_check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (listener != null) {
-					listener.onCheck(finalPosition);
-				}
-			}
-		});
 		return convertView;
 	}
 
 	public class ViewHolder {
-		public CheckBox item_check;
+		public ImageView item_check;
 		public TextView item_date;
 
 		public ImageView state_0_icon, state_1_icon, state_2_icon,

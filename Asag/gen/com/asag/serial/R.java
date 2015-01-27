@@ -378,16 +378,16 @@ public final class R {
         public static final int yellow_state=0x7f020057;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b01a1;
+        public static final int action_settings=0x7f0b01a0;
         public static final int all_select=0x7f0b001a;
-        public static final int b_big_size=0x7f0b01a0;
+        public static final int b_big_size=0x7f0b019f;
         public static final int base_content_=0x7f0b0010;
         public static final int base_extra_layout=0x7f0b0011;
         public static final int base_loading=0x7f0b0012;
         public static final int base_title_layout=0x7f0b000f;
         public static final int bianhao_title=0x7f0b0037;
         public static final int bianhao_value=0x7f0b0123;
-        public static final int big_size=0x7f0b019f;
+        public static final int big_size=0x7f0b019e;
         public static final int bt_ceding=0x7f0b00e0;
         public static final int bt_file=0x7f0b00de;
         public static final int bt_function=0x7f0b00df;
@@ -505,7 +505,7 @@ public final class R {
         public static final int minute_paikong=0x7f0b00ef;
         public static final int mmi_title=0x7f0b003b;
         public static final int mmi_value=0x7f0b0125;
-        public static final int normal_size=0x7f0b019e;
+        public static final int normal_size=0x7f0b019d;
         public static final int number_0_title=0x7f0b012b;
         public static final int number_10_title=0x7f0b0153;
         public static final int number_11_title=0x7f0b0157;
@@ -552,7 +552,7 @@ public final class R {
         public static final int ph_title=0x7f0b0016;
         public static final int point_check_menu=0x7f0b009a;
         public static final int point_detail_listview=0x7f0b003c;
-        public static final int point_distribute_menu=0x7f0b0198;
+        public static final int point_distribute_menu=0x7f0b0197;
         public static final int point_grid=0x7f0b0126;
         public static final int point_set_menu=0x7f0b0195;
         public static final int pop_local=0x7f0b0095;
@@ -610,7 +610,7 @@ public final class R {
         public static final int ruku_date_title=0x7f0b0032;
         public static final int ruku_date_value=0x7f0b0033;
         public static final int ruku_time_title=0x7f0b0100;
-        public static final int s_small_size=0x7f0b019c;
+        public static final int s_small_size=0x7f0b019b;
         public static final int safe_state_icon=0x7f0b0021;
         public static final int safe_state_title=0x7f0b0015;
         public static final int save_as=0x7f0b001d;
@@ -634,10 +634,10 @@ public final class R {
         public static final int shuliang_number_title=0x7f0b002a;
         public static final int shuliang_number_value=0x7f0b002b;
         public static final int shuliang_title=0x7f0b00fa;
-        public static final int small_size=0x7f0b019d;
+        public static final int small_size=0x7f0b019c;
         public static final int spinner=0x7f0b00e9;
-        public static final int spinner_item_tx=0x7f0b0199;
-        public static final int spinner_list=0x7f0b019a;
+        public static final int spinner_item_tx=0x7f0b0198;
+        public static final int spinner_list=0x7f0b0199;
         public static final int ssi_title=0x7f0b003a;
         public static final int ssi_value=0x7f0b0124;
         public static final int start_date_input=0x7f0b0107;
@@ -700,7 +700,6 @@ public final class R {
         public static final int t_value=0x7f0b00c1;
         public static final int t_value_state=0x7f0b00c0;
         public static final int testTime=0x7f0b00ed;
-        public static final int textSize_menu=0x7f0b0197;
         public static final int textView1=0x7f0b00a2;
         public static final int textView2=0x7f0b00a3;
         public static final int textView3=0x7f0b00a4;
@@ -737,7 +736,7 @@ public final class R {
         public static final int way_8_title=0x7f0b0177;
         public static final int way_9_title=0x7f0b0178;
         public static final int way_title=0x7f0b016b;
-        public static final int welcome_loading=0x7f0b019b;
+        public static final int welcome_loading=0x7f0b019a;
         public static final int wendu_value=0x7f0b0191;
         public static final int x_0_input=0x7f0b012c;
         public static final int x_10_input=0x7f0b0154;

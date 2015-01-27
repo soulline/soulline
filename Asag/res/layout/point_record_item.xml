@@ -3,7 +3,6 @@
     android:id="@+id/record_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,16 +12,16 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="35dp"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
-            <CheckBox
+            <ImageView
                 android:id="@+id/item_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/point_check_selector" />
+                android:background="@drawable/point_item_normal" />
 
             <TextView
                 android:id="@+id/item_date"
