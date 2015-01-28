@@ -119,9 +119,16 @@ public class Welcome extends BaseActivity {
 				if (!TextUtils.isEmpty(chandiCode)) {
 					sendChandiCode(chandiCode);	
 				}
-				sendMessageS(CMDCode.DATA_TRANSFER_FINISH);
+				
 			}
 		}, 12000);
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				sendMessageS(CMDCode.DATA_TRANSFER_FINISH);
+			}
+		}, 14000);
 
 		
 		
