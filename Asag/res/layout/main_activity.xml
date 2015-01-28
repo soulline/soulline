@@ -591,22 +591,23 @@
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:text="CO₂/ppm"
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
 
                     <TextView android:id="@+id/result_rh"
-                        android:layout_width="60dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
                         android:text="RH/%"
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
 
                     <TextView android:id="@+id/result_tc"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
                         android:text="T/℃"
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />

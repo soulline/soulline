@@ -221,13 +221,6 @@
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView android:id="@+id/start_date_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="起始日期："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/start_date_input"

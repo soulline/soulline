@@ -1,5 +1,6 @@
 package com.asag.serial;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,29 +50,31 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 	private TextView chandiSpinner;
 
 	private TextView cangNumInput, countInput, waterInput, rkDateInput,
-			canzhaoPointInput, startDateInput, paikongTimeInput,
-			jianceTimeInput, startTimeInput, jiangeTimeInput;
-	
-	private TextView paramsSettingTitle, title1Ttx, canghaoTitle, liangzhongTitle, shuliangTitle, shuliangDun,
-	                 shuifenTitle, persentDanwei, rukuTimeTitle, chandiTitle, title2Tx, canzhaodianTitle, startDateTitle,
-	                 paikongTimeTitle, paikongTimeDanwei, jianceTimeTitle, jianceTimeDanwei, startTimeTitle, jiangeTimeTitle,
-	                 jiangeTimeDanwei;
-	
+			canzhaoPointInput, paikongTimeInput, jianceTimeInput,
+			startTimeInput, jiangeTimeInput;
+
+	private TextView paramsSettingTitle, title1Ttx, canghaoTitle,
+			liangzhongTitle, shuliangTitle, shuliangDun, shuifenTitle,
+			persentDanwei, rukuTimeTitle, chandiTitle, title2Tx,
+			canzhaodianTitle, paikongTimeTitle, paikongTimeDanwei,
+			jianceTimeTitle, jianceTimeDanwei, startTimeTitle, jiangeTimeTitle,
+			jiangeTimeDanwei;
+
 	private Button btnOk, btnCancel;
 
 	private long chooseTime = 0L;
 
 	private long firstAlarmTime = 0L;
-	
+
 	private CheckDetailItem checkDetail = new CheckDetailItem();
 
 	private LocalBroadcastManager lbm = LocalBroadcastManager
 			.getInstance(SerialApp.getInstance());
 
 	private int setTpye = -1;
-	
+
 	private SpinnerItem liangzhongItem = new SpinnerItem();
-	
+
 	private SpinnerItem chandiItem = new SpinnerItem();
 
 	@Override
@@ -82,8 +85,9 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		initContent();
 		setTpye = getIntent().getIntExtra("set_type", -1);
 		initTextSize();
+		reloadBaseInfo();
 	}
-	
+
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		switch (size) {
@@ -107,7 +111,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
+
 	private void reloadTextSize(float size) {
 		liangzhongSpinner.setTextSize(liangzhongSpinner.getTextSize() * size);
 		chandiSpinner.setTextSize(chandiSpinner.getTextSize() * size);
@@ -116,7 +120,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		waterInput.setTextSize(waterInput.getTextSize() * size);
 		rkDateInput.setTextSize(rkDateInput.getTextSize() * size);
 		canzhaoPointInput.setTextSize(canzhaoPointInput.getTextSize() * size);
-		startDateInput.setTextSize(startDateInput.getTextSize() * size);
 		paikongTimeInput.setTextSize(paikongTimeInput.getTextSize() * size);
 		jianceTimeInput.setTextSize(jianceTimeInput.getTextSize() * size);
 		startTimeInput.setTextSize(startTimeInput.getTextSize() * size);
@@ -133,7 +136,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		chandiTitle.setTextSize(chandiTitle.getTextSize() * size);
 		title2Tx.setTextSize(title2Tx.getTextSize() * size);
 		canzhaodianTitle.setTextSize(canzhaodianTitle.getTextSize() * size);
-		startDateTitle.setTextSize(startDateTitle.getTextSize() * size);
 		paikongTimeTitle.setTextSize(paikongTimeTitle.getTextSize() * size);
 		paikongTimeDanwei.setTextSize(paikongTimeDanwei.getTextSize() * size);
 		jianceTimeTitle.setTextSize(jianceTimeTitle.getTextSize() * size);
@@ -152,7 +154,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		chandiSpinner.setOnClickListener(this);
 		findViewById(R.id.btn_cancel).setOnClickListener(this);
 		findViewById(R.id.btn_ok).setOnClickListener(this);
-		
+
 		paramsSettingTitle = (TextView) findViewById(R.id.params_setting_title);
 		title1Ttx = (TextView) findViewById(R.id.title_1_tx);
 		canghaoTitle = (TextView) findViewById(R.id.canghao_title);
@@ -165,7 +167,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		chandiTitle = (TextView) findViewById(R.id.chandi_title);
 		title2Tx = (TextView) findViewById(R.id.title_2_tx);
 		canzhaodianTitle = (TextView) findViewById(R.id.canzhaodian_title);
-		startDateTitle = (TextView) findViewById(R.id.start_date_title);
 		paikongTimeTitle = (TextView) findViewById(R.id.paikong_time_title);
 		paikongTimeDanwei = (TextView) findViewById(R.id.paikong_time_danwei);
 		jianceTimeTitle = (TextView) findViewById(R.id.jiance_time_title);
@@ -181,7 +182,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		waterInput = (TextView) findViewById(R.id.water_input);
 		rkDateInput = (TextView) findViewById(R.id.rk_date_input);
 		canzhaoPointInput = (TextView) findViewById(R.id.canzhao_point_input);
-		startDateInput = (TextView) findViewById(R.id.start_date_input);
 		paikongTimeInput = (TextView) findViewById(R.id.paikong_time_input);
 		jianceTimeInput = (TextView) findViewById(R.id.jiance_time_input);
 		startTimeInput = (TextView) findViewById(R.id.start_time_input);
@@ -191,7 +191,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		waterInput.setOnClickListener(this);
 		rkDateInput.setOnClickListener(this);
 		canzhaoPointInput.setOnClickListener(this);
-		startDateInput.setOnClickListener(this);
 		paikongTimeInput.setOnClickListener(this);
 		jianceTimeInput.setOnClickListener(this);
 		startTimeInput.setOnClickListener(this);
@@ -383,10 +382,9 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 							checkDetail.rukuDate = dateStr;
 							SimpleDateFormat format2 = new SimpleDateFormat(
 									"yyyyMMdd");
-							 String timeMsg =
-							 getHexString(format2.format(date),
-							 6);
-							 sendMessageS(timeMsg);
+							String timeMsg = getHexString(format2.format(date),
+									6);
+							sendMessageS(timeMsg);
 						}
 
 					}
@@ -550,31 +548,29 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 	private void sendChandiCode(String chandiCode) {
 		if (TextUtils.isEmpty(chandiCode))
 			return;
-		String chandiStrMsg = CMDCode.DATA_CHANDI + " " + chandiCode
-				+ "FF FF";
+		String chandiStrMsg = CMDCode.DATA_CHANDI + " " + chandiCode + "FF FF";
 		sendMessageS(chandiStrMsg);
 	}
-	
+
 	private void sendFoodCode(String foodCode) {
 		if (TextUtils.isEmpty(foodCode))
 			return;
-		String foodStr = CMDCode.DATA_LIANGZHONG + " "
-				+ foodCode + "FF FF";
+		String foodStr = CMDCode.DATA_LIANGZHONG + " " + foodCode + "FF FF";
 		sendMessageS(foodStr);
 	}
-	
+
 	private void setValueText(InputEntry inputEntry) {
 		switch (inputEntry.type) {
 		case 1:
-			 sendMessageS(getHexString(inputEntry.value, 1));
+			sendMessageS(getHexString(inputEntry.value, 1));
 			cangNumInput.setText(inputEntry.value);
 			break;
 		case 2:
-			 sendMessageS(getHexString(inputEntry.value, 2));
+			sendMessageS(getHexString(inputEntry.value, 2));
 			waterInput.setText(inputEntry.value);
 			break;
 		case 3:
-			 sendMessageS(getHexString(inputEntry.value, 3));
+			sendMessageS(getHexString(inputEntry.value, 3));
 			countInput.setText(inputEntry.value);
 			break;
 		case 4:
@@ -593,6 +589,86 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 			break;
 		default:
 			break;
+		}
+	}
+
+	private void reloadBaseInfo() {
+		String canghao = DataUtils.getPreferences("canghao_data", "");
+		String liangzhong = DataUtils
+				.getPreferences("liangzhong_data_name", "");
+		final String shuliang = DataUtils.getPreferences("check_count_data", "");
+		final String shuifen = DataUtils.getPreferences("shuifen_data", "");
+		final String rukudate = DataUtils.getPreferences("ruku_date", "");
+		String chandi = DataUtils.getPreferences("chandi_data_name", "");
+		if (!TextUtils.isEmpty(canghao)) {
+			cangNumInput.setText(canghao);
+			sendMessageS(getHexString(canghao, 1));
+		}
+		if (!TextUtils.isEmpty(liangzhong)) {
+			liangzhongTitle.setText(liangzhong);
+			liangzhongItem.code = DataUtils.getPreferences("liangzhong_data",
+					"");
+			liangzhongItem.name = DataUtils.getPreferences(
+					"liangzhong_data_name", "");
+			handler.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					sendFoodCode(liangzhongItem.code);
+				}
+			}, 200);
+
+		}
+		if (!TextUtils.isEmpty(shuliang)) {
+			countInput.setText(shuliang);
+			handler.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					sendMessageS(getHexString(shuliang, 3));
+				}
+			}, 400);
+		}
+		if (!TextUtils.isEmpty(shuifen)) {
+			waterInput.setText(shuifen);
+			handler.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					sendMessageS(getHexString(shuifen, 2));
+				}
+			}, 600);
+		}
+		if (!TextUtils.isEmpty(rukudate)) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				Date date = format.parse(rukudate);
+				chooseTime = date.getTime();
+				rkDateInput.setText(format1.format(date));
+				handler.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						sendMessageS(getHexString(rukudate, 6));
+					}
+				}, 800);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		if (!TextUtils.isEmpty(chandi)) {
+			chandiTitle.setText(chandi);
+			chandiItem.code = DataUtils.getPreferences("chandi_data", "");
+			chandiItem.name = DataUtils.getPreferences("chandi_data_name", "");
+			handler.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					sendChandiCode(chandiItem.code);
+					
+				}
+			}, 1000);
 		}
 	}
 
@@ -644,20 +720,28 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 				}
 				DataUtils.putPreferences("check_time", check);
 				DataUtils.putPreferences("paikong_time", paikong);
-				DataUtils.putPreferences("canghao_data", cangNumInput.getText().toString().trim());
-				DataUtils.putPreferences("liangzhong_data", liangzhongItem.code);
-				DataUtils.putPreferences("check_count_data", countInput.getText().toString().trim());
-				DataUtils.putPreferences("shuifen_data", waterInput.getText().toString().trim());
-				SimpleDateFormat format2 = new SimpleDateFormat(
-						"yyyyMMdd");
+				DataUtils.putPreferences("canghao_data", cangNumInput.getText()
+						.toString().trim());
+				DataUtils
+						.putPreferences("liangzhong_data", liangzhongItem.code);
+				DataUtils.putPreferences("liangzhong_data_name",
+						liangzhongItem.name);
+				DataUtils.putPreferences("check_count_data", countInput
+						.getText().toString().trim());
+				DataUtils.putPreferences("shuifen_data", waterInput.getText()
+						.toString().trim());
+				SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
 				String timeMsg = format2.format(chooseTime);
 				DataUtils.putPreferences("ruku_date", timeMsg);
 				DataUtils.putPreferences("chandi_data", chandiItem.code);
+				DataUtils.putPreferences("chandi_data_name", chandiItem.name);
 				data.putExtra("check_value", check);
 				data.putExtra("paikong_value", paikong);
 				data.putExtra("first_alarm_time", firstAlarmTime);
 				data.putExtra("check_detail", checkDetail);
-				Log.d("zhao", "set_params : checkDate : " + checkDetail.checkDate + " -- checkType : " + checkDetail.checkType);
+				Log.d("zhao", "set_params : checkDate : "
+						+ checkDetail.checkDate + " -- checkType : "
+						+ checkDetail.checkType);
 				sendMessageS(CMDCode.PREPARE_OK);
 				setResult(RESULT_OK, data);
 				finish();

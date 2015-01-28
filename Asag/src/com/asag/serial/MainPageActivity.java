@@ -548,6 +548,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private CheckDetailItem checkState(CheckDetailItem check) {
+		if (check.pointList.size() == 0) return check;
 		StringBuilder sb1 = new StringBuilder();
 		StringBuilder sb2 = new StringBuilder();
 		boolean safe1 = true;
@@ -568,12 +569,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			if (wendu >= 8.0f) {
 				safe3 = false;
 				sb2.append(record.wayNum).append("、");
-			} else if (wendu > 0.0f) {
-				safe3 = true;
 			}
 		}
 		if (safe1 && safe2) {
-			check.chuliangState = "安全";
+			check.chuliangState = "基本安全";
 		} else if (!safe1 && safe2) {
 			check.chuliangState = "基本安全";
 		} else {
@@ -582,7 +581,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (!safe3) {
 			check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
 		} else {
-			check.shuifenState = "安全";
+			check.shuifenState = "基本安全";
 		}
 		return check;
 	}
@@ -634,7 +633,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					record.mmi = getMmi(dataEntry.wendu) + "";
 					record.o2Value = dataEntry.o2;
 					record.ph3Value = dataEntry.ph3data;
-					Log.d("zhaoz", "receive checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
+					Log.d("zhao", "receive checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
 					if (checkDetail != null) {
 						checkDetail.pointList.add(record);
 					}
