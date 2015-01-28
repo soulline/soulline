@@ -564,11 +564,11 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				safe1 = false;
 				safe2 = true;
 			}
-			float wendu = Float.valueOf(record.tValue);
+			float wendu = Float.valueOf(record.mmi);
 			if (wendu >= 8.0f) {
 				safe3 = false;
 				sb2.append(record.wayNum).append("、");
-			} else {
+			} else if (wendu > 0.0f) {
 				safe3 = true;
 			}
 		}

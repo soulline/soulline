@@ -110,7 +110,11 @@ public class SerialService extends Service {
 								if (message.startsWith(CMDCode.PASSWAY_DATA
 										.replaceAll(" ", ""))) {
 									if (!checkZeroData(message)) {
-										parsePassway(message);
+										try {
+											parsePassway(message);
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
 									}
 								} else if (message
 										.startsWith(CMDCode.RECEIVE_CO2
