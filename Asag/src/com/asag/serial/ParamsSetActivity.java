@@ -14,11 +14,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.asag.serial.ChandiPopMenu.OnChandiClickListener;
 import com.asag.serial.LiangzhongPopMenu.OnLiangClickListener;
@@ -35,7 +39,7 @@ import com.asag.serial.utils.CMDCode;
 import com.asag.serial.utils.DataUtils;
 import com.asag.serial.utils.SerialBroadCode;
 
-public class ParamsSetActivity extends BaseActivity implements OnClickListener {
+public class ParamsSetActivity extends BaseActivity implements OnClickListener, OnEditorActionListener{
 
 	private ArrayList<SpinnerItem> foodList = new ArrayList<SpinnerItem>();
 
@@ -49,9 +53,9 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 
 	private TextView chandiSpinner;
 
-	private TextView cangNumInput, countInput, waterInput, rkDateInput,
-			canzhaoPointInput, paikongTimeInput, jianceTimeInput,
-			startTimeInput, jiangeTimeInput;
+	private TextView rkDateInput,
+			
+			startTimeInput;
 
 	private TextView paramsSettingTitle, title1Ttx, canghaoTitle,
 			liangzhongTitle, shuliangTitle, shuliangDun, shuifenTitle,
@@ -59,6 +63,8 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 			canzhaodianTitle, paikongTimeTitle, paikongTimeDanwei,
 			jianceTimeTitle, jianceTimeDanwei, startTimeTitle, jiangeTimeTitle,
 			jiangeTimeDanwei;
+	
+	private EditText cangNumInput, countInput, waterInput, canzhaoPointInput, paikongTimeInput, jianceTimeInput, jiangeTimeInput;
 
 	private Button btnOk, btnCancel;
 
@@ -177,24 +183,20 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		btnOk = (Button) findViewById(R.id.btn_ok);
 		btnCancel = (Button) findViewById(R.id.btn_cancel);
 
-		cangNumInput = (TextView) findViewById(R.id.cang_num_input);
-		countInput = (TextView) findViewById(R.id.count_input);
-		waterInput = (TextView) findViewById(R.id.water_input);
+		cangNumInput = (EditText) findViewById(R.id.cang_num_input);
+		countInput = (EditText) findViewById(R.id.count_input);
+		waterInput = (EditText) findViewById(R.id.water_input);
 		rkDateInput = (TextView) findViewById(R.id.rk_date_input);
-		canzhaoPointInput = (TextView) findViewById(R.id.canzhao_point_input);
-		paikongTimeInput = (TextView) findViewById(R.id.paikong_time_input);
-		jianceTimeInput = (TextView) findViewById(R.id.jiance_time_input);
+		canzhaoPointInput = (EditText) findViewById(R.id.canzhao_point_input);
+		paikongTimeInput = (EditText) findViewById(R.id.paikong_time_input);
+		jianceTimeInput = (EditText) findViewById(R.id.jiance_time_input);
 		startTimeInput = (TextView) findViewById(R.id.start_time_input);
-		jiangeTimeInput = (TextView) findViewById(R.id.jiange_time_input);
-		cangNumInput.setOnClickListener(this);
-		countInput.setOnClickListener(this);
-		waterInput.setOnClickListener(this);
+		jiangeTimeInput = (EditText) findViewById(R.id.jiange_time_input);
 		rkDateInput.setOnClickListener(this);
-		canzhaoPointInput.setOnClickListener(this);
-		paikongTimeInput.setOnClickListener(this);
-		jianceTimeInput.setOnClickListener(this);
 		startTimeInput.setOnClickListener(this);
-		jiangeTimeInput.setOnClickListener(this);
+		cangNumInput.setOnEditorActionListener(this);
+		countInput.setOnEditorActionListener(this);
+		waterInput.setOnEditorActionListener(this);
 
 	}
 
@@ -527,7 +529,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 		return null;
 	}
 
-	private void showInputFragment(int type) {
+	/*private void showInputFragment(int type) {
 		Bundle b = new Bundle();
 		b.putInt("type", type);
 		displayFragment(true, false, "input_dialog", b,
@@ -543,7 +545,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 						}
 					}
 				});
-	}
+	}*/
 
 	private void sendChandiCode(String chandiCode) {
 		if (TextUtils.isEmpty(chandiCode))
@@ -748,50 +750,59 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 
-		case R.id.cang_num_input:
-			showInputFragment(1);
-			break;
-
-		case R.id.count_input:
-			showInputFragment(3);
-			break;
-
-		case R.id.water_input:
-			showInputFragment(2);
-			break;
 
 		case R.id.rk_date_input:
 			showDatePick();
 			break;
 
-		case R.id.canzhao_point_input:
-			showInputFragment(7);
-			break;
-
-		case R.id.paikong_time_input:
-			showInputFragment(5);
-			break;
-
-		case R.id.start_date_input:
-
-			break;
-
-		case R.id.jiance_time_input:
-			showInputFragment(4);
-			break;
 
 		case R.id.start_time_input:
 			showTimePicker();
-			break;
-
-		case R.id.jiange_time_input:
-			showInputFragment(6);
 			break;
 
 		default:
 			break;
 		}
 
+	}
+
+	@Override
+	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		if (actionId == EditorInfo.IME_ACTION_NEXT) {
+			switch (v.getId()) {
+			case R.id.cang_num_input:
+				sendMessageS(getHexString(v.getText().toString().trim(), 1));
+				break;
+				
+			case R.id.count_input:
+				sendMessageS(getHexString(v.getText().toString().trim(), 3));
+				break;
+
+			case R.id.water_input:
+				sendMessageS(getHexString(v.getText().toString().trim(), 2));
+				break;
+				
+			case R.id.canzhao_point_input:
+				
+				break;
+				
+			case R.id.paikong_time_input:
+				
+				break;
+				
+			case R.id.jiance_time_input:
+				
+				break;
+				
+			case R.id.jiange_time_input:
+				
+				break;
+
+			default:
+				break;
+			}
+		}
+		return false;
 	}
 
 }

@@ -24,7 +24,7 @@ public class ExcellUtils {
 	
 	public static String upanfilePath = "/storage/udisk1/disk-1/";
 
-	public static void writeExcell(List list, String fileName, String sheetName) throws Exception {
+	public static void writeExcell(List list, String dirName, String fileName, String sheetName) throws Exception {
 		File fileSd = new File(sdcardfilePath);
 		String path = "";
 		Log.d("zhao", "sdcard isDirectory : " + fileSd.isDirectory());
@@ -37,7 +37,11 @@ public class ExcellUtils {
 				path = upanfilePath;
 			}
 		}
-		WritableWorkbook book= Workbook.createWorkbook(new File(path + "asag" + fileName + ".xls")); 
+		File newFile = new File(path, dirName);
+		if (!newFile.isDirectory()) {
+			newFile.mkdir();
+		}
+		WritableWorkbook book= Workbook.createWorkbook(new File(newFile.getAbsolutePath() + fileName + ".xls")); 
         WritableSheet sheet=book.createSheet(sheetName, 0); 
         writeDataToSheet(sheet, list);
         book.write(); 
@@ -85,8 +89,8 @@ public class ExcellUtils {
 			row.add(point.co2);
 			row.add(point.rhValue);
 			row.add(point.tValue);
-			row.add(point.ssi);
-			row.add(point.mmi);
+			row.add(getSSIStatus(point.status));
+			row.add(getMMiStatus(point.mmi));
 			row.add(point.status + "");
 			list.add(row);
 		}
@@ -102,6 +106,51 @@ public class ExcellUtils {
 		list.add(row7);
 		list.add(row8);
 		return list;
+	}
+	
+	private static String getMMiStatus(String mmi) {
+		String status = "I级";
+		try {
+			float mmiF = Float.valueOf(mmi);
+			if (mmiF > 0.0f && mmiF <= 6.0f) {
+				status = "I级";
+			} else if (mmiF > 6.0f && mmiF <= 10.0f) {
+				status = "II级";
+			} else if (mmiF > 10.0f && mmiF <= 20.0f) {
+				status = "III级";
+			} else if (mmiF > 20.0f) {
+				status = "IV级";
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "I级";
+		}
+		return status;
+	}
+	
+	private static String getSSIStatus(int status) {
+		String statusStr = "I级";
+		switch (status) {
+		case 1:
+			statusStr = "I级";
+			break;
+			
+		case 2:
+			statusStr = "II级";
+			break;
+			
+		case 3:
+			statusStr = "III级";
+			break;
+			
+		case 4:
+			statusStr = "IV级";
+			break;
+
+		default:
+			break;
+		}
+		return statusStr;
 	}
 	
 	public static List getCanganCheckList(CheckDetailItem checkDetail) {

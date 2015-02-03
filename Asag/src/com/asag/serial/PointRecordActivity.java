@@ -575,8 +575,16 @@ public class PointRecordActivity extends BaseActivity implements
 					Log.d("zhao", "save list size : " + selectListS.size());
 					for (int check : selectListS) {
 						CheckDetailItem checkDetail = checkList.get(check);
+						String dirName = "";
+						if (checkDetail.checkType.equals("1")) {
+							dirName = "lianganalarm";
+						} else if (checkDetail.checkType.equals("2")) {
+							dirName = "lianganpoint";
+						} else if (checkDetail.checkType.equals("3")) {
+							dirName = "cangancheck";
+						}
 						try {
-							ExcellUtils.writeExcell(ExcellUtils.getPointCheckList(checkDetail), checkDetail.checkDate + "type" + checkDetail.checkType, "checkwith" + checkDetail.checkType);
+							ExcellUtils.writeExcell(ExcellUtils.getPointCheckList(checkDetail), dirName, checkDetail.checkDate + "type" + checkDetail.checkType, "checkwith" + checkDetail.checkType);
 							File fileSd = new File(ExcellUtils.sdcardfilePath);
 							int saveType = 1;
 							if (fileSd.isDirectory()) {

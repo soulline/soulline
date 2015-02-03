@@ -47,7 +47,7 @@ public class CheckDetailRecordActivity extends BaseActivity {
 			}
 			cang_number_value.setText(checkDetail.canghao);
 			liangzhong_number_value.setText(checkDetail.liangzhong);
-			shuliang_number_value.setText(checkDetail.shuliang);
+			shuliang_number_value.setText(checkDetail. shuliang);
 			shuifen_number_value.setText(checkDetail.shuifen);
 			chandi_value.setText(checkDetail.chandi);
 			ruku_date_value.setText(checkDetail.rukuDate);

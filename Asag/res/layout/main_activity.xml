@@ -15,9 +15,9 @@
             android:id="@+id/top_title_tx"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="40dp"
             android:background="@drawable/title_blue_bg"
             android:gravity="center"
+            android:minHeight="40dp"
             android:text="储粮质量安全监测系统"
             android:textColor="@color/white"
             android:textSize="16dp" />
@@ -178,6 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/title_diver" />
+
             <TextView
                 android:id="@+id/cancel_alarm_menu"
                 android:layout_width="wrap_content"
@@ -186,7 +187,7 @@
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="取消定时"
+                android:text="急停检测"
                 android:textColor="@color/serial_black"
                 android:textSize="16dp" />
 
@@ -305,7 +306,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/paikong_check_danwei"
+                            <TextView
+                                android:id="@+id/paikong_check_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -343,7 +345,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/check_check_danwei"
+                            <TextView
+                                android:id="@+id/check_check_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -376,8 +379,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal" >
 
-
-                            <TextView 
+                            <TextView
                                 android:id="@+id/co2_value_state"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -398,7 +400,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/co2_danwei"
+                            <TextView
+                                android:id="@+id/co2_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -413,7 +416,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:orientation="horizontal" >
-
 
                             <TextView
                                 android:id="@+id/ph3_value_state"
@@ -436,7 +438,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/ph3_danwei"
+                            <TextView
+                                android:id="@+id/ph3_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -473,7 +476,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/o2_danwei"
+                            <TextView
+                                android:id="@+id/o2_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -488,7 +492,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:orientation="horizontal" >
-
 
                             <TextView
                                 android:id="@+id/rh_value_state"
@@ -511,7 +514,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/rh_danwei"
+                            <TextView
+                                android:id="@+id/rh_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -526,7 +530,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:orientation="horizontal" >
-
 
                             <TextView
                                 android:id="@+id/t_value_state"
@@ -549,7 +552,8 @@
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
-                            <TextView android:id="@+id/t_danwei"
+                            <TextView
+                                android:id="@+id/t_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -581,13 +585,15 @@
                     android:textColor="@color/serial_black"
                     android:textSize="15dp" />
 
-                <LinearLayout android:id="@+id/result_title"
+                <LinearLayout
+                    android:id="@+id/result_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title_result"
                     android:orientation="horizontal" >
 
-                    <TextView android:id="@+id/result_co2"
+                    <TextView
+                        android:id="@+id/result_co2"
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="40dp"
@@ -596,7 +602,8 @@
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
 
-                    <TextView android:id="@+id/result_rh"
+                    <TextView
+                        android:id="@+id/result_rh"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -604,7 +611,8 @@
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
 
-                    <TextView android:id="@+id/result_tc"
+                    <TextView
+                        android:id="@+id/result_tc"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -613,57 +621,89 @@
                         android:textSize="14dp" />
                 </LinearLayout>
 
-                <View android:id="@+id/title_diver_line"
+                <View
+                    android:id="@+id/title_diver_line"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="5dp"
                     android:layout_below="@+id/result_title"
-                    android:background="@color/gray_line"/>
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray_line" />
+
                 <ListView
                     android:id="@+id/listid"
-                    android:layout_below="@+id/title_diver_line"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_below="@+id/title_diver_line"
+                    android:layout_marginBottom="200dp"
                     android:divider="@color/gray_line"
-                    android:dividerHeight="0.5dp"
-                    android:layout_marginBottom="200dp" />
+                    android:dividerHeight="0.5dp" />
 
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="170dp"
-                    android:orientation="vertical"
-                    android:layout_alignParentBottom="true">
-                    <TextView android:id="@+id/chuliang_state"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/question_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="储粮状况："
+                        android:text="问题点"
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
-                    <TextView android:id="@+id/chuliang_state_value"
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/serial_black"
-                        android:textSize="14dp" />
-                    <TextView android:id="@+id/shuifen_state"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/chuliang_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.CP:"
+                            android:textColor="@color/serial_black"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/chuliang_state_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/serial_black"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="水分迁移："
-                        android:textColor="@color/serial_black"
-                        android:textSize="14dp" />
-                    <TextView android:id="@+id/shuifen_state_value"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/shuifen_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2.PP:"
+                            android:textColor="@color/serial_black"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/shuifen_state_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/serial_black"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <com.asag.serial.widget.DigitalNewClock
+                        android:id="@+id/digital_clock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/serial_black"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="5dp"
                         android:textSize="14dp" />
-                <com.asag.serial.widget.DigitalNewClock
-                    android:id="@+id/digital_clock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_gravity="right"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginRight="5dp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

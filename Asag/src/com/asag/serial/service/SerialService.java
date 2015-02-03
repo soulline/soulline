@@ -362,6 +362,7 @@ public class SerialService extends Service {
 		if (data.length() < 8) {
 			return;
 		}
+		Log.d("zhao", " parseway : " + data);
 		data = data.substring(6);
 		RightDataEntry dataEntry = new RightDataEntry();
 		dataEntry.number = getAsiicForHex(data.substring(0, 2)) + "";

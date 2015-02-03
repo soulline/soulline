@@ -453,8 +453,16 @@ public class CanganRecordActivity extends BaseActivity implements
 				public void run() {
 					for (int check : selectListS) {
 						CheckDetailItem checkDetail = checkList.get(check);
+						String dirName = "";
+						if (checkDetail.checkType.equals("1")) {
+							dirName = "lianganalarm";
+						} else if (checkDetail.checkType.equals("2")) {
+							dirName = "lianganpoint";
+						} else if (checkDetail.checkType.equals("3")) {
+							dirName = "cangancheck";
+						}
 						try {
-							ExcellUtils.writeExcell(ExcellUtils.getCanganCheckList(checkDetail), checkDetail.checkDate + "cangan", "cangan");
+							ExcellUtils.writeExcell(ExcellUtils.getCanganCheckList(checkDetail), dirName, checkDetail.checkDate + "cangan", "cangan");
 							showToast("导出成功");
 							showLoading(false, 3);
 						} catch (Exception e) {

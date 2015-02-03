@@ -6,366 +6,398 @@
 
     <!-- Content layout -->
 
-    <LinearLayout
-        android:id="@+id/base_content_"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="640dp"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
+        android:layout_centerInParent="true" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ScrollView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/params_up_title"
-            android:gravity="center"
-            android:minHeight="30dp"
+            android:scrollbars="vertical">
+        <LinearLayout
+            android:id="@+id/base_content_"
+            android:layout_width="640dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="300dp"
             android:orientation="vertical" >
 
-            <TextView android:id="@+id/params_setting_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/params_up_title"
                 android:gravity="center"
                 android:minHeight="30dp"
-                android:text="参数设定"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/params_down_bg"
-            android:orientation="vertical" >
-
-            <TextView android:id="@+id/title_1_tx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:text="一、信息输入"
-                android:textColor="@color/serial_black"
-                android:textSize="14dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView android:id="@+id/canghao_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="仓号："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
+                android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/cang_num_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView android:id="@+id/liangzhong_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="粮种："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/liangzhong_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/spinner_menu_bg"
-                    android:paddingLeft="3dp"
-                    android:textColor="@color/serial_black"
-                    android:textSize="13dp" />
-
-                <TextView android:id="@+id/shuliang_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="数量："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/count_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView android:id="@+id/shuliang_dun"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="吨"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView android:id="@+id/shuifen_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="水分："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/water_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView android:id="@+id/persent_danwei"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="%"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView android:id="@+id/ruku_time_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="入库时间："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/rk_date_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView android:id="@+id/chandi_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="产地："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/chandi_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/spinner_menu_bg"
-                    android:paddingLeft="3dp"
-                    android:singleLine="true"
-                    android:textColor="@color/serial_black"
-                    android:textSize="13dp" />
-            </LinearLayout>
-
-            <TextView android:id="@+id/title_2_tx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:text="二、参数设定"
-                android:textColor="@color/serial_black"
-                android:textSize="14dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView android:id="@+id/canzhaodian_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="参照点（RP）："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/canzhao_point_input"
-                    android:layout_width="40dp"
+                    android:id="@+id/params_setting_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-
-                <TextView
-                    android:id="@+id/start_date_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
+                    android:minHeight="30dp"
+                    android:text="参数设定"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView android:id="@+id/paikong_time_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="排空时间："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
+                android:background="@drawable/params_down_bg"
+                android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/paikong_time_input"
-                    android:layout_width="80dp"
+                    android:id="@+id/title_1_tx"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="一、信息输入"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView android:id="@+id/paikong_time_danwei"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="min"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
 
-                <TextView android:id="@+id/jiance_time_title"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/canghao_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="仓号："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/cang_num_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/liangzhong_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="粮种："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/liangzhong_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/spinner_menu_bg"
+                        android:paddingLeft="3dp"
+                        android:textColor="@color/serial_black"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/shuliang_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="数量："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/count_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/shuliang_dun"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="吨"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="检测时间："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/shuifen_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="水分："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/water_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/persent_danwei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="%"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/ruku_time_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="入库时间："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/rk_date_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/chandi_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="产地："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/chandi_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/spinner_menu_bg"
+                        android:paddingLeft="3dp"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="13dp" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/jiance_time_input"
-                    android:layout_width="80dp"
+                    android:id="@+id/title_2_tx"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="二、参数设定"
                     android:textColor="@color/serial_black"
                     android:textSize="14dp" />
 
-                <TextView android:id="@+id/jiance_time_danwei"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="min"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/canzhaodian_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="参照点（RP）："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/canzhao_point_input"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/paikong_time_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="排空时间："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/paikong_time_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/paikong_time_danwei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="min"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/jiance_time_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="检测时间："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/jiance_time_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/jiance_time_danwei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="min"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/start_time_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="起始时间："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/start_time_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/jiange_time_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:text="间隔时间："
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/jiange_time_input"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/jiange_time_danwei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="min"
+                        android:textColor="@color/serial_black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp" >
+
+                    <Button
+                        android:id="@+id/btn_ok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/params_btn_selector"
+                        android:text="确定"
+                        android:textColor="@color/serial_black"
+                        android:textSize="17dp" />
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/params_btn_selector"
+                        android:text="取消"
+                        android:textColor="@color/serial_black"
+                        android:textSize="17dp" />
+                </RelativeLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView android:id="@+id/start_time_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="起始时间："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/start_time_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView android:id="@+id/jiange_time_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="间隔时间："
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/jiange_time_input"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-
-                <TextView android:id="@+id/jiange_time_danwei"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="min"
-                    android:textColor="@color/serial_black"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp" >
-
-                <Button
-                    android:id="@+id/btn_ok"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/params_btn_selector"
-                    android:text="确定"
-                    android:textColor="@color/serial_black"
-                    android:textSize="17dp" />
-
-                <Button
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/params_btn_selector"
-                    android:text="取消"
-                    android:textColor="@color/serial_black"
-                    android:textSize="17dp" />
-            </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
-
+        </ScrollView>
+    </RelativeLayout>
     <!-- Extra Fragment layout -->
 
     <FrameLayout

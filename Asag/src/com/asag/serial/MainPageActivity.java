@@ -102,7 +102,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangState, chuliangStateValue,
 			shuifenState, shuifenStateValue;
 
-	private TextView paikongCheckDanwei, checkCheckDanwei;
+	private TextView paikongCheckDanwei, checkCheckDanwei, questionTitle;
 
 	private DigitalNewClock digitalClock;
 
@@ -275,6 +275,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		chuliangStateValue.setTextSize(11.0f * size);
 		shuifenState.setTextSize(11.0f * size);
 		shuifenStateValue.setTextSize(11.0f * size);
+		questionTitle.setTextSize(11.0f * size);
 	}
 
 	private void initView() {
@@ -308,6 +309,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		chuliangStateValue = (TextView) findViewById(R.id.chuliang_state_value);
 		shuifenState = (TextView) findViewById(R.id.shuifen_state);
 		shuifenStateValue = (TextView) findViewById(R.id.shuifen_state_value);
+		
+		questionTitle = (TextView) findViewById(R.id.question_title);
 
 		findViewById(R.id.file_menu).setOnClickListener(this);
 		findViewById(R.id.function_menu).setOnClickListener(this);
@@ -1638,9 +1641,25 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.cancel_alarm_menu:
-			app.isAreadyAlarm = false;
-			JcAlarm.cancelSendAlarm();
-			showToast("已取消定时器");
+//			app.isAreadyAlarm = false;
+//			JcAlarm.cancelSendAlarm();
+//			showToast("已取消定时器");
+			if (checkDetail.checkType.equals("1")) {
+				showToast("当前正在进行粮安监测，无法急停");
+				return;
+			}
+			lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_FINISH_CHECKING));
+			if (checkDetail != null && app.isCheckIng) {
+				sendMessageS(CMDCode.DATA_INTERRUP_STOP);
+				CheckDetailItem checkNew = checkDetail;
+				saveCheckInNewTask(checkNew);
+			}
+			checkWayList.clear();
+			if (app.isPause) {
+				Log.d("zhao", "fast interrup  pause : " + app.isPause);
+				app.isPause = false;
+			}
+			app.isCheckIng = false;
 			break;
 
 		default:
