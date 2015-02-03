@@ -227,6 +227,12 @@ public class CanganRecordActivity extends BaseActivity implements
 				point.checkDate = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKDATE));
+				point.shuifenState = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.SHUIFENSTATE));
+				point.chuliangState = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHULIANGSTATE));
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));

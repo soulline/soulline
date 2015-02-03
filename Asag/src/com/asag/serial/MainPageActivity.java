@@ -560,26 +560,27 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		sb1.append("有潜在风险：");
 		sb2.append("有潜在风险：");
 		for (PointItemRecord record : check.pointList) {
+			Log.d("zhao", "checkState : " + record.status + "  size : " + check.pointList.size());
 			if (record.status > 2) {
 				safe1 = false;
 				safe2 = false;
 				sb1.append(record.wayNum).append("、");
-			} else if (record.status == 2) {
+			}/* else if (record.status == 2) {
 				safe1 = false;
 				safe2 = true;
-			}
+			}*/
 			float wendu = Float.valueOf(record.mmi);
 			if (wendu >= 8.0f) {
 				safe3 = false;
 				sb2.append(record.wayNum).append("、");
 			}
 		}
-		if (safe1 && safe2) {
+		if (!safe1 && !safe2) {
+			check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
+		} else if (safe1 && safe2) {
 			check.chuliangState = "基本安全";
 		} else if (!safe1 && safe2) {
 			check.chuliangState = "基本安全";
-		} else {
-			check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
 		}
 		if (!safe3) {
 			check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
