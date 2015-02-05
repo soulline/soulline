@@ -41,7 +41,7 @@ public class ExcellUtils {
 		if (!newFile.isDirectory()) {
 			newFile.mkdir();
 		}
-		WritableWorkbook book= Workbook.createWorkbook(new File(newFile.getAbsolutePath() + fileName + ".xls")); 
+		WritableWorkbook book= Workbook.createWorkbook(new File(newFile.getAbsolutePath() + "/" + fileName + ".xls")); 
         WritableSheet sheet=book.createSheet(sheetName, 0); 
         writeDataToSheet(sheet, list);
         book.write(); 
