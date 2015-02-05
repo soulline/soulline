@@ -668,14 +668,6 @@
                                 android:orientation="horizontal" >
 
                                 <TextView
-                                    android:id="@+id/chuliang_state"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1.CP:"
-                                    android:textColor="@color/serial_black"
-                                    android:textSize="14dp" />
-
-                                <TextView
                                     android:id="@+id/chuliang_state_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -688,14 +680,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal" >
-
-                                <TextView
-                                    android:id="@+id/shuifen_state"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="2.PP:"
-                                    android:textColor="@color/serial_black"
-                                    android:textSize="14dp" />
 
                                 <TextView
                                     android:id="@+id/shuifen_state_value"

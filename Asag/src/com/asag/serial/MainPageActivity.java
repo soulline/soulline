@@ -99,8 +99,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			checkFunctionTx;
 
 	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei,
-			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangState, chuliangStateValue,
-			shuifenState, shuifenStateValue;
+			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangStateValue, shuifenStateValue;
 
 	private TextView paikongCheckDanwei, checkCheckDanwei, questionTitle;
 
@@ -271,9 +270,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		tDanwei.setTextSize(11.0f * size);
 		paikongCheckDanwei.setTextSize(11.0f * size);
 		checkCheckDanwei.setTextSize(11.0f * size);
-		chuliangState.setTextSize(11.0f * size);
 		chuliangStateValue.setTextSize(11.0f * size);
-		shuifenState.setTextSize(11.0f * size);
 		shuifenStateValue.setTextSize(11.0f * size);
 		questionTitle.setTextSize(11.0f * size);
 	}
@@ -305,9 +302,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		paikongCheckDanwei = (TextView) findViewById(R.id.paikong_check_danwei);
 		checkCheckDanwei = (TextView) findViewById(R.id.check_check_danwei);
 		
-		chuliangState = (TextView) findViewById(R.id.chuliang_state);
 		chuliangStateValue = (TextView) findViewById(R.id.chuliang_state_value);
-		shuifenState = (TextView) findViewById(R.id.shuifen_state);
 		shuifenStateValue = (TextView) findViewById(R.id.shuifen_state_value);
 		
 		questionTitle = (TextView) findViewById(R.id.question_title);
@@ -642,8 +637,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						checkDetail.pointList.add(record);
 					}
 					checkDetail = checkState(checkDetail);
-					chuliangStateValue.setText(checkDetail.chuliangState);
-					shuifenStateValue.setText(checkDetail.shuifenState);
+					chuliangStateValue.setText("1.CP：" + checkDetail.chuliangState);
+					shuifenStateValue.setText("2.PP：" + checkDetail.shuifenState);
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
 						checkWayValue.setText("0");

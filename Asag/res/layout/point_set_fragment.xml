@@ -58,6 +58,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:numeric="integer"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     android:background="@null"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -82,6 +84,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:numeric="integer"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     android:background="@null"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
