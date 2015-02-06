@@ -669,7 +669,7 @@
 
                                 <TextView
                                     android:id="@+id/chuliang_state_value"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text=""
                                     android:textColor="@color/serial_black"
@@ -683,7 +683,7 @@
 
                                 <TextView
                                     android:id="@+id/shuifen_state_value"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text=""
                                     android:textColor="@color/serial_black"
