@@ -607,7 +607,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener, 
 			sendMessageS(getHexString(canghao, 1));
 		}
 		if (!TextUtils.isEmpty(liangzhong)) {
-			liangzhongTitle.setText(liangzhong);
+			liangzhongSpinner.setText(liangzhong);
 			liangzhongItem.code = DataUtils.getPreferences("liangzhong_data",
 					"");
 			liangzhongItem.name = DataUtils.getPreferences(
@@ -660,7 +660,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener, 
 			}
 		}
 		if (!TextUtils.isEmpty(chandi)) {
-			chandiTitle.setText(chandi);
+			chandiSpinner.setText(chandi);
 			chandiItem.code = DataUtils.getPreferences("chandi_data", "");
 			chandiItem.name = DataUtils.getPreferences("chandi_data_name", "");
 			handler.postDelayed(new Runnable() {
