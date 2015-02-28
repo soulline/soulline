@@ -77,7 +77,7 @@ public class ExcellUtils {
 		row5.add("T/℃");
 		row5.add("SSI");
 		row5.add("MMI");
-		row5.add("安全状况");
+//		row5.add("安全状况");
 		list.add(row1);
 		list.add(row2);
 		list.add(row3);
@@ -91,16 +91,16 @@ public class ExcellUtils {
 			row.add(point.tValue);
 			row.add(getSSIStatus(point.status));
 			row.add(getMMiStatus(point.mmi));
-			row.add(point.status + "");
+//			row.add(point.status + "");
 			list.add(row);
 		}
 		List<String> row6 = new ArrayList<String>();
 		row6.add("三、储粮状况");
 		List<String> row7 = new ArrayList<String>();
-		row7.add("储粮状况：");
+		row7.add("疑似点（CP）");
 		row7.add(checkDetail.chuliangState);
 		List<String> row8 = new ArrayList<String>();
-		row8.add("水分迁移:");
+		row8.add("潜在点（PP）");
 		row8.add(checkDetail.shuifenState);
 		list.add(row6);
 		list.add(row7);
