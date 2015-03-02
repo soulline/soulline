@@ -175,7 +175,7 @@
 
                     <TextView
                         android:id="@+id/rk_date_input"
-                        android:layout_width="80dp"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/serial_black"
                         android:textSize="14dp" />
@@ -333,7 +333,7 @@
 
                     <TextView
                         android:id="@+id/start_time_input"
-                        android:layout_width="80dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/serial_black"

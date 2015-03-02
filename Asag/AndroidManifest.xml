@@ -59,7 +59,7 @@
             android:configChanges="locale|screenSize|keyboardHidden|orientation"
             android:screenOrientation="landscape"
             android:theme="@style/BaseDialogTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:windowSoftInputMode="stateVisible|adjustResize" >
         </activity>
         <activity
             android:name="com.asag.serial.CheckParamsSetActivity"
