@@ -224,7 +224,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					cangNumInput.setText("");
 				}
 			}
@@ -233,7 +233,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					countInput.setText("");
 				}
 			}
@@ -242,7 +242,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					waterInput.setText("");
 				}
 
@@ -252,7 +252,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					canzhaoPointInput.setText("");
 				}
 
@@ -262,7 +262,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					paikongTimeInput.setText("");
 				}
 
@@ -272,7 +272,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					jianceTimeInput.setText("");
 				}
 
@@ -282,7 +282,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				if (!arg1) {
+				if (arg1) {
 					jiangeTimeInput.setText("");
 				}
 
