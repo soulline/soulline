@@ -100,11 +100,14 @@ public class ExcellUtils {
 		row7.add("疑似点（CP）");
 		row7.add(checkDetail.chuliangState);
 		List<String> row8 = new ArrayList<String>();
-		row8.add("潜在点（PP）");
-		row8.add(checkDetail.shuifenState);
+		row8.add("四、水分迁移");
+		List<String> row9 = new ArrayList<String>();
+		row9.add("潜在点（PP）");
+		row9.add(checkDetail.shuifenState);
 		list.add(row6);
 		list.add(row7);
 		list.add(row8);
+		list.add(row9);
 		return list;
 	}
 	
