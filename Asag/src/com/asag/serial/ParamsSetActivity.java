@@ -55,9 +55,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 	private TextView chandiSpinner;
 
-	private TextView rkDateInput,
-
-	startTimeInput;
+	private TextView rkDateInput, startTimeInput;
 
 	private TextView paramsSettingTitle, title1Ttx, canghaoTitle,
 			liangzhongTitle, shuliangTitle, shuliangDun, shuifenTitle,
@@ -85,6 +83,8 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 	private SpinnerItem liangzhongItem = new SpinnerItem();
 
 	private SpinnerItem chandiItem = new SpinnerItem();
+	
+	private boolean firstLoad = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 		initTextSize();
 		reloadBaseInfo();
 		initEditText();
+		firstLoad = true;
 	}
 
 	@Override
@@ -225,7 +226,11 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
 				if (arg1) {
-					cangNumInput.setText("");
+					if (!firstLoad) {
+						cangNumInput.setText("");
+					} else {
+						firstLoad = false;
+					}
 				}
 			}
 		});
