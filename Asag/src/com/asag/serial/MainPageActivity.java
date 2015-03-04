@@ -552,8 +552,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		boolean safe1 = true;
 		boolean safe2 = true;
 		boolean safe3 = true;
-		sb1.append("有潜在风险：").append("/n");
-		sb2.append("有潜在风险：").append("/n");
+		sb1.append("有潜在风险：").append("\n");
+		sb2.append("有潜在风险：").append("\n");
 		for (PointItemRecord record : check.pointList) {
 			Log.d("zhao", "checkState : " + record.status + "  size : " + check.pointList.size());
 			if (record.status > 2) {
