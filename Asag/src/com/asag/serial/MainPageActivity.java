@@ -552,8 +552,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		boolean safe1 = true;
 		boolean safe2 = true;
 		boolean safe3 = true;
-		sb1.append("有潜在风险：").append("\n");
-		sb2.append("有潜在风险：").append("\n");
+		sb1.append("疑似点（CP）：").append("\n");
+		sb2.append("潜在点（CP）：").append("\n");
 		for (PointItemRecord record : check.pointList) {
 			Log.d("zhao", "checkState : " + record.status + "  size : " + check.pointList.size());
 			if (record.status > 2) {
@@ -570,18 +570,20 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				sb2.append(record.wayNum).append("、");
 			}
 		}
-		if (!safe1 && !safe2) {
+		check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
+		/*if (!safe1 && !safe2) {
 			check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
 		} else if (safe1 && safe2) {
 			check.chuliangState = "基本安全";
 		} else if (!safe1 && safe2) {
 			check.chuliangState = "基本安全";
-		}
-		if (!safe3) {
+		}*/
+		check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
+		/*if (!safe3) {
 			check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
 		} else {
 			check.shuifenState = "基本安全";
-		}
+		}*/
 		return check;
 	}
 
