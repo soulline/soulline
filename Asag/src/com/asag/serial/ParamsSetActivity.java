@@ -83,8 +83,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 	private SpinnerItem liangzhongItem = new SpinnerItem();
 
 	private SpinnerItem chandiItem = new SpinnerItem();
-	
-	private boolean firstLoad = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +93,14 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 		setTpye = getIntent().getIntExtra("set_type", -1);
 		initTextSize();
 		reloadBaseInfo();
-		initEditText();
-		firstLoad = true;
+		handler.postDelayed(new Runnable() {
+			 
+			@Override
+			public void run() {
+				paramsSettingTitle.requestFocus();
+				initEditText();
+			}
+		}, 200);
 	}
 
 	@Override
@@ -221,17 +225,11 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private void initEditText() {
-		cangNumInput.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			@Override
-			public void onFocusChange(View arg0, boolean arg1) {
-				if (arg1) {
-					if (!firstLoad) {
-						cangNumInput.setText("");
-					} else {
-						firstLoad = false;
-					}
-				}
+		cangNumInput.setOnClickListener(new OnClickListener() {
+			
+			@Override 
+			public void onClick(View arg0) {
+				cangNumInput.setText("");
 			}
 		});
 		countInput.setOnFocusChangeListener(new OnFocusChangeListener() {
