@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -668,6 +669,66 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 			break;
 		}
 	}
+	
+	private void sendAllMessage(final Intent data) {
+		final ProgressDialog dialog = new ProgressDialog(context);
+		dialog.setTitle("正在发送数据，请稍后...");
+		dialog.show();
+		sendMessageS(getHexString(cangNumInput.getText().toString().trim(), 1));
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				sendFoodCode(liangzhongItem.code);
+			}
+		}, 200);
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				sendMessageS(getHexString(countInput.getText().toString(), 3));
+			}
+		}, 400);
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				sendMessageS(getHexString(waterInput.getText().toString().trim(), 2));
+			}
+		}, 600);
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				SimpleDateFormat format2 = new SimpleDateFormat(
+						"yyyyMMdd");
+				String timeMsg = getHexString(format2.format(chooseTime),
+						6);
+				sendMessageS(timeMsg);
+			}
+		}, 800);
+		
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				sendChandiCode(chandiItem.code);
+
+			}
+		}, 1000);
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (dialog.isShowing()) {
+					dialog.dismiss();
+				}
+				sendMessageS(CMDCode.PREPARE_OK);
+				setResult(RESULT_OK, data);
+				finish();
+			}
+		}, 1200);
+	}
 
 	private void reloadBaseInfo() {
 		String canghao = DataUtils.getPreferences("canghao_data", "");
@@ -854,9 +915,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 				Log.d("zhao", "set_params : checkDate : "
 						+ checkDetail.checkDate + " -- checkType : "
 						+ checkDetail.checkType);
-				sendMessageS(CMDCode.PREPARE_OK);
-				setResult(RESULT_OK, data);
-				finish();
+				sendAllMessage(data);
 			}
 			break;
 
