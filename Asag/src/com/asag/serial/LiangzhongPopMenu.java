@@ -48,7 +48,7 @@ public class LiangzhongPopMenu extends PopupWindow {
 		this.listener = listener;
 		this.setContentView(view);
 		this.setWidth(70);
-		this.setHeight(LayoutParams.WRAP_CONTENT);
+		this.setHeight(200);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
         this.update();  
