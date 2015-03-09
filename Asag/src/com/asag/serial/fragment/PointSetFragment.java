@@ -64,7 +64,7 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 			if (getActivity() instanceof BaseActivity) {
 				((BaseActivity) getActivity()).showToast("请输入检测时间");
 				return false;
-			}
+			} 
 		}
 		return true;
 	}

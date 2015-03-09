@@ -30,7 +30,7 @@
                 android:minHeight="30dp"
                 android:text="参数设定"
                 android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:textSize="28dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -181,7 +181,7 @@
                     android:background="@drawable/params_btn_selector"
                     android:text="确定"
                     android:textColor="@color/serial_black"
-                    android:textSize="17dp" />
+                    android:textSize="30dp" />
                 
                 <Button
                     android:id="@+id/all_select"
@@ -191,7 +191,7 @@
                     android:layout_centerInParent="true"
                     android:text="全选"
                     android:textColor="@color/serial_black"
-                    android:textSize="17dp" />
+                    android:textSize="30dp" />
 
                 <Button
                     android:id="@+id/btn_cancel"
@@ -201,7 +201,7 @@
                     android:background="@drawable/params_btn_selector"
                     android:text="取消"
                     android:textColor="@color/serial_black"
-                    android:textSize="17dp" />
+                    android:textSize="30dp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

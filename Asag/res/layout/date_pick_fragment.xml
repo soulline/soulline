@@ -53,7 +53,7 @@
                 android:gravity="center"
                 android:text="确定"
                 android:textColor="@color/serial_black"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/content_cancel"
@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:text="取消"
                 android:textColor="@color/serial_black"
-                android:textSize="20dp" />
+                android:textSize="30dp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -634,7 +634,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/title_diver_line"
-                    android:layout_marginBottom="200dp"
+                    android:layout_marginBottom="250dp"
                     android:divider="@color/gray_line"
                     android:dividerHeight="0.5dp" />
 
@@ -658,7 +658,7 @@
                                 android:id="@+id/question_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="问题点"
+                                android:text="储粮状况："
                                 android:textColor="@color/serial_black"
                                 android:textSize="14dp" />
 
@@ -675,6 +675,14 @@
                                     android:textColor="@color/serial_black"
                                     android:textSize="14dp" />
                             </LinearLayout>
+                            
+                            <TextView
+                                android:id="@+id/shuifen_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="水分迁移："
+                                android:textColor="@color/serial_black"
+                                android:textSize="14dp" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

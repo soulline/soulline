@@ -96,7 +96,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	private TextView topTitleTx, fileMenu, functionMenu, cedingMenu,
 			settingMenu, shituMenu, searchMenu, helpMenu, cancelAlarmMenu,
-			checkFunctionTx;
+			checkFunctionTx, shuifenTitle;
 
 	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei,
 			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangStateValue, shuifenStateValue;
@@ -122,13 +122,15 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initView();
 		registerReceiver();
 		initTextSize();
-		new Thread(new Runnable() {
+		chuliangStateValue.setText("疑似点（CP）：");
+		shuifenStateValue.setText("潜在点（CP）：");
+		handler.postDelayed(new Runnable() {
 			
 			@Override
 			public void run() {
 				initRecord();
 			}
-		}).start();
+		}, 200);
 	}
 
 	private void initRecord() {
@@ -180,7 +182,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						}
 					}
 				});
-				
+				if (!TextUtils.isEmpty(detail.shuifenState) && !TextUtils.isEmpty(detail.chuliangState)) {
+					chuliangStateValue.setText(checkDetail.chuliangState);
+					shuifenStateValue.setText(checkDetail.shuifenState);
+				} else {
+					chuliangStateValue.setText("疑似点（CP）：");
+					shuifenStateValue.setText("潜在点（CP）：");
+				}
+					
 			}
 		}
 	}
@@ -273,6 +282,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		chuliangStateValue.setTextSize(11.0f * size);
 		shuifenStateValue.setTextSize(11.0f * size);
 		questionTitle.setTextSize(11.0f * size);
+		shuifenTitle.setTextSize(11.0f * size);
 	}
 
 	private void initView() {
@@ -337,6 +347,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		tState = (TextView) findViewById(R.id.t_value_state);
 
 		stopMenu = (TextView) findViewById(R.id.stop_menu);
+		
+		shuifenTitle = (TextView) findViewById(R.id.shuifen_title);
 	}
 
 	private void registerReceiver() {
@@ -514,6 +526,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			rightList.clear();
 			adapter.notifyDataSetChanged();
 		}
+		chuliangStateValue.setText("疑似点（CP）：");
+		shuifenStateValue.setText("潜在点（CP）：");
 	}
 	
 	private int getCo2Status(String co2value) {
@@ -639,8 +653,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						checkDetail.pointList.add(record);
 					}
 					checkDetail = checkState(checkDetail);
-					chuliangStateValue.setText("1.CP：" + checkDetail.chuliangState);
-					shuifenStateValue.setText("2.PP：" + checkDetail.shuifenState);
+					chuliangStateValue.setText(checkDetail.chuliangState);
+					shuifenStateValue.setText(checkDetail.shuifenState);
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
 						checkWayValue.setText("0");
