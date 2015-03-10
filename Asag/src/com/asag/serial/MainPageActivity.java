@@ -781,6 +781,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 						checkDetail.checkDate = format.format(today);
 						checkDetail.checkType = 1 + "";
+						initCheckDetail();
 						if (alarmInfo != null) {
 							setCheckinfo(alarmInfo, 0);
 							startCutDown(0);
@@ -1336,6 +1337,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 												app.alarmInfo = alarmInfo;
 												app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
 												app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+												initCheckDetail();
 												String wayN = checkWayList.get(0);
 												int way = 0;
 												if (isNumber(wayN)) {
@@ -1381,6 +1383,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									app.alarmInfo = alarmInfo;
 									app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
 									app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+									initCheckDetail();
 									setCheckinfo(alarmInfo, 0);
 									showToast("开始测定");
 									sendMessageS(CMDCode.CD_CANGAN_CHECK);
@@ -1447,6 +1450,23 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			return datePickF;
 		}
 		return null;
+	}
+	
+	private void initCheckDetail() {
+		String canghao = DataUtils.getPreferences("canghao_data", "");
+		String liangzhong = DataUtils
+				.getPreferences("liangzhong_data_name", "");
+		final String shuliang = DataUtils
+				.getPreferences("check_count_data", "");
+		final String shuifen = DataUtils.getPreferences("shuifen_data", "");
+		final String rukudate = DataUtils.getPreferences("ruku_date", "");
+		String chandi = DataUtils.getPreferences("chandi_data_name", "");
+		checkDetail.canghao = canghao;
+		checkDetail.liangzhong = liangzhong;
+		checkDetail.shuliang = shuliang;
+		checkDetail.shuifen = shuifen;
+		checkDetail.rukuDate = rukudate;
+		checkDetail.chandi = chandi;
 	}
 
 	@Override
