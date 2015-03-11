@@ -123,7 +123,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		registerReceiver();
 		initTextSize();
 		chuliangStateValue.setText("疑似点（CP）：");
-		shuifenStateValue.setText("潜在点（CP）：");
+		shuifenStateValue.setText("潜在点（PP）：");
 		handler.postDelayed(new Runnable() {
 			
 			@Override
