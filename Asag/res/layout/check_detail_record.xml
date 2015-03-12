@@ -227,14 +227,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="60dp">
-            <TextView
+           <!--  <TextView
             android:id="@+id/yisidian_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="储粮状况："
             android:textColor="@color/black"
             android:textSize="14dp" />
-            
+             -->
             <TextView
             android:id="@+id/yisidian_value"
             android:layout_width="match_parent"
@@ -243,17 +243,19 @@
             android:textColor="@color/black"
             android:textSize="14dp" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/qianzaidian_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="四、水分迁移："
+            android:textColor="@color/black"
+            android:textSize="14dp" />
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="60dp">
-            <TextView
-            android:id="@+id/qianzaidian_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="水分迁移："
-            android:textColor="@color/black"
-            android:textSize="14dp" />
+            
             
             <TextView
             android:id="@+id/qianzai_value"
@@ -269,7 +271,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="四、建议"
+            android:text="五、建议"
             android:textColor="@color/black"
             android:textSize="14dp" />
         

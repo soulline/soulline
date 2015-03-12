@@ -18,7 +18,7 @@ public class CheckDetailRecordActivity extends BaseActivity {
 	                 liangzhong_number_value, shuliang_number_title, shuliang_number_value, shuliang_number_danwei,
 	                 shuifen_number_title, shuifen_number_value, shuifen_number_danwei, chandi_title, chandi_value,
 	                 ruku_date_title, ruku_date_value, check_date_title, check_date_value, second_title, bianhao_title,
-	                 co2_title, rh_title, t_title, ssi_title, mmi_title, third_title, yisidian_title, yisidian_value,
+	                 co2_title, rh_title, t_title, ssi_title, mmi_title, third_title, yisidian_value,
 	                 qianzaidian_title, qianzai_value, fourth_title, jianyi_value;
 	
 	private ListView point_detail_listview;
@@ -123,7 +123,6 @@ public class CheckDetailRecordActivity extends BaseActivity {
 		ssi_title.setTextSize(ssi_title.getTextSize() * size);
 		mmi_title.setTextSize(mmi_title.getTextSize() * size);
 		third_title.setTextSize(third_title.getTextSize() * size);
-		yisidian_title.setTextSize(yisidian_title.getTextSize() * size);
 		yisidian_value.setTextSize(yisidian_value.getTextSize() * size);
 		qianzaidian_title.setTextSize(qianzaidian_title.getTextSize() * size);
 		qianzai_value.setTextSize(qianzai_value.getTextSize() * size);
@@ -161,7 +160,6 @@ public class CheckDetailRecordActivity extends BaseActivity {
 		ssi_title = (TextView) findViewById(R.id.ssi_title);
 		mmi_title = (TextView) findViewById(R.id.mmi_title);
 		third_title = (TextView) findViewById(R.id.third_title);
-		yisidian_title = (TextView) findViewById(R.id.yisidian_title);
 		
 		yisidian_value = (TextView) findViewById(R.id.yisidian_value);
 		qianzaidian_title = (TextView) findViewById(R.id.qianzaidian_title);
