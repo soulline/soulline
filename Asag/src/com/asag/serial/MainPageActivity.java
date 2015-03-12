@@ -187,7 +187,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					shuifenStateValue.setText(checkDetail.shuifenState);
 				} else {
 					chuliangStateValue.setText("疑似点（CP）：");
-					shuifenStateValue.setText("潜在点（CP）：");
+					shuifenStateValue.setText("潜在点（PP）：");
 				}
 					
 			}
@@ -527,7 +527,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			adapter.notifyDataSetChanged();
 		}
 		chuliangStateValue.setText("疑似点（CP）：");
-		shuifenStateValue.setText("潜在点（CP）：");
+		shuifenStateValue.setText("潜在点（PP）：");
 	}
 	
 	private int getCo2Status(String co2value) {
@@ -567,7 +567,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		boolean safe2 = true;
 		boolean safe3 = true;
 		sb1.append("疑似点（CP）：").append("\n");
-		sb2.append("潜在点（CP）：").append("\n");
+		sb2.append("潜在点（PP）：").append("\n");
 		for (PointItemRecord record : check.pointList) {
 			Log.d("zhao", "checkState : " + record.status + "  size : " + check.pointList.size());
 			if (record.status > 2) {
