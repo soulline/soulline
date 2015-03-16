@@ -361,7 +361,7 @@ public class PointRecordActivity extends BaseActivity implements
 					dialog.show();
 				} else if (dialog != null) {
 					dialog.dismiss();
-				}
+				} 
 			}
 		});
 	}
