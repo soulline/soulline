@@ -44,10 +44,11 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
-                
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -66,8 +67,9 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                
+                android:inputType="numberSigned"
                 android:padding="5dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -88,10 +90,11 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
-                
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -128,10 +131,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -151,10 +155,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
-                
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -174,10 +179,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
-                
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -196,9 +202,11 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -225,9 +233,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -247,9 +257,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -269,9 +281,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -291,9 +305,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -321,9 +337,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -343,9 +361,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -365,9 +385,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -387,9 +409,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -416,9 +440,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -438,8 +464,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:padding="5dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:padding="5dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -460,8 +488,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:padding="5dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:padding="5dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
@@ -480,9 +510,11 @@
                 android:id="@+id/t_15_input"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -530,9 +562,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -552,9 +586,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -574,9 +610,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -596,9 +634,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -626,9 +666,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -648,9 +690,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -670,9 +714,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -692,9 +738,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -721,9 +769,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -743,9 +793,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -765,9 +817,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -787,9 +841,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -817,9 +873,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -839,9 +897,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -861,9 +921,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -883,9 +945,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:digits="@string/number_format"
                 android:imeOptions="actionNext"
-                android:singleLine="true"
+                android:inputType="numberSigned"
                 android:padding="5dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
         </LinearLayout>

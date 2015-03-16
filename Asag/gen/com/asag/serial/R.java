@@ -840,6 +840,7 @@ public final class R {
         public static final int app_name1=0x7f080003;
         public static final int clearButton=0x7f080008;
         public static final int hello_world=0x7f080002;
+        public static final int number_format=0x7f08000d;
         public static final int per1000ms=0x7f08000c;
         public static final int per100ms=0x7f08000a;
         public static final int per500ms=0x7f08000b;

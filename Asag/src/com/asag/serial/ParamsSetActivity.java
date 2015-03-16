@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -95,7 +97,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 		initTextSize();
 		reloadBaseInfo();
 		handler.postDelayed(new Runnable() {
-			 
+
 			@Override
 			public void run() {
 				paramsSettingTitle.requestFocus();
@@ -227,8 +229,8 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 	private void initEditText() {
 		cangNumInput.setOnClickListener(new OnClickListener() {
-			
-			@Override 
+
+			@Override
 			public void onClick(View arg0) {
 				cangNumInput.setText("");
 			}
@@ -449,7 +451,21 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 	}
 
+	public void hideKeyboard() {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
+				InputMethodManager.HIDE_NOT_ALWAYS);
+
+	}
+
 	private void showDatePick() {
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				hideKeyboard();
+			}
+		}, 100);
 		Bundle b = new Bundle();
 		b.putLong("choose_time", chooseTime);
 		displayFragment(true, false, "date_picker", b,
@@ -477,6 +493,13 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private void showTimePicker() {
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				hideKeyboard();
+			}
+		}, 100);
 		displayFragment(true, true, "time_picker", null,
 				new BaseFragmentListener() {
 
@@ -669,7 +692,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 			break;
 		}
 	}
-	
+
 	private void sendAllMessage(final Intent data) {
 		final ProgressDialog dialog = new ProgressDialog(context);
 		dialog.setTitle("正在发送数据，请稍后...");
@@ -693,21 +716,20 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void run() {
-				sendMessageS(getHexString(waterInput.getText().toString().trim(), 2));
+				sendMessageS(getHexString(waterInput.getText().toString()
+						.trim(), 2));
 			}
 		}, 600);
 		handler.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				SimpleDateFormat format2 = new SimpleDateFormat(
-						"yyyyMMdd");
-				String timeMsg = getHexString(format2.format(chooseTime),
-						6);
+				SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
+				String timeMsg = getHexString(format2.format(chooseTime), 6);
 				sendMessageS(timeMsg);
 			}
 		}, 800);
-		
+
 		handler.postDelayed(new Runnable() {
 
 			@Override
@@ -717,7 +739,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 			}
 		}, 1000);
 		handler.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (dialog.isShowing()) {

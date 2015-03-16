@@ -15,5 +15,6 @@
 	<string name="per100ms">Per100ms</string>
 	<string name="per500ms">Per500ms</string>
 	<string name="per1000ms">Per1s</string>
+	<string name="number_format">0123456789.-+abcdefghijklmnopqrstuvwxyz</string>
 
 </resources>
