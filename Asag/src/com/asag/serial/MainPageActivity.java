@@ -1452,6 +1452,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		return null;
 	}
 	
+	@Override
+	public void onBackPressed() {
+	}
+
 	private void initCheckDetail() {
 		String canghao = DataUtils.getPreferences("canghao_data", "");
 		String liangzhong = DataUtils
