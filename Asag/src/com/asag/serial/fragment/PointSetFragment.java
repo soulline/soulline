@@ -39,6 +39,7 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.point_set_fragment, null);
 		initView();
+		loadCache();
 		return view;
 	}
 	
@@ -73,6 +74,17 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 		Intent intent = new Intent(SerialBroadCode.ACTION_SEND_MESSAGE);
 		intent.putExtra("send_message", message);
 		lbm.sendBroadcast(intent);
+	}
+	
+	private void loadCache() {
+		String checkTime = DataUtils.getPreferences("check_time", "");
+		if (!TextUtils.isEmpty(checkTime)) {
+			jianceInput.setText(checkTime);
+		}
+		String paikongTime = DataUtils.getPreferences("paikong_time", "");
+		if (!TextUtils.isEmpty(paikongTime)) {
+			paikongInput.setText(paikongTime);
+		}
 	}
 	
 	@Override

@@ -1,10 +1,13 @@
 package com.asag.serial;
 
+import java.util.ArrayList;
+
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,6 +75,13 @@ public class PointLocationActivity extends BaseActivity implements
 		setContentView(R.layout.point_location_set_activity);
 		initView();
 		initTextSize();
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				loadData();
+			}
+		}).start();
 	}
 
 	private void initTextSize() {
@@ -282,6 +292,201 @@ public class PointLocationActivity extends BaseActivity implements
 		btn_cancel = (Button) findViewById(R.id.btn_cancel);
 		findViewById(R.id.btn_ok).setOnClickListener(this);
 		findViewById(R.id.btn_cancel).setOnClickListener(this);
+	}
+	
+	private void loadData() {
+		final ArrayList<PointInfo> list = queryData();
+		
+		if (list.size() > 0) {
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					for (PointInfo info : list) {
+						if (info.way.equals("0")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_0_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_0_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_0_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("1")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_1_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_1_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_1_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("2")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_2_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_2_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_2_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("3")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_3_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_3_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_3_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("4")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_4_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_4_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_4_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("5")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_5_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_5_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_5_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("6")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_6_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_6_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_6_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("7")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_7_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_7_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_7_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("8")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_8_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_8_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_8_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("9")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_9_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_9_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_9_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("10")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_10_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_10_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_10_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("11")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_11_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_11_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_11_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("12")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_12_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_12_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_12_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("13")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_13_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_13_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_13_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("14")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_14_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_14_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_14_input.setText(info.zpoint);
+							}
+						} else if (info.way.equals("15")) {
+							if (!TextUtils.isEmpty(info.xpoint)) {
+								x_15_input.setText(info.xpoint);
+							}
+							if (!TextUtils.isEmpty(info.ypoint)) {
+								y_15_input.setText(info.ypoint);
+							}
+							if (!TextUtils.isEmpty(info.zpoint)) {
+								z_15_input.setText(info.zpoint);
+							}
+						}
+					}
+				}
+			});
+			
+		}
+	}
+	
+	private ArrayList<PointInfo> queryData() {
+		ArrayList<PointInfo> list = new ArrayList<PointInfo>();
+		Cursor cursor = getContentResolver().query(AsagProvider.PointColumns.CONTENT_URI, new String[] { AsagProvider.PointColumns.NUMBER, AsagProvider.PointColumns.XPOINT, AsagProvider.PointColumns.YPOINT
+				,AsagProvider.PointColumns.ZPOINT}, null, null, null);
+		if (cursor != null) {
+			while(cursor.moveToNext()) {
+				PointInfo point = new PointInfo();
+				point.way = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointColumns.NUMBER));
+				point.xpoint = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointColumns.XPOINT));
+				point.ypoint = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointColumns.YPOINT));
+				point.zpoint = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.PointColumns.ZPOINT));
+				list.add(point);
+			}
+			cursor.close();
+		}
+		return list;
 	}
 
 	private void savaData() {

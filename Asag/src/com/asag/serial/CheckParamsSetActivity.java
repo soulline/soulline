@@ -44,6 +44,7 @@ public class CheckParamsSetActivity extends BaseActivity implements
 		setContentView(R.layout.check_params_setting);
 		initView();
 		initTextSize();
+		loadCache();
 	}
 
 	private void initTextSize() {
@@ -237,6 +238,150 @@ public class CheckParamsSetActivity extends BaseActivity implements
 
 		findViewById(R.id.btn_ok).setOnClickListener(this);
 		findViewById(R.id.btn_cancel).setOnClickListener(this);
+	}
+	
+	private void loadCache() {
+		String co2_input = DataUtils.getPreferences("co2_input", "");
+		if (!TextUtils.isEmpty(co2_input)) {
+			co2Input.setText(co2_input);
+		}
+		String ph3_input = DataUtils.getPreferences("ph3_input", "");
+		if (!TextUtils.isEmpty(ph3_input)) {
+			ph3Input.setText(ph3_input);
+		}
+		String o2_input = DataUtils.getPreferences("o2_input", "");
+		if (!TextUtils.isEmpty(o2_input)) {
+			o2Input.setText(o2_input);
+		}
+		String t_0_input = DataUtils.getPreferences("t_0_input", "");
+		if (!TextUtils.isEmpty(t_0_input)) {
+			t0Input.setText(t_0_input);
+		}
+		String t_1_input = DataUtils.getPreferences("t_1_input", "");
+		if (!TextUtils.isEmpty(t_1_input)) {
+			t1Input.setText(t_1_input);
+		}
+		String t_2_input = DataUtils.getPreferences("t_2_input", "");
+		if (!TextUtils.isEmpty(t_2_input)) {
+			t2Input.setText(t_2_input);
+		}
+		String t_3_input = DataUtils.getPreferences("t_3_input", "");
+		if (!TextUtils.isEmpty(t_3_input)) {
+			t3Input.setText(t_3_input);
+		}
+		String t_4_input = DataUtils.getPreferences("t_4_input", "");
+		if (!TextUtils.isEmpty(t_4_input)) {
+			t4Input.setText(t_4_input);
+		}
+		String t_5_input = DataUtils.getPreferences("t_5_input", "");
+		if (!TextUtils.isEmpty(t_5_input)) {
+			t5Input.setText(t_5_input);
+		}
+		String t_6_input = DataUtils.getPreferences("t_6_input", "");
+		if (!TextUtils.isEmpty(t_6_input)) {
+			t6Input.setText(t_6_input);
+		}
+		String t_7_input = DataUtils.getPreferences("t_7_input", "");
+		if (!TextUtils.isEmpty(t_7_input)) {
+			t7Input.setText(t_7_input);
+		}
+		String t_8_input = DataUtils.getPreferences("t_8_input", "");
+		if (!TextUtils.isEmpty(t_8_input)) {
+			t8Input.setText(t_8_input);
+		}
+		String t_9_input = DataUtils.getPreferences("t_9_input", "");
+		if (!TextUtils.isEmpty(t_9_input)) {
+			t9Input.setText(t_9_input);
+		}
+		String t_10_input = DataUtils.getPreferences("t_10_input", "");
+		if (!TextUtils.isEmpty(t_10_input)) {
+			t10Input.setText(t_10_input);
+		}
+		String t_11_input = DataUtils.getPreferences("t_11_input", "");
+		if (!TextUtils.isEmpty(t_11_input)) {
+			t11Input.setText(t_11_input);
+		}
+		String t_12_input = DataUtils.getPreferences("t_12_input", "");
+		if (!TextUtils.isEmpty(t_12_input)) {
+			t12Input.setText(t_12_input);
+		}
+		String t_13_input = DataUtils.getPreferences("t_13_input", "");
+		if (!TextUtils.isEmpty(t_13_input)) {
+			t13Input.setText(t_13_input);
+		}
+		String t_14_input = DataUtils.getPreferences("t_14_input", "");
+		if (!TextUtils.isEmpty(t_14_input)) {
+			t14Input.setText(t_14_input);
+		}
+		String t_15_input = DataUtils.getPreferences("t_15_input", "");
+		if (!TextUtils.isEmpty(t_15_input)) {
+			t15Input.setText(t_15_input);
+		}
+		
+		String r_0_input = DataUtils.getPreferences("r_0_input", "");
+		if (!TextUtils.isEmpty(r_0_input)) {
+			r0Input.setText(r_0_input);
+		}
+		String r_1_input = DataUtils.getPreferences("r_1_input", "");
+		if (!TextUtils.isEmpty(r_1_input)) {
+			r1Input.setText(r_1_input);
+		}
+		String r_2_input = DataUtils.getPreferences("r_2_input", "");
+		if (!TextUtils.isEmpty(r_2_input)) {
+			r2Input.setText(r_2_input);
+		}
+		String r_3_input = DataUtils.getPreferences("r_3_input", "");
+		if (!TextUtils.isEmpty(r_3_input)) {
+			r3Input.setText(r_3_input);
+		}
+		String r_4_input = DataUtils.getPreferences("r_4_input", "");
+		if (!TextUtils.isEmpty(r_4_input)) {
+			r4Input.setText(r_4_input);
+		}
+		String r_5_input = DataUtils.getPreferences("r_5_input", "");
+		if (!TextUtils.isEmpty(r_5_input)) {
+			r5Input.setText(r_5_input);
+		}
+		String r_6_input = DataUtils.getPreferences("r_6_input", "");
+		if (!TextUtils.isEmpty(r_6_input)) {
+			r6Input.setText(r_6_input);
+		}
+		String r_7_input = DataUtils.getPreferences("r_7_input", "");
+		if (!TextUtils.isEmpty(r_7_input)) {
+			r7Input.setText(r_7_input);
+		}
+		String r_8_input = DataUtils.getPreferences("r_8_input", "");
+		if (!TextUtils.isEmpty(r_8_input)) {
+			r8Input.setText(r_8_input);
+		}
+		String r_9_input = DataUtils.getPreferences("r_9_input", "");
+		if (!TextUtils.isEmpty(r_9_input)) {
+			r9Input.setText(r_9_input);
+		}
+		String r_10_input = DataUtils.getPreferences("r_10_input", "");
+		if (!TextUtils.isEmpty(r_10_input)) {
+			r10Input.setText(r_10_input);
+		}
+		String r_11_input = DataUtils.getPreferences("r_11_input", "");
+		if (!TextUtils.isEmpty(r_11_input)) {
+			r11Input.setText(r_11_input);
+		}
+		String r_12_input = DataUtils.getPreferences("r_12_input", "");
+		if (!TextUtils.isEmpty(r_12_input)) {
+			r12Input.setText(r_12_input);
+		}
+		String r_13_input = DataUtils.getPreferences("r_13_input", "");
+		if (!TextUtils.isEmpty(r_13_input)) {
+			r13Input.setText(r_13_input);
+		}
+		String r_14_input = DataUtils.getPreferences("r_14_input", "");
+		if (!TextUtils.isEmpty(r_14_input)) {
+			r14Input.setText(r_14_input);
+		}
+		String r_15_input = DataUtils.getPreferences("r_15_input", "");
+		if (!TextUtils.isEmpty(r_15_input)) {
+			r15Input.setText(r_15_input);
+		}
 	}
 
 	private void saveInput() {
