@@ -169,11 +169,11 @@ public class CanganRecordActivity extends BaseActivity implements
 					dialog.setTitle("提示");
 				}
 				if (type == 1) {
-					dialog.setMessage("正在加载中，请稍后...");
+					dialog.setMessage("正在加载中，请稍候...");
 				} else if (type == 2) {
-					dialog.setMessage("正在删除中，请稍后...");
+					dialog.setMessage("正在删除中，请稍候...");
 				} else if (type == 3) {
-					dialog.setMessage("正在导出中，请稍后...");
+					dialog.setMessage("正在导出中，请稍候...");
 				}
 				if (isShow) {
 					dialog.show();

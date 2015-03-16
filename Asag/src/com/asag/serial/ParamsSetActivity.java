@@ -695,7 +695,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 	private void sendAllMessage(final Intent data) {
 		final ProgressDialog dialog = new ProgressDialog(context);
-		dialog.setTitle("正在发送数据，请稍后...");
+		dialog.setTitle("正在发送数据，请稍候...");
 		dialog.show();
 		sendMessageS(getHexString(cangNumInput.getText().toString().trim(), 1));
 		handler.postDelayed(new Runnable() {

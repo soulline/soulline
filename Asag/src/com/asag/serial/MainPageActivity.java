@@ -1550,7 +1550,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					public void onClick(int resourceId) {
 						final ProgressDialog dialog = new ProgressDialog(
 								context);
-						dialog.setTitle("正在设置字体，请稍后...");
+						dialog.setTitle("正在设置字体，请稍候...");
 						dialog.show();
 						handler.postDelayed(new Runnable() {
 

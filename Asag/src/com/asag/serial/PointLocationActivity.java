@@ -413,7 +413,7 @@ public class PointLocationActivity extends BaseActivity implements
 			public void run() {
 				if (isShow) {
 					dialog = new ProgressDialog(context);
-					dialog.setTitle("正在加载中，请稍后...");
+					dialog.setTitle("正在加载中，请稍候...");
 					dialog.show();
 				} else if (dialog != null) {
 					dialog.dismiss();

@@ -116,7 +116,7 @@ public class PointFangActivity extends BaseActivity {
 				if (isShow) {
 					dialog = new ProgressDialog(context);
 					dialog.setTitle("提示");
-					dialog.setMessage("正在加载中，请稍后...");
+					dialog.setMessage("正在加载中，请稍候...");
 					dialog.show();
 				} else if (dialog != null) {
 					dialog.dismiss();
