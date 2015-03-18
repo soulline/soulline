@@ -17,8 +17,8 @@
         <LinearLayout
             android:id="@+id/base_content_"
             android:layout_width="640dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="300dp"
+            android:layout_height="550dp"
+            android:paddingBottom="300dp"
             android:orientation="vertical" >
 
             <LinearLayout

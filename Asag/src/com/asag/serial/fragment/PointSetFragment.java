@@ -77,11 +77,11 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 	}
 	
 	private void loadCache() {
-		String checkTime = DataUtils.getPreferences("check_time", "");
+		String checkTime = DataUtils.getPreferences("check_minute_input", "");
 		if (!TextUtils.isEmpty(checkTime)) {
 			jianceInput.setText(checkTime);
 		}
-		String paikongTime = DataUtils.getPreferences("paikong_time", "");
+		String paikongTime = DataUtils.getPreferences("paikong_minute_input", "");
 		if (!TextUtils.isEmpty(paikongTime)) {
 			paikongInput.setText(paikongTime);
 		}
@@ -99,13 +99,13 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 						.trim())) {
 					entry.checkTime = Integer.valueOf(jianceInput.getText()
 							.toString().trim());
-					DataUtils.putPreferences("check_time", entry.checkTime);
+					DataUtils.putPreferences("check_minute_input", entry.checkTime);
 				}
 				if (!TextUtils.isEmpty(paikongInput.getText().toString()
 						.trim())) {
 					entry.paikongTime = Integer.valueOf(paikongInput.getText()
 							.toString().trim());
-					DataUtils.putPreferences("paikong_time", entry.paikongTime);
+					DataUtils.putPreferences("paikong_minute_input", entry.paikongTime);
 				}
 				if (listener != null) {
 					listener.onCallBack(entry);
