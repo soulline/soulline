@@ -486,9 +486,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	}
 
 	public void setRHValue(float value) {
-		if (value > 30.0f) {
+		if (value > 85.0f || value == 85.0f) {
 			showPointView(rhState, true);
-		} else if ((value < 30.0f && (value > 0 || value == 0)) || value == 30.0f) {
+		} else if ((value < 85.0f && (value > 0 || value == 0))) {
 			showPointView(rhState, false);
 		}
 		rhtx.setText(value + "");

@@ -511,6 +511,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:digits="@string/number_format"
+                android:layout_marginLeft="10dp"
                 android:imeOptions="actionNext"
                 android:inputType="numberSigned"
                 android:padding="5dp"
