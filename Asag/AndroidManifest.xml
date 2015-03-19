@@ -66,12 +66,14 @@
             android:name="com.asag.serial.CheckParamsSetActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="com.asag.serial.PointLocationActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity

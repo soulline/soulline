@@ -1465,11 +1465,18 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		final String shuifen = DataUtils.getPreferences("shuifen_data", "");
 		final String rukudate = DataUtils.getPreferences("ruku_date", "");
 		String chandi = DataUtils.getPreferences("chandi_data_name", "");
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		try {
+			Date date = format.parse(rukudate);
+			checkDetail.rukuDate = format1.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		checkDetail.canghao = canghao;
 		checkDetail.liangzhong = liangzhong;
 		checkDetail.shuliang = shuliang;
 		checkDetail.shuifen = shuifen;
-		checkDetail.rukuDate = rukudate;
 		checkDetail.chandi = chandi;
 	}
 

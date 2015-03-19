@@ -634,7 +634,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/title_diver_line"
-                    android:layout_marginBottom="250dp"
+                    android:layout_marginBottom="110dp"
                     android:divider="@color/gray_line"
                     android:dividerHeight="0.5dp" />
 

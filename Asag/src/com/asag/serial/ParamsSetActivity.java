@@ -807,6 +807,7 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 				Date date = format.parse(rukudate);
 				chooseTime = date.getTime();
 				rkDateInput.setText(format1.format(date));
+				checkDetail.rukuDate = format1.format(date);
 				handler.postDelayed(new Runnable() {
 
 					@Override
