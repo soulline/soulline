@@ -171,18 +171,18 @@ public class SerialService extends Service {
 				String o2P = DataUtils.getPreferences("o2_input", "0");
 				Log.d("zhao", "O2P : " + o2P + "  --- O2N before : " + dataEntry.o2);
 				float o2N = Float.valueOf(dataEntry.o2) + Float.valueOf(o2P);
-				dataEntry.o2 = String.format("%.2f", o2N);
+				dataEntry.o2 = String.format("%.1f", o2N);
 				String wenduP = DataUtils.getPreferences("t_0_input", "0");
 				float wenduN = Float.valueOf(dataEntry.wendu)
 						+ Float.valueOf(wenduP);
 				BigDecimal b = new BigDecimal(wenduN);
 				float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
 						.floatValue();
-				dataEntry.wendu = String.format("%.2f", fwendu);
+				dataEntry.wendu = String.format("%.1f", fwendu);
 				String shiduP = DataUtils.getPreferences("r_0_input", "0");
 				float shiduN = Float.valueOf(dataEntry.shidu)
 						+ Float.valueOf(shiduP);
-				dataEntry.shidu = String.format("%.2f", shiduN);
+				dataEntry.shidu = String.format("%.1f", shiduN);
 				Log.d("zhao", "dataentry.number : " + dataEntry.number + "   -- lastway: " + app.lastWay);
 				if (!dataEntry.number.equals(app.lastWay)) {
 					checkMunite = app.oldCheckTime;
@@ -220,7 +220,7 @@ public class SerialService extends Service {
 		String co2Str = getAsiicForHex(data) + "";
 		String co2P = DataUtils.getPreferences("co2_input", "0");
 		float co2N = Float.valueOf(co2Str) + Float.valueOf(co2P);
-		co2Str = String.format("%.2f", co2N);
+		co2Str = String.format("%.1f", co2N);
 		Intent intent = new Intent(SerialBroadCode.ACTION_CO2_RECEIVED);
 		intent.putExtra("co2_data", co2Str);
 		lbm.sendBroadcast(intent);
@@ -234,7 +234,7 @@ public class SerialService extends Service {
 		String o2Str = o2i + "";
 		String o2P = DataUtils.getPreferences("o2_input", "0");
 		float o2N = Float.valueOf(o2Str) + Float.valueOf(o2P);
-		o2Str = String.format("%.2f", o2N);
+		o2Str = String.format("%.1f", o2N);
 		Intent intent = new Intent(SerialBroadCode.ACTION_O2_RECEIVED);
 		intent.putExtra("o2_data", o2Str);
 		lbm.sendBroadcast(intent);
@@ -397,7 +397,7 @@ public class SerialService extends Service {
 		String shiduP = DataUtils.getPreferences(rMap.get(dataEntry.number),
 				"0");
 		float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
-		dataEntry.shidu = String.format("%.2f", shiduN);
+		dataEntry.shidu = String.format("%.1f", shiduN);
 		Log.d("zhao", "parsePassway dataentry.number : " + dataEntry.number + "   -- lastway: " + app.lastWay);
 		if (!dataEntry.number.equals(app.lastWay)) {
 			checkMunite = app.oldCheckTime;

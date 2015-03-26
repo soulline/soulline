@@ -51,7 +51,7 @@ public class SerialPortManager {
 	}
 
 	/**
-	 * ½«Ö¸¶¨×Ö·û´®src£¬ÒÔÃ¿Á½¸ö×Ö·û·Ö¸î×ª»»Îª16½øÖÆÐÎÊ½ Èç£º"2B44EFD9" --> byte[]{0x2B, 0x44, 0xEF,
+	 * ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½srcï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ö¸ï¿½×ªï¿½ï¿½Îª16ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ ï¿½ç£º"2B44EFD9" --> byte[]{0x2B, 0x44, 0xEF,
 	 * 0xD9}
 	 * 
 	 * @param src
@@ -67,7 +67,7 @@ public class SerialPortManager {
 		return ret;
 	}
 	/**
-	 * ½«Á½¸öASCII×Ö·ûºÏ³ÉÒ»¸ö×Ö½Ú£» Èç£º"EF"--> 0xEF
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ASCIIï¿½Ö·ï¿½ï¿½Ï³ï¿½Ò»ï¿½ï¿½ï¿½Ö½Ú£ï¿½ ï¿½ç£º"EF"--> 0xEF
 	 * 
 	 * @param src0
 	 *            byte
@@ -104,7 +104,7 @@ public class SerialPortManager {
 		return ret.toUpperCase();
 	}
 	
-	// ´ò¿ª¶Ë¿Ú
+	// ï¿½ò¿ª¶Ë¿ï¿½
 	public void openSerialPort() {
 
 		if (serialPort.mFd == null) {
@@ -129,7 +129,7 @@ public class SerialPortManager {
 			//Log.i("uart port operate", "Mainactivity.java==>ReadThread started");
 		}
 	}
-	// ¹Ø±Õ´®¿Ú 
+	// ï¿½Ø±Õ´ï¿½ï¿½ï¿½ 
 	public void closeSerialPort() {
 
 		if (mReadThread != null) {
@@ -158,11 +158,11 @@ public class SerialPortManager {
 
 				if (size > 0) {
 					
-					// new String(buf, 0, size).getBytes()»áÔì³ÉÊý¾Ý´íÎó
+					// new String(buf, 0, size).getBytes()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½
 					byte[] dest = new byte[size];
 					System.arraycopy(buf, 0, dest, 0, size);
-					// Ê¹ÓÃ¶ÓÁÐ½ÓÊÜÊý¾Ý£¬½â¾öÉÏ°æ±¾´®¿Ú½ÓÊÜ
-					// Á¬Ðø´óÁ¿Êý¾Ýºó³öÏÖµÄÊý¾Ý»ìÂÒ
+					// Ê¹ï¿½Ã¶ï¿½ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½Ï°æ±¾ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýºï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
 //					byteLinkedList.offer(new String(buf, 0, size).getBytes());
 					byteLinkedList.offer(dest);
 					if (!byteLinkedList.isEmpty()) {
@@ -188,17 +188,17 @@ public class SerialPortManager {
 	
 	public void initSerial() {
 		serialPort = new SerialPortOpt();
-		// 0 ±íÊ¾com0
+		// 0 ï¿½ï¿½Ê¾com0
 		serialPort.mDevNum = 0;
-		// ²¨ÌØÂÊ 115200
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 115200
 		serialPort.mSpeed = 115200;
-		// Êý¾ÝÎ»8
+		// ï¿½ï¿½ï¿½ï¿½Î»8
 		serialPort.mDataBits = 8;
 		// Í£Ö¹Î» 1
 		serialPort.mStopBits = 1;
-		// Ð£ÑéÎ» 'n', 'o', 'e', 'm', 's'
+		// Ð£ï¿½ï¿½Î» 'n', 'o', 'e', 'm', 's'
 		serialPort.mParity = 'n';
-		// ´ò¿ª´®¿Ú COM 0
+		// ï¿½ò¿ª´ï¿½ï¿½ï¿½ COM 0
 		openSerialPort();
 	}
 }

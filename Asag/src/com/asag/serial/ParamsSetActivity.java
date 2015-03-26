@@ -846,6 +846,10 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 			jianceTimeInput.setText(DataUtils.getPreferences(
 					"check_minute_input", ""));
 		}
+		Log.d("zhao", "params set activity cache checkTime : " + DataUtils.getPreferences("check_minute_input",
+				""));
+		Log.d("zhao", "params set activity cache paikongTime : " + DataUtils.getPreferences("paikong_minute_input",
+				""));
 		if (!TextUtils
 				.isEmpty(DataUtils.getPreferences("start_time_input", ""))) {
 			startTimeInput.setText(DataUtils.getPreferences("start_time_input",

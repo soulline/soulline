@@ -25,6 +25,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -113,6 +114,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	private boolean isSaving = false;
 	
+	private static final int KEY_CEDING = 59;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +197,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KEY_CEDING) {
+			showFunctionMenu(1);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		if (adapter != null && adapter.getCount() > 0) {

@@ -423,9 +423,15 @@ public class CanganRecordActivity extends BaseActivity implements
 					public void run() {
 						for (int i : selectListD) {
 							CheckDetailItem checkDetail = checkList.get(i);
-							getContentResolver().delete(AsagProvider.CheckDetail.CONTENT_URI, AsagProvider.CheckDetail._ID + "=" + checkDetail.id, null);
-							getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI, AsagProvider.PointRecord.SAVE_TIME + "='" + checkDetail.saveTime + "' AND " + 
-									AsagProvider.PointRecord.CHECKTYPE + "='" + checkDetail.checkType + "'", null);
+							try {
+								getContentResolver().delete(AsagProvider.CheckDetail.CONTENT_URI, AsagProvider.CheckDetail._ID + "=" + checkDetail.id, null);
+								getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI, AsagProvider.PointRecord.SAVE_TIME + "='" + checkDetail.saveTime + "' AND " + 
+										AsagProvider.PointRecord.CHECKTYPE + "='" + checkDetail.checkType + "'", null);
+							} catch (Exception e) {
+								e.printStackTrace();
+								showToast("删除异常");
+								return;
+							}
 						}
 						showToast("删除成功");
 						for (int i : selectListD) {

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,10 +79,12 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 	
 	private void loadCache() {
 		String checkTime = DataUtils.getPreferences("check_minute_input", "");
+		Log.d("zhao", "point set fragment cache checkTime : " + checkTime);
 		if (!TextUtils.isEmpty(checkTime)) {
 			jianceInput.setText(checkTime);
 		}
 		String paikongTime = DataUtils.getPreferences("paikong_minute_input", "");
+		Log.d("zhao", "point set fragment cache paikongTime : " + paikongTime);
 		if (!TextUtils.isEmpty(paikongTime)) {
 			paikongInput.setText(paikongTime);
 		}
