@@ -1282,7 +1282,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 						} else if (type == 1) {
 							if (resourceId == R.id.liangan_jiance_menu) {
-								if (app.isPause) {
+								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
 									checkFunctionTx.setText("粮安监测");
@@ -1309,7 +1309,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									}
 								}
 							} else if (resourceId == R.id.point_check_menu) {
-								if (app.isPause) {
+								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 									if (app.isAreadyAlarm) {
 //										restartAlarmSet();
@@ -1371,7 +1371,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									});
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
-								if (app.isPause) {
+								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 									/*if (app.isAreadyAlarm) {
 										restartAlarmSet();

@@ -151,9 +151,11 @@ public class SerialService extends Service {
 				dataEntry.wendu = subDataHex(array[4]).trim();
 				String co2P = DataUtils.getPreferences("co2_input", "0");
 				if ((isNumber(co2P) || isFuNumber(co2P)) && isNumber(dataEntry.co2)) {
-					long co2N = Long.valueOf(dataEntry.co2)
-							+ Long.valueOf(co2P);
-					dataEntry.co2 = co2N + "";
+					if (Long.valueOf(dataEntry.co2) > 0L) {
+						long co2N = Long.valueOf(dataEntry.co2)
+								+ Long.valueOf(co2P);
+						dataEntry.co2 = co2N + "";
+					}
 				}
 				String ph3P = DataUtils.getPreferences("ph3_input", "0");
 				if (isNumber(dataEntry.ph3data)) {
@@ -163,25 +165,42 @@ public class SerialService extends Service {
 				if (isNumber(ph3P) && (isNumber(dataEntry.ph3data) || (isFuNumber(dataEntry.ph3data)))) {
 					Log.d("zhao", "原始PH3 : " + dataEntry.ph3data
 							+ "   校正参数ph3：" + ph3P);
-					long ph3N = Long.valueOf(dataEntry.ph3data)
-							+ Long.valueOf(ph3P);
-					dataEntry.ph3data = ph3N + "";
+					if (Long.valueOf(dataEntry.ph3data) > 0L) {
+						long ph3N = Long.valueOf(dataEntry.ph3data)
+								+ Long.valueOf(ph3P);
+						dataEntry.ph3data = ph3N + "";
+					}
 				}
 				
 				String o2P = DataUtils.getPreferences("o2_input", "0");
 				Log.d("zhao", "O2P : " + o2P + "  --- O2N before : " + dataEntry.o2);
-				float o2N = Float.valueOf(dataEntry.o2) + Float.valueOf(o2P);
+				float o2N = 0f;
+				if (Float.valueOf(dataEntry.o2) > 0f) {
+					o2N = Float.valueOf(dataEntry.o2) + Float.valueOf(o2P);
+				} else {
+					o2N = Float.valueOf(dataEntry.o2);
+				}
 				dataEntry.o2 = String.format("%.1f", o2N);
 				String wenduP = DataUtils.getPreferences("t_0_input", "0");
-				float wenduN = Float.valueOf(dataEntry.wendu)
-						+ Float.valueOf(wenduP);
+				float wenduN = 0f;
+				if (Float.valueOf(dataEntry.wendu) > 0f) {
+					wenduN = Float.valueOf(dataEntry.wendu)
+							+ Float.valueOf(wenduP);
+				} else {
+					wenduN = Float.valueOf(dataEntry.wendu);
+				}
 				BigDecimal b = new BigDecimal(wenduN);
 				float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
 						.floatValue();
 				dataEntry.wendu = String.format("%.1f", fwendu);
 				String shiduP = DataUtils.getPreferences("r_0_input", "0");
-				float shiduN = Float.valueOf(dataEntry.shidu)
-						+ Float.valueOf(shiduP);
+				float shiduN = 0f;
+				if (Float.valueOf(dataEntry.shidu) > 0) {
+					shiduN = Float.valueOf(dataEntry.shidu)
+							+ Float.valueOf(shiduP);
+				} else {
+					shiduN = Float.valueOf(dataEntry.shidu);
+				}
 				dataEntry.shidu = String.format("%.1f", shiduN);
 				Log.d("zhao", "dataentry.number : " + dataEntry.number + "   -- lastway: " + app.lastWay);
 				if (!dataEntry.number.equals(app.lastWay)) {
@@ -384,19 +403,34 @@ public class SerialService extends Service {
 		dataEntry.wendu = subDataHex(array[2]).trim();
 		String co2P = DataUtils.getPreferences("co2_input", "0");
 		if ((isNumber(co2P) || isFuNumber(co2P)) && isNumber(dataEntry.co2)) {
-			Long co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
+			Long co2N =0L;
+			if (Long.valueOf(dataEntry.co2) > 0L) {
+				co2N = Long.valueOf(dataEntry.co2) + Long.valueOf(co2P);
+			} else {
+				co2N = Long.valueOf(dataEntry.co2);
+			}
 			dataEntry.co2 = co2N + "";
 		}
 		String wenduP = DataUtils.getPreferences(tMap.get(dataEntry.number),
 				"0");
-		float wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
+		float wenduN = 0f;
+		if (Float.valueOf(dataEntry.wendu) > 0) {
+			wenduN = Float.valueOf(dataEntry.wendu) + Float.valueOf(wenduP);
+		} else {
+			wenduN = Float.valueOf(dataEntry.wendu);
+		}
 		BigDecimal b = new BigDecimal(wenduN);
 		float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
 				.floatValue();
 		dataEntry.wendu = fwendu + "";
 		String shiduP = DataUtils.getPreferences(rMap.get(dataEntry.number),
 				"0");
-		float shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
+		float shiduN = 0f;
+		if (Float.valueOf(dataEntry.shidu) > 0f) {
+			shiduN = Float.valueOf(dataEntry.shidu) + Float.valueOf(shiduP);
+		} else {
+			shiduN = Float.valueOf(dataEntry.shidu);
+		}
 		dataEntry.shidu = String.format("%.1f", shiduN);
 		Log.d("zhao", "parsePassway dataentry.number : " + dataEntry.number + "   -- lastway: " + app.lastWay);
 		if (!dataEntry.number.equals(app.lastWay)) {

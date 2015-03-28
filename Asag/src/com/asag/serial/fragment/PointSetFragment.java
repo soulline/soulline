@@ -102,13 +102,15 @@ public class PointSetFragment extends DialogFragment implements OnClickListener{
 						.trim())) {
 					entry.checkTime = Integer.valueOf(jianceInput.getText()
 							.toString().trim());
-					DataUtils.putPreferences("check_minute_input", entry.checkTime);
+					DataUtils.putPreferences("check_minute_input", jianceInput.getText().toString()
+							.trim());
 				}
 				if (!TextUtils.isEmpty(paikongInput.getText().toString()
 						.trim())) {
 					entry.paikongTime = Integer.valueOf(paikongInput.getText()
 							.toString().trim());
-					DataUtils.putPreferences("paikong_minute_input", entry.paikongTime);
+					DataUtils.putPreferences("paikong_minute_input", paikongInput.getText()
+							.toString().trim());
 				}
 				if (listener != null) {
 					listener.onCallBack(entry);

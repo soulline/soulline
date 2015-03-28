@@ -493,13 +493,6 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private void showTimePicker() {
-		handler.postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
-				hideKeyboard();
-			}
-		}, 100);
 		displayFragment(true, true, "time_picker", null,
 				new BaseFragmentListener() {
 
@@ -516,6 +509,13 @@ public class ParamsSetActivity extends BaseActivity implements OnClickListener,
 
 					}
 				});
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				hideKeyboard();
+			}
+		}, 1000);
 	}
 
 	private void initChandiMap() {
