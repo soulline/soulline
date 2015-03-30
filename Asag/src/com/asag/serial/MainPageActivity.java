@@ -1346,8 +1346,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 												checkDetail.checkDate = format.format(today);
 												checkDetail.checkType = 2 + "";
 												app.alarmInfo = alarmInfo;
-												app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-												app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+												checkMinuteValue = app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
+												paikongMinuteValue = app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+												Log.d("zhao", "点检测  checkTime : " + checkMinuteValue);
+												Log.d("zhao", "点检测  paikongTime : " + paikongMinuteValue);
 												initCheckDetail();
 												String wayN = checkWayList.get(0);
 												int way = 0;
