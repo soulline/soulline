@@ -114,7 +114,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	private boolean isSaving = false;
 	
-	private static final int KEY_CEDING = 59;
+	private static final int KEY_CEDING = 61;
 	
 
 	@Override
