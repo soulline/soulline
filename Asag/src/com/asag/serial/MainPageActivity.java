@@ -1382,6 +1382,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									checkFunctionTx.setText("仓安监测");
 									clearRightData();
 									app.lastWay = "0";
+									checkWayValue.setText("0");
 									checkState = 2;
 									if (checkDetail != null) {
 										checkDetail.pointList.clear();
