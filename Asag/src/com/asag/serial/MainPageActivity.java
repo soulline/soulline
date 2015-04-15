@@ -666,6 +666,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					checkDetail = checkState(checkDetail);
 					chuliangStateValue.setText(checkDetail.chuliangState);
 					shuifenStateValue.setText(checkDetail.shuifenState);
+					Log.d("zhao", "onReceive checkState is : " + checkState);
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
 						checkWayValue.setText("0");
@@ -1285,6 +1286,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
+									int checkMinuteV = DataUtils.getPreferences("check_time", 0);
+									int paikongMinuteV = DataUtils.getPreferences("paikong_time", 0);
+									if (checkMinuteV == 0 || paikongMinuteV == 0) {
+										showToast("您的检测时间或排空时间为0，请重新设置");
+										return;
+									}
 									checkFunctionTx.setText("粮安监测");
 									clearRightData();
 									checkState = 0;
@@ -1315,6 +1322,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 //										restartAlarmSet();
 									}
 								} else {
+									int checkMinuteV = DataUtils.getPreferences("check_time", 0);
+									int paikongMinuteV = DataUtils.getPreferences("paikong_time", 0);
+									if (checkMinuteV == 0 || paikongMinuteV == 0) {
+										showToast("您的检测时间或排空时间为0，请重新设置");
+										return;
+									}
 									checkFunctionTx.setText("粮安检测");
 									clearRightData();
 									if (checkDetail != null) {
@@ -1350,6 +1363,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 												paikongMinuteValue = app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
 												Log.d("zhao", "点检测  checkTime : " + checkMinuteValue);
 												Log.d("zhao", "点检测  paikongTime : " + paikongMinuteValue);
+												if (checkMinuteValue == 0 || paikongMinuteValue == 0) {
+													showToast("您的检测时间或排空时间为0，请重新设置");
+												}
 												initCheckDetail();
 												String wayN = checkWayList.get(0);
 												int way = 0;
@@ -1373,6 +1389,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									});
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
+								int checkMinuteV = DataUtils.getPreferences("check_time", 0);
+								int paikongMinuteV = DataUtils.getPreferences("paikong_time", 0);
+								if (checkMinuteV == 0 || paikongMinuteV == 0) {
+									showToast("您的检测时间或排空时间为0，请重新设置");
+									return;
+								}
 								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 									/*if (app.isAreadyAlarm) {

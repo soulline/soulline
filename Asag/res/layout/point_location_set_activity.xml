@@ -42,7 +42,7 @@
 
                     <TextView
                         android:id="@+id/number_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:text="点号"
                         android:textColor="@color/black"
@@ -50,27 +50,27 @@
 
                     <TextView
                         android:id="@+id/x_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="5dp"
                         android:text="X/m"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/y_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:text="Y/m"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/z_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
+                        android:layout_marginLeft="160dp"
                         android:text="Z/m"
                         android:textColor="@color/black"
                         android:textSize="14dp" />

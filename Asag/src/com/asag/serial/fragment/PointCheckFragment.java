@@ -3,10 +3,13 @@ package com.asag.serial.fragment;
 import com.asag.serial.MainPageActivity;
 import com.asag.serial.R;
 import com.asag.serial.utils.CMDCode;
+import com.asag.serial.utils.SerialBroadCode;
 import com.asag.serial.widget.SerialCheck;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -177,6 +180,14 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 			listener.onCallBack(getCheckResult());
 		}
 	}
+	
+	private void sendMessageS(String message) {
+		Intent intent = new Intent(SerialBroadCode.ACTION_SEND_MESSAGE);
+		intent.putExtra("send_message", message);
+		if (getActivity() != null) {
+			LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+		}
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -194,6 +205,7 @@ public class PointCheckFragment extends DialogFragment implements OnClickListene
 			break;
 			
 		case R.id.btn_cancel:
+			sendMessageS(CMDCode.PREPARE_CANCLE);
 			dismissAllowingStateLoss();
 			break;
 

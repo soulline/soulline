@@ -362,6 +362,7 @@ public class SerialService extends Service {
 	}
 
 	private void stopTimer() {
+		Log.d("zhao", "check stop timer");
 		lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_STOP_CHECKING));
 		if (timer != null) {
 			timer.cancel();
@@ -517,6 +518,8 @@ public class SerialService extends Service {
 		if (serialManager != null) {
 			serialManager.closeSerialPort();
 		}
+		Log.d("zhao", "service onDestroy()");
+		stopTimer();
 		lbm.unregisterReceiver(serialPortReceiver);
 	}
 
