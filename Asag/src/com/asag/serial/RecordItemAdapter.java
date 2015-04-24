@@ -95,16 +95,61 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 		float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
 				.floatValue();
 		holder.t_value.setText(fwendu + "");
-		holder.ssi_value.setText(record.ssi);
+		int ssiStt = Integer.valueOf(record.ssi);
+		holder.ssi_value.setText(getSSIStatus(ssiStt));
 		float mmiv = Float.valueOf(record.mmi);
-		BigDecimal b1 = new BigDecimal(mmiv);
-		float fmmi = b1.setScale(1, BigDecimal.ROUND_HALF_UP)
-				.floatValue();
-		holder.mmi_value.setText(fmmi + "");
-		Log.d("zhao", "show item mmi : " + fmmi + "ssi : " + record.ssi + "  tvalue : " + record.tValue + " after tvalue : " + fwendu);
+//		BigDecimal b1 = new BigDecimal(mmiv);
+//		float fmmi = b1.setScale(1, BigDecimal.ROUND_HALF_UP)
+//				.floatValue();
+		holder.mmi_value.setText(getMMiStatus(record.mmi));
+//		Log.d("zhao", "show item mmi : " + fmmi + "ssi : " + record.ssi + "  tvalue : " + record.tValue + " after tvalue : " + fwendu);
 		return convertView;
 	}
 	
+	private static String getMMiStatus(String mmi) {
+		String status = "I级";
+		try {
+			float mmiF = Float.valueOf(mmi);
+			if (mmiF > 0.0f && mmiF <= 6.0f) {
+				status = "I级";
+			} else if (mmiF > 6.0f && mmiF <= 10.0f) {
+				status = "II级";
+			} else if (mmiF > 10.0f && mmiF <= 20.0f) {
+				status = "III级";
+			} else if (mmiF > 20.0f) {
+				status = "IV级";
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "I级";
+		}
+		return status;
+	}
+	
+	private static String getSSIStatus(int status) {
+		String statusStr = "I级";
+		switch (status) {
+		case 1:
+			statusStr = "I级";
+			break;
+			
+		case 2:
+			statusStr = "II级";
+			break;
+			
+		case 3:
+			statusStr = "III级";
+			break;
+			
+		case 4:
+			statusStr = "IV级";
+			break;
+
+		default:
+			break;
+		}
+		return statusStr;
+	}
 
 	public class ViewHolder {
 		public TextView bianhao_value, co2_value, rh_value, t_value, ssi_value,

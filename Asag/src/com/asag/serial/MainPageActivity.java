@@ -147,10 +147,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			}
 		}, 200);
 		Log.d("zhao", "mainpage onCreate()");
-		loadLastCheck(savedInstanceState.getBundle(KEY_INSTANCE));
+//		if (savedInstanceState != null && savedInstanceState.containsKey(KEY_INSTANCE)) {
+//			loadLastCheck(savedInstanceState.getBundle(KEY_INSTANCE));
+//		}
 	}
 	
 	private void loadLastCheck(Bundle b) {
+		if (b == null) return;
 		rightList = (ArrayList<RightDataEntry>) b.getSerializable("right_list");
 		if (rightList != null) {
 			initAdapter(rightList);
@@ -177,7 +180,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putBundle(KEY_INSTANCE, saveBundle());
+//		outState.putBundle(KEY_INSTANCE, saveBundle());
 		super.onSaveInstanceState(outState);
 	}
 

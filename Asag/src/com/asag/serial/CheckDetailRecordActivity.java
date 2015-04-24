@@ -60,6 +60,8 @@ public class CheckDetailRecordActivity extends BaseActivity {
 		}
 	}
 	
+	
+	
 	private void initTextSize() {
 		int size = DataUtils.getPreferences(DataUtils.KEY_TEXT_SIZE, 5);
 		switch (size) {
