@@ -134,6 +134,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				initRecord();
 			}
 		}, 200);
+		Log.d("zhao", "mainpage onCreate()");
 	}
 
 	private void initRecord() {
@@ -1541,8 +1542,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	protected void onDestroy() {
 		super.onDestroy();
 		lbm.unregisterReceiver(dataReceiver);
-		Intent service = new Intent(context, SerialService.class);
-		stopService(service);
+//		Intent service = new Intent(context, SerialService.class);
+//		stopService(service);
+		Log.d("zhao", "mainpage onDestroy()");
 	}
 
 	private void showSettingMenu() {
