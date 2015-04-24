@@ -116,6 +116,18 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	
 	private static final int KEY_CEDING = 61;
 	
+	private static final String KEY_INSTANCE = "key_main_instance";
+	
+	private long zero_Co2 = 0;
+	
+	private float zero_O2 = 0;
+	
+	private double zero_ph3 = 0;
+	
+	private float zero_shidu = 0;
+	
+	private float zero_wendu = 0;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +147,38 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			}
 		}, 200);
 		Log.d("zhao", "mainpage onCreate()");
+		loadLastCheck(savedInstanceState.getBundle(KEY_INSTANCE));
+	}
+	
+	private void loadLastCheck(Bundle b) {
+		rightList = (ArrayList<RightDataEntry>) b.getSerializable("right_list");
+		if (rightList != null) {
+			initAdapter(rightList);
+		}
+		checkWayValue.setText(b.getString("check_num"));
+		setCo2Value(b.getLong("co2_zero"));
+		setO2Value(b.getFloat("o2_zero"));
+		setPH3Value(b.getDouble("ph3_zero"));
+		setRHValue(b.getFloat("shidu_zero"));
+		setTValue(b.getFloat("wendu_zero"));
+	}
+	
+	private Bundle saveBundle() {
+		Bundle b = new Bundle();
+		b.putSerializable("right_list", rightList);
+		b.putString("check_num", checkWayValue.getText().toString());
+		b.putLong("co2_zero", zero_Co2);
+		b.putFloat("o2_zero", zero_O2);
+		b.putDouble("ph3_zero", zero_ph3);
+		b.putFloat("shidu_zero", zero_shidu);
+		b.putFloat("wendu_zero", zero_wendu);
+		return b;
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putBundle(KEY_INSTANCE, saveBundle());
+		super.onSaveInstanceState(outState);
 	}
 
 	private void initRecord() {
@@ -476,6 +520,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else if (value > 50000) {
 			showPointView(co2State, true);
 		}
+		zero_Co2 = value;
 		co2Tx.setText(value + "");
 	}
 
@@ -485,6 +530,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else {
 			showPointView(o2State, false);
 		}
+		zero_O2 = value;
 		o2Tx.setText(value + "");
 	}
 
@@ -494,6 +540,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else {
 			showPointView(ph3State, true);
 		}
+		zero_ph3 = value;
 		ph3tx.setText(value + "");
 	}
 
@@ -503,6 +550,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else if ((value < 85.0f && (value > 0 || value == 0))) {
 			showPointView(rhState, false);
 		}
+		zero_shidu = value;
 		rhtx.setText(value + "");
 	}
 
@@ -512,6 +560,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else if (value > 80.0f) {
 			showPointView(tState, true);
 		}
+		zero_wendu = value;
 		ttx.setText(value + "");
 	}
 
@@ -670,7 +719,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					Log.d("zhao", "onReceive checkState is : " + checkState);
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
-						checkWayValue.setText("0");
+						setCheckWayValue("0");
 						wayCount = 0;
 						checkWayList.clear();
 //						setAlarmCheck(app.alarmInfo);
@@ -683,21 +732,21 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							if (next != -1) {
 								if (next < checkWayList.size()) {
 									String checkWay = checkWayList.get(next + 1);
-									checkWayValue.setText(checkWay + "");
+									setCheckWayValue(checkWay + "");
 									float check = ((float) checkMinuteValue) / 10.0f;
 									float paikong = ((float) paikongMinuteValue) / 10.0f;
 									updateCheckMinute(check + "");
 									updatePaikongMinute(paikong + "");
 								} else {
 									showToast("检测结束");
-									checkWayValue.setText("0");
+									setCheckWayValue("0");
 									wayCount = 0;
 									checkWayList.clear();
 									saveCheckInNewTask(checkDetail);
 								}
 							} else {
 								showToast("检测结束");
-								checkWayValue.setText("0");
+								setCheckWayValue("0");
 								wayCount = 0;
 								checkWayList.clear();
 								saveCheckInNewTask(checkDetail);
@@ -707,13 +756,14 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							number += 1;
 							wayCount = number;
 							checkWayValue.setText(number + "");
+							setCheckWayValue(number + "");
 							float check = ((float) checkMinuteValue) / 10.0f;
 							float paikong = ((float) paikongMinuteValue) / 10.0f;
 							updateCheckMinute(check + "");
 							updatePaikongMinute(paikong + "");
 						} else if (checkState == 2) {
 							showToast("检测结束");
-							checkWayValue.setText("0");
+							setCheckWayValue("0");
 							wayCount = 0;
 							checkWayList.clear();
 							saveCheckInNewTask(checkDetail);
@@ -902,15 +952,20 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.PointRecord.SAVE_TIME, record.saveTime);
 		getContentResolver().insert(AsagProvider.PointRecord.CONTENT_URI, values);
 	}
+	
+	private void setCheckWayValue(String way) {
+		checkWayValue.setText(way);
+		
+	}
 
 	public void startCutDown(int checkCode) {
 		app.isPause = false;
 		if (checkCode == 0) {
 			String title = wayCount + "";
-			checkWayValue.setText(title);
+			setCheckWayValue(title);
 		} else if ((checkCode == 1 || checkCode == 2)
 				&& checkWayList.size() > 0) {
-			checkWayValue.setText(checkWayList.get(0));
+			setCheckWayValue(checkWayList.get(0));
 		}
 		Intent check = new Intent(SerialBroadCode.ACTION_CHECK_MINUTE);
 		check.putExtra("check_minute", checkMinuteValue + "");
@@ -1405,7 +1460,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									checkFunctionTx.setText("仓安监测");
 									clearRightData();
 									app.lastWay = "0";
-									checkWayValue.setText("0");
+									setCheckWayValue("0");
 									checkState = 2;
 									if (checkDetail != null) {
 										checkDetail.pointList.clear();
