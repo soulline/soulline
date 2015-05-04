@@ -15,10 +15,11 @@ public class JcAlarm {
 	
 	public static void setSendAlarm(AlarmInfo alarm) {
 		AlarmManager manager = (AlarmManager) SerialApp.getInstance().getSystemService(Context.ALARM_SERVICE);
+		alarmInfo = alarm;
 		Intent intent = new Intent(SerialApp.getInstance(), JcAlarmReceiver.class);
 		intent.setAction(SerialBroadCode.ACTION_ALARM_CHECK);
 		intent.putExtra("alarm_info", alarm);
-		PendingIntent sender = PendingIntent.getBroadcast(SerialApp.getInstance(), 0, intent, 0);
+		PendingIntent sender = PendingIntent.getBroadcast(SerialApp.getInstance(), 13145, intent, 0);
 		long interval = alarm.minuteN * 60 * 1000;
 //		manager.set(AlarmManager.RTC, alarm.firstTimeN, sender);
 		manager.setRepeating(AlarmManager.RTC, alarm.firstTimeN, interval, sender);
@@ -29,7 +30,7 @@ public class JcAlarm {
 		Intent intent = new Intent(SerialApp.getInstance(), JcAlarmReceiver.class);
 		intent.setAction(SerialBroadCode.ACTION_ALARM_CHECK);
 		intent.putExtra("alarm_info", alarmInfo);
-		PendingIntent sender = PendingIntent.getBroadcast(SerialApp.getInstance(), 0, intent, 0);
+		PendingIntent sender = PendingIntent.getBroadcast(SerialApp.getInstance(), 13145, intent, 0);
 		manager.cancel(sender);
 	}
 }

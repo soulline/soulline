@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="8" />
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -50,7 +50,7 @@
         </activity>
         <activity 
             android:name="com.asag.serial.MainPageActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:configChanges="locale|screenSize|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >

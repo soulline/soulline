@@ -95,14 +95,13 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 		float fwendu = b.setScale(1, BigDecimal.ROUND_HALF_UP)
 				.floatValue();
 		holder.t_value.setText(fwendu + "");
-		int ssiStt = Integer.valueOf(record.ssi);
-		holder.ssi_value.setText(getSSIStatus(ssiStt));
-		float mmiv = Float.valueOf(record.mmi);
+		holder.ssi_value.setText(getSSIStatus(record.status));
+//		float mmiv = Float.valueOf(record.mmi);
 //		BigDecimal b1 = new BigDecimal(mmiv);
 //		float fmmi = b1.setScale(1, BigDecimal.ROUND_HALF_UP)
 //				.floatValue();
 		holder.mmi_value.setText(getMMiStatus(record.mmi));
-//		Log.d("zhao", "show item mmi : " + fmmi + "ssi : " + record.ssi + "  tvalue : " + record.tValue + " after tvalue : " + fwendu);
+		Log.d("zhao", "show item mmi : " + record.mmi + "ssi : " + record.ssi + "  tvalue : " + record.tValue + " after tvalue : " + fwendu);
 		return convertView;
 	}
 	
@@ -150,7 +149,7 @@ public class RecordItemAdapter extends ArrayAdapter<PointItemRecord> {
 		}
 		return statusStr;
 	}
-
+	
 	public class ViewHolder {
 		public TextView bianhao_value, co2_value, rh_value, t_value, ssi_value,
 				mmi_value;

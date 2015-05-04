@@ -41,6 +41,7 @@ import com.asag.serial.alarm.JcAlarm;
 import com.asag.serial.app.SerialApp;
 import com.asag.serial.base.BaseActivity;
 import com.asag.serial.data.AsagProvider;
+import com.asag.serial.data.AsagProvider.CheckDetail;
 import com.asag.serial.fragment.BaseFragmentListener;
 import com.asag.serial.fragment.DatePickFragment;
 import com.asag.serial.fragment.InputSureFragment;
@@ -100,7 +101,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			checkFunctionTx, shuifenTitle;
 
 	private TextView titleResult, resultCo2, resultRh, resultTc, co2Danwei,
-			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangStateValue, shuifenStateValue;
+			ph3Danwei, o2Danwei, rhDanwei, tDanwei, chuliangStateValue,
+			shuifenStateValue;
 
 	private TextView paikongCheckDanwei, checkCheckDanwei, questionTitle;
 
@@ -109,25 +111,24 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	private ArrayList<String> checkWayList = new ArrayList<String>();
 
 	private int checkState = 0;
-	
+
 	private CheckDetailItem checkDetail = new CheckDetailItem();
-	
+
 	private boolean isSaving = false;
-	
+
 	private static final int KEY_CEDING = 61;
-	
-	private static final String KEY_INSTANCE = "key_main_instance";
-	
+
 	private long zero_Co2 = 0;
-	
+
 	private float zero_O2 = 0;
-	
+
 	private double zero_ph3 = 0;
-	
+
 	private float zero_shidu = 0;
-	
+
 	private float zero_wendu = 0;
 	
+	private static final String KEY_SAVEINSTANCE = "save_instance";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -139,50 +140,20 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		initTextSize();
 		chuliangStateValue.setText("疑似点（CP）：");
 		shuifenStateValue.setText("潜在点（PP）：");
-		handler.postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				initRecord();
-			}
-		}, 200);
-		Log.d("zhao", "mainpage onCreate()");
-//		if (savedInstanceState != null && savedInstanceState.containsKey(KEY_INSTANCE)) {
-//			loadLastCheck(savedInstanceState.getBundle(KEY_INSTANCE));
-//		}
-	}
-	
-	private void loadLastCheck(Bundle b) {
-		if (b == null) return;
-		rightList = (ArrayList<RightDataEntry>) b.getSerializable("right_list");
-		if (rightList != null) {
-			initAdapter(rightList);
-		}
-		checkWayValue.setText(b.getString("check_num"));
-		setCo2Value(b.getLong("co2_zero"));
-		setO2Value(b.getFloat("o2_zero"));
-		setPH3Value(b.getDouble("ph3_zero"));
-		setRHValue(b.getFloat("shidu_zero"));
-		setTValue(b.getFloat("wendu_zero"));
-	}
-	
-	private Bundle saveBundle() {
-		Bundle b = new Bundle();
-		b.putSerializable("right_list", rightList);
-		b.putString("check_num", checkWayValue.getText().toString());
-		b.putLong("co2_zero", zero_Co2);
-		b.putFloat("o2_zero", zero_O2);
-		b.putDouble("ph3_zero", zero_ph3);
-		b.putFloat("shidu_zero", zero_shidu);
-		b.putFloat("wendu_zero", zero_wendu);
-		return b;
-	}
+		
+		if (savedInstanceState != null && savedInstanceState.getBundle(KEY_SAVEINSTANCE) != null) {
+			loadLastCheck(savedInstanceState.getBundle(KEY_SAVEINSTANCE));
+		} else {
+			handler.postDelayed(new Runnable() {
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-//		outState.putBundle(KEY_INSTANCE, saveBundle());
-		super.onSaveInstanceState(outState);
-	}
+				@Override
+				public void run() {
+					initRecord();
+				}
+			}, 200);
+		}
+		Log.d("zhao", "mainPage onCreate()");
+	} 
 
 	private void initRecord() {
 		ArrayList<CheckDetailItem> checkList = queryData();
@@ -201,7 +172,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				dataEntry.wendu = record.tValue;
 				final RightDataEntry entry = dataEntry;
 				handler.post(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						if (entry.number.equals("0")) {
@@ -227,24 +198,90 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								float value = Float.valueOf(entry.wendu);
 								setTValue(value);
 							}
-							
+
 						} else {
 							addData(entry);
 						}
 					}
 				});
-				if (!TextUtils.isEmpty(detail.shuifenState) && !TextUtils.isEmpty(detail.chuliangState)) {
+				if (!TextUtils.isEmpty(detail.shuifenState)
+						&& !TextUtils.isEmpty(detail.chuliangState)) {
 					chuliangStateValue.setText(checkDetail.chuliangState);
 					shuifenStateValue.setText(checkDetail.shuifenState);
 				} else {
 					chuliangStateValue.setText("疑似点（CP）：");
 					shuifenStateValue.setText("潜在点（PP）：");
 				}
-					
+
 			}
 		}
 	}
-	
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+	    outState.putBundle(KEY_SAVEINSTANCE, saveBundle());
+		super.onSaveInstanceState(outState);
+	}
+
+	private void loadLastCheck(Bundle b) {
+		if (b == null)
+			return;
+		rightList = (ArrayList<RightDataEntry>) b.getSerializable("right_list");
+		if (rightList != null) {
+			initAdapter(rightList);
+		}
+		checkWayValue.setText(b.getString("check_num"));
+		setCo2Value(b.getLong("co2_zero"));
+		setO2Value(b.getFloat("o2_zero"));
+		setPH3Value(b.getDouble("ph3_zero"));
+		setRHValue(b.getFloat("shidu_zero"));
+		setTValue(b.getFloat("wendu_zero"));
+		CheckDetailItem checkD = (CheckDetailItem) b.getSerializable("check_detail_b");
+		if (checkD != null) {
+			checkDetail = checkD;
+		}
+		checkWayList = b.getStringArrayList("check_way_list_b");
+		alarmInfo = (AlarmInfo) b.getSerializable("alarm_info_b");
+		checkState = b.getInt("check_state_b");
+		String functionTx = b.getString("check_function_b");
+		checkFunctionTx.setText(functionTx);
+		checkMinuteValue = b.getInt("check_time_bundle");
+		paikongMinuteValue = b.getInt("paikong_time_bundle");
+		Log.d("zhao", "loadLastcheck check: " + checkMinuteValue + " -- paikong: " + paikongMinuteValue);
+		if (paikongMinuteValue > 0 || checkMinuteValue > 0) {
+			if (checkMinuteValue > 0) {
+				float checkF = ((float) checkMinuteValue) / 10.0f;
+				updateCheckMinute(checkF
+						+ "");
+			}
+			if (paikongMinuteValue > 0) {
+				float paikongF = ((float) paikongMinuteValue) / 10.0f;
+				updatePaikongMinute(paikongF
+						+ "");
+			}
+			showCheckAnim(true);
+		}
+	}
+
+	private Bundle saveBundle() {
+		Bundle b = new Bundle();
+		b.putSerializable("right_list", rightList);
+		b.putString("check_num", checkWayValue.getText().toString());
+		b.putLong("co2_zero", zero_Co2);
+		b.putFloat("o2_zero", zero_O2);
+		b.putDouble("ph3_zero", zero_ph3);
+		b.putFloat("shidu_zero", zero_shidu);
+		b.putFloat("wendu_zero", zero_wendu);
+		b.putInt("check_time_bundle", checkMinuteValue);
+		b.putInt("paikong_time_bundle", paikongMinuteValue);
+		b.putSerializable("check_detail_b", checkDetail);
+		b.putInt("check_state_b", checkState);
+		b.putStringArrayList("check_way_list_b", checkWayList);
+		b.putSerializable("alarm_info_b", alarmInfo);
+		b.putString("check_function_b", checkFunctionTx.getText().toString().trim());
+		return b;
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KEY_CEDING) {
@@ -370,10 +407,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 		paikongCheckDanwei = (TextView) findViewById(R.id.paikong_check_danwei);
 		checkCheckDanwei = (TextView) findViewById(R.id.check_check_danwei);
-		
+
 		chuliangStateValue = (TextView) findViewById(R.id.chuliang_state_value);
 		shuifenStateValue = (TextView) findViewById(R.id.shuifen_state_value);
-		
+
 		questionTitle = (TextView) findViewById(R.id.question_title);
 
 		findViewById(R.id.file_menu).setOnClickListener(this);
@@ -406,7 +443,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		tState = (TextView) findViewById(R.id.t_value_state);
 
 		stopMenu = (TextView) findViewById(R.id.stop_menu);
-		
+
 		shuifenTitle = (TextView) findViewById(R.id.shuifen_title);
 	}
 
@@ -478,6 +515,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		} else {
 			showPointView(paikongTimeState, false);
 		}
+		if (app.isCheckIng) {
+			showCheckAnim(true);
+		}
 	}
 
 	public void updateCheckMinute(String value) {
@@ -491,7 +531,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	public void initService() {
 		if (!ServiceUtil
-				.isServiceRunning("com.example.testbutton.service.SerialService")) {
+				.isServiceRunning("com.asag.serial.service.SerialService")) {
 			Intent service = new Intent(context, SerialService.class);
 			startService(service);
 		}
@@ -550,17 +590,22 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 	public void setRHValue(float value) {
 		if (value > 85.0f || value == 85.0f) {
 			showPointView(rhState, true);
-		} else if ((value < 85.0f && (value > 0 || value == 0))) {
+		} else if ((value < 85.0f && value > 0)) {
 			showPointView(rhState, false);
+		} else if (value == 0.0f) {
+			showPointView(rhState, true);
 		}
 		zero_shidu = value;
 		rhtx.setText(value + "");
 	}
 
 	public void setTValue(float value) {
-		if ((value < 80.0f && (value > 0.0f || value == 0.0f)) || value == 80.0f) {
+		if ((value < 80.0f && value > 0.0f)
+				|| value == 80.0f) {
 			showPointView(tState, false);
 		} else if (value > 80.0f) {
+			showPointView(tState, true);
+		} else if (value == 0.0f) {
 			showPointView(tState, true);
 		}
 		zero_wendu = value;
@@ -593,7 +638,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		chuliangStateValue.setText("疑似点（CP）：");
 		shuifenStateValue.setText("潜在点（PP）：");
 	}
-	
+
 	private int getCo2Status(String co2value) {
 		if (!isNumber(co2value)) {
 			return 1;
@@ -610,9 +655,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		return 1;
 	}
-	
+
 	private float getMmi(String tvalue) {
-		if (checkDetail == null) return 0.0f;
+		if (checkDetail == null)
+			return 0.0f;
 		for (PointItemRecord record : checkDetail.pointList) {
 			if (record.wayNum.equals("0")) {
 				float a = Float.valueOf(tvalue);
@@ -622,9 +668,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		return 0.0f;
 	}
-	
+
 	private CheckDetailItem checkState(CheckDetailItem check) {
-		if (check.pointList.size() == 0) return check;
+		if (check.pointList.size() == 0)
+			return check;
 		StringBuilder sb1 = new StringBuilder();
 		StringBuilder sb2 = new StringBuilder();
 		boolean safe1 = true;
@@ -633,35 +680,35 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		sb1.append("疑似点（CP）：").append("\n");
 		sb2.append("潜在点（PP）：").append("\n");
 		for (PointItemRecord record : check.pointList) {
-			Log.d("zhao", "checkState : " + record.status + "  size : " + check.pointList.size());
+			Log.d("zhao", "checkState : " + record.status + "  size : "
+					+ check.pointList.size());
 			if (record.status > 2) {
 				safe1 = false;
 				safe2 = false;
 				sb1.append(record.wayNum).append("、");
-			}/* else if (record.status == 2) {
-				safe1 = false;
-				safe2 = true;
-			}*/
+			}/*
+			 * else if (record.status == 2) { safe1 = false; safe2 = true; }
+			 */
 			float wendu = Float.valueOf(record.mmi);
 			if (wendu >= 8.0f) {
 				safe3 = false;
 				sb2.append(record.wayNum).append("、");
 			}
 		}
-		check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
-		/*if (!safe1 && !safe2) {
-			check.chuliangState = sb1.toString().substring(0, sb1.toString().length());
-		} else if (safe1 && safe2) {
-			check.chuliangState = "基本安全";
-		} else if (!safe1 && safe2) {
-			check.chuliangState = "基本安全";
-		}*/
-		check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
-		/*if (!safe3) {
-			check.shuifenState = sb2.toString().substring(0, sb2.toString().length());
-		} else {
-			check.shuifenState = "基本安全";
-		}*/
+		check.chuliangState = sb1.toString().substring(0,
+				sb1.toString().length());
+		/*
+		 * if (!safe1 && !safe2) { check.chuliangState =
+		 * sb1.toString().substring(0, sb1.toString().length()); } else if
+		 * (safe1 && safe2) { check.chuliangState = "基本安全"; } else if (!safe1 &&
+		 * safe2) { check.chuliangState = "基本安全"; }
+		 */
+		check.shuifenState = sb2.toString().substring(0,
+				sb2.toString().length());
+		/*
+		 * if (!safe3) { check.shuifenState = sb2.toString().substring(0,
+		 * sb2.toString().length()); } else { check.shuifenState = "基本安全"; }
+		 */
 		return check;
 	}
 
@@ -696,7 +743,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							float value = Float.valueOf(dataEntry.wendu);
 							setTValue(value);
 						}
-						
+
 					} else {
 						addData(dataEntry);
 					}
@@ -712,7 +759,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					record.mmi = getMmi(dataEntry.wendu) + "";
 					record.o2Value = dataEntry.o2;
 					record.ph3Value = dataEntry.ph3data;
-					Log.d("zhao", "receive checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
+					Log.d("zhao", "receive checkDate : "
+							+ checkDetail.checkDate + "  checkType : "
+							+ checkDetail.checkType);
 					if (checkDetail != null) {
 						checkDetail.pointList.add(record);
 					}
@@ -722,34 +771,36 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					Log.d("zhao", "onReceive checkState is : " + checkState);
 					if (checkState == 0 && dataEntry.number.equals("15")) {
 						showToast("检测结束");
-						setCheckWayValue("0");
+						checkWayValue.setText("0");
 						wayCount = 0;
 						checkWayList.clear();
-//						setAlarmCheck(app.alarmInfo);
+						// setAlarmCheck(app.alarmInfo);
 						saveCheckInNewTask(checkDetail);
 					} else {
 						int number = Integer.valueOf(dataEntry.number);
 						if (checkState == 1) {
 							int next = getNextWay(number + "");
-							Log.d("zhao", "next : " + next + " -- size : " + checkWayList.size());
+							Log.d("zhao", "next : " + next + " -- size : "
+									+ checkWayList.size());
 							if (next != -1) {
 								if (next < checkWayList.size()) {
-									String checkWay = checkWayList.get(next + 1);
-									setCheckWayValue(checkWay + "");
+									String checkWay = checkWayList
+											.get(next + 1);
+									checkWayValue.setText(checkWay + "");
 									float check = ((float) checkMinuteValue) / 10.0f;
 									float paikong = ((float) paikongMinuteValue) / 10.0f;
 									updateCheckMinute(check + "");
 									updatePaikongMinute(paikong + "");
 								} else {
 									showToast("检测结束");
-									setCheckWayValue("0");
+									checkWayValue.setText("0");
 									wayCount = 0;
 									checkWayList.clear();
 									saveCheckInNewTask(checkDetail);
 								}
 							} else {
 								showToast("检测结束");
-								setCheckWayValue("0");
+								checkWayValue.setText("0");
 								wayCount = 0;
 								checkWayList.clear();
 								saveCheckInNewTask(checkDetail);
@@ -759,14 +810,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							number += 1;
 							wayCount = number;
 							checkWayValue.setText(number + "");
-							setCheckWayValue(number + "");
 							float check = ((float) checkMinuteValue) / 10.0f;
 							float paikong = ((float) paikongMinuteValue) / 10.0f;
 							updateCheckMinute(check + "");
 							updatePaikongMinute(paikong + "");
 						} else if (checkState == 2) {
 							showToast("检测结束");
-							setCheckWayValue("0");
+							checkWayValue.setText("0");
 							wayCount = 0;
 							checkWayList.clear();
 							saveCheckInNewTask(checkDetail);
@@ -812,7 +862,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					showToast("粮安监测正在进行中..请等待下一次监测");
 					return;
 				}
-				lbm.sendBroadcast(new Intent(SerialBroadCode.ACTION_FINISH_CHECKING));
+				lbm.sendBroadcast(new Intent(
+						SerialBroadCode.ACTION_FINISH_CHECKING));
 				if (checkDetail != null && app.isCheckIng) {
 					sendMessageS(CMDCode.DATA_INTERRUP_STOP);
 					CheckDetailItem checkNew = checkDetail;
@@ -831,9 +882,16 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				clearRightData();
 				alarmInfo = (AlarmInfo) intent
 						.getSerializableExtra("alarm_info");
-//				setCheckinfo(alarmInfo, 0);
+				alarmInfo.checkN = DataUtils
+						.getPreferences("check_time", 0);
+				alarmInfo.paikongN = DataUtils
+						.getPreferences("paikong_time",
+								0);
+				// setCheckinfo(alarmInfo, 0);
 				if (alarmInfo != null) {
-					Log.d("zhao", "alarm stating check time : " + alarmInfo.checkN + "  == paikong time : " + alarmInfo.paikongN);
+					Log.d("zhao", "alarm stating check time : "
+							+ alarmInfo.checkN + "  == paikong time : "
+							+ alarmInfo.paikongN);
 				}
 				handler.postDelayed(new Runnable() {
 
@@ -844,7 +902,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							checkDetail.pointList.clear();
 						}
 						long today = System.currentTimeMillis();
-						SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+						SimpleDateFormat format = new SimpleDateFormat(
+								"yyyy-MM-dd");
 						checkDetail.checkDate = format.format(today);
 						checkDetail.checkType = 1 + "";
 						initCheckDetail();
@@ -864,12 +923,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 		}
 	};
-	
+
 	private void saveCheckInNewTask(final CheckDetailItem check) {
-		Log.d("zhao", "saveCheckInNewTask date : " + check.checkDate + "  -- type: " + check.checkType + 
-				"    -- point size : " + check.pointList.size());
+		Log.d("zhao", "saveCheckInNewTask date : " + check.checkDate
+				+ "  -- type: " + check.checkType + "    -- point size : "
+				+ check.pointList.size());
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				if (!isSaving) {
@@ -879,7 +939,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			}
 		}).start();
 	}
-	
+
 	private synchronized void saveCheckDetail(CheckDetailItem check) {
 		check.saveTime = System.currentTimeMillis() + "";
 		Log.d("zhao", "save time : " + check.saveTime);
@@ -898,7 +958,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		if (check.checkType.equals("1")) {
 			Cursor cursor = getContentResolver().query(
 					AsagProvider.CheckDetail.CONTENT_URI,
-					new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
+					new String[] { AsagProvider.CheckDetail._ID,
+							AsagProvider.CheckDetail.CANGHAO,
 							AsagProvider.CheckDetail.CHANDI,
 							AsagProvider.CheckDetail.CHECKDATE,
 							AsagProvider.CheckDetail.CHECKTYPE,
@@ -906,26 +967,33 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 							AsagProvider.CheckDetail.RUKUDATE,
 							AsagProvider.CheckDetail.SHUIFEN,
 							AsagProvider.CheckDetail.SHULIANG,
-							AsagProvider.CheckDetail.SAVE_TIME }, AsagProvider.CheckDetail.CHECKDATE + "='" + 
-									check.checkDate + "' AND "+
-									AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'", null,
-									null); 
+							AsagProvider.CheckDetail.SAVE_TIME },
+					AsagProvider.CheckDetail.CHECKDATE + "='" + check.checkDate
+							+ "' AND " + AsagProvider.CheckDetail.CHECKTYPE
+							+ "='" + check.checkType + "'", null, null);
 			Log.d("zhao", "save qeury cursor --- " + cursor);
 			if (cursor != null) {
-				Log.d("zhao", "save qeury cursor count --- " + cursor.getCount());
+				Log.d("zhao",
+						"save qeury cursor count --- " + cursor.getCount());
 			}
 			if (cursor != null && cursor.getCount() > 0) {
-				getContentResolver().update(AsagProvider.CheckDetail.CONTENT_URI,
-						values, AsagProvider.CheckDetail.CHECKDATE + "='" + check.checkDate + "' AND " + AsagProvider.CheckDetail.CHECKTYPE + "='" + check.checkType + "'",
-						null);
+				getContentResolver().update(
+						AsagProvider.CheckDetail.CONTENT_URI,
+						values,
+						AsagProvider.CheckDetail.CHECKDATE + "='"
+								+ check.checkDate + "' AND "
+								+ AsagProvider.CheckDetail.CHECKTYPE + "='"
+								+ check.checkType + "'", null);
 			} else {
-				getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
-						values);
+				getContentResolver().insert(
+						AsagProvider.CheckDetail.CONTENT_URI, values);
 			}
 			cursor.close();
-			getContentResolver().delete(AsagProvider.PointRecord.CONTENT_URI,
-					AsagProvider.PointRecord.CHECKDATE + "='" + check.checkDate + 
-					"' AND " + AsagProvider.PointRecord.CHECKTYPE + "='" + check.checkType + "'", null);
+			getContentResolver().delete(
+					AsagProvider.PointRecord.CONTENT_URI,
+					AsagProvider.PointRecord.CHECKDATE + "='" + check.checkDate
+							+ "' AND " + AsagProvider.PointRecord.CHECKTYPE
+							+ "='" + check.checkType + "'", null);
 		} else {
 			getContentResolver().insert(AsagProvider.CheckDetail.CONTENT_URI,
 					values);
@@ -937,9 +1005,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		isSaving = false;
 	}
-	
+
 	private void saveCheckItemRecord(PointItemRecord record) {
-		Log.d("zhao", "checkdate : " + record.checkDate + " checkType : " + record.checkType);
+		Log.d("zhao", "checkdate : " + record.checkDate + " checkType : "
+				+ record.checkType);
 		ContentValues values = new ContentValues();
 		values.put(AsagProvider.PointRecord.COTWO, record.co2);
 		values.put(AsagProvider.PointRecord.MMI, record.mmi);
@@ -953,22 +1022,18 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		values.put(AsagProvider.PointRecord.OTWO, record.o2Value);
 		values.put(AsagProvider.PointRecord.PHVALUE, record.ph3Value);
 		values.put(AsagProvider.PointRecord.SAVE_TIME, record.saveTime);
-		getContentResolver().insert(AsagProvider.PointRecord.CONTENT_URI, values);
-	}
-	
-	private void setCheckWayValue(String way) {
-		checkWayValue.setText(way);
-		
+		getContentResolver().insert(AsagProvider.PointRecord.CONTENT_URI,
+				values);
 	}
 
 	public void startCutDown(int checkCode) {
 		app.isPause = false;
 		if (checkCode == 0) {
 			String title = wayCount + "";
-			setCheckWayValue(title);
+			checkWayValue.setText(title);
 		} else if ((checkCode == 1 || checkCode == 2)
 				&& checkWayList.size() > 0) {
-			setCheckWayValue(checkWayList.get(0));
+			checkWayValue.setText(checkWayList.get(0));
 		}
 		Intent check = new Intent(SerialBroadCode.ACTION_CHECK_MINUTE);
 		check.putExtra("check_minute", checkMinuteValue + "");
@@ -1009,8 +1074,10 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	private void setAlarmCheck(final AlarmInfo alarm) {
 		if (alarm.firstTimeN < System.currentTimeMillis()) {
-			float mbei = (float) (System.currentTimeMillis() - alarm.firstTimeN) / (alarm.minuteN * 60 * 1000L);
-			long mod = (System.currentTimeMillis() - alarm.firstTimeN) % (alarm.minuteN * 60 * 1000L);
+			float mbei = (float) (System.currentTimeMillis() - alarm.firstTimeN)
+					/ (alarm.minuteN * 60 * 1000L);
+			long mod = (System.currentTimeMillis() - alarm.firstTimeN)
+					% (alarm.minuteN * 60 * 1000L);
 			long nminute = alarm.minuteN * 60 * 1000L - mod;
 			int nbei = 0;
 			if (nminute > 60 * 1000L) {
@@ -1018,11 +1085,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			} else {
 				nbei = (int) Math.ceil(mbei) + 1;
 			}
-			alarm.firstTimeN = alarm.firstTimeN + alarm.minuteN * 60
-					* 1000L * nbei;
+			alarm.firstTimeN = alarm.firstTimeN + alarm.minuteN * 60 * 1000L
+					* nbei;
 			alarmInfo = alarm;
 		}
-		if (app.isAreadyAlarm) {
+		boolean isAraedyAlarm = DataUtils.getPreferences("is_aready_alarm", false);
+		Log.d("zhao", "set alarm isAready : " + isAraedyAlarm);
+		if (isAraedyAlarm) {
 			JcAlarm.cancelSendAlarm();
 			app.isAreadyAlarm = false;
 			handler.postDelayed(new Runnable() {
@@ -1030,12 +1099,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				@Override
 				public void run() {
 					JcAlarm.setSendAlarm(alarm);
-					app.isAreadyAlarm = true;
+					DataUtils.putPreferences("is_aready_alarm", true);
 				}
 			}, 500);
 		} else {
 			JcAlarm.setSendAlarm(alarm);
-			app.isAreadyAlarm = true;
+			DataUtils.putPreferences("is_aready_alarm", true);
 		}
 	}
 
@@ -1100,34 +1169,36 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				&& app.alarmInfo.minuteN > 0) {
 			app.alarmInfo = alarmInfo;
 			app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-			app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
-//			setCheckinfo(alarmInfo, 0);
+			app.alarmInfo.paikongN = DataUtils
+					.getPreferences("paikong_time", 0);
+			// setCheckinfo(alarmInfo, 0);
 			Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
 			setAlarmCheck(app.alarmInfo);
 		}
 	}
-	
+
 	private ArrayList<CheckDetailItem> queryData() {
 		long today = System.currentTimeMillis();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String date = format.format(today);
 		ArrayList<CheckDetailItem> list = new ArrayList<CheckDetailItem>();
-		Cursor cursor = getContentResolver().query(
-				AsagProvider.CheckDetail.CONTENT_URI,
-				new String[] { AsagProvider.CheckDetail._ID, AsagProvider.CheckDetail.CANGHAO,
-						AsagProvider.CheckDetail.CHANDI,
-						AsagProvider.CheckDetail.CHECKDATE,
-						AsagProvider.CheckDetail.CHECKTYPE,
-						AsagProvider.CheckDetail.LIANGZHONG,
-						AsagProvider.CheckDetail.RUKUDATE,
-						AsagProvider.CheckDetail.SHUIFEN,
-						AsagProvider.CheckDetail.SHULIANG,
-						AsagProvider.CheckDetail.CHULIANGSTATE,
-						AsagProvider.CheckDetail.SHUIFENSTATE,
-						AsagProvider.CheckDetail.SAVE_TIME },AsagProvider.CheckDetail.CHECKDATE + "='"
-							    + date + "' AND " +
-				AsagProvider.CheckDetail.CHECKTYPE + "='" + "1" + "'", null,
-				null);
+		Cursor cursor = getContentResolver()
+				.query(AsagProvider.CheckDetail.CONTENT_URI,
+						new String[] { AsagProvider.CheckDetail._ID,
+								AsagProvider.CheckDetail.CANGHAO,
+								AsagProvider.CheckDetail.CHANDI,
+								AsagProvider.CheckDetail.CHECKDATE,
+								AsagProvider.CheckDetail.CHECKTYPE,
+								AsagProvider.CheckDetail.LIANGZHONG,
+								AsagProvider.CheckDetail.RUKUDATE,
+								AsagProvider.CheckDetail.SHUIFEN,
+								AsagProvider.CheckDetail.SHULIANG,
+								AsagProvider.CheckDetail.CHULIANGSTATE,
+								AsagProvider.CheckDetail.SHUIFENSTATE,
+								AsagProvider.CheckDetail.SAVE_TIME },
+						AsagProvider.CheckDetail.CHECKDATE + "='" + date
+								+ "' AND " + AsagProvider.CheckDetail.CHECKTYPE
+								+ "='" + "1" + "'", null, null);
 		Log.d("zhao", "cursor count : " + cursor.getCount());
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
@@ -1158,21 +1229,25 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				point.checkType = cursor
 						.getString(cursor
 								.getColumnIndexOrThrow(AsagProvider.CheckDetail.CHECKTYPE));
-				point.saveTime = cursor.getString(cursor.getColumnIndexOrThrow(AsagProvider.CheckDetail.SAVE_TIME));
+				point.saveTime = cursor
+						.getString(cursor
+								.getColumnIndexOrThrow(AsagProvider.CheckDetail.SAVE_TIME));
 				list.add(point);
-				Log.d("zhao", "query PointRecord cursor id : " + point.id + " checkDate : " + point.checkDate + "" +
-						"  -- checkType : " + point.checkType);
-				
+				Log.d("zhao", "query PointRecord cursor id : " + point.id
+						+ " checkDate : " + point.checkDate + ""
+						+ "  -- checkType : " + point.checkType);
+
 			}
 			cursor.close();
 		}
 		return list;
 	}
-	
+
 	private synchronized void fillPointRecord(CheckDetailItem point) {
 		Cursor cursor1 = getContentResolver().query(
 				AsagProvider.PointRecord.CONTENT_URI,
-				new String[] { AsagProvider.PointRecord._ID, AsagProvider.PointRecord.WAYNUMBER,
+				new String[] { AsagProvider.PointRecord._ID,
+						AsagProvider.PointRecord.WAYNUMBER,
 						AsagProvider.PointRecord.COTWO,
 						AsagProvider.PointRecord.CHECKDATE,
 						AsagProvider.PointRecord.CHECKTYPE,
@@ -1185,34 +1260,33 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 						AsagProvider.PointRecord.STATUS,
 						AsagProvider.PointRecord.SAVE_TIME },
 				AsagProvider.PointRecord.SAVE_TIME + "='"
-					    + point.saveTime.trim() + "' AND "
+						+ point.saveTime.trim() + "' AND "
 						+ AsagProvider.PointRecord.CHECKTYPE + "="
 						+ point.checkType.trim(), null, null);
-		Log.d("zhao", " fillPointRecord  checkDate : " + point + " checkTYPE : " + point.checkType);
+		Log.d("zhao", " fillPointRecord  checkDate : " + point
+				+ " checkTYPE : " + point.checkType);
 		if (cursor1 != null) {
-			Log.d("zhao", "query fillPointRecord cursor1 count : " + cursor1.getCount());
+			Log.d("zhao",
+					"query fillPointRecord cursor1 count : "
+							+ cursor1.getCount());
 		}
 		if (cursor1 != null) {
 			while (cursor1.moveToNext()) {
 				PointItemRecord record = new PointItemRecord();
-				record.id = cursor1
-						.getInt(cursor1
-								.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
+				record.id = cursor1.getInt(cursor1
+						.getColumnIndexOrThrow(AsagProvider.PointRecord._ID));
 				record.wayNum = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.WAYNUMBER));
-				record.co2 = cursor1
-						.getString(cursor1
-								.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
-				record.mmi = cursor1
-						.getString(cursor1
-								.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
+				record.co2 = cursor1.getString(cursor1
+						.getColumnIndexOrThrow(AsagProvider.PointRecord.COTWO));
+				record.mmi = cursor1.getString(cursor1
+						.getColumnIndexOrThrow(AsagProvider.PointRecord.MMI));
 				record.rhValue = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.RHVALUE));
-				record.ssi = cursor1
-						.getString(cursor1
-								.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
+				record.ssi = cursor1.getString(cursor1
+						.getColumnIndexOrThrow(AsagProvider.PointRecord.SSI));
 				record.status = cursor1
 						.getInt(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.STATUS));
@@ -1225,20 +1299,21 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				record.tValue = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.TVALUE));
-				record.o2Value = cursor1
-						.getString(cursor1
-								.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
+				record.o2Value = cursor1.getString(cursor1
+						.getColumnIndexOrThrow(AsagProvider.PointRecord.OTWO));
 				record.ph3Value = cursor1
 						.getString(cursor1
 								.getColumnIndexOrThrow(AsagProvider.PointRecord.PHVALUE));
-				record.saveTime = cursor1.getString(cursor1.getColumnIndexOrThrow(AsagProvider.PointRecord.SAVE_TIME));
+				record.saveTime = cursor1
+						.getString(cursor1
+								.getColumnIndexOrThrow(AsagProvider.PointRecord.SAVE_TIME));
 				point.pointList.add(record);
 				Log.d("zhao", "query PointRecord cursor1 id : " + record.id);
 			}
 			cursor1.close();
 		}
 	}
-	
+
 	private void showFunctionMenu(final int type) {
 		FunctionPopMenu functionMenu = new FunctionPopMenu(context,
 				new OnFunctionClickListener() {
@@ -1271,9 +1346,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 												public void onCallBack(
 														Object object) {
 													if (object instanceof TimeSetEntry) {
-														long today = System.currentTimeMillis();
-														SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-														checkDetail.checkDate = format.format(today);
+														long today = System
+																.currentTimeMillis();
+														SimpleDateFormat format = new SimpleDateFormat(
+																"yyyy-MM-dd");
+														checkDetail.checkDate = format
+																.format(today);
 														checkDetail.checkType = 2 + "";
 														TimeSetEntry entry = (TimeSetEntry) object;
 														checkMinuteValue = entry.checkTime * 10;
@@ -1304,39 +1382,42 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								} else {
 									checkFunctionTx.setText("仓安监测");
 									sendMessageS(CMDCode.FF_CANGAN_CHECK);
-//								startCanshuActivity(newType);
+									// startCanshuActivity(newType);
 									displayFragment(true, "point_set", null,
 											new BaseFragmentListener() {
-										
-										@Override
-										public void onCallBack(
-												Object object) {
-											if (object instanceof TimeSetEntry) {
-												long today = System.currentTimeMillis();
-												SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-												checkDetail.checkDate = format.format(today);
-												checkDetail.checkType = 3 + "";
-												TimeSetEntry entry = (TimeSetEntry) object;
-												checkMinuteValue = entry.checkTime * 10;
-												paikongMinuteValue = entry.paikongTime * 10;
-												wayCount = 0;
-												app.oldCheckTime = checkMinuteValue;
-												app.oldPaikongTime = paikongMinuteValue;
-												// fragment.clearRightData();
-												if (checkMinuteValue > 0) {
-													float checkF = ((float) checkMinuteValue) / 10.0f;
-													updateCheckMinute(checkF
-															+ "");
+
+												@Override
+												public void onCallBack(
+														Object object) {
+													if (object instanceof TimeSetEntry) {
+														long today = System
+																.currentTimeMillis();
+														SimpleDateFormat format = new SimpleDateFormat(
+																"yyyy-MM-dd");
+														checkDetail.checkDate = format
+																.format(today);
+														checkDetail.checkType = 3 + "";
+														TimeSetEntry entry = (TimeSetEntry) object;
+														checkMinuteValue = entry.checkTime * 10;
+														paikongMinuteValue = entry.paikongTime * 10;
+														wayCount = 0;
+														app.oldCheckTime = checkMinuteValue;
+														app.oldPaikongTime = paikongMinuteValue;
+														// fragment.clearRightData();
+														if (checkMinuteValue > 0) {
+															float checkF = ((float) checkMinuteValue) / 10.0f;
+															updateCheckMinute(checkF
+																	+ "");
+														}
+														if (paikongMinuteValue > 0) {
+															float paikongF = ((float) paikongMinuteValue) / 10.0f;
+															updatePaikongMinute(paikongF
+																	+ "");
+														}
+													}
+
 												}
-												if (paikongMinuteValue > 0) {
-													float paikongF = ((float) paikongMinuteValue) / 10.0f;
-													updatePaikongMinute(paikongF
-															+ "");
-												}
-											}
-											
-										}
-									});
+											});
 								}
 							}
 
@@ -1345,9 +1426,12 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 								} else {
-									int checkMinuteV = DataUtils.getPreferences("check_time", 0);
-									int paikongMinuteV = DataUtils.getPreferences("paikong_time", 0);
-									if (checkMinuteV == 0 || paikongMinuteV == 0) {
+									int checkMinuteV = DataUtils
+											.getPreferences("check_time", 0);
+									int paikongMinuteV = DataUtils
+											.getPreferences("paikong_time", 0);
+									if (checkMinuteV == 0
+											|| paikongMinuteV == 0) {
 										showToast("您的检测时间或排空时间为0，请重新设置");
 										return;
 									}
@@ -1361,16 +1445,24 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									if (alarmInfo == null) {
 										alarmInfo = new AlarmInfo();
 									}
-									DataUtils.putPreferences("first_alarm_time", alarmInfo.firstTimeN);
-									DataUtils.putPreferences("interval_time", alarmInfo.minuteN);
+									DataUtils.putPreferences(
+											"first_alarm_time",
+											alarmInfo.firstTimeN);
+									DataUtils.putPreferences("interval_time",
+											alarmInfo.minuteN);
+									Log.d("zhao", "alarmInfo -- minuteN : " + alarmInfo.minuteN);
 									if (alarmInfo != null
-											&& alarmInfo.firstTimeN > 0L
 											&& alarmInfo.minuteN > 0) {
 										app.alarmInfo = alarmInfo;
-										app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-										app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+										app.alarmInfo.checkN = DataUtils
+												.getPreferences("check_time", 0);
+										app.alarmInfo.paikongN = DataUtils
+												.getPreferences("paikong_time",
+														0);
+										alarmInfo = app.alarmInfo;
 										setCheckinfo(alarmInfo, 0);
-										Log.d("zhao", "start set alarm : " + alarmInfo.minuteN);
+										Log.d("zhao", "start set alarm : "
+												+ alarmInfo.minuteN);
 										setAlarmCheck(alarmInfo);
 									}
 								}
@@ -1378,12 +1470,15 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
 									if (app.isAreadyAlarm) {
-//										restartAlarmSet();
+										// restartAlarmSet();
 									}
 								} else {
-									int checkMinuteV = DataUtils.getPreferences("check_time", 0);
-									int paikongMinuteV = DataUtils.getPreferences("paikong_time", 0);
-									if (checkMinuteV == 0 || paikongMinuteV == 0) {
+									int checkMinuteV = DataUtils
+											.getPreferences("check_time", 0);
+									int paikongMinuteV = DataUtils
+											.getPreferences("paikong_time", 0);
+									if (checkMinuteV == 0
+											|| paikongMinuteV == 0) {
 										showToast("您的检测时间或排空时间为0，请重新设置");
 										return;
 									}
@@ -1396,74 +1491,99 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 									sendMessageS(CMDCode.CD_POINT_CHECK);
 									displayFragment(true, "point_select", null,
 											new BaseFragmentListener() {
-										
-										@Override
-										public void onCallBack(Object object) {
-											if (object != null
-													&& object instanceof String) {
-												String result = (String) object;
-												Log.d("zhao", "result : " + result);
-												fillCheckWayList(result);
-												if (checkWayList.size() == 0) {
-													showToast("请选择检测通道");
-													return;
+
+												@Override
+												public void onCallBack(
+														Object object) {
+													if (object != null
+															&& object instanceof String) {
+														String result = (String) object;
+														Log.d("zhao",
+																"result : "
+																		+ result);
+														fillCheckWayList(result);
+														if (checkWayList.size() == 0) {
+															showToast("请选择检测通道");
+															return;
+														}
+														app.lastWay = checkWayList
+																.get(checkWayList
+																		.size() - 1);
+														if (alarmInfo == null) {
+															alarmInfo = new AlarmInfo();
+														}
+														long today = System
+																.currentTimeMillis();
+														SimpleDateFormat format = new SimpleDateFormat(
+																"yyyy-MM-dd");
+														checkDetail.checkDate = format
+																.format(today);
+														checkDetail.checkType = 2 + "";
+														app.alarmInfo = alarmInfo;
+														checkMinuteValue = app.alarmInfo.checkN = DataUtils
+																.getPreferences(
+																		"check_time",
+																		0);
+														paikongMinuteValue = app.alarmInfo.paikongN = DataUtils
+																.getPreferences(
+																		"paikong_time",
+																		0);
+														Log.d("zhao",
+																"点检测  checkTime : "
+																		+ checkMinuteValue);
+														Log.d("zhao",
+																"点检测  paikongTime : "
+																		+ paikongMinuteValue);
+														if (checkMinuteValue == 0
+																|| paikongMinuteValue == 0) {
+															showToast("您的检测时间或排空时间为0，请重新设置");
+														}
+														initCheckDetail();
+														String wayN = checkWayList
+																.get(0);
+														int way = 0;
+														if (isNumber(wayN)) {
+															way = Integer
+																	.valueOf(wayN);
+														}
+														setCheckinfo(alarmInfo,
+																way);
+														result = result
+																.substring(0, 2)
+																+ " "
+																+ result.substring(
+																		2,
+																		result.length());
+														String message = CMDCode.CD_LIANGAN_CHECK_2
+																+ result
+																+ "FF FF";
+														showToast("开始测定");
+														sendMessageS(message);
+														startCutDown(1);
+													}
 												}
-												app.lastWay = checkWayList.get(checkWayList
-														.size() - 1);
-												if (alarmInfo == null) {
-													alarmInfo = new AlarmInfo();
-												}
-												long today = System.currentTimeMillis();
-												SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-												checkDetail.checkDate = format.format(today);
-												checkDetail.checkType = 2 + "";
-												app.alarmInfo = alarmInfo;
-												checkMinuteValue = app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-												paikongMinuteValue = app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
-												Log.d("zhao", "点检测  checkTime : " + checkMinuteValue);
-												Log.d("zhao", "点检测  paikongTime : " + paikongMinuteValue);
-												if (checkMinuteValue == 0 || paikongMinuteValue == 0) {
-													showToast("您的检测时间或排空时间为0，请重新设置");
-												}
-												initCheckDetail();
-												String wayN = checkWayList.get(0);
-												int way = 0;
-												if (isNumber(wayN)) {
-													way = Integer.valueOf(wayN);
-												}
-												setCheckinfo(alarmInfo, way);
-												result = result.substring(
-														0, 2)
-														+ " "
-														+ result.substring(
-																2,
-																result.length());
-												String message = CMDCode.CD_LIANGAN_CHECK_2
-														+ result + "FF FF";
-												showToast("开始测定");
-												sendMessageS(message);
-												startCutDown(1);
-											}
-										}
-									});
+											});
 								}
 							} else if (resourceId == R.id.cangan_jiance_menu) {
-								int checkMinuteV = DataUtils.getPreferences("check_time", 0);
-								int paikongMinuteV = DataUtils.getPreferences("paikong_time", 0);
+								int checkMinuteV = DataUtils.getPreferences(
+										"check_time", 0);
+								int paikongMinuteV = DataUtils.getPreferences(
+										"paikong_time", 0);
 								if (checkMinuteV == 0 || paikongMinuteV == 0) {
 									showToast("您的检测时间或排空时间为0，请重新设置");
 									return;
 								}
 								if (app.isPause || app.isCheckIng) {
 									showToast("检测正在进行中，无法开启新检测");
-									/*if (app.isAreadyAlarm) {
-										restartAlarmSet();
-									}*/
+									/*
+									 * if (app.isAreadyAlarm) {
+									 * restartAlarmSet(); }
+									 */
 								} else {
 									checkFunctionTx.setText("仓安监测");
 									clearRightData();
 									app.lastWay = "0";
-									setCheckWayValue("0");
+									checkWayValue.setText("0");
 									checkState = 2;
 									if (checkDetail != null) {
 										checkDetail.pointList.clear();
@@ -1472,12 +1592,16 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 										alarmInfo = new AlarmInfo();
 									}
 									long today = System.currentTimeMillis();
-									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-									checkDetail.checkDate = format.format(today);
+									SimpleDateFormat format = new SimpleDateFormat(
+											"yyyy-MM-dd");
+									checkDetail.checkDate = format
+											.format(today);
 									checkDetail.checkType = 3 + "";
 									app.alarmInfo = alarmInfo;
-									app.alarmInfo.checkN = DataUtils.getPreferences("check_time", 0);
-									app.alarmInfo.paikongN = DataUtils.getPreferences("paikong_time", 0);
+									app.alarmInfo.checkN = DataUtils
+											.getPreferences("check_time", 0);
+									app.alarmInfo.paikongN = DataUtils
+											.getPreferences("paikong_time", 0);
 									initCheckDetail();
 									setCheckinfo(alarmInfo, 0);
 									showToast("开始测定");
@@ -1486,7 +1610,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								}
 							}
 						} else if (type == 2) {
-							Intent record = new Intent(context, PointRecordActivity.class);
+							Intent record = new Intent(context,
+									PointRecordActivity.class);
 							if (resourceId == R.id.liangan_jiance_menu) {
 								record.putExtra("record_title", "粮安监测结果");
 								record.putExtra("record_type", 1);
@@ -1496,12 +1621,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 								record.putExtra("record_type", 2);
 								startActivity(record);
 							} else if (resourceId == R.id.cangan_jiance_menu) {
-								Intent canganRec = new Intent(context, CanganRecordActivity.class);
+								Intent canganRec = new Intent(context,
+										CanganRecordActivity.class);
 								canganRec.putExtra("record_title", "仓安检测结果");
 								canganRec.putExtra("record_type", 3);
 								startActivity(canganRec);
 							}
-							
+
 						}
 					}
 				});
@@ -1546,7 +1672,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 	}
@@ -1588,10 +1714,13 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			alarmInfo.firstTimeN = data.getLongExtra("first_alarm_time", 0L);
 			alarmInfo.minuteN = data.getIntExtra("interval_time", 0);
 			setCheckinfo(alarmInfo, 0);
-			checkDetail = (CheckDetailItem) data.getSerializableExtra("check_detail");
+			checkDetail = (CheckDetailItem) data
+					.getSerializableExtra("check_detail");
 			Log.d("zhao", "activityresult checkDetail : " + checkDetail);
 			if (checkDetail != null) {
-				Log.d("zhaoz", "activityresult checkDate : " + checkDetail.checkDate + "  checkType : " + checkDetail.checkType);
+				Log.d("zhaoz", "activityresult checkDate : "
+						+ checkDetail.checkDate + "  checkType : "
+						+ checkDetail.checkType);
 			}
 		}
 	}
@@ -1602,7 +1731,6 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 		lbm.unregisterReceiver(dataReceiver);
 //		Intent service = new Intent(context, SerialService.class);
 //		stopService(service);
-		Log.d("zhao", "mainpage onDestroy()");
 	}
 
 	private void showSettingMenu() {
@@ -1612,32 +1740,38 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					@Override
 					public void onClick(int resourceId) {
 						switch (resourceId) {
-							
+
 						case R.id.check_params_menu:
-							Intent checkParam = new Intent(context, CheckParamsSetActivity.class);
+							Intent checkParam = new Intent(context,
+									CheckParamsSetActivity.class);
 							startActivity(checkParam);
 							break;
-							
+
 						case R.id.point_set_menu:
-							Intent intent = new Intent(context, PointLocationActivity.class);
+							Intent intent = new Intent(context,
+									PointLocationActivity.class);
 							startActivity(intent);
 							break;
-							
+
 						case R.id.date_set_menu:
 							Bundle b = new Bundle();
-							b.putSerializable("choose_time", System.currentTimeMillis());
-							displayFragment(true, "time_set", b, new BaseFragmentListener() {
-								
-								@Override
-								public void onCallBack(Object object) {
-									if (object instanceof Date) {
-										Date date = (Date) object;
-										if (date != null) {
-											SystemClock.setCurrentTimeMillis(date.getTime());
+							b.putSerializable("choose_time",
+									System.currentTimeMillis());
+							displayFragment(true, "time_set", b,
+									new BaseFragmentListener() {
+
+										@Override
+										public void onCallBack(Object object) {
+											if (object instanceof Date) {
+												Date date = (Date) object;
+												if (date != null) {
+													SystemClock
+															.setCurrentTimeMillis(date
+																	.getTime());
+												}
+											}
 										}
-									}
-								}
-							});
+									});
 							break;
 
 						default:
@@ -1714,7 +1848,8 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 					public void onClick(int resourceId) {
 						switch (resourceId) {
 						case R.id.point_distribute_menu:
-							Intent gotoV = new Intent(context, PointFangActivity.class);
+							Intent gotoV = new Intent(context,
+									PointFangActivity.class);
 							startActivity(gotoV);
 							break;
 
@@ -1726,7 +1861,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 				});
 		shituMenu.showPopupWindow(findViewById(R.id.shitu_menu));
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		if (ButtonUtils.isFastClick()) {
@@ -1780,9 +1915,9 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.cancel_alarm_menu:
-//			app.isAreadyAlarm = false;
-//			JcAlarm.cancelSendAlarm();
-//			showToast("已取消定时器");
+			// app.isAreadyAlarm = false;
+			// JcAlarm.cancelSendAlarm();
+			// showToast("已取消定时器");
 			if (checkDetail.checkType.equals("1")) {
 				showToast("当前正在进行粮安监测，无法急停");
 				return;
