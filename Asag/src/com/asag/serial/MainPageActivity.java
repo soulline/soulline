@@ -284,6 +284,7 @@ public class MainPageActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		showToast("kecode is : " + keyCode);
 		if (keyCode == KEY_CEDING) {
 			showFunctionMenu(1);
 		}
